@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the Signup activity
-                //Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                //startActivityForResult(intent, REQUEST_SIGNUP);
+                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
     }
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Autenticando...");
+        progressDialog.setMessage("Autenticando ...");
         progressDialog.show();
 
         String email = _emailText.getText().toString();
@@ -92,7 +92,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
-                this.finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                //this.finish();
             }
         }
     }
