@@ -3,8 +3,9 @@
     <string name="email_label">Email</string>
     <string name="pass_label">Contraseña</string>
     <string name="forgot_pass_text"><u>¿Olvidaste tu contraseña?</u></string>
-    <string name="login_btn_label">Iniciar Sesión</string>
+    <string name="login_btn_label">Iniciar sesión</string>
     <string name="new_user_label">¿Nuevo usuario?</string>
     <string name="signup_btn_label">Regístrate</string>
     <string name="coach_text"><u>¿Asesor?</u></string>
+    <string name="create_account_text">Crear cuenta</string>
 </resources>
