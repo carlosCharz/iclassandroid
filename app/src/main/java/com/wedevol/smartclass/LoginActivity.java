@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private static final int REQUEST_FORGOTPASS = 1;
+    private static final int REQUEST_COACH = 2;
 
     @BindView(R.id.input_email)
     EditText _emailText;
@@ -24,8 +26,12 @@ public class LoginActivity extends AppCompatActivity {
     EditText _passwordText;
     @BindView(R.id.btn_login)
     Button _loginButton;
-    @BindView(R.id.link_signup)
-    TextView _signupLink;
+    @BindView(R.id.btn_signup)
+    Button _signupButton;
+    @BindView(R.id.link_forgot_pass)
+    TextView _forgotPassLink;
+    @BindView(R.id.link_coach_pass)
+    TextView _coachLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,16 +47,41 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        _signupLink.setOnClickListener(new View.OnClickListener() {
+        _signupButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                signup();
+            }
+        });
+
+        _forgotPassLink.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Start the Forgot Pass activity
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, REQUEST_FORGOTPASS);
+            }
+        });
+
+        _coachLink.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // Start the Coach activity
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, REQUEST_COACH);
             }
         });
     }
+
+    public void signup() {
+        // Start the Signup activity
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivityForResult(intent, REQUEST_SIGNUP);
+    }
+
 
     public void login() {
         Log.d(TAG, "Login");
