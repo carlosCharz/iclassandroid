@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -19,14 +18,16 @@ public class SignupActivity extends AppCompatActivity {
 
     @BindView(R.id.input_name)
     EditText _nameText;
+    @BindView(R.id.input_last_name)
+    EditText _lastNameText;
+    @BindView(R.id.input_phone)
+    EditText _phoneText;
     @BindView(R.id.input_email)
     EditText _emailText;
     @BindView(R.id.input_password)
     EditText _passwordText;
     @BindView(R.id.btn_signup)
     Button _signupButton;
-    @BindView(R.id.link_login)
-    TextView _loginLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,14 +42,6 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signup();
-            }
-        });
-
-        _loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
-                finish();
             }
         });
     }
@@ -69,6 +62,8 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.show();
 
         String name = _nameText.getText().toString();
+        String lastName = _lastNameText.getText().toString();
+        String phone = _phoneText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
@@ -103,6 +98,8 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         String name = _nameText.getText().toString();
+        String lastName = _lastNameText.getText().toString();
+        String phone = _phoneText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
@@ -111,6 +108,20 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _nameText.setError(null);
+        }
+
+        if (lastName.isEmpty() || lastName.length() < 3) {
+            _lastNameText.setError("por lo menos 3 caracteres");
+            valid = false;
+        } else {
+            _lastNameText.setError(null);
+        }
+
+        if (phone.isEmpty() || phone.length() < 5) {
+            _phoneText.setError("por lo menos 5 dígitos");
+            valid = false;
+        } else {
+            _phoneText.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

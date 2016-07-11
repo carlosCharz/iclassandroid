@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SmartClass</string>
+
+    <!-- Login -->
     <string name="email_label">Email</string>
     <string name="pass_label">Contraseña</string>
     <string name="forgot_pass_text"><u>¿Olvidaste tu contraseña?</u></string>
@@ -8,4 +10,9 @@
     <string name="signup_btn_label">Regístrate</string>
     <string name="coach_text"><u>¿Asesor?</u></string>
     <string name="create_account_text">Crear cuenta</string>
+
+    <!-- Sign up-->
+    <string name="name_label">Nombre</string>
+    <string name="last_name_label">Apellido</string>
+    <string name="phone_label">Teléfono</string>
 </resources>
