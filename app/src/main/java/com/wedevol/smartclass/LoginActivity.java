@@ -131,6 +131,22 @@ public class LoginActivity extends AppCompatActivity {
                 //this.finish();
             }
         }
+
+        if (requestCode == REQUEST_FORGOTPASS) {
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        }
+
+        if (requestCode == REQUEST_COACH) {
+            if (resultCode == RESULT_OK) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        }
     }
 
     @Override
