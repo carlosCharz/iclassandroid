@@ -15,4 +15,8 @@
     <string name="name_label">Nombre</string>
     <string name="last_name_label">Apellido</string>
     <string name="phone_label">Teléfono</string>
+
+    <!-- Coach code -->
+    <string name="coach_title">Asesor</string>
+    <string name="validate_text">Validar</string>
 </resources>

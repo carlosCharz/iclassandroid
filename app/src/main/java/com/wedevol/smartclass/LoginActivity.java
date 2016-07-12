@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Start the Coach activity
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CoachCodeActivity.class);
                 startActivityForResult(intent, REQUEST_COACH);
             }
         });
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         // onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 2000);
     }
 
 
@@ -147,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login incorrecto", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Inicio de sesión incorrecto", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }
