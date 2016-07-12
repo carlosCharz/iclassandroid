@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (requestCode == REQUEST_COACH) {
             if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CoachProfileActivity.class);
                 startActivity(intent);
                 //finish();
             }
