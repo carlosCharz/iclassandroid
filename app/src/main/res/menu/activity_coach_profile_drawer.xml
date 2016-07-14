@@ -7,29 +7,41 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Perfil" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_gallery2"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Horario" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Estadísticas" />
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Buscar" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Cerrar sesión" />
+        android:id="@+id/nav_slideshow"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="Cursos" />
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Chat" />
     </group>
 
-    <item android:title="Canales de comunicación">
+    <item android:title="Otros">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Hangout" />
+                android:title="Promociones" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Chat" />
+                android:id="@+id/nav_slideshow2"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Historial" />
+            <item
+                android:id="@+id/nav_slideshow2"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Configuración" />
+            <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Cerrar sesión" />
         </menu>
     </item>
 
