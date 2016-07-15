@@ -35,7 +35,7 @@
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="Historial" />
             <item
-                android:id="@+id/nav_slideshow2"
+                android:id="@+id/nav_slideshow3"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="Configuración" />
             <item
