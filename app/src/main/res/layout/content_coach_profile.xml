@@ -13,63 +13,81 @@
     tools:showIn="@layout/app_bar_coach_profile">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView android:src="@drawable/user"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp" />
+        android:paddingRight="24dp"
+        android:paddingTop="56dp">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginBottom="24dp"
+                android:src="@drawable/user" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="Nivel 1"
+                    android:textSize="16dip" />
+
+                <ImageView
+                    android:layout_width="196dp"
+                    android:layout_height="51dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginBottom="1dp"
+                    android:src="@drawable/rating" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:layout_gravity="right"
+                    android:text="20 Hrs"
+                    android:textSize="16dip" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="Cursos dictando"
+            android:gravity="left"
+            android:textSize="20dip"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            tools:context=".ListActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nivel 1"
-            android:textSize="16dip"
-            android:layout_marginLeft="14dp"
-            android:layout_marginBottom="5dp"/>
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingBar" />
-
+            <ListView
+                android:id="@+id/course_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></ListView>
         </LinearLayout>
 
-        </LinearLayout>
-
-        <ProgressBar
-            android:layout_width="match_parent"
+        <TextView android:id="@+id/link_course_new"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBar" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="20 Hrs"
-            android:textSize="16dip"
-            android:layout_gravity="right"/>
-
-        <TextView android:id="@+id/link_coach_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="¿Quieres dictar un curso?"
+            android:layout_marginTop="86dp"
+            android:text="@string/new_course_text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:gravity="center"
             android:textSize="16dip"/>

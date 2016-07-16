@@ -11,29 +11,21 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Horario" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Buscar" />
-        <item
-        android:id="@+id/nav_slideshow"
-        android:icon="@drawable/ic_menu_slideshow"
-        android:title="Cursos" />
-        <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_menu_send"
-            android:title="Chat" />
+            android:title="Notificaciones" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Estadísticas" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Promociones" />
     </group>
 
     <item android:title="Otros">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Promociones" />
-            <item
-                android:id="@+id/nav_slideshow2"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Historial" />
             <item
                 android:id="@+id/nav_slideshow3"
                 android:icon="@drawable/ic_menu_slideshow"

@@ -12,9 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class CoachProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String[] mobileArray = {"Cálculo 1", "Física 1", "Química 1", "Dibujo en Ingeniería"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,12 @@ public class CoachProfileActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Luis Becerra");
+
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_coach_profile_list_view, mobileArray);
+
+        ListView listView = (ListView) findViewById(R.id.course_list);
+        listView.setAdapter(adapter);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +95,6 @@ public class CoachProfileActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
