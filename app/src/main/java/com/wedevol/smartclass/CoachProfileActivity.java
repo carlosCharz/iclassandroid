@@ -1,5 +1,6 @@
 package com.wedevol.smartclass;
 
+import android.widget.AdapterView.OnItemClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -34,6 +36,23 @@ public class CoachProfileActivity extends AppCompatActivity
 
         ListView listView = (ListView) findViewById(R.id.course_list);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new OnItemClickListener(){
+
+
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
+
+                //ItemClicked item = adapter.getItemAtPosition(position);
+
+                Intent intent = new Intent(getApplicationContext(), CourseActivity.class);
+
+                startActivity(intent);
+
+            }
+
+
+        });
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
