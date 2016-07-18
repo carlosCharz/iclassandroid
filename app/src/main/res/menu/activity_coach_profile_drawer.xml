@@ -3,23 +3,27 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/profile_link"
             android:icon="@drawable/ic_menu_camera"
             android:title="Perfil" />
         <item
-            android:id="@+id/nav_gallery2"
+            android:id="@+id/schedule_link"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Horario" />
         <item
-            android:id="@+id/nav_send"
+            android:id="@+id/notifications_link"
             android:icon="@drawable/ic_menu_send"
             android:title="Notificaciones" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/asesorias_link"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Asesorías" />
+        <item
+            android:id="@+id/statistics_link"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Estadísticas" />
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/promotions_link"
             android:icon="@drawable/ic_menu_share"
             android:title="Promociones" />
     </group>
@@ -27,11 +31,15 @@
     <item android:title="Otros">
         <menu>
             <item
-                android:id="@+id/nav_slideshow3"
+                android:id="@+id/config_link"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="Configuración" />
+                android:title="Ajustes" />
             <item
-                android:id="@+id/nav_manage"
+                android:id="@+id/about_us_link"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Sobre Nosotros" />
+            <item
+                android:id="@+id/signout_link"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Cerrar sesión" />
         </menu>

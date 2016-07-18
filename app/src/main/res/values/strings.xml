@@ -27,5 +27,8 @@
     <!-- Coach Profile -->
     <string name="new_course_text"><u>¿Quieres dictar un nuevo curso?</u></string>
 
+    <!-- Schedule -->
+    <string name="add_schedule_line_text"><u>agregar línea</u></string>
+
     <string name="action_settings">Settings</string>
 </resources>
