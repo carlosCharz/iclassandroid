@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartClass</string>
+    <string name="app_name">iClass</string>
 
     <!-- Login -->
     <string name="email_label">Email</string>
