@@ -45,7 +45,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Alex - Cálculo 1\nJueves 16/08 de 2 a 4 PM"
+                    android:text="Alex Jara - Cálculo 1\nJueves 16/08 de 2 a 4 PM"
                     android:textSize="16dip"
                     android:layout_marginTop="-15dp"
                     android:layout_marginLeft="15dp"
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mario - Física 1\nViernes 17/08 de 2 a 4 PM"
+                    android:text="Mario Casas - Física 1\nViernes 17/08 de 2 a 4 PM"
                     android:textSize="16dip"
                     android:layout_marginTop="-15dp"
                     android:layout_marginLeft="15dp"

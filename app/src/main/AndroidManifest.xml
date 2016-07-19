@@ -27,7 +27,8 @@
         <activity android:name=".ScheduleActivity" />
         <activity android:name=".CourseActivity" />
         <activity android:name=".NotificationsActivity" />
-        <activity android:name=".AsesoriasActivity"></activity>
+        <activity android:name=".AsesoriasActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
