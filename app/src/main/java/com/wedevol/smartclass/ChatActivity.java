@@ -41,7 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         _uniLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "El alumno puede recibir asesorías en la unviersidad.", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "El alumno puede recibir asesorías en la unviersidad. De preferencia: Tinkuy y Biblioteca Central.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

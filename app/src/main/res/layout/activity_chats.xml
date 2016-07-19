@@ -9,4 +9,92 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wedevol.smartclass.ChatsActivity">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/iron">
+
+            <ImageView android:id="@+id/chat1_link"
+                android:src="@drawable/chat2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="Alex Jara - Cálculo 1 el jueves 16/08 de 2 a 4 PM."
+                android:textSize="16dip"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="-3dp"
+                android:padding="10dp"/>
+
+            <ImageView
+                android:src="@drawable/home"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"/>
+
+            <ImageView
+                android:src="@drawable/uni"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/iron"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:src="@drawable/chat2"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:text="Mario Casas - Física 1 el viernes 17/08 de 2 a 4 PM."
+                android:textSize="16dip"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="-3dp"
+                android:padding="10dp"/>
+
+            <ImageView
+                android:src="@drawable/home"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"/>
+
+            <ImageView
+                android:src="@drawable/uni"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>

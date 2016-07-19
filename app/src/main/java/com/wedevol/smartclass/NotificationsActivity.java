@@ -125,7 +125,7 @@ public class NotificationsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_chat:
-                Intent intent2 = new Intent(this, MainActivity.class);
+                Intent intent2 = new Intent(this, ChatsActivity.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 return true;
