@@ -120,6 +120,9 @@ public class CoachProfileActivity extends AppCompatActivity
         } else if (id == R.id.notifications_link) {
             Intent intent = new Intent(getApplicationContext(), NotificationsActivity.class);
             startActivity(intent);
+        } else if (id == R.id.asesorias_link) {
+            Intent intent = new Intent(getApplicationContext(), AsesoriasActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
