@@ -14,7 +14,7 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Chat");
+        actionBar.setTitle("Alex Jara - Cálculo 1");
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 

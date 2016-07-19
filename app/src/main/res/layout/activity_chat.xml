@@ -20,30 +20,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
 
-                <ImageView android:src="@drawable/chat2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center_horizontal" />
-
                 <TextView
                     android:layout_width="210dp"
                     android:layout_height="wrap_content"
-                    android:text="Alex - Cálculo 1\nJueves 16/08 de 2 a 4 PM"
+                    android:text="Jueves 16/08 de 2 a 4 PM"
                     android:textSize="16dip"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:padding="10dp"/>
 
                 <ImageView android:src="@drawable/home"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="center_horizontal" />
 
                 <ImageView android:src="@drawable/uni"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>
@@ -59,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="24dp"
+                android:layout_marginTop="40dp"
                 android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
