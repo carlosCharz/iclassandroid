@@ -109,14 +109,9 @@ public class CourseActivity extends AppCompatActivity {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding header data
-        listDataHeader.add("Ver Descargas");
         listDataHeader.add("Tema 1: Funciones");
         listDataHeader.add("Tema 2: Límites de Funciones");
-
-        // Adding child data
-        List<String> descargas = new ArrayList<String>();
-        descargas.add("File1.pdf");
-        descargas.add("File2.txt");
+        listDataHeader.add("Tema 3: Continuidad de Funciones");
 
         List<String> tema1 = new ArrayList<String>();
         tema1.add("Diapositivas de clase");
@@ -128,9 +123,14 @@ public class CourseActivity extends AppCompatActivity {
         tema2.add("Ejercicios resueltos");
         tema2.add("Ejercicios propuestos");
 
-        listDataChild.put(listDataHeader.get(0), descargas); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), tema1);
-        listDataChild.put(listDataHeader.get(2), tema2);
+        List<String> tema3 = new ArrayList<String>();
+        tema3.add("Diapositivas de clase");
+        tema3.add("Ejercicios resueltos");
+        tema3.add("Ejercicios propuestos");
+
+        listDataChild.put(listDataHeader.get(0), tema1); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), tema2);
+        listDataChild.put(listDataHeader.get(2), tema3);
     }
 
     @Override

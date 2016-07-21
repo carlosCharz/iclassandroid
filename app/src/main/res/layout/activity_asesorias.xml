@@ -31,38 +31,38 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:background="@color/green_soft">
 
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="25dp"
                     android:text="C"
                     android:textSize="40dip" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Alex Jara - Cálculo 1\nJueves 16/08 de 2 a 4 PM"
-                    android:textSize="16dip"
-                    android:layout_marginTop="-15dp"
-                    android:layout_marginLeft="15dp"
-                    android:padding="10dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alex Jara - Cálculo 1\nJueves 16/08 de 2 a 4 PM\nTinkuy PUCP"
+                android:textSize="16dip"
+                android:layout_marginTop="-15dp"
+                android:layout_marginLeft="15dp"
+                android:padding="10dp"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="80dp"
                 android:background="@color/iron">
 
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="25dp"
                     android:text="R"
                     android:textSize="40dip" />
@@ -70,7 +70,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mario Casas - Física 1\nViernes 17/08 de 2 a 4 PM"
+                    android:text="Mario Casas - Física 1\nViernes 17/08 de 2 a 4 PM\nCalle La Huerta Perdida 20, SMP"
                     android:textSize="16dip"
                     android:layout_marginTop="-15dp"
                     android:layout_marginLeft="15dp"
