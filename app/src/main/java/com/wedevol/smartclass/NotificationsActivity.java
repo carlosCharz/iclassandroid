@@ -24,10 +24,9 @@ public class NotificationsActivity extends AppCompatActivity {
     @BindView(R.id.btn_chat1)
     Button _chat1Button;
 
-    @BindView(R.id.btn_confirm1)
-    Button _confirm1Button;
+    @BindView(R.id.btn_confirm)
+    Button _confirmButton;
 
-    AlertDialog.Builder builder1;
     AlertDialog.Builder builder2;
 
     @Override
@@ -50,34 +49,15 @@ public class NotificationsActivity extends AppCompatActivity {
             }
         });
 
-        builder1 = new AlertDialog.Builder(NotificationsActivity.this);
-        builder1.setMessage("Al aceptar, confirmas que darás asesoría en el horario y lugar acordado.");
-        builder1.setCancelable(false);
-
-        builder1.setPositiveButton(
-                "Aceptar",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-        builder1.setNegativeButton(
-                "Cerrar",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        _confirm1Button.setOnClickListener(new View.OnClickListener() {
+        _confirmButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+                Intent intent = new Intent(getApplicationContext(), ConfirmActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
-
 
         builder2 = new AlertDialog.Builder(NotificationsActivity.this);
         builder2.setMessage("Al aceptar, confirmas que cancelarás la asesoría.");

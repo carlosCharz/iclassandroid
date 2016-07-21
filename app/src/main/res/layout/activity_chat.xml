@@ -53,13 +53,18 @@
                 android:background="#000000"
                 android:layout_marginTop="10dp"/>
 
-            <ImageView android:src="@drawable/chat_example"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="40dp"
-                android:layout_gravity="center_horizontal" />
-
         </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+    <ImageView android:src="@drawable/chat_example"
+        android:layout_width="wrap_content"
+        android:layout_height="360dp"
+        />
+    </LinearLayout>
 
 </RelativeLayout>
