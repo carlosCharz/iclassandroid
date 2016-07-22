@@ -21,17 +21,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ingrese el lugar donde se acordó dictar la asesoría."
-        android:textSize="16dip"/>
+        android:textSize="16dip"
+        android:layout_marginBottom="20dp"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casa del alumno"
+            android:id="@+id/radioButton"
+            android:layout_gravity="left" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Casa del asesor"
+            android:id="@+id/radioButton2"
+            android:layout_gravity="left"
+            android:enabled="false" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Universidad"
+            android:id="@+id/radioButton3"
+            android:layout_gravity="left"
+            android:checked="true" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_lugar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Lugar" />
+                android:hint="Ingresa el lugar aquí" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton

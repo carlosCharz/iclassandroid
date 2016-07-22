@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Asesorías confirmadas y/o reservadas"
+            android:text="Asesorías confirmadas (C) y/o reservadas (R)"
             android:textSize="16dip"
             android:padding="8dp" />
 

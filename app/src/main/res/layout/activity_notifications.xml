@@ -15,6 +15,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chatea con los alumnos para poder determinar el lugar exacto donde se dictará la asesoría."
+            android:textSize="16dip"
+            android:padding="8dp"/>
+
     <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
