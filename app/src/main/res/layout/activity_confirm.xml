@@ -29,32 +29,33 @@
             android:layout_height="wrap_content"
             android:text="Casa del alumno"
             android:id="@+id/radioButton"
-            android:layout_gravity="left" />
+            android:layout_gravity="left"
+            android:textSize="16dip"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Casa del asesor"
             android:id="@+id/radioButton2"
             android:layout_gravity="left"
-            android:enabled="false" />
+            android:enabled="false"
+            android:textSize="16dip"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Universidad"
             android:id="@+id/radioButton3"
             android:layout_gravity="left"
-            android:checked="true" />
+            android:checked="true"
+            android:textSize="16dip"/>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_lugar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="Ingresa el lugar aquí" />
-        </android.support.design.widget.TextInputLayout>
+                android:hint="Ingresa el lugar aquí"
+                android:textSize="16dip"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_confirm"

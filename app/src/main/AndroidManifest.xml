@@ -30,7 +30,8 @@
         <activity android:name=".AsesoriasActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".ChatsActivity" />
-        <activity android:name=".ConfirmActivity"></activity>
+        <activity android:name=".ConfirmActivity" />
+        <activity android:name=".ConfigActivity"></activity>
     </application>
 
 </manifest>
