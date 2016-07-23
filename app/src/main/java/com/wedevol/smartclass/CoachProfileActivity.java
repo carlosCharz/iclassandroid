@@ -126,10 +126,12 @@ public class CoachProfileActivity extends AppCompatActivity
         } else if (id == R.id.config_link) {
             Intent intent = new Intent(getApplicationContext(), ConfigActivity.class);
             startActivity(intent);
+        } else if (id == R.id.signout_link) {
+            finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

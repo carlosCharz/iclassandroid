@@ -137,10 +137,12 @@ public class StudentProfileActivity extends AppCompatActivity
         } else if (id == R.id.config_link2) {
             //Intent intent = new Intent(getApplicationContext(), ConfigActivity.class);
             //startActivity(intent);
+        } else if (id == R.id.signout_link2) {
+            finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
-        drawer.closeDrawer(GravityCompat.START);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
+        //drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }

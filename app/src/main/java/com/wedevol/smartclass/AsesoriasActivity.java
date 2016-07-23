@@ -1,6 +1,5 @@
 package com.wedevol.smartclass;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,14 +30,12 @@ public class AsesoriasActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; go home
-                Intent intent = new Intent(this, CoachProfileActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                finish();
                 return true;
             case R.id.action_asesorias_chat:
-                Intent intent2 = new Intent(this, MainActivity.class);
-                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent2);
+                //Intent intent2 = new Intent(this, MainActivity.class);
+                //intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //startActivity(intent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
