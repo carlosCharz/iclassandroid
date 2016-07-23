@@ -51,6 +51,7 @@ public class SelectCourseActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SelectScheduleActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
         });
     }

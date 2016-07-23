@@ -38,6 +38,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".SelectCourseActivity"></activity>
         <activity android:name=".SelectScheduleActivity"></activity>
+        <activity android:name=".ConfirmCourseActivity"></activity>
 
     </application>
 

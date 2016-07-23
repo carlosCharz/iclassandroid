@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.wedevol.smartclass.SelectCourseActivity">
+    tools:context="com.wedevol.smartclass.ConfirmCourseActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,23 +26,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Escoge el curso del cual quieres una asesoría"
+            android:text="El asesor disponible es: LUIS BECERRA"
+            android:textSize="16dip"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comunícate con él para establecer el lugar donde se dictará la asesoría y los temas a tratar en ella"
             android:textSize="16dip" />
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/courses_spinner2"
-            android:layout_gravity="left"
-            android:textSize="16dip"
-            android:layout_marginTop="20dp"/>
-
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_confirm_course"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="Siguiente"
+            android:text="Confirmar"
             android:layout_marginTop="40dp"/>
 
     </LinearLayout>
