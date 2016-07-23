@@ -30,5 +30,8 @@
     <!-- Schedule -->
     <string name="add_schedule_line_text"><u>agregar línea</u></string>
 
+    <!-- Student Profile -->
+    <string name="title_activity_student_profile">StudentProfileActivity</string>
+
     <string name="action_settings">Settings</string>
 </resources>
