@@ -91,8 +91,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "Login");
 
         if (!validate()) {
-            onLoginFailed();
-            return;
+            //onLoginFailed();
+            //return;
         }
 
         _loginButton.setEnabled(false);

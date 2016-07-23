@@ -67,8 +67,8 @@ public class SignupActivity extends AppCompatActivity {
         Log.d(TAG, "Signup");
 
         if (!validate()) {
-            onSignupFailed();
-            return;
+            //onSignupFailed();
+            //return;
         }
 
         _signupButton.setEnabled(false);
