@@ -16,39 +16,42 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SelectCourseActivity extends AppCompatActivity {
+public class SelectScheduleActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_next)
-    Button _nextButton;
+    @BindView(R.id.btn_next2)
+    Button _next2Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_course);
+        setContentView(R.layout.activity_select_schedule);
         ButterKnife.bind(this);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Curso");
+        actionBar.setTitle("Horario");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        List<String> courses =  new ArrayList<String>();
-        courses.add("Cálculo 1");
-        courses.add("Física 1");
-        courses.add("Dibujo en Ingeniería");
-        courses.add("Química 1");
+        List<String> day =  new ArrayList<String>();
+        day.add("Lunes");
+        day.add("Martes");
+        day.add("Miércoles");
+        day.add("Jueves");
+        day.add("Viernes");
+        day.add("Sábado");
+        day.add("Domingo");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, courses);
+                this, android.R.layout.simple_spinner_item, day);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) findViewById(R.id.courses_spinner2);
+        Spinner sItems = (Spinner) findViewById(R.id.days_spinner);
         sItems.setAdapter(adapter);
 
-        _nextButton.setOnClickListener(new View.OnClickListener() {
+        _next2Button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SelectScheduleActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
