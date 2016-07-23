@@ -36,6 +36,7 @@
             android:name=".StudentProfileActivity"
             android:label="@string/title_activity_student_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SelectCourseActivity"></activity>
 
     </application>
 

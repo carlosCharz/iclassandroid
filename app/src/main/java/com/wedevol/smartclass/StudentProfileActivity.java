@@ -1,5 +1,6 @@
 package com.wedevol.smartclass;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,10 +16,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class StudentProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.btn_request)
+    Button _requestButton;
 
     String[] mobileArray = {"Cálculo 1 - Jue 2 - 4 PM", "Física 1 - Mie 6 - 9 PM"};
 
@@ -30,6 +38,16 @@ public class StudentProfileActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Tops Zúñiga");
+        ButterKnife.bind(this);
+
+        _requestButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SelectCourseActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_student_profile_list_view, mobileArray);
 
@@ -38,19 +56,15 @@ public class StudentProfileActivity extends AppCompatActivity
 
         listView.setOnItemClickListener(new OnItemClickListener(){
 
-
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
-
                 //ItemClicked item = adapter.getItemAtPosition(position);
                 //Intent intent = new Intent(getApplicationContext(), CourseActivity.class);
                 //startActivity(intent);
-
             }
 
 
         });
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab2);
         fab.setOnClickListener(new View.OnClickListener() {
