@@ -1,6 +1,5 @@
 package com.wedevol.smartclass;
 
-import android.widget.AdapterView.OnItemClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,11 +14,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CoachProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.ratingBar)
+    RatingBar _ratingBar;
 
     String[] mobileArray = {"Cálculo 1", "Física 1", "Química 1", "Dibujo en Ingeniería"};
 
@@ -28,6 +35,10 @@ public class CoachProfileActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coach_profile);
+        ButterKnife.bind(this);
+
+        _ratingBar.setRating(3);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Luis Becerra");
@@ -59,7 +70,7 @@ public class CoachProfileActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Se procesará tu solicitud para dictar un nuevo curso", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

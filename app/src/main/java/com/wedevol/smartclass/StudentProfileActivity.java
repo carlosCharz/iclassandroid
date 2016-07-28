@@ -2,9 +2,7 @@ package com.wedevol.smartclass;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +27,9 @@ public class StudentProfileActivity extends AppCompatActivity
     @BindView(R.id.btn_request)
     Button _requestButton;
 
+    @BindView(R.id.ratingBar2)
+    RatingBar _ratingBar2;
+
     String[] mobileArray = {"Cálculo 1 - Jue 2 - 4 PM", "Física 1 - Mie 6 - 9 PM"};
 
 
@@ -35,10 +37,13 @@ public class StudentProfileActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
+        ButterKnife.bind(this);
+
+        _ratingBar2.setRating(1);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Tops Zúñiga");
-        ButterKnife.bind(this);
 
         _requestButton.setOnClickListener(new View.OnClickListener() {
 
@@ -64,15 +69,6 @@ public class StudentProfileActivity extends AppCompatActivity
             }
 
 
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab2);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
