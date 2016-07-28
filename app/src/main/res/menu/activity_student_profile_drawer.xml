@@ -26,23 +26,18 @@
             android:id="@+id/promotions_link2"
             android:icon="@drawable/ic_menu_share"
             android:title="Promociones" />
+        <item
+            android:id="@+id/config_link2"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Ajustes" />
+        <item
+            android:id="@+id/about_us_link2"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Sobre Nosotros" />
+        <item
+            android:id="@+id/signout_link2"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Cerrar sesión" />
     </group>
-
-    <item android:title="Otros">
-        <menu>
-            <item
-                android:id="@+id/config_link2"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Ajustes" />
-            <item
-                android:id="@+id/about_us_link2"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="Sobre Nosotros" />
-            <item
-                android:id="@+id/signout_link2"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Cerrar sesión" />
-        </menu>
-    </item>
 
 </menu>
