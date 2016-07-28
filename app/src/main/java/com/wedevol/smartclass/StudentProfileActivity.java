@@ -30,7 +30,7 @@ public class StudentProfileActivity extends AppCompatActivity
     @BindView(R.id.ratingBar2)
     RatingBar _ratingBar2;
 
-    String[] mobileArray = {"Cálculo 1 - Jue 2 - 4 PM", "Física 1 - Mie 6 - 9 PM"};
+    String[] mobileArray = {"Cálculo 1 - Jue 2:00 - 4:00 PM", "Física 1 - Mie 6:30 - 9:30 PM"};
 
 
     @Override
