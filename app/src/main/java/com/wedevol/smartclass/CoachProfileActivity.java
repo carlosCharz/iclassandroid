@@ -126,7 +126,7 @@ public class CoachProfileActivity extends AppCompatActivity
         if (id == R.id.profile_link) {
 
         } else if (id == R.id.schedule_link) {
-            Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ScheduleMainActivity.class);
             startActivity(intent);
         } else if (id == R.id.notifications_link) {
             Intent intent = new Intent(getApplicationContext(), NotificationsActivity.class);

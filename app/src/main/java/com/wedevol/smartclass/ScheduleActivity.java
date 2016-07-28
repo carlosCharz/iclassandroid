@@ -6,21 +6,26 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ScheduleActivity extends AppCompatActivity {
 
-    @BindView(R.id.btn_complete_view)
-    Button _completeViewButton;
     @BindView(R.id.btn_save_schedule)
     Button _saveScheduleButton;
     @BindView(R.id.from1Text)
     EditText _from1Text;
+    @BindView(R.id.to1Text)
+    EditText _to1Text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +34,24 @@ public class ScheduleActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Horario");
+        actionBar.setTitle("Agregar horario");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        _completeViewButton.setOnClickListener(new View.OnClickListener() {
+        List<String> daysArray =  new ArrayList<String>();
+        daysArray.add("Lunes");
+        daysArray.add("Martes");
+        daysArray.add("Miercoles");
+        daysArray.add("Jueves");
+        daysArray.add("Viernes");
+        daysArray.add("Sábado");
+        daysArray.add("Domingo");
 
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, daysArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = (Spinner) findViewById(R.id.days_spinner2);
+        sItems.setAdapter(adapter);
 
         _saveScheduleButton.setOnClickListener(new View.OnClickListener() {
 
@@ -56,6 +69,20 @@ public class ScheduleActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         _from1Text.setText(hourOfDay + ":" + minute);
+                    }
+                }, 0, 0, true);
+                timePickerDialog.show();
+            }
+        });
+
+        _to1Text.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(ScheduleActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        _to1Text.setText(hourOfDay + ":" + minute);
                     }
                 }, 0, 0, true);
                 timePickerDialog.show();
