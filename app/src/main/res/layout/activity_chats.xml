@@ -18,80 +18,74 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="90dp"
             android:background="@color/iron">
 
             <ImageView android:id="@+id/chat1_link"
                 android:src="@drawable/chat2"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
                 android:clickable="true"/>
 
             <TextView
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:text="Alex Jara - Cálculo 1 el jueves 16/08 de 2 a 4 PM."
+                android:text="Alex Jara - Cálculo 1 el jueves 16/08 de 2:00 a 4:00 PM."
                 android:textSize="16dip"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="-3dp"
-                android:padding="10dp"/>
+                android:padding="10dp"
+                android:layout_gravity="center_vertical"
+                />
 
             <ImageView
                 android:src="@drawable/home"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_gravity="center_horizontal"
-                android:clickable="true"/>
+                android:layout_gravity="center_vertical"
+                android:clickable="true" />
 
             <ImageView
                 android:src="@drawable/uni"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_vertical" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="90dp"
             android:background="@color/iron"
             android:layout_marginTop="16dp">
 
             <ImageView
                 android:src="@drawable/chat2"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
-                android:text="Mario Casas - Física 1 el viernes 17/08 de 2 a 4 PM."
+                android:text="Mario Casas - Física 1 el viernes 17/08 de 6:30 a 9:30 PM."
                 android:textSize="16dip"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="-3dp"
-                android:padding="10dp"/>
-
-            <ImageView
-                android:src="@drawable/home"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_horizontal"
-                android:clickable="true"/>
+                android:padding="10dp"
+                android:layout_gravity="center_vertical"
+                />
 
             <ImageView
                 android:src="@drawable/uni"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_vertical" />
 
         </LinearLayout>
 

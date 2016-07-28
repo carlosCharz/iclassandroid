@@ -18,30 +18,29 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <TextView
-                    android:layout_width="210dp"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
-                    android:text="Jueves 16/08 de 2 a 4 PM"
+                    android:text="Jueves 16/08 de 2:00 a 4:30 PM"
                     android:textSize="16dip"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:padding="10dp"/>
 
                 <ImageView android:id="@+id/home_link"
                     android:src="@drawable/home"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_gravity="center_horizontal"
                     android:clickable="true"/>
 
                 <ImageView android:id="@+id/uni_link"
                     android:src="@drawable/uni"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>

@@ -10,71 +10,71 @@
     tools:context="com.wedevol.smartclass.AsesoriasActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:padding="8dp"
             android:text="Asesorías confirmadas (C) y/o reservadas (R)"
-            android:textSize="16dip"
-            android:padding="8dp" />
+            android:textSize="16dip" />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="@color/green_soft">
+                android:background="@color/green_soft"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
+                    android:layout_gravity="center_vertical"
                     android:text="C"
-                    android:textSize="40dip" />
-
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Alex Jara - Cálculo 1\nJueves 16/08 de 2 a 4 PM\nTinkuy PUCP"
-                android:textSize="16dip"
-                android:layout_marginTop="-15dp"
-                android:layout_marginLeft="15dp"
-                android:padding="10dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@color/iron">
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:text="R"
                     android:textSize="40dip" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mario Casas - Física 1\nViernes 17/08 de 2 a 4 PM\nCalle La Huerta Perdida 20, SMP"
-                    android:textSize="16dip"
-                    android:layout_marginTop="-15dp"
-                    android:layout_marginLeft="15dp"
-                    android:padding="10dp"/>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:text="Alex Jara - Cálculo 1\nJueves 16/08 de 2:00 a 4:00 PM\nTinkuy PUCP"
+                    android:textSize="16dip" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/iron"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:text="R"
+                    android:textSize="40dip"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:padding="10dp"
+                    android:text="Mario Casas - Física 1\nViernes 17/08 de 6:30 a 9:30 PM\nCalle La Huerta Perdida 20, SMP"
+                    android:textSize="16dip" />
 
             </LinearLayout>
 

@@ -7,7 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,14 @@ public class ConfigActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_save)
     Button _saveButton;
+    @BindView(R.id.home_switch)
+    Switch _homeSwitch;
+    @BindView(R.id.distrito_spinner)
+    Spinner _distritoSpinner;
+    @BindView(R.id.frequency_spinner)
+    Spinner _frequencySpinner;
+    @BindView(R.id.input_address)
+    EditText _inputAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +41,18 @@ public class ConfigActivity extends AppCompatActivity {
         actionBar.setTitle("Ajustes");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        _homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    _distritoSpinner.setVisibility(View.VISIBLE);
+                    _inputAddress.setVisibility(View.VISIBLE);
+                } else {
+                    _distritoSpinner.setVisibility(View.GONE);
+                    _inputAddress.setVisibility(View.GONE);
+                }
+            }
+        });
+
         List<String> distritosArray =  new ArrayList<String>();
         distritosArray.add("Los Olivos");
         distritosArray.add("San Isidro");
@@ -40,8 +63,7 @@ public class ConfigActivity extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, distritosArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) findViewById(R.id.distrito_spinner);
-        sItems.setAdapter(adapter);
+        _distritoSpinner.setAdapter(adapter);
 
         List<String> frecuenciaArray =  new ArrayList<String>();
         frecuenciaArray.add("1 semana");
@@ -54,8 +76,7 @@ public class ConfigActivity extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, frecuenciaArray);
 
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems2 = (Spinner) findViewById(R.id.frequency_spinner);
-        sItems2.setAdapter(adapter2);
+        _frequencySpinner.setAdapter(adapter2);
 
         _saveButton.setOnClickListener(new View.OnClickListener() {
 
