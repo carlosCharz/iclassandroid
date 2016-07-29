@@ -10,52 +10,62 @@
     tools:context="com.wedevol.smartclass.ConfirmActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="44dp"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingRight="24dp"
+        android:paddingTop="44dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingrese el lugar donde se acordó dictar la asesoría."
-        android:textSize="16dip"
-        android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Ingrese el lugar donde se acordó dictar la asesoría."
+            android:textSize="16dip" />
 
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/radioPlace"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Casa del alumno"
-            android:id="@+id/radioButton"
-            android:layout_gravity="left"
-            android:textSize="16dip"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Casa del asesor"
-            android:id="@+id/radioButton2"
-            android:layout_gravity="left"
-            android:enabled="false"
-            android:textSize="16dip"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Universidad"
-            android:id="@+id/radioButton3"
-            android:layout_gravity="left"
-            android:checked="true"
-            android:textSize="16dip"/>
+            android:layout_height="wrap_content">
 
-            <EditText android:id="@+id/input_lugar"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/rb1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="Ingresa el lugar aquí"
-                android:textSize="16dip"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_gravity="left"
+                android:text="Casa del alumno"
+                android:checked="true"
+                android:textSize="16dip" />
+
+            <RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:enabled="false"
+                android:text="Casa del asesor"
+                android:textSize="16dip" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:checked="false"
+                android:text="Universidad"
+                android:textSize="16dip" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/input_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:hint="Ingresa el lugar aquí"
+            android:inputType="textEmailAddress"
+            android:textSize="16dip" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_confirm"
@@ -63,20 +73,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:padding="12dp"
-            android:text="Confirmar"/>
+            android:text="Confirmar" />
 
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/green_soft">
+        android:background="@color/green_soft"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
+            android:padding="8dp"
             android:text="* Al confirmar, aceptas que darás asesoría en el horario y lugar acordado."
-            android:textSize="16dip"
-            android:padding="8dp" />
+            android:textSize="16dip" />
     </LinearLayout>
 </RelativeLayout>

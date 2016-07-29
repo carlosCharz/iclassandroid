@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:checked="true"
+                android:checked="false"
                 android:text=""
                 android:textSize="16dip" />
         </LinearLayout>

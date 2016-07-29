@@ -41,6 +41,10 @@ public class ConfigActivity extends AppCompatActivity {
         actionBar.setTitle("Ajustes");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        _homeSwitch.setChecked(false);
+        _distritoSpinner.setVisibility(View.GONE);
+        _inputAddress.setVisibility(View.GONE);
+
         _homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
