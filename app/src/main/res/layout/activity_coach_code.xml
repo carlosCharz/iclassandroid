@@ -42,7 +42,8 @@ android:fitsSystemWindows="true">
             android:inputType="number"
             android:ems="1"
             android:id="@+id/code1Text"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:maxLength="1"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -50,7 +51,8 @@ android:fitsSystemWindows="true">
             android:inputType="number"
             android:ems="1"
             android:id="@+id/code2Text"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:maxLength="1"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -58,7 +60,8 @@ android:fitsSystemWindows="true">
             android:inputType="number"
             android:ems="1"
             android:id="@+id/code3Text"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:maxLength="1"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -66,7 +69,8 @@ android:fitsSystemWindows="true">
             android:inputType="number"
             android:ems="1"
             android:id="@+id/code4Text"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:maxLength="1"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -74,7 +78,8 @@ android:fitsSystemWindows="true">
             android:inputType="number"
             android:ems="1"
             android:id="@+id/code5Text"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:maxLength="1"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -82,8 +87,8 @@ android:fitsSystemWindows="true">
             android:inputType="number"
             android:ems="1"
             android:id="@+id/code6Text"
-            android:layout_alignParentTop="true" />
-
+            android:layout_alignParentTop="true"
+            android:maxLength="1"/>
 
     </LinearLayout>
 

@@ -1,7 +1,6 @@
 package com.wedevol.smartclass;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -53,13 +52,13 @@ public class CoachCodeActivity extends AppCompatActivity {
             }
         });
 
-        ((EditText) findViewById(R.id.code1Text)).addTextChangedListener(new TextWatcher() {
+        _code1Text.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (((EditText) findViewById(R.id.code1Text)).getText().toString().length() == 1) {
-                    ((EditText) findViewById(R.id.code1Text)).clearFocus();
-                    ((EditText) findViewById(R.id.code2Text)).requestFocus();
-                    ((EditText) findViewById(R.id.code2Text)).setCursorVisible(true);
+                if (_code1Text.getText().toString().length() == 1) {
+                    _code1Text.clearFocus();
+                    _code2Text.requestFocus();
+                    _code2Text.setCursorVisible(true);
                 }
             }
 
@@ -74,13 +73,13 @@ public class CoachCodeActivity extends AppCompatActivity {
             }
         });
 
-        ((EditText) findViewById(R.id.code2Text)).addTextChangedListener(new TextWatcher() {
+        _code2Text.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (((EditText) findViewById(R.id.code2Text)).getText().toString().length() == 1) {
-                    ((EditText) findViewById(R.id.code2Text)).clearFocus();
-                    ((EditText) findViewById(R.id.code3Text)).requestFocus();
-                    ((EditText) findViewById(R.id.code3Text)).setCursorVisible(true);
+                if (_code2Text.getText().toString().length() == 1) {
+                    _code2Text.clearFocus();
+                    _code3Text.requestFocus();
+                    _code3Text.setCursorVisible(true);
                 }
             }
 
@@ -95,13 +94,13 @@ public class CoachCodeActivity extends AppCompatActivity {
             }
         });
 
-        ((EditText) findViewById(R.id.code3Text)).addTextChangedListener(new TextWatcher() {
+        _code3Text.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (((EditText) findViewById(R.id.code3Text)).getText().toString().length() == 1) {
-                    ((EditText) findViewById(R.id.code3Text)).clearFocus();
-                    ((EditText) findViewById(R.id.code4Text)).requestFocus();
-                    ((EditText) findViewById(R.id.code4Text)).setCursorVisible(true);
+                if (_code3Text.getText().toString().length() == 1) {
+                    _code3Text.clearFocus();
+                    _code4Text.requestFocus();
+                    _code4Text.setCursorVisible(true);
                 }
             }
 
@@ -116,13 +115,13 @@ public class CoachCodeActivity extends AppCompatActivity {
             }
         });
 
-        ((EditText) findViewById(R.id.code4Text)).addTextChangedListener(new TextWatcher() {
+        _code4Text.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (((EditText) findViewById(R.id.code4Text)).getText().toString().length() == 1) {
-                    ((EditText) findViewById(R.id.code4Text)).clearFocus();
-                    ((EditText) findViewById(R.id.code5Text)).requestFocus();
-                    ((EditText) findViewById(R.id.code5Text)).setCursorVisible(true);
+                if (_code4Text.getText().toString().length() == 1) {
+                    _code4Text.clearFocus();
+                    _code5Text.requestFocus();
+                    _code5Text.setCursorVisible(true);
                 }
             }
 
@@ -137,13 +136,13 @@ public class CoachCodeActivity extends AppCompatActivity {
             }
         });
 
-        ((EditText) findViewById(R.id.code5Text)).addTextChangedListener(new TextWatcher() {
+        _code5Text.addTextChangedListener(new TextWatcher() {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (((EditText) findViewById(R.id.code5Text)).getText().toString().length() == 1) {
-                    ((EditText) findViewById(R.id.code5Text)).clearFocus();
-                    ((EditText) findViewById(R.id.code6Text)).requestFocus();
-                    ((EditText) findViewById(R.id.code6Text)).setCursorVisible(true);
+                if (_code5Text.getText().toString().length() == 1) {
+                    _code5Text.clearFocus();
+                    _code6Text.requestFocus();
+                    _code6Text.setCursorVisible(true);
                 }
             }
 
@@ -157,16 +156,14 @@ public class CoachCodeActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
-                Intent intent = new Intent(this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
