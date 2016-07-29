@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,8 +26,10 @@ public class CoachProfileActivity extends AppCompatActivity
 
     @BindView(R.id.ratingBar)
     RatingBar _ratingBar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
-    String[] mobileArray = {"Cálculo 1", "Física 1", "Química 1", "Dibujo en Ingeniería"};
+    String[] courseArray = {"Cálculo 1", "Física 1", "Química 1", "Dibujo en Ingeniería"};
 
 
     @Override
@@ -43,7 +44,7 @@ public class CoachProfileActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Luis Becerra");
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_coach_profile_list_view, mobileArray);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_coach_profile_list_view, courseArray);
 
         ListView listView = (ListView) findViewById(R.id.course_list);
         listView.setAdapter(adapter);
@@ -65,13 +66,14 @@ public class CoachProfileActivity extends AppCompatActivity
 
         });
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Se procesará tu solicitud para dictar un nuevo curso", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Se procesará tu solicitud para dictar un nuevo curso", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), RequestCourseActivity.class);
+                startActivity(intent);
+
             }
         });
 
