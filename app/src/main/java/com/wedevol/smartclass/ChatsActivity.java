@@ -6,15 +6,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ChatsActivity extends AppCompatActivity {
 
-    @BindView(R.id.chat1_link)
-    ImageView _chat1Link;
+    @BindView(R.id.chat1_panel)
+    LinearLayout _chat1Panel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class ChatsActivity extends AppCompatActivity {
         actionBar.setTitle("Chats");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        _chat1Link.setOnClickListener(new View.OnClickListener() {
+        _chat1Panel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
