@@ -16,7 +16,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RatingBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,9 +26,6 @@ public class StudentProfileActivity extends AppCompatActivity
     @BindView(R.id.btn_request)
     Button _requestButton;
 
-    @BindView(R.id.ratingBar2)
-    RatingBar _ratingBar2;
-
     String[] mobileArray = {"Cálculo 1 - Jue 2:00 - 4:00 PM", "Física 1 - Mie 6:30 - 9:30 PM"};
 
 
@@ -38,8 +34,6 @@ public class StudentProfileActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_profile);
         ButterKnife.bind(this);
-
-        _ratingBar2.setRating(1);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
