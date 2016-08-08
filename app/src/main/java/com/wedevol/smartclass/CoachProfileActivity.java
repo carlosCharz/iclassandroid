@@ -12,9 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
@@ -28,9 +25,8 @@ public class CoachProfileActivity extends AppCompatActivity
     RatingBar _ratingBar;
     @BindView(R.id.fab)
     FloatingActionButton fab;
-
-    String[] courseArray = {"Cálculo 1", "Física 1", "Química 1", "Dibujo en Ingeniería"};
-
+    @BindView(R.id.course_list)
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,27 +40,10 @@ public class CoachProfileActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Luis Becerra");
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_coach_profile_list_view, courseArray);
+        CustomCoachAdapter customCoachAdapter = new CustomCoachAdapter();
 
-        ListView listView = (ListView) findViewById(R.id.course_list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new OnItemClickListener(){
-
-
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
-
-                //ItemClicked item = adapter.getItemAtPosition(position);
-
-                Intent intent = new Intent(getApplicationContext(), CourseActivity.class);
-
-                startActivity(intent);
-
-            }
-
-
-        });
+        listView.setAdapter(customCoachAdapter);
+        listView.setDivider(null);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
