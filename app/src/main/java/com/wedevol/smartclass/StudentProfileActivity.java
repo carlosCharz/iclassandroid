@@ -11,9 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -26,8 +23,10 @@ public class StudentProfileActivity extends AppCompatActivity
     @BindView(R.id.btn_request)
     Button _requestButton;
 
-    String[] mobileArray = {"Cálculo 1 - Jue 2:00 - 4:00 PM", "Física 1 - Mie 6:30 - 9:30 PM"};
+    @BindView(R.id.asesorias_list)
+    ListView listView;
 
+    CustomStudentAdapter customStudentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,22 +47,9 @@ public class StudentProfileActivity extends AppCompatActivity
             }
         });
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_student_profile_list_view, mobileArray);
-
-        ListView listView = (ListView) findViewById(R.id.asesorias_list);
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long id){
-                //ItemClicked item = adapter.getItemAtPosition(position);
-                //Intent intent = new Intent(getApplicationContext(), CourseActivity.class);
-                //startActivity(intent);
-            }
-
-
-        });
+        customStudentAdapter = new CustomStudentAdapter();
+        listView.setAdapter(customStudentAdapter);
+        listView.setDivider(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

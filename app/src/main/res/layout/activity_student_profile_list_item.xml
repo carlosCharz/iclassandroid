@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--  Single List Item Design -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/label_asesoria"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:textStyle="bold"></TextView>
+
+</LinearLayout>

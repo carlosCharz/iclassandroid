@@ -28,6 +28,8 @@ public class CoachProfileActivity extends AppCompatActivity
     @BindView(R.id.course_list)
     ListView listView;
 
+    CustomCoachAdapter customCoachAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +42,7 @@ public class CoachProfileActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Luis Becerra");
 
-        CustomCoachAdapter customCoachAdapter = new CustomCoachAdapter();
-
+        customCoachAdapter = new CustomCoachAdapter();
         listView.setAdapter(customCoachAdapter);
         listView.setDivider(null);
 
