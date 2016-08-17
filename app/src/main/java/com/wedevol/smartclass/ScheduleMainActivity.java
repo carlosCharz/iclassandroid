@@ -19,6 +19,8 @@ import butterknife.ButterKnife;
 
 public class ScheduleMainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_ADD_SCHEDULE = 0;
+
     @BindView(R.id.add_schedule_button)
     FloatingActionButton _addScheduleButton;
     @BindView(R.id.hourExpListView)
@@ -41,7 +43,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_ADD_SCHEDULE);
             }
         });
 
@@ -60,11 +62,7 @@ public class ScheduleMainActivity extends AppCompatActivity {
             }
         });
 
-        for (int i = 0; i < hourCollection.size(); i++) {
-            if (hourCollection.get(groupList.get(i)).size() > 0) {
-                hourExpListView.expandGroup(i);
-            }
-        }
+        expandCollections();
 
     }
 
@@ -81,13 +79,13 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
     private void createCollection() {
         // preparing mock hours collection(child)
-        String[] lunHours = { };
-        String[] marHours = { "9:00 - 11:00 AM", "5:00 - 7:00 PM"};
-        String[] mieHours = { };
-        String[] jueHours = {"5:00 - 9:00 PM" };
-        String[] vieHours = { };
-        String[] sabHours = { };
-        String[] domHours = { };
+        String[] lunHours = {};
+        String[] marHours = {"9:00 - 11:00 AM", "5:00 - 7:00 PM"};
+        String[] mieHours = {};
+        String[] jueHours = {"5:00 - 9:00 PM"};
+        String[] vieHours = {};
+        String[] sabHours = {};
+        String[] domHours = {};
 
 
         hourCollection = new LinkedHashMap<String, List<String>>();
@@ -126,6 +124,51 @@ public class ScheduleMainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_ADD_SCHEDULE) {
+            if (resultCode == RESULT_OK) {
+                String day = data.getExtras().getString("day");
+                String hourSince = data.getExtras().getString("hourSince");
+                String hourTo = data.getExtras().getString("hourTo");
+
+                String hour = hourSince + " - " + hourTo + " AM";
+
+                if (day.equals("Lunes")) {
+                    loadSingleChild(day, hour);
+                } else if (day.equals("Martes"))
+                    loadSingleChild(day, hour);
+                else if (day.equals("Miércoles"))
+                    loadSingleChild(day, hour);
+                else if (day.equals("Jueves"))
+                    loadSingleChild(day, hour);
+                else if (day.equals("Viernes"))
+                    loadSingleChild(day, hour);
+                else if (day.equals("Sábado"))
+                    loadSingleChild(day, hour);
+                else
+                    loadSingleChild(day, hour);
+            }
+        }
+    }
+
+    private void loadSingleChild(String day, String hour) {
+        List<String> childList = hourCollection.get(day);
+        if (childList == null){
+            childList = new ArrayList<String>();
+        }
+        childList.add(hour);
+        expandCollections();
+    }
+
+    private void expandCollections(){
+        for (int i = 0; i < hourCollection.size(); i++) {
+            if (hourCollection.get(groupList.get(i)).size() > 0) {
+                hourExpListView.expandGroup(i);
+            }
         }
     }
 }

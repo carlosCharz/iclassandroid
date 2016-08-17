@@ -1,6 +1,7 @@
 package com.wedevol.smartclass;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -52,13 +53,20 @@ public class ScheduleActivity extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, daysArray);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = (Spinner) findViewById(R.id.days_spinner2);
+        final Spinner sItems = (Spinner) findViewById(R.id.days_spinner2);
         sItems.setAdapter(adapter);
 
         _saveScheduleButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+
+                intent.putExtra("day", sItems.getSelectedItem().toString());
+                intent.putExtra("hourSince", _from1Text.getText().toString());
+                intent.putExtra("hourTo", _to1Text.getText().toString());
+                setResult(RESULT_OK, intent);
+
                 finish();
             }
         });
