@@ -21,7 +21,6 @@ public class ScheduleMainActivity extends AppCompatActivity {
 
     @BindView(R.id.add_schedule_button)
     FloatingActionButton _addScheduleButton;
-
     @BindView(R.id.hourExpListView)
     ExpandableListView hourExpListView;
     List<String> groupList;

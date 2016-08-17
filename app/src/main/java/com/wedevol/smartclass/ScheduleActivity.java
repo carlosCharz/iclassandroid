@@ -26,6 +26,8 @@ public class ScheduleActivity extends AppCompatActivity {
     EditText _from1Text;
     @BindView(R.id.to1Text)
     EditText _to1Text;
+    @BindView(R.id.btn_cancel_schedule)
+    Button _cancelScheduleButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,14 @@ public class ScheduleActivity extends AppCompatActivity {
                     }
                 }, 0, 0, true);
                 timePickerDialog.show();
+            }
+        });
+
+        _cancelScheduleButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
