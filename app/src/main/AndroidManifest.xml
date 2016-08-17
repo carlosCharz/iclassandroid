@@ -42,6 +42,7 @@
         <activity android:name=".ScheduleMainActivity" />
         <activity android:name=".MyCoachProfileActivity" />
         <activity android:name=".RequestCourseActivity" />
+        <activity android:name=".AsesoriasDetailActivity" />
 
     </application>
 
