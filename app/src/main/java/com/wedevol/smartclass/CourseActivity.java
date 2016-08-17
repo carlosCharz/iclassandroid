@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CourseActivity extends AppCompatActivity {
 
-    ExpandableListAdapter listAdapter;
+    CourseExpandListAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -37,7 +37,7 @@ public class CourseActivity extends AppCompatActivity {
         // preparing list data
         prepareListData();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        listAdapter = new CourseExpandListAdapter(this, listDataHeader, listDataChild);
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
