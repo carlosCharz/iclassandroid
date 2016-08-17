@@ -11,11 +11,11 @@ import java.util.ArrayList;
 /**
  * Created by charz on 8/8/16.
  */
-public class CustomStudentAdapter extends BaseAdapter {
+public class CustomStudentListAdapter extends BaseAdapter {
 
     ArrayList<String> listArray;
 
-    public CustomStudentAdapter() {
+    public CustomStudentListAdapter() {
         listArray = new ArrayList<>(5);
         listArray.add("Cálculo 1 - Jue 2:00 - 4:00 PM");
         listArray.add("Física 1 - Mie 6:30 - 9:30 PM");

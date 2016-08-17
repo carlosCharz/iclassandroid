@@ -12,11 +12,11 @@ import java.util.ArrayList;
 /**
  * Created by charz on 8/8/16.
  */
-public class CustomCoachAdapter extends BaseAdapter {
+public class CustomCoachListAdapter extends BaseAdapter {
 
     ArrayList<String> listArray;
 
-    public CustomCoachAdapter() {
+    public CustomCoachListAdapter() {
         listArray = new ArrayList<>(5);
         listArray.add("Cálculo 1");
         listArray.add("Física 1");

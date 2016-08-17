@@ -26,7 +26,7 @@ public class StudentProfileActivity extends AppCompatActivity
     @BindView(R.id.asesorias_list)
     ListView listView;
 
-    CustomStudentAdapter customStudentAdapter;
+    CustomStudentListAdapter customStudentListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class StudentProfileActivity extends AppCompatActivity
             }
         });
 
-        customStudentAdapter = new CustomStudentAdapter();
-        listView.setAdapter(customStudentAdapter);
+        customStudentListAdapter = new CustomStudentListAdapter();
+        listView.setAdapter(customStudentListAdapter);
         listView.setDivider(null);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
