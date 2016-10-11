@@ -82,6 +82,22 @@
                 android:hint="@string/pass_label"/>
         </android.support.design.widget.TextInputLayout>
 
+        <Spinner
+            android:id="@+id/type_spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="24dp"
+            android:textSize="16dip" />
+
+        <Spinner
+            android:id="@+id/course_spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="24dp"
+            android:textSize="16dip" />
+
         <!-- Signup Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"

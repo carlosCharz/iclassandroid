@@ -9,7 +9,7 @@
     <string name="new_user_label">¿Nuevo usuario?</string>
     <string name="signup_btn_label">Regístrate</string>
     <string name="coach_text"><u>¿Asesor?</u></string>
-    <string name="create_account_text">Crear cuenta</string>
+    <string name="create_account_text">Registrar</string>
 
     <!-- Sign up-->
     <string name="name_label">Nombre</string>

@@ -7,9 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +34,10 @@ public class SignupActivity extends AppCompatActivity {
     EditText _passwordText;
     @BindView(R.id.btn_signup)
     Button _signupButton;
+    @BindView(R.id.type_spinner)
+    Spinner _typeSpinner;
+    @BindView(R.id.course_spinner)
+    Spinner _courseSpinner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +46,35 @@ public class SignupActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.create_account_text);
+        actionBar.setTitle("Crear cuenta");
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        _typeSpinner.setVisibility(View.VISIBLE);
+        _courseSpinner.setVisibility(View.VISIBLE);
+
+        List<String> typeArray =  new ArrayList<String>();
+        typeArray.add("¿Alumno o asesor?");
+        typeArray.add("Alumno");
+        typeArray.add("Asesor");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, typeArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        _typeSpinner.setAdapter(adapter);
+
+        List<String> courseArray =  new ArrayList<String>();
+        courseArray.add("Selecciona un curso");
+        courseArray.add("Cálculo 1");
+        courseArray.add("Cálculo 2");
+        courseArray.add("Física 1");
+        courseArray.add("Química 1");
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, courseArray);
+
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        _courseSpinner.setAdapter(adapter2);
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
