@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Autenticando ...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
+        final String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
@@ -85,8 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
+                        //onLoginSuccess();
                         // onLoginFailed();
+                        signInWithoutLogin(email);
                         progressDialog.dismiss();
                     }
                 }, 1000);
@@ -111,6 +112,18 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed() {
         // disable going back to the MainActivity
         moveTaskToBack(true);
+    }
+
+    public void signInWithoutLogin(String email){
+        _loginButton.setEnabled(true);
+        if (email.equals("1")){
+            Intent intent = new Intent(getApplicationContext(), CoachProfileActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), StudentProfileActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     public void onLoginSuccess() {
