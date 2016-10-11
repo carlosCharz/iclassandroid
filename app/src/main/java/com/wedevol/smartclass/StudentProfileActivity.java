@@ -101,17 +101,14 @@ public class StudentProfileActivity extends AppCompatActivity
 
         if (id == R.id.profile_link2) {
 
-        } else if (id == R.id.schedule_link2) {
+        } else if (id == R.id.courses_link2) {
             //Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
             //startActivity(intent);
-        } else if (id == R.id.notifications_link2) {
+        } else if (id == R.id.solicitudes_link2) {
             //Intent intent = new Intent(getApplicationContext(), NotificationsActivity.class);
             //startActivity(intent);
         } else if (id == R.id.asesorias_link2) {
             //Intent intent = new Intent(getApplicationContext(), AsesoriasActivity.class);
-            //startActivity(intent);
-        } else if (id == R.id.config_link2) {
-            //Intent intent = new Intent(getApplicationContext(), ConfigActivity.class);
             //startActivity(intent);
         } else if (id == R.id.signout_link2) {
             finish();
