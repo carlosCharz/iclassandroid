@@ -14,6 +14,14 @@ public class Topic {
         this.id = id;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     public String getName() {
         return name;
     }

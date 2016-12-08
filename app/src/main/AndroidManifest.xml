@@ -27,15 +27,15 @@
 
 
 
-        <activity android:name=".fragments.course.SelectCourseActivity"/>
+        <activity android:name=".fragments.student.course.SelectCourseActivity"/>
         <activity android:name=".fragments.zothermomentaneous.MainActivity" />
         <activity
             android:name=".fragments.zothermomentaneous.CoachProfileActivity"
             android:label="@string/title_activity_coach_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".fragments.schedule.ScheduleActivity" />
-        <activity android:name=".fragments.course.CourseActivity" />
-        <activity android:name=".fragments.notification.NotificationsActivity" />
+        <activity android:name=".fragments.student.schedule.ScheduleActivity" />
+        <activity android:name=".fragments.student.course.CourseActivity" />
+        <activity android:name=".fragments.student.notification.NotificationsActivity" />
         <activity android:name=".fragments.zothermomentaneous.ConsultActivity" />
         <activity android:name=".fragments.zothermomentaneous.ChatActivity" />
         <activity android:name=".fragments.zothermomentaneous.ChatsActivity" />
@@ -45,12 +45,12 @@
             android:label="@string/title_activity_student_profile"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".fragments.schedule.SelectScheduleActivity"/>
-        <activity android:name=".fragments.paycourse.ConfirmCourseActivity"/>
-        <activity android:name=".fragments.schedule.ScheduleMainActivity" />
+        <activity android:name=".fragments.student.schedule.SelectScheduleActivity"/>
+        <activity android:name=".fragments.student.paycourse.ConfirmCourseActivity"/>
+        <activity android:name=".fragments.student.schedule.ScheduleMainActivity" />
         <activity android:name=".fragments.zothermomentaneous.MyCoachProfileActivity" />
-        <activity android:name=".fragments.course.RequestCourseActivity" />
-        <activity android:name=".activities.DetailConsultActivity" />
+        <activity android:name=".fragments.student.course.RequestCourseActivity" />
+        <activity android:name=".activities.instructor.DetailInstructorActivity" />
 
     </application>
 

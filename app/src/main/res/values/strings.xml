@@ -41,4 +41,6 @@
     <string name="nav_item_exit">CERRAR SESION</string>
     <string name="drawer_open">Opening</string>
     <string name="drawer_close">Closing</string>
+    <string name="iclass_logo_content_description">iClass Logo - Content Description</string>
+    <string name="nav_item_requests">MIS SOLICITUDES</string>
 </resources>

@@ -21,13 +21,7 @@ public class Class {
         this.id = id;
     }
 
-    public Date getClassDate() {
-        return classDate;
-    }
 
-    public void setClassDate(Date classDate) {
-        this.classDate = classDate;
-    }
 
     public String getStatus() {
         return status;
@@ -35,5 +29,37 @@ public class Class {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public Date getClassDate() {
+        return classDate;
+    }
+
+    public void setClassDate(Date classDate) {
+        this.classDate = classDate;
     }
 }

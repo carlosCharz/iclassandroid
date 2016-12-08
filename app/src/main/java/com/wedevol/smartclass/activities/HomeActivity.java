@@ -1,6 +1,5 @@
 package com.wedevol.smartclass.activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,13 +14,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.fragments.BankAccountsFragment;
-import com.wedevol.smartclass.fragments.ConsultationsFragment;
-import com.wedevol.smartclass.fragments.CoursesFragment;
-import com.wedevol.smartclass.fragments.NotificationsFragment;
-import com.wedevol.smartclass.fragments.PayCourseFragment;
-import com.wedevol.smartclass.fragments.ProfileFragment;
-import com.wedevol.smartclass.fragments.ScheduleFragment;
+import com.wedevol.smartclass.fragments.BankAccountFragment;
+import com.wedevol.smartclass.fragments.counselor.CounselorCounselledFragment;
+import com.wedevol.smartclass.fragments.counselor.CounselorCoursesFragment;
+import com.wedevol.smartclass.fragments.counselor.CounselorNotificationsFragment;
+import com.wedevol.smartclass.fragments.counselor.CounselorProfileFragment;
+import com.wedevol.smartclass.fragments.counselor.CounselorScheduleFragment;
+import com.wedevol.smartclass.fragments.student.StudentCounselingFragment;
+import com.wedevol.smartclass.fragments.student.StudentCoursesFragment;
+import com.wedevol.smartclass.fragments.student.StudentPayCourseFragment;
+import com.wedevol.smartclass.fragments.student.StudentProfileFragment;
+import com.wedevol.smartclass.fragments.student.StudentRequestFragment;
 import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.navigation.FragmentDrawer;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
@@ -33,16 +36,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private User currentUser;
     private ImageView iv_toolbar_actual_screen;
     private int fragmentDrawableId;
-    private Context context;
+    private boolean isInstructor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
         setContentView(R.layout.activity_home);
 
         //FacebookSdk.sdkInitialize(getApplicationContext());
-
         setupElements(savedInstanceState);
     }
 
@@ -59,9 +60,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setSupportActionBar(toolbar);
 
+        isInstructor = false;
+        //TODO we should validate the kind of user here, given the type of user given at login
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_fragment_drawer, new FragmentDrawer(), "NavDrawer");
+        fragmentTransaction.replace(R.id.nav_fragment_drawer, FragmentDrawer.newInstance(isInstructor), "NavDrawer");
         fragmentTransaction.commitNow();
 
         FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentByTag("NavDrawer");
@@ -71,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         if(savedInstanceState != null){
             fragmentDrawableId = savedInstanceState.getInt("selectedFragmentIcon");
         }else{
-            fragmentTransaction.replace(R.id.main_fragment_container, new ScheduleFragment());
+            fragmentTransaction.replace(R.id.main_fragment_container, new CounselorScheduleFragment());
             fragmentDrawableId = R.drawable.ic_schedule_selected;
             fragmentTransaction.commit();
         }
@@ -88,39 +92,68 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @Override
     public void onDrawerItemSelected(View view, int position) {
         Fragment fragment = null;
-        switch (position) {
-            case 0:
-                fragment = new ProfileFragment();
-                fragmentDrawableId = R.drawable.ic_profile_selected;
-                break;
-            case 1:
-                fragment = new ScheduleFragment();
-                fragmentDrawableId = R.drawable.ic_schedule_selected;
-                break;
-            case 2:
-                fragment = new NotificationsFragment();
-                fragmentDrawableId = R.drawable.ic_notification_selected;
-                break;
-            case 3:
-                fragment = new ConsultationsFragment();
-                fragmentDrawableId = R.drawable.ic_consultation_selected;
-                break;
-            case 4:
-                fragment = new CoursesFragment();
-                fragmentDrawableId = R.drawable.ic_course_selected;
-                break;
-            case 5:
-                fragment = new PayCourseFragment();
-                fragmentDrawableId = R.drawable.ic_pay_course_selected;
-                break;
-            case 6:
-                fragment = new BankAccountsFragment();
-                fragmentDrawableId = R.drawable.ic_bank_account_selected;
-                break;
-            case 7:
-                mPreferencesManager.logout();
-            default:
-                break;
+        if(isInstructor){
+            switch (position) {
+                case 0:
+                    fragment = new CounselorProfileFragment();
+                    fragmentDrawableId = R.drawable.ic_profile_selected;
+                    break;
+                case 1:
+                    fragment = new CounselorScheduleFragment();
+                    fragmentDrawableId = R.drawable.ic_schedule_selected;
+                    break;
+                case 2:
+                    fragment = new CounselorNotificationsFragment();
+                    fragmentDrawableId = R.drawable.ic_notification_selected;
+                    break;
+                case 3:
+                    fragment = new CounselorCounselledFragment();
+                    fragmentDrawableId = R.drawable.ic_counsel_selected;
+                    break;
+                case 4:
+                    fragment = new CounselorCoursesFragment();
+                    fragmentDrawableId = R.drawable.ic_course_selected;
+                    break;
+                case 5:
+                    fragment = new BankAccountFragment();
+                    fragmentDrawableId = R.drawable.ic_bank_account_selected;
+                    break;
+                case 6:
+                    mPreferencesManager.logout();
+                default:
+                    break;
+            }
+        } else {
+            switch (position) {
+                case 0:
+                    fragment = new StudentProfileFragment();
+                    fragmentDrawableId = R.drawable.ic_profile_selected;
+                    break;
+                case 1:
+                    fragment = new StudentCoursesFragment();
+                    fragmentDrawableId = R.drawable.ic_course_selected;
+                    break;
+                case 2:
+                    fragment = new StudentRequestFragment();
+                    fragmentDrawableId = R.drawable.ic_notification_selected;
+                    break;
+                case 3:
+                    fragment = new StudentCounselingFragment();
+                    fragmentDrawableId = R.drawable.ic_counsel_selected;
+                    break;
+                case 4:
+                    fragment = new StudentPayCourseFragment();
+                    fragmentDrawableId = R.drawable.ic_course_selected;
+                    break;
+                case 5:
+                    fragment = new BankAccountFragment();
+                    fragmentDrawableId = R.drawable.ic_bank_account_selected;
+                    break;
+                case 6:
+                    mPreferencesManager.logout();
+                default:
+                    break;
+            }
         }
 
         if (fragment != null) {

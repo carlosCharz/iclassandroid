@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.wedevol.smartclass.fragments.course.CourseActivity;
+import com.wedevol.smartclass.fragments.student.course.CourseActivity;
 import com.wedevol.smartclass.R;
 
 import java.util.ArrayList;

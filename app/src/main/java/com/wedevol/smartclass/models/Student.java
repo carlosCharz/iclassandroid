@@ -17,4 +17,28 @@ public class Student extends User{
                 birthday,  gender,  profilePictureUrl, placeOptions,
                 university,  rating,  level,  totalHours);
     }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public List<String> getCoursesStatus() {
+        return coursesStatus;
+    }
+
+    public void setCoursesStatus(List<String> coursesStatus) {
+        this.coursesStatus = coursesStatus;
+    }
+
+    public List<Class> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Class> classes) {
+        this.classes = classes;
+    }
 }

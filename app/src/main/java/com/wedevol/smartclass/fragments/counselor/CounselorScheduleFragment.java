@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.fragments;
+package com.wedevol.smartclass.fragments.counselor;
 
 import android.content.Context;
 
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.wedevol.smartclass.R;
 
 /** Created by paolorossi on 12/8/16.*/
-public class ScheduleFragment extends Fragment{
+public class CounselorScheduleFragment extends Fragment{
     private Context context;
 
     @Override
