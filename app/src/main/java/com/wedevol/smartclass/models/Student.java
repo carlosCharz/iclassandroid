@@ -5,6 +5,11 @@ import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Student extends User{
+    private List<Course> courses;
+    private List<String> coursesStatus;
+    private List<Class> classes;
+
+
     public Student(int id, String firstname, String lastname, String phone, String email, String password,
                    Date birthday, boolean gender, String profilePictureUrl, List<String> placeOptions,
                    String university, double rating, int level, int totalHours) {

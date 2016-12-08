@@ -5,6 +5,9 @@ import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Instructor extends User {
+    List<Course> enrolledCourses;
+    List<Schedule> schedules;
+
     public Instructor(int id, String firstname, String lastname, String phone, String email, String password,
                       Date birthday, boolean gender, String profilePictureUrl, List<String> placeOptions,
                       String university, double rating, int level, int totalHours) {
