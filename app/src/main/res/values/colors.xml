@@ -3,7 +3,8 @@
     <color name="primary">#E43F3F</color>
     <color name="primary_dark">#E12929</color>
     <color name="primary_darker">#CC1D1D</color>
-    <color name="accent">#FFFFFF</color>
+    <color name="accent">#FF9900</color>
+    <color name="gold">#d2cc6a</color>
 
     <color name="black">#000000</color>
     <color name="jet">#222222</color>
@@ -16,4 +17,6 @@
     <color name="white">#FFFFFF</color>
 
     <color name="green_soft">#8FA880</color>
+
+    <color name="baseOrange">#FF9900</color>
 </resources>

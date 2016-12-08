@@ -31,4 +31,14 @@
     <string name="title_activity_student_profile">StudentProfileActivity</string>
 
     <string name="action_settings">Settings</string>
+    <string name="nav_item_profile">PERFIL</string>
+    <string name="nav_item_schedule">HORARIO</string>
+    <string name="nav_item_notification">NOTIFICACIONES</string>
+    <string name="nav_item_consultation">MIS ASESORIAS</string>
+    <string name="nav_item_course">MIS CURSOS</string>
+    <string name="nav_item_pay_course">PAGAR CURSO</string>
+    <string name="nav_item_bank_account">CUENTAS BANCARIAS</string>
+    <string name="nav_item_exit">CERRAR SESION</string>
+    <string name="drawer_open">Opening</string>
+    <string name="drawer_close">Closing</string>
 </resources>

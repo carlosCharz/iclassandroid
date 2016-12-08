@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:id="@+id/nav_header_container"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_background">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/iv_user_image"
+            android:src="@drawable/ic_profile_selected"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            app:civ_border_width="2dp"/>
+
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_user_name"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:maxLines="3"
+                android:scrollHorizontally="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
+                android:text="Paolo Rossi"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_actual_city_country"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:ellipsize="marquee"
+                android:text="Lima, Peru" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/drawerList"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="30dp"
+            android:scrollbars="vertical"/>
+    </LinearLayout>
+
+</LinearLayout>

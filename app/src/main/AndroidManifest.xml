@@ -10,39 +10,47 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".CoachCodeActivity" />
+        <activity android:name=".activities.SignupActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.LoginActivity" />
+
+
+
+
+
+
+
+        <activity android:name=".fragments.course.SelectCourseActivity"/>
+        <activity android:name=".fragments.zothermomentaneous.MainActivity" />
         <activity
-            android:name=".CoachProfileActivity"
+            android:name=".fragments.zothermomentaneous.CoachProfileActivity"
             android:label="@string/title_activity_coach_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ScheduleActivity" />
-        <activity android:name=".CourseActivity" />
-        <activity android:name=".NotificationsActivity" />
-        <activity android:name=".AsesoriasActivity" />
-        <activity android:name=".ChatActivity" />
-        <activity android:name=".ChatsActivity" />
-        <activity android:name=".ConfirmActivity" />
-        <activity android:name=".ConfigActivity"></activity>
+        <activity android:name=".fragments.schedule.ScheduleActivity" />
+        <activity android:name=".fragments.course.CourseActivity" />
+        <activity android:name=".fragments.notification.NotificationsActivity" />
+        <activity android:name=".fragments.zothermomentaneous.ConsultActivity" />
+        <activity android:name=".fragments.zothermomentaneous.ChatActivity" />
+        <activity android:name=".fragments.zothermomentaneous.ChatsActivity" />
+        <activity android:name=".fragments.zothermomentaneous.ConfirmActivity" />
         <activity
-            android:name=".StudentProfileActivity"
+            android:name=".fragments.zothermomentaneous.StudentProfileActivity"
             android:label="@string/title_activity_student_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SelectCourseActivity"></activity>
-        <activity android:name=".SelectScheduleActivity"></activity>
-        <activity android:name=".ConfirmCourseActivity"></activity>
-        <activity android:name=".ScheduleMainActivity" />
-        <activity android:name=".MyCoachProfileActivity" />
-        <activity android:name=".RequestCourseActivity" />
-        <activity android:name=".AsesoriasDetailActivity" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".fragments.schedule.SelectScheduleActivity"/>
+        <activity android:name=".fragments.paycourse.ConfirmCourseActivity"/>
+        <activity android:name=".fragments.schedule.ScheduleMainActivity" />
+        <activity android:name=".fragments.zothermomentaneous.MyCoachProfileActivity" />
+        <activity android:name=".fragments.course.RequestCourseActivity" />
+        <activity android:name=".activities.DetailConsultActivity" />
 
     </application>
 
