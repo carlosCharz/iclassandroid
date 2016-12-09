@@ -41,4 +41,11 @@ public class Schedule {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    /**
+     * Prints the schedule in a presentation format.
+    * */
+    public String printSchedule() {
+        return startTime + " - " + endTime;
+    }
 }

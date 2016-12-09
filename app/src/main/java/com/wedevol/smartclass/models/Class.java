@@ -11,7 +11,18 @@ public class Class {
     private Date classDate;
     private String status;
 
+    public Class(){
 
+    }
+
+    public Class(int id, Instructor instructor, Course course, Schedule schedule, Date classDate, String status){
+        this.id = id;
+        this.instructor = instructor;
+        this.course = course;
+        this.schedule = schedule;
+        this.classDate = classDate;
+        this.status = status;
+    }
 
     public int getId() {
         return id;

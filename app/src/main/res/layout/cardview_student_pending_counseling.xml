@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp">
+
+    <ru.rambler.libs.swipe_layout.SwipeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_swipe_enabled="true"
+        app:right_swipe_enabled="true">
+
+        <!--Main not clamped view. The clam         ped view is hidden-->
+        <LinearLayout
+            app:gravity="center"
+            android:weightSum="1"
+            android:background="@color/gold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_weight="0.7"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_pending_counsel_course_counseller"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Curso X - Pedro Zegarra"/>
+                <TextView
+                    android:id="@+id/tv_pending_counsel_date"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="12/11/16 - 20 a 22 hrs "/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_weight="0.3"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_gravity="end"
+                    android:id="@+id/iv_call_counseller"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_phone_black"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--Clamped view with additinal options-->
+        <LinearLayout
+            app:gravity="right"
+            app:bring_to_clamp="100dp"
+            app:clamp="self"
+            app:sticky="none"
+            android:background="@color/gold"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <ImageView
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:id="@+id/iv_detail_counseller"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_profile_black"/>
+
+            <ImageView
+                android:id="@+id/iv_detail_course"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_course_black"/>
+        </LinearLayout>
+
+    </ru.rambler.libs.swipe_layout.SwipeLayout>
+</android.support.v7.widget.CardView>

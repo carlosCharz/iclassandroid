@@ -9,6 +9,10 @@ public class Instructor extends User {
     private List<Course> enrolledCourses = new ArrayList<>();
     private List<Schedule> schedules = new ArrayList<>();
 
+    public Instructor(){
+
+    }
+
     public Instructor(int id, String firstname, String lastname, String phone, String email, String password,
                       Date birthday, boolean gender, String profilePictureUrl, List<String> placeOptions,
                       String university, double rating, int level, int totalHours) {
