@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
             fragmentDrawableId = savedInstanceState.getInt("selectedFragmentIcon");
         }else{
             fragmentTransaction.replace(R.id.main_fragment_container, new CounselorScheduleFragment());
-            fragmentDrawableId = R.drawable.ic_schedule_selected;
+            fragmentDrawableId = R.drawable.ic_schedule_black;
             fragmentTransaction.commit();
         }
 
@@ -96,27 +96,27 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
             switch (position) {
                 case 0:
                     fragment = new CounselorProfileFragment();
-                    fragmentDrawableId = R.drawable.ic_profile_selected;
+                    fragmentDrawableId = R.drawable.ic_profile_black;
                     break;
                 case 1:
                     fragment = new CounselorScheduleFragment();
-                    fragmentDrawableId = R.drawable.ic_schedule_selected;
+                    fragmentDrawableId = R.drawable.ic_schedule_black;
                     break;
                 case 2:
                     fragment = new CounselorNotificationsFragment();
-                    fragmentDrawableId = R.drawable.ic_notification_selected;
+                    fragmentDrawableId = R.drawable.ic_notification_black;
                     break;
                 case 3:
                     fragment = new CounselorCounselledFragment();
-                    fragmentDrawableId = R.drawable.ic_counsel_selected;
+                    fragmentDrawableId = R.drawable.ic_counsel_black;
                     break;
                 case 4:
                     fragment = new CounselorCoursesFragment();
-                    fragmentDrawableId = R.drawable.ic_course_selected;
+                    fragmentDrawableId = R.drawable.ic_course_black;
                     break;
                 case 5:
                     fragment = new BankAccountFragment();
-                    fragmentDrawableId = R.drawable.ic_bank_account_selected;
+                    fragmentDrawableId = R.drawable.ic_bank_account_black;
                     break;
                 case 6:
                     mPreferencesManager.logout();
@@ -127,27 +127,27 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
             switch (position) {
                 case 0:
                     fragment = new StudentProfileFragment();
-                    fragmentDrawableId = R.drawable.ic_profile_selected;
+                    fragmentDrawableId = R.drawable.ic_profile_black;
                     break;
                 case 1:
                     fragment = new StudentCoursesFragment();
-                    fragmentDrawableId = R.drawable.ic_course_selected;
+                    fragmentDrawableId = R.drawable.ic_course_black;
                     break;
                 case 2:
                     fragment = new StudentRequestFragment();
-                    fragmentDrawableId = R.drawable.ic_notification_selected;
+                    fragmentDrawableId = R.drawable.ic_notification_black;
                     break;
                 case 3:
                     fragment = new StudentCounselingFragment();
-                    fragmentDrawableId = R.drawable.ic_counsel_selected;
+                    fragmentDrawableId = R.drawable.ic_counsel_black;
                     break;
                 case 4:
                     fragment = new StudentPayCourseFragment();
-                    fragmentDrawableId = R.drawable.ic_course_selected;
+                    fragmentDrawableId = R.drawable.ic_course_black;
                     break;
                 case 5:
                     fragment = new BankAccountFragment();
-                    fragmentDrawableId = R.drawable.ic_bank_account_selected;
+                    fragmentDrawableId = R.drawable.ic_bank_account_black;
                     break;
                 case 6:
                     mPreferencesManager.logout();

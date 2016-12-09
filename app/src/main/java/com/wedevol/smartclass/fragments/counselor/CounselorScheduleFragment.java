@@ -12,12 +12,9 @@ import com.wedevol.smartclass.R;
 
 /** Created by paolorossi on 12/8/16.*/
 public class CounselorScheduleFragment extends Fragment{
-    private Context context;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
     }
 
     @Override

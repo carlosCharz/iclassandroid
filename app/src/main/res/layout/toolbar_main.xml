@@ -10,15 +10,16 @@
     local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     local:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/iv_toolbar_actual_screen" />
+    <TextView
+        android:id="@+id/iv_reception_title"
+        android:gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"/>
 
     <ImageView
-        android:id="@+id/iv_reception_title"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:id="@+id/iv_toolbar_actual_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end"/>
 </android.support.v7.widget.Toolbar>

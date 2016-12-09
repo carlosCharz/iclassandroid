@@ -19,7 +19,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:id="@+id/iv_user_image"
-            android:src="@drawable/ic_profile_selected"
+            android:src="@drawable/ic_profile_black"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             app:civ_border_width="2dp"/>

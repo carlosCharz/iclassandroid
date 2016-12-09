@@ -86,22 +86,22 @@ public class FragmentDrawer extends Fragment {
     private List<NavDrawerItem> getData() {
         List<NavDrawerItem> data = new ArrayList<>();
         if(isInstructor){
-            data.add(new NavDrawerItem(getString(R.string.nav_item_profile), true, false, R.drawable.ic_profile_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_schedule), true, false, R.drawable.ic_schedule_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_notification), true, false, R.drawable.ic_notification_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_consultation), true, false, R.drawable.ic_counsel_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_course), true, false, R.drawable.ic_course_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_pay_course), true, false, R.drawable.ic_pay_course_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_bank_account), true, false, R.drawable.ic_bank_account_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_exit), true,false, R.drawable.ic_exit_selected));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_profile), true, false, R.drawable.ic_profile_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_schedule), true, false, R.drawable.ic_schedule_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_notification), true, false, R.drawable.ic_notification_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_consultation), true, false, R.drawable.ic_counsel_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_course), true, false, R.drawable.ic_course_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_pay_course), true, false, R.drawable.ic_pay_course_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_bank_account), true, false, R.drawable.ic_bank_account_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_exit), true,false, R.drawable.ic_exit_black));
         }else{
-            data.add(new NavDrawerItem(getString(R.string.nav_item_profile), true, false, R.drawable.ic_profile_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_course), true, false, R.drawable.ic_course_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_requests), true, false, R.drawable.ic_request_send_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_consultation), true, false, R.drawable.ic_counsel_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_pay_course), true, false, R.drawable.ic_pay_course_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_bank_account), true, false, R.drawable.ic_bank_account_selected));
-            data.add(new NavDrawerItem(getString(R.string.nav_item_exit), true,false, R.drawable.ic_exit_selected));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_profile), true, false, R.drawable.ic_profile_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_course), true, false, R.drawable.ic_course_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_requests), true, false, R.drawable.ic_request_send_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_consultation), true, false, R.drawable.ic_counsel_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_pay_course), true, false, R.drawable.ic_pay_course_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_bank_account), true, false, R.drawable.ic_bank_account_black));
+            data.add(new NavDrawerItem(getString(R.string.nav_item_exit), true,false, R.drawable.ic_exit_black));
         }
 
         return data;
