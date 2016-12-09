@@ -1,13 +1,14 @@
 package com.wedevol.smartclass.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Student extends User{
-    private List<Course> courses;
-    private List<String> coursesStatus;
-    private List<Class> classes;
+    private List<Course> courses = new ArrayList<>();
+    private List<String> coursesStatus = new ArrayList<>();
+    private List<Class> classes = new ArrayList<>();
 
 
     public Student(int id, String firstname, String lastname, String phone, String email, String password,
@@ -16,6 +17,10 @@ public class Student extends User{
         super( id,  firstname,  lastname,  phone,  email,  password,
                 birthday,  gender,  profilePictureUrl, placeOptions,
                 university,  rating,  level,  totalHours);
+    }
+
+    public Student() {
+        super();
     }
 
     public List<Course> getCourses() {

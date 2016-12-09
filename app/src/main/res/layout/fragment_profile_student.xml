@@ -3,187 +3,208 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <!--This is the header of the view. For know golden.-->
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:weightSum="1"
-            android:background="@drawable/custom_splash_background">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_weight="0.5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                tools:src="@drawable/ic_profile_black"/>
+            <!--This is the header of the view. For know golden.-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:weightSum="1"
+                android:background="@color/primary_dark">
+
+                <ImageView
+                    android:id="@+id/iv_user_profile_photo"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_profile_black"/>
+
+                <LinearLayout
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center"
+                    android:layout_weight="0.5"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tv_student_level"
+                        android:textSize="24sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Nivel 3" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_student_progress"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:max="100"
+                        android:progress="100"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_student_counselled_time"
+                        android:textSize="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="20 hrs" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--This is the detail related to each student. Should be left white-->
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_face_black" />
+                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_student_profile_type"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="Alumno" />
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginEnd="20dp"
-                android:gravity="center"
-                android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_phone_black"/>
 
                 <TextView
-                    android:textSize="24sp"
-                    android:id="@+id/tv_student_level"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Nivel 3" />
-
-                <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:id="@+id/progress"
-                    android:max="100"
-                    android:progress="100"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_student_profile_number"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
                     android:textSize="20sp"
-                    android:id="@+id/tv_student_counselled_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="20 hrs" />
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="999695670" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_email_black"/>
+
+                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_student_profile_email"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="diagonal_zero@hotmail.com" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_course_black"/>
+
+                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_student_profile_courses_taken"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="2 cursos" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_av_timer_black"/>
+
+                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_student_profile_time"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="20 horas" />
             </LinearLayout>
         </LinearLayout>
 
-        <!--This is the detail related to each student. Should be left white-->
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:weightSum="1">
-            <ImageView
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_face_black" />
-            <TextView
-                android:id="@+id/tv_student_profile_type"
-                android:gravity="center_vertical"
-                android:layout_weight="0.6"
-                android:layout_width="0dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                tools:text="Alumno" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:weightSum="1">
-            <ImageView
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_phone_black"/>
-
-            <TextView
-                android:id="@+id/tv_student_profile_number"
-                android:gravity="center_vertical"
-                android:layout_weight="0.6"
-                android:layout_width="0dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                tools:text="999695670" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:weightSum="1">
-            <ImageView
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_email_black"/>
-
-            <TextView
-                android:id="@+id/tv_student_profile_email"
-                android:gravity="center_vertical"
-                android:layout_weight="0.6"
-                android:layout_width="0dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                tools:text="a20105435@pucp.pe" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:weightSum="1">
-            <ImageView
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_course_black"/>
-
-            <TextView
-                android:id="@+id/tv_student_profile_course_number"
-                android:gravity="center_vertical"
-                android:layout_weight="0.6"
-                android:layout_width="0dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                tools:text="2 cursos" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:weightSum="1">
-            <ImageView
-                android:layout_weight="0.4"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/ic_av_timer_black"/>
-
-            <TextView
-                android:id="@+id/tv_student_profile_time"
-                android:gravity="center_vertical"
-                android:layout_weight="0.6"
-                android:layout_width="0dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_height="match_parent"
-                tools:text="20 horas" />
-        </LinearLayout>
-
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_edit_profile"
             android:src="@drawable/ic_mode_edit_white"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="end"
             android:layout_margin="10dp"/>
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </ScrollView>

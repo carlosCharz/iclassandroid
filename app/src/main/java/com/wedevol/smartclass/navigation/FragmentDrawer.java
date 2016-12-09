@@ -17,6 +17,7 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,8 @@ public class FragmentDrawer extends Fragment {
         iv_user_image = (ImageView) view.findViewById(R.id.iv_user_image);
 
         //tv_user_name.setText("Placeholder on FragDrawer"/*currentUser.getFullName()*/);
-        UtilMethods.setUserPhoto(getActivity(), iv_user_image, mPreferencesManager);
+        //mPreferencesManager.getUserInfo().getProfilePictureUrl() should go instead of ""
+        UtilMethods.setPhoto(getActivity(), iv_user_image, "", Constants.USER_PHOTO);
         setupRecyclerView();
     }
 
@@ -86,6 +88,7 @@ public class FragmentDrawer extends Fragment {
     private List<NavDrawerItem> getData() {
         List<NavDrawerItem> data = new ArrayList<>();
         if(isInstructor){
+            data.add(new NavDrawerItem(getString(R.string.nav_item_desk), true, false, R.drawable.ic_desktop_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_profile), true, false, R.drawable.ic_profile_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_schedule), true, false, R.drawable.ic_schedule_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_notification), true, false, R.drawable.ic_notification_black));
@@ -95,6 +98,7 @@ public class FragmentDrawer extends Fragment {
             data.add(new NavDrawerItem(getString(R.string.nav_item_bank_account), true, false, R.drawable.ic_bank_account_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_exit), true,false, R.drawable.ic_exit_black));
         }else{
+            data.add(new NavDrawerItem(getString(R.string.nav_item_locker), true, false, R.drawable.ic_locker_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_profile), true, false, R.drawable.ic_profile_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_course), true, false, R.drawable.ic_course_black));
             data.add(new NavDrawerItem(getString(R.string.nav_item_requests), true, false, R.drawable.ic_request_send_black));

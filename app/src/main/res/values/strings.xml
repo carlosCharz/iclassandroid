@@ -43,4 +43,6 @@
     <string name="drawer_close">Closing</string>
     <string name="iclass_logo_content_description">iClass Logo - Content Description</string>
     <string name="nav_item_requests">MIS SOLICITUDES</string>
+    <string name="nav_item_desk">ESCRITORIO</string>
+    <string name="nav_item_locker">LOCKER</string>
 </resources>
