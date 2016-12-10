@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity{
         mSharedPreferencesManager = SharedPreferencesManager.getInstance(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(UtilMethods.checkMarshmallowPermissions(this)==2){
+            if(UtilMethods.checkMarshmallowPermissions(this)==4){
                 login();
             }
         }else{

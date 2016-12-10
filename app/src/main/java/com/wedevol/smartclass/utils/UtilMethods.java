@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -25,13 +24,11 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.SignupActivity;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,8 +86,7 @@ public class UtilMethods {
         int permissionCheck, permissionCount=0;
         permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if(permissionCheck != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
         } else {
             permissionCount++;
         }
@@ -98,14 +94,28 @@ public class UtilMethods {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
             if(permissionCheck != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(activity,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 11);
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 11);
             } else {
                 permissionCount++;
             }
         }else{
             permissionCount++;
         }
+
+        permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE}, 12);
+        } else {
+            permissionCount++;
+        }
+
+        permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE}, 13);
+        } else {
+            permissionCount++;
+        }
+
         return permissionCount;
     }
 

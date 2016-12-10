@@ -1,7 +1,15 @@
 package com.wedevol.smartclass.adapters;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +18,12 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Class;
+import com.wedevol.smartclass.utils.PhoneCallListener;
 
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
-public class PendingCounselsAdapter extends RecyclerView.Adapter<PendingCounselsAdapter.ViewHolder>{
+public class PendingCounselsAdapter extends RecyclerView.Adapter<PendingCounselsAdapter.ViewHolder> {
     private final List<Class> mItems;
     private final Activity context;
 
@@ -46,7 +55,16 @@ public class PendingCounselsAdapter extends RecyclerView.Adapter<PendingCounsels
         viewHolder.iv_call_counseller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO call with cellphone API
+                // add PhoneStateListener
+                PhoneCallListener phoneListener = new PhoneCallListener(context);
+                TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                telephonyManager.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:+5199695670"));
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                context.startActivity(callIntent);
 
             }
         });
