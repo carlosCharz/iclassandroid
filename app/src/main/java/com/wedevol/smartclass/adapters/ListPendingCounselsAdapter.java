@@ -23,25 +23,25 @@ import com.wedevol.smartclass.utils.PhoneCallListener;
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
-public class PendingCounselsAdapter extends RecyclerView.Adapter<PendingCounselsAdapter.ViewHolder> {
+public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPendingCounselsAdapter.ViewHolder> {
     private final List<Class> mItems;
     private final Activity context;
 
-    public PendingCounselsAdapter(Activity context, List<Class> list) {
+    public ListPendingCounselsAdapter(Activity context, List<Class> list) {
         super();
         this.context = context;
         mItems = list;
     }
 
     @Override
-    public PendingCounselsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ListPendingCounselsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.cardview_student_pending_counseling, viewGroup, false);
-        return new PendingCounselsAdapter.ViewHolder(v);
+        return new ListPendingCounselsAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final PendingCounselsAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ListPendingCounselsAdapter.ViewHolder viewHolder, int i) {
         final Class classy = mItems.get(i);
         /*
         viewHolder.tv_pending_counsel_course_counseller.setText(classy.getCourse().getName() + " - "
@@ -56,7 +56,7 @@ public class PendingCounselsAdapter extends RecyclerView.Adapter<PendingCounsels
             @Override
             public void onClick(View view) {
                 // add PhoneStateListener
-                PhoneCallListener phoneListener = new PhoneCallListener(context);
+                PhoneCallListener phoneListener = new PhoneCallListener();
                 TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 telephonyManager.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
                 Intent callIntent = new Intent(Intent.ACTION_CALL);

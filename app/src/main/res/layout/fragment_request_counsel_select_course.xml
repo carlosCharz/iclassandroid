@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:weightSum="1">
+
+    <ProgressBar
+        android:layout_weight="0.16"
+        android:id="@+id/pb_counselor_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        android:progress="20"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:scaleY="4.5"/>
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="0.16"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escoge el curso en el que deseas asesoria"/>
+
+    <TextView
+        android:id="@+id/tv_pick_course"
+        android:layout_weight="0.16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_keyboard_arrow_down_black"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_down_black"/>
+
+    <LinearLayout
+        android:layout_weight="0.16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/b_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_background"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:gravity="center"
+        android:layout_weight="0.16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="El curso no se encuentra en la lista?"/>
+
+    <LinearLayout
+        android:layout_weight="0.16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/b_suggest_new_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sugerir Curso"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_background"/>
+    </LinearLayout>
+</LinearLayout>

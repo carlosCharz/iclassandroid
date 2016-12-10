@@ -25,6 +25,9 @@
         <activity android:name=".activities.SignupActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.student.RequestCounselActivity" />
+
+        <activity android:name=".adapters.ListCourseAdapterActivity"/>
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
     </application>

@@ -16,7 +16,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.adapters.PendingCounselsAdapter;
+import com.wedevol.smartclass.adapters.ListPendingCounselsAdapter;
 import com.wedevol.smartclass.models.Class;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.models.Instructor;
@@ -75,7 +75,7 @@ public class CounselorDesktopFragment extends Fragment {
 
         RecyclerView rv_pending_counselings = (RecyclerView) view.findViewById(R.id.rv_pending_counselings);
         rv_pending_counselings.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_pending_counselings.setAdapter(new PendingCounselsAdapter(getActivity(), pendingCounselleds));
+        rv_pending_counselings.setAdapter(new ListPendingCounselsAdapter(getActivity(), pendingCounselleds));
 
         if(pendingCounselleds.size() == 0){
             tv_no_counselings.setVisibility(View.VISIBLE);

@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setSupportActionBar(toolbar);
 
-        isInstructor = true;
+        isInstructor = false;
         //TODO we should validate the kind of user here, given the type of user given at login
 
         FragmentManager fragmentManager = getSupportFragmentManager();

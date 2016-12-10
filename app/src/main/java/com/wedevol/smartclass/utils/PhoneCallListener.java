@@ -1,23 +1,19 @@
 package com.wedevol.smartclass.utils;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
 /** Created by paolorossi on 12/9/16.*/
 public class PhoneCallListener extends PhoneStateListener {
-    private final Activity activity;
     private boolean isPhoneCalling = false;
-    String LOG_TAG = "LOGGING 123";
 
-    public PhoneCallListener(Activity activity){
-        this.activity = activity;
+    public PhoneCallListener(){
     }
 
     @Override
     public void onCallStateChanged(int state, String incomingNumber) {
+        String LOG_TAG = "LOG_TELEPHONY";
         if (TelephonyManager.CALL_STATE_RINGING == state) {// phone ringing
             Log.i(LOG_TAG, "RINGING, number: " + incomingNumber);
         }

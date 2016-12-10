@@ -50,4 +50,6 @@
     <string name="take_photo">Tomar foto</string>
     <string name="choose_from_gallery">Elegir de la galeria</string>
     <string name="choose_option">Escoge una opcion</string>
+    <string name="suggest">Sugerir</string>
+    <string name="cancel">Cancelar</string>
 </resources>
