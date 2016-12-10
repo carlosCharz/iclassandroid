@@ -2,11 +2,21 @@ package com.wedevol.smartclass.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +25,15 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.SignupActivity;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /** Created by paolo on 11/16/16.*/
 public class UtilMethods {
@@ -77,22 +95,61 @@ public class UtilMethods {
             permissionCount++;
         }
 
-        permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 11);
-        } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
+            if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(activity,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 11);
+            } else {
+                permissionCount++;
+            }
+        }else{
             permissionCount++;
         }
-
-        permissionCheck = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 12);
-        } else {
-            permissionCount++;
-        }
-
         return permissionCount;
+    }
+
+    public static AlertDialog createSelectionDialog(Context context, String title, List<Object> optionList, Dialog.OnClickListener onClickListener) {
+        ArrayAdapter<Object> arrayAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, optionList);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setAdapter(arrayAdapter, onClickListener);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        return dialog;
+    }
+
+    public static File getImageFile() {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File file;
+
+        try {
+            File storage = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            if (!storage.isDirectory()) {
+                storage.mkdirs();
+            }
+            file = File.createTempFile(imageFileName, ".jpg", storage);
+        } catch (IOException e) {
+            return null;
+        }
+
+        return file;
+    }
+
+    public static String getGalleryImagePath(Context context, Uri imageUri) {
+        String path = "";
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(imageUri,
+                filePathColumn, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            path = cursor.getString(columnIndex);
+            cursor.close();
+        }
+
+        return path;
     }
 }

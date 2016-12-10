@@ -47,4 +47,7 @@
     <string name="nav_item_locker">LOCKER</string>
     <string name="no_hay_asesorias_pendientes">No hay asesorias pendientes</string>
     <string name="solicitar_asesoria">Solicitar Asesoria</string>
+    <string name="take_photo">Tomar foto</string>
+    <string name="choose_from_gallery">Elegir de la galeria</string>
+    <string name="choose_option">Escoge una opcion</string>
 </resources>
