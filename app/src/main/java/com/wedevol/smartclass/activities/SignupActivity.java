@@ -42,10 +42,12 @@ public class SignupActivity extends AppCompatActivity {
     private Spinner sp_type;
     private Spinner sp_course;
     private CircleImageView civ_profile_photo;
-    protected File mDestinationFile;
-    protected String mPhotoLocationPath;
-    protected final int CAMERA_REQUEST_CODE = 1;
-    protected final int GALLERY_REQUEST_CODE = 2;
+    private ImageView iv_toolbar_back;
+    private File mDestinationFile;
+    private String mPhotoLocationPath;
+    private final int CAMERA_REQUEST_CODE = 1;
+    private final int GALLERY_REQUEST_CODE = 2;
+                    private Activity self;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void setElements() {
+        self = this;
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         ImageView iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
         tv_detail_title.setText("Crear cuenta");
@@ -71,8 +74,9 @@ public class SignupActivity extends AppCompatActivity {
         sp_course = (Spinner) findViewById(R.id.sp_course);
         sp_type.setVisibility(View.VISIBLE);
         sp_course.setVisibility(View.VISIBLE);
-
         civ_profile_photo = (CircleImageView) findViewById(R.id.civ_profile_photo);
+
+        iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
 
         List<String> typeArray =  new ArrayList<>();
         typeArray.add("¿Alumno o asesor?");
@@ -158,6 +162,13 @@ public class SignupActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 1000);
+            }
+        });
+
+        iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                self.finish();
             }
         });
     }
