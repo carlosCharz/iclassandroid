@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.fragments.student.request_counseling.RequestCounselSelectCourseFragment;
@@ -26,5 +27,11 @@ public class RequestCounselActivity extends AppCompatActivity {
     }
 
     private void setupActions() {
+    }
+
+    public void setToolbarTitle(String title) {
+        TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
+        tv_detail_title.setText(title);
+
     }
 }

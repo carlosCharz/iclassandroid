@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListCourseAdapterActivity;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
@@ -52,8 +53,7 @@ public class RequestCounselSelectCourseFragment extends Fragment{
     }
 
     private void setupElements(View view) {
-        TextView tv_detail_title = (TextView) view.findViewById(R.id.tv_detail_title);
-        tv_detail_title.setText("Seleccionar Curso");
+        ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Curso");
 
         tv_pick_course = (TextView) view.findViewById(R.id.tv_pick_course);
         b_next = (Button) view.findViewById(R.id.b_next);
