@@ -47,7 +47,7 @@ public class SignupActivity extends AppCompatActivity {
     private String mPhotoLocationPath;
     private final int CAMERA_REQUEST_CODE = 1;
     private final int GALLERY_REQUEST_CODE = 2;
-                    private Activity self;
+    private Activity self;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

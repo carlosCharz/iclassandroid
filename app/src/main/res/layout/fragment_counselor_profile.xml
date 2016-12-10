@@ -33,7 +33,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginEnd="30dp"
-                    android:gravity="center"
+                    android:gravity="center_vertical"
                     android:layout_weight="0.5"
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
@@ -46,6 +46,29 @@
                         android:layout_height="wrap_content"
                         tools:text="Nivel 3" />
 
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        >
+                        <RatingBar
+                            android:id="@+id/rb_counselor_rating_stars"
+                            style = "?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:rating="3"
+                            android:max="5"/>
+
+                        <TextView
+                            android:id="@+id/tv_counselor_rating_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.7"/>
+                    </LinearLayout>
+
                     <ProgressBar
                         android:id="@+id/pb_counselor_progress"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -55,13 +78,14 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:id="@+id/tv_student_counselled_time"
+                        android:id="@+id/tv_counselor_counseling_time"
                         android:textSize="20sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:text="20 hrs" />
                 </LinearLayout>
             </LinearLayout>
+
 
             <!--This is the detail related to each student. Should be left white-->
             <LinearLayout
@@ -80,13 +104,13 @@
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:id="@+id/tv_student_profile_type"
+                    android:id="@+id/tv_counselor_profile_type"
                     android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_height="match_parent"
-                    tools:text="Alumno" />
+                    tools:text="Instructor" />
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +130,7 @@
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:id="@+id/tv_student_profile_number"
+                    android:id="@+id/tv_counselor_profile_number"
                     android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:textSize="20sp"
@@ -132,13 +156,13 @@
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:id="@+id/tv_student_profile_email"
+                    android:id="@+id/tv_counselor_profile_email"
                     android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_height="match_parent"
-                    tools:text="diagonal_zero@hotmail.com" />
+                    tools:text="luis.becerrita@gmail.com" />
             </LinearLayout>
 
             <LinearLayout
@@ -158,7 +182,7 @@
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:id="@+id/tv_student_profile_courses_taken"
+                    android:id="@+id/tv_counselor_profile_courses_afilliated"
                     android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:textSize="20sp"
@@ -184,7 +208,7 @@
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
-                    android:id="@+id/tv_student_profile_time"
+                    android:id="@+id/tv_counselor_profile_time_teaching"
                     android:gravity="center_vertical"
                     android:layout_width="0dp"
                     android:textSize="20sp"

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--This is the header of the view. For know golden.-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:weightSum="1"
+            android:background="@color/primary_dark">
+
+            <ImageView
+                android:id="@+id/iv_user_profile_photo"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_profile_black"/>
+
+            <LinearLayout
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="center_vertical"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_counselor_level"
+                    android:textSize="24sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Nivel 3" />
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    >
+                    <RatingBar
+                        android:id="@+id/rb_counselor_rating_stars"
+                        style = "?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:rating="3"
+                        android:max="5"/>
+
+                    <TextView
+                        android:id="@+id/tv_counselor_rating_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.7"/>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/pb_counselor_progress"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:max="100"
+                    android:progress="100"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tv_counselor_counseling_time"
+                    android:textSize="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="20 hrs" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--The recyclerview that holds the cards for the currently awaiting counselling sessions-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_pending_counselings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchMode="columnWidth"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideInset"/>
+
+            <TextView
+                android:id="@+id/tv_no_counselings"
+                android:drawableTop="@drawable/ic_counsel_black"
+                android:gravity="center"
+                android:layout_margin="50dp"
+                android:textSize="22sp"
+                android:text="@string/no_hay_asesorias_pendientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

@@ -48,8 +48,8 @@ public class StudentProfileFragment extends Fragment{
         Student student = new Student();
 
         iv_user_profile_photo = (ImageView)  view.findViewById(R.id.iv_user_profile_photo);
-        tv_student_level = (TextView) view.findViewById(R.id.tv_student_level);
-        pb_student_progress = (ProgressBar) view.findViewById(R.id.pb_student_progress);
+        tv_student_level = (TextView) view.findViewById(R.id.tv_counselor_level);
+        pb_student_progress = (ProgressBar) view.findViewById(R.id.pb_counselor_progress);
         tv_student_counselled_time = (TextView) view.findViewById(R.id.tv_student_counselled_time);
         tv_student_profile_type = (TextView) view.findViewById(R.id.tv_student_profile_type);
         tv_student_profile_number = (TextView) view.findViewById(R.id.tv_student_profile_number);
