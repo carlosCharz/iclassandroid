@@ -5,5 +5,6 @@ public interface Constants {
     String USER_PHOTO = "user_photo";
 
     int CHOOSEN_COURSE = 1;
-    int SUGGEST_COURSE = 2;
+
+    String BUNDLE_INSTRUCTOR = "bundle_is_instructor";
 }

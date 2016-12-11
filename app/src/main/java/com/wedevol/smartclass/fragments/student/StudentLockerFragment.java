@@ -55,11 +55,11 @@ public class StudentLockerFragment extends Fragment{
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
         //student.getClasses().size() + " cursos"
-        tv_student_level.setText("20 cursos");
+        tv_student_level.setText("Nivel 1");
         //(int) student.getRating()
         pb_student_progress.setProgress(45);
         //student.getTotalHours() + " hrs"
-        tv_student_counselled_time.setText("50 hrs");
+        tv_student_counselled_time.setText("10 hrs");
 
         List<Class> pendingCounsels = new ArrayList<>();
         pendingCounsels.add(new Class(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));

@@ -40,17 +40,18 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/tv_counselor_level"
+                        android:id="@+id/tv_student_level"
                         android:textSize="24sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:text="Nivel 3" />
+                        tools:text="Nivel 1" />
 
                     <ProgressBar
-                        android:id="@+id/pb_counselor_progress"
+                        android:id="@+id/pb_student_progress"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:max="100"
-                        android:progress="100"
+                        android:progress="50"
+                        android:scaleY="2.5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 

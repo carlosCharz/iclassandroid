@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 1;
@@ -16,6 +19,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_password;
     private Button b_login;
     private Button b_signup;
+    private ToggleButton tb_instructor_student;
+    private boolean isInstructor = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         b_login = (Button) findViewById(R.id.b_login);
         b_signup = (Button) findViewById(R.id.b_signup);
+        tb_instructor_student = (ToggleButton) findViewById(R.id.tb_instructor_student);
 
     }
 
@@ -55,13 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                 new android.os.Handler().postDelayed(new Runnable() {
                     public void run() {
                         b_login.setEnabled(true);
-                        if (email.equals("1")){
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                            startActivity(intent);
-                        }
+
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);
+                        startActivity(intent);
+
                         progressDialog.dismiss();
                     }
                 }, 1000);
@@ -78,6 +82,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        tb_instructor_student.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isInstructor = !isInstructor;
+                String message;
+                if(isInstructor){ message = "Entrando como instructor";} else message = "Entrando como alumno";
+                Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public boolean validate() {

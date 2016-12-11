@@ -2,8 +2,7 @@
     <string name="app_name">iClass</string>
 
     <!-- Login -->
-    <string name="email_label">Email</string>
-    <string name="pass_label">Contraseña</string>
+
     <string name="forgot_pass_text"><u>¿Olvidaste tu contraseña?</u></string>
     <string name="login_btn_label">Iniciar sesión</string>
     <string name="new_user_label">¿Nuevo usuario?</string>
@@ -12,9 +11,11 @@
     <string name="create_account_text">Registrar</string>
 
     <!-- Sign up-->
-    <string name="name_label">Nombre</string>
-    <string name="last_name_label">Apellido</string>
-    <string name="phone_label">Teléfono</string>
+    <string name="et_hint_signup_email">Email *</string>
+    <string name="et_hint_signup_password">Contraseña *</string>
+    <string name="et_hint_signup_name">Nombre *</string>
+    <string name="et_hint_signup_lastname">Apellido *</string>
+    <string name="et_hint_signup_telephone_number">Teléfono *</string>
 
     <!-- Coach code -->
     <string name="coach_title">Asesor</string>
@@ -52,4 +53,7 @@
     <string name="choose_option">Escoge una opcion</string>
     <string name="suggest">Sugerir</string>
     <string name="cancel">Cancelar</string>
+    <string name="et_hint_login_email">Email</string>
+    <string name="et_hint_login_password">Contraseña</string>
+    <string name="tv_reminder_obligatory_field">* Campos obligatorios</string>
 </resources>

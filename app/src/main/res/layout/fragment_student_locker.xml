@@ -48,6 +48,7 @@
                     android:id="@+id/pb_student_progress"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:max="100"
+                    android:scaleY="2.5"
                     android:progress="100"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

@@ -27,9 +27,9 @@
             android:padding="10dp">
             <LinearLayout
                 android:gravity="center_vertical"
-                android:layout_weight="0.7"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_weight="0.8"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
@@ -38,7 +38,7 @@
                     android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Curso X - Pedro Zegarra"/>
+                    tools:text="Curso X - Pedro Zegarra - S./20"/>
                 <TextView
                     android:id="@+id/tv_pending_counsel_date"
                     android:layout_marginTop="10dp"
@@ -47,9 +47,10 @@
                     android:layout_height="wrap_content"
                     tools:text="12/11/16 - 20 a 22 hrs "/>
             </LinearLayout>
+
             <LinearLayout
                 android:gravity="center_vertical"
-                android:layout_weight="0.3"
+                android:layout_weight="0.2"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">

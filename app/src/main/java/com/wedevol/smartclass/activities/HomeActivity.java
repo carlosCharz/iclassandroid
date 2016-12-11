@@ -32,6 +32,7 @@ import com.wedevol.smartclass.fragments.student.StudentRequestFragment;
 import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.navigation.FragmentDrawer;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 /* Created by paolorossi on 12/7/16. */
 public class HomeActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -70,7 +71,10 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setSupportActionBar(toolbar);
 
-        isInstructor = false;
+
+        isInstructor = getIntent().getBooleanExtra(Constants.BUNDLE_INSTRUCTOR, false);
+
+
         //TODO we should validate the kind of user here, given the type of user given at login
 
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="@string/email_label" />
+                android:hint="@string/et_hint_login_email" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -47,8 +47,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/pass_label"/>
+                android:hint="@string/et_hint_login_password"/>
         </android.support.design.widget.TextInputLayout>
+
+        <ToggleButton
+            android:id="@+id/tb_instructor_student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/b_login"
@@ -82,5 +87,13 @@
             android:padding="12dp"
             android:text="@string/signup_btn_label"/>
 
+        <TextView
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tv_reminder_obligatory_field"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
     </LinearLayout>
 </ScrollView>

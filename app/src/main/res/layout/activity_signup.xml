@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
-                    android:hint="@string/name_label" />
+                    android:hint="@string/et_hint_signup_name" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Last Name Label -->
@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
-                    android:hint="@string/last_name_label" />
+                    android:hint="@string/et_hint_signup_lastname" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Phone Label -->
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:hint="@string/phone_label" />
+                    android:hint="@string/et_hint_signup_telephone_number" />
             </android.support.design.widget.TextInputLayout>
 
             <!--  Email Label -->
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/email_label" />
+                    android:hint="@string/et_hint_signup_email" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Password Label -->
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:hint="@string/pass_label"
+                    android:hint="@string/et_hint_signup_password"
                     android:drawableEnd="@drawable/ic_toggle_password_black"
                     android:drawableRight="@drawable/ic_toggle_password_black"/>
             </android.support.design.widget.TextInputLayout>

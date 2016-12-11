@@ -48,8 +48,8 @@ public class StudentProfileFragment extends Fragment{
         Student student = new Student();
 
         iv_user_profile_photo = (ImageView)  view.findViewById(R.id.iv_user_profile_photo);
-        tv_student_level = (TextView) view.findViewById(R.id.tv_counselor_level);
-        pb_student_progress = (ProgressBar) view.findViewById(R.id.pb_counselor_progress);
+        tv_student_level = (TextView) view.findViewById(R.id.tv_student_level);
+        pb_student_progress = (ProgressBar) view.findViewById(R.id.pb_student_progress);
         tv_student_counselled_time = (TextView) view.findViewById(R.id.tv_student_counselled_time);
         tv_student_profile_type = (TextView) view.findViewById(R.id.tv_student_profile_type);
         tv_student_profile_number = (TextView) view.findViewById(R.id.tv_student_profile_number);
@@ -64,20 +64,20 @@ public class StudentProfileFragment extends Fragment{
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
 
         //student.getClasses().size() + " cursos"
-        tv_student_level.setText("20 cursos");
+        tv_student_level.setText("0 cursos");
         //(int) student.getRating()
         pb_student_progress.setProgress(45);
         //student.getTotalHours() + " hrs"
-        tv_student_counselled_time.setText("50 hrs");
+        tv_student_counselled_time.setText("0 hrs");
         tv_student_profile_type.setText("Alumno");
         //student.getPhone()
         tv_student_profile_number.setText("99695670");
         //student.getEmail()
         tv_student_profile_email.setText("diagonal_zero@hotmail.com");
         //student.getClasses().size() + " cursos"
-        tv_student_profile_courses_taken.setText("20 cursos");
+        tv_student_profile_courses_taken.setText("0 cursos");
         //student.getTotalHours() + " hrs"
-        tv_student_profile_time.setText("50 hrs");
+        tv_student_profile_time.setText("0 hrs");
     }
 
     private void setActions() {
