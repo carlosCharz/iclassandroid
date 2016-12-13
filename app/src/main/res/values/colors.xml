@@ -14,6 +14,7 @@
     <color name="aluminum">#999999</color>
     <color name="base">#AAAAAA</color>
     <color name="iron">#CCCCCC</color>
+    <color name="light_iron">#DDDDDD</color>
     <color name="white">#FFFFFF</color>
 
     <color name="green_soft">#8FA880</color>

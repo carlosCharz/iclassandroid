@@ -93,12 +93,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
             if(isInstructor){
                 fragmentTransaction.replace(R.id.main_fragment_container, new CounselorDesktopFragment());
                 fragmentDrawableId = R.drawable.ic_desktop_black;
-                fragmentTitle = "Mi Escritorio";
+                fragmentTitle = "Home";
                 fragmentTransaction.commit();
             }else{
                 fragmentTransaction.replace(R.id.main_fragment_container, new StudentLockerFragment());
                 fragmentDrawableId = R.drawable.ic_locker_black;
-                fragmentTitle = "Mi Locker";
+                fragmentTitle = "Home";
                 fragmentTransaction.commit();
             }
         }
@@ -121,7 +121,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 case 0:
                     fragment = new CounselorDesktopFragment();
                     fragmentDrawableId = R.drawable.ic_desktop_black;
-                    fragmentTitle = "Mi Escritorio";
+                    fragmentTitle = "Home";
                     break;
                 case 1:
                     fragment = new CounselorProfileFragment();
@@ -163,7 +163,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 case 0:
                     fragment = new StudentLockerFragment();
                     fragmentDrawableId = R.drawable.ic_locker_black;
-                    fragmentTitle = "Mi Locker";
+                    fragmentTitle = "Home";
                     break;
                 case 1:
                     fragment = new StudentProfileFragment();

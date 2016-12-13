@@ -22,12 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SignupActivity" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.student.RequestCounselActivity" />
-
-        <activity android:name=".adapters.ListCourseAdapterActivity"/>
+        <activity android:name=".activities.SignupActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.student.RequestCounselActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ListCoursesActivity"
+            android:screenOrientation="portrait"/>
 
         <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
     </application>

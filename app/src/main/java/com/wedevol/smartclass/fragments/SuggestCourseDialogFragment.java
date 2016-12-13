@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.fragments.student.request_counseling;
+package com.wedevol.smartclass.fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;

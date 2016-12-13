@@ -7,6 +7,19 @@ public class Course {
     private String name;
     private String description;
     private String university;
+    private String career;
+
+    public Course(){
+
+    }
+
+    public Course(int id, String name, String description, String university, String career){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.university = university;
+        this.career = career;
+    }
 
     public int getId() {
         return id;
@@ -39,4 +52,13 @@ public class Course {
     public void setUniversity(String university) {
         this.university = university;
     }
+
+    public String getCareer() {
+        return career;
+    }
+
+    public void setCareer(String career) {
+        this.career = career;
+    }
+
 }
