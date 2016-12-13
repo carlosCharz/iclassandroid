@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cd_course_holder"
+    android:id="@+id/cd_date_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="6dp"
@@ -16,18 +16,18 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/tv_course_name"
+            android:id="@+id/tv_date_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/oil"
             android:textSize="18sp"
-            tools:text="Curso X"/>
+            tools:text="XX"/>
 
         <TextView
-            android:id="@+id/tv_course_university_career"
+            android:id="@+id/tv_city_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            tools:text="Univesity Y - Carrera W"/>
+            tools:text="Lima, Peru"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

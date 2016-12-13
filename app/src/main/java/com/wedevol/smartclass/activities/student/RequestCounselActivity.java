@@ -11,13 +11,14 @@ import android.widget.TextView;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.fragments.student.request_counseling.RequestCounselSelectCourseFragment;
 import com.wedevol.smartclass.models.Course;
-import com.wedevol.smartclass.models.Schedule;
 
 /** Created by paolorossi on 12/9/16.*/
 public class RequestCounselActivity extends AppCompatActivity {
     private Course course;
-    private Schedule schedule;
     private ImageView iv_toolbar_back;
+    private String dateName;
+    private String beginTime;
+    private String endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +57,8 @@ public class RequestCounselActivity extends AppCompatActivity {
         course.setName(courseName);
     }
 
-    public void saveSchedule(int courseId, String courseName) {
-        schedule = new Schedule();
-        course.setId(courseId);
-        course.setName(courseName);
+    public void saveSchedule(String dateName) {
+        this.dateName = dateName;
     }
 
     @Override
@@ -70,5 +69,10 @@ public class RequestCounselActivity extends AppCompatActivity {
         } else {
             getFragmentManager().popBackStack();
         }
+    }
+
+    public void saveScheduleTimes(String beginTime, String endTime) {
+        this.beginTime = beginTime;
+        this.endTime = endTime;
     }
 }

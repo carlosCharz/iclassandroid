@@ -8,6 +8,7 @@ import java.util.List;
 public class Instructor extends User {
     private List<Course> enrolledCourses = new ArrayList<>();
     private List<Schedule> schedules = new ArrayList<>();
+    private double hourlyRate;
 
     public Instructor(){
 
@@ -35,5 +36,17 @@ public class Instructor extends User {
 
     public void setSchedules(List<Schedule> schedules) {
         this.schedules = schedules;
+    }
+
+    public String getName() {
+        return getFirstname();
+    }
+
+    public void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
+    public double getHourlyRate() {
+        return hourlyRate;
     }
 }
