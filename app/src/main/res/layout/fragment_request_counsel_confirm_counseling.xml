@@ -24,6 +24,7 @@
             android:scaleY="4.5"/>
 
         <TextView
+            android:id="@+id/tv_selected_counsellor_name"
             android:gravity="center"
             android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
@@ -39,13 +40,15 @@
             android:text="Confirmar los datos de la asesoria"/>
 
         <TextView
+            android:id="@+id/tv_selected_course_name"
             android:layout_marginTop="20dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Curso: Calculo 1"
             android:textSize="18sp" />
         <TextView
+            android:id="@+id/tv_selected_date"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -53,6 +56,7 @@
             android:text="Fecha: 20/10/16"
             android:textSize="18sp" />
         <TextView
+            android:id="@+id/tv_selected_hour"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:layout_width="wrap_content"
@@ -60,18 +64,12 @@
             android:text="Hora: 6:00pm - 8:00pm "
             android:textSize="18sp"/>
         <TextView
+            android:id="@+id/tv_selected_hourly_rate"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tarifa: 20 s/h"
-            android:textSize="18sp"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total: 40 soles"
             android:textSize="18sp"/>
 
         <TextView

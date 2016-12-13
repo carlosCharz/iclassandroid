@@ -74,6 +74,10 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
         notifyItemChanged(position);
     }
 
+    public Instructor getItemInPosition(int position) {
+        return mItems.get(position);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         final TextView tv_counsellor_name;
         final TextView tv_counsellor_rating;

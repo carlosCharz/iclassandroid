@@ -118,8 +118,9 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         if(et_begin_time.getText().toString().isEmpty()||et_end_time.getText().toString().isEmpty()) {
             return 0;
         }else{
-            boolean r =Integer.parseInt(et_begin_time.getText().toString())>=Integer.parseInt(et_end_time.getText().toString());
-            if(r){
+            int r = Integer.parseInt(et_end_time.getText().toString()) -
+                    Integer.parseInt(et_begin_time.getText().toString());
+            if(r<1){
                 return 1;
             }
         }

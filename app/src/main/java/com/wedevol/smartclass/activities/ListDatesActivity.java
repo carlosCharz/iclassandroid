@@ -15,6 +15,7 @@ import com.wedevol.smartclass.adapters.ListDatesAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,23 +48,25 @@ public class ListDatesActivity extends AppCompatActivity {
         tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
 
-        tv_detail_title.setText("Cursos");
+        tv_detail_title.setText("Fechas");
         iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
 
         //sv_search_course = (SearchView) findViewById(R.id.sv_search_course);
-        rv_dates = (RecyclerView) findViewById(R.id.rv_courses);
+        rv_dates = (RecyclerView) findViewById(R.id.rv_dates);
 
         detailedDates = new ArrayList<>();
-        Date date = new Date();
-        for(int i=0; i<14; i++) {
-            date.setDate(date.getDay() + 1);
-            SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy", Locale.US);
-            String now = sdfDate.format(date);
 
-            SimpleDateFormat sdfDayOfWeek = new SimpleDateFormat("EEEE", Locale.US);
-            String dayOfTheWeek = sdfDayOfWeek.format(date);
+        Calendar calendar = Calendar.getInstance();
+        for(int i=0; i<14; i++) {
+            SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy");
+            String now = sdfDate.format(calendar.getTime());
+
+            SimpleDateFormat sdfDayOfWeek = new SimpleDateFormat("EEEE");
+            String dayOfTheWeek = sdfDayOfWeek.format(calendar.getTime());
 
             detailedDates.add(dayOfTheWeek + " - " + now);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
         rv_dates.setLayoutManager(new LinearLayoutManager(this));

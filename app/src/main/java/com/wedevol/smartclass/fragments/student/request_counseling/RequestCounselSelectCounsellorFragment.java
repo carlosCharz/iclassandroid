@@ -22,7 +22,6 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 /** Created by paolorossi on 12/12/16.*/
 public class RequestCounselSelectCounsellorFragment extends Fragment implements ItemClickListener {
-    private RecyclerView rv_elligible_counsellors;
     private Button b_next;
     private int oldPosition;
     private ListCounselorsAdapter listCounselorsAdapter;
@@ -85,7 +84,7 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
         counsellor.setRating(2.4);
         counsellorList.add(counsellor);
 
-        rv_elligible_counsellors = (RecyclerView) view.findViewById(R.id.rv_elligible_counsellor);
+        RecyclerView rv_elligible_counsellors = (RecyclerView) view.findViewById(R.id.rv_elligible_counsellor);
         rv_elligible_counsellors.setHasFixedSize(true);
         rv_elligible_counsellors.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -97,6 +96,8 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((RequestCounselActivity)getActivity()).setCounsellor(listCounselorsAdapter.getItemInPosition(oldPosition));
+
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.rl_request_counseling_holder, RequestCounselConfirmCounselingFragment.newInstance())

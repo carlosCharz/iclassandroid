@@ -45,7 +45,7 @@ public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPending
         final Class classy = mItems.get(i);
         /*
         viewHolder.tv_pending_counsel_course_counseller.setText(classy.getCourse().getName() + " - "
-                + classy.getInstructor().getReducedName(18));
+                + classy.getInstructorName().getReducedName(18));
         viewHolder.tv_pending_counsel_date.setText(""+classy.getClassDate() + " - "
                 + classy.getSchedule().printSchedule());
         */
