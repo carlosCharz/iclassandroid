@@ -11,11 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 
 /** Created by paolorossi on 12/12/16.*/
 public class RequestCounselSelectScheduleFragment extends Fragment {
-    private int courseId;
-    private String courseName;
     private TextView tv_pick_date;
     private EditText et_begin_time;
     private EditText et_end_time;
@@ -46,6 +45,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment {
     }
 
     private void setupElements(View view) {
+        ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Horario");
+
         tv_pick_date = (TextView) view.findViewById(R.id.tv_pick_date);
         et_begin_time = (EditText) view.findViewById(R.id.et_begin_time) ;
         et_end_time = (EditText) view.findViewById(R.id.et_end_time) ;
@@ -65,7 +66,21 @@ public class RequestCounselSelectScheduleFragment extends Fragment {
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.rl_request_counseling_holder, RequestCounselSelectCounsellorFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
+        ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack();
             }
         });
     }

@@ -30,24 +30,8 @@
             android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escoge el horario que desees"/>
+            android:text="Escoge el asesor que desees"/>
 
-        <TextView
-            android:id="@+id/tv_pick_date"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:lines="1"
-            android:drawableRight="@drawable/ic_keyboard_arrow_down_black"
-            android:drawableEnd="@drawable/ic_keyboard_arrow_down_black"/>
-
-        <TextView
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Horas disponibles"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_available_hours"
@@ -60,46 +44,7 @@
             android:clipToPadding="false"
             android:scrollbarStyle="outsideInset"/>
 
-        <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1">
 
-            <TextView
-                android:gravity="center"
-                android:textSize="18sp"
-                android:layout_weight="0.25"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Desde "/>
-
-            <EditText
-                android:id="@+id/et_begin_time"
-                android:layout_weight="0.25"
-                android:layout_width="0dp"
-                android:background="@color/light_iron"
-                android:layout_height="match_parent"
-                android:inputType="number" />
-
-            <TextView
-                android:gravity="center"
-                android:textSize="18sp"
-                android:layout_weight="0.25"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text=" - hasta "/>
-
-            <EditText
-                android:id="@+id/et_end_time"
-                android:inputType="number"
-                android:layout_weight="0.25"
-                android:background="@color/light_iron"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_marginTop="30dp"
@@ -114,7 +59,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:background="@drawable/custom_button_background"/>
-
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 
 /** Created by paolorossi on 12/12/16.*/
 public class RequestCounselSelectCounsellorFragment extends Fragment {
@@ -36,6 +37,8 @@ public class RequestCounselSelectCounsellorFragment extends Fragment {
     }
 
     private void setupElements(View view) {
+        ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Asesor");
+
         b_next = (Button) view.findViewById(R.id.b_next);
     }
 
@@ -43,7 +46,20 @@ public class RequestCounselSelectCounsellorFragment extends Fragment {
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.rl_request_counseling_holder, RequestCounselConfirmCounselingFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
+        ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack();
             }
         });
     }

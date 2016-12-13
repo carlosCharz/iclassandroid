@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 
 /** Created by paolorossi on 12/12/16.*/
 public class RequestCounselConfirmCounselingFragment extends Fragment {
     private Button b_finish;
 
     public static Fragment newInstance() {
-        RequestCounselSelectCounsellorFragment RequestCounselSelectCounsellorFragment = new RequestCounselSelectCounsellorFragment();
+        RequestCounselConfirmCounselingFragment requestCounselConfirmCounselingFragment = new RequestCounselConfirmCounselingFragment();
         Bundle args = new Bundle();
-        RequestCounselSelectCounsellorFragment.setArguments(args);
-        return RequestCounselSelectCounsellorFragment;
+        requestCounselConfirmCounselingFragment.setArguments(args);
+        return requestCounselConfirmCounselingFragment;
     }
 
     @Override
@@ -35,6 +36,7 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
     }
 
     private void setupElements(View view) {
+        ((RequestCounselActivity)getActivity()).setToolbarTitle("Confirmar Asesoria");
         b_finish = (Button) view.findViewById(R.id.b_finish);
     }
 
@@ -43,6 +45,15 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().finish();
+            }
+        });
+
+        ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .popBackStack();
             }
         });
     }

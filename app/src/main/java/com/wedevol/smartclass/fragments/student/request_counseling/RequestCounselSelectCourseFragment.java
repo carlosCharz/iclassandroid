@@ -70,9 +70,17 @@ public class RequestCounselSelectCourseFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager()
-                        .beginTransaction().
-                        replace(R.id.rl_request_counseling_holder, RequestCounselSelectScheduleFragment.newInstance())
+                        .beginTransaction()
+                        .replace(R.id.rl_request_counseling_holder, RequestCounselSelectScheduleFragment.newInstance())
+                        .addToBackStack(null)
                         .commit();
+            }
+        });
+
+        ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
             }
         });
 
