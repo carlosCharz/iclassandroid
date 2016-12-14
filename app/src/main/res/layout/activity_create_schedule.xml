@@ -5,5 +5,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    
+    <include layout="@layout/toolbar_detail" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:id="@+id/tv_pick_day"
+            android:layout_weight="0.25"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:drawableRight="@drawable/ic_keyboard_arrow_down_black"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_down_black"/>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textColorHint="@color/oil">
+                <EditText
+                    android:id="@+id/et_begin_time"
+                    android:hint="Desde"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textColorHint="@color/oil">
+                <EditText
+                    android:id="@+id/et_end_time"
+                    android:hint="Hasta"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/b_cancel"
+                android:text="Cancelar"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/b_save"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_button_background"
+                android:text="Guardar"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

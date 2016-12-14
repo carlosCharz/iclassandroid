@@ -48,12 +48,12 @@ public class ListCalendarDatesActivity extends AppCompatActivity {
         tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
         rv_dates = (RecyclerView) findViewById(R.id.rv_dates);
+        detailedDates = new ArrayList<>();
 
         if(!is_simple_date){
             tv_detail_title.setText("Fechas");
             iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
 
-            detailedDates = new ArrayList<>();
             Calendar calendar = Calendar.getInstance();
             for(int i=0; i<14; i++) {
                 SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy");
@@ -68,6 +68,7 @@ public class ListCalendarDatesActivity extends AppCompatActivity {
         } else {
             tv_detail_title.setText("Dias de la semana");
             iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_schedule_black));
+
             detailedDates.add("Lunes");
             detailedDates.add("Martes");
             detailedDates.add("Miercoles");
