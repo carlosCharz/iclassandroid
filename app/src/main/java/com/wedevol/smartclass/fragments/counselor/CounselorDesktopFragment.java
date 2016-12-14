@@ -60,7 +60,7 @@ public class CounselorDesktopFragment extends Fragment {
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
         //student.getClasses().size() + " cursos"
-        tv_counselor_level.setText("20 cursos");
+        tv_counselor_level.setText("Nivel 2");
         //(int) student.getRating()
         pb_counselor_progress.setProgress(45);
         //student.getTotalHours() + " hrs"

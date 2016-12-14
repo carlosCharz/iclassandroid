@@ -56,5 +56,5 @@
     <string name="et_hint_login_email">Email</string>
     <string name="et_hint_login_password">Contraseña</string>
     <string name="tv_reminder_obligatory_field">* Campos obligatorios</string>
-    <string name="nav_home">Home</string>
+    <string name="nav_home">HOME</string>
 </resources>

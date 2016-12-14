@@ -49,7 +49,7 @@ public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPending
         viewHolder.tv_pending_counsel_date.setText(""+classy.getClassDate() + " - "
                 + classy.getSchedule().printSchedule());
         */
-        viewHolder.tv_pending_counsel_course_counseller.setText("IMU + Richard Cancino - S/.20");
+        viewHolder.tv_pending_counsel_course_counseller.setText("IMU - Richard Cancino - S/.20");
         viewHolder.tv_pending_counsel_date.setText("12/12/16 - 20 a 24 horas");
 
         viewHolder.iv_call_counseller.setOnClickListener(new View.OnClickListener() {
