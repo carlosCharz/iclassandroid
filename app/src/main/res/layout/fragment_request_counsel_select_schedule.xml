@@ -68,37 +68,41 @@
             android:orientation="horizontal"
             android:weightSum="1">
 
-            <TextView
-                android:gravity="center"
-                android:textSize="18sp"
-                android:layout_weight="0.25"
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Desde "/>
+                android:layout_weight="0.5"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textColorHint="@color/oil">
+                <EditText
+                    android:id="@+id/et_begin_time"
+                    android:hint="Desde"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/et_begin_time"
-                android:layout_weight="0.25"
-                android:layout_width="0dp"
-                android:background="@color/light_iron"
-                android:layout_height="match_parent"
-                android:inputType="number" />
-
-            <TextView
-                android:gravity="center"
-                android:textSize="18sp"
-                android:layout_weight="0.25"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=" - hasta "/>
-
-            <EditText
-                android:id="@+id/et_end_time"
-                android:inputType="number"
-                android:layout_weight="0.25"
-                android:background="@color/light_iron"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_weight="0.5"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:textColorHint="@color/oil">
+                <EditText
+                    android:id="@+id/et_end_time"
+                    android:hint="Hasta"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="0.5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
