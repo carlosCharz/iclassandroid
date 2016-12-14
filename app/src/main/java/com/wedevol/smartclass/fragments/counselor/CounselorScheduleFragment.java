@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.counselor;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.counselor.CreateScheduleActivity;
@@ -78,9 +80,18 @@ public class CounselorScheduleFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), CreateScheduleActivity.class);
-                intent.putExtra(Constants.BUNDLE_SIMPLE_DATE,true);
-                startActivity(intent);
+                intent.putExtra(Constants.BUNDLE_SIMPLE_DATE, true);
+                startActivityForResult(intent, Constants.CHOOSEN_SCHEDULE);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.CHOOSEN_SCHEDULE) && (resultCode == Activity.RESULT_OK)) {
+            //data.getByteArrayExtra();
+            Toast.makeText(getActivity(), "La data si volvio" , Toast.LENGTH_SHORT).show();
+        }
     }
 }

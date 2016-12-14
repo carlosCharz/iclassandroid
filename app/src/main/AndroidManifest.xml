@@ -33,7 +33,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.ListCoursesActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.ListCalendarDatesActivity"
+        <activity android:name=".activities.ListDatesActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.counselor.CreateScheduleActivity"
             android:screenOrientation="portrait"/>

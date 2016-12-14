@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.ListCalendarDatesActivity;
+import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListTimesAdapter;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -81,7 +81,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         tv_pick_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ListCalendarDatesActivity.class);
+                Intent intent = new Intent(getActivity(), ListDatesActivity.class);
                 startActivityForResult(intent, Constants.CHOOSEN_DATE);
             }
         });

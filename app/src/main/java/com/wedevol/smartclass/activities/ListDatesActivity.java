@@ -22,7 +22,7 @@ import java.util.List;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 /** Created by paolo on 12/13/16.*/
-public class ListCalendarDatesActivity extends AppCompatActivity {
+public class ListDatesActivity extends AppCompatActivity {
     //private SearchView sv_search_course;
     private RecyclerView rv_dates;
     private List<String> detailedDates;
