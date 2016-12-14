@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
+import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.Calendar;
@@ -80,6 +81,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        UtilMethods.deactivateSoftKeyboard(view, self);
                         Calendar mcurrentTime = Calendar.getInstance();
                         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                         int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -103,10 +105,18 @@ public class CreateScheduleActivity extends AppCompatActivity {
                 }
         );
 
+        et_begin_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                UtilMethods.deactivateSoftKeyboard(v, self);
+            }
+        });
+
         et_end_time.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        UtilMethods.deactivateSoftKeyboard(view, self);
                         Calendar mcurrentTime = Calendar.getInstance();
                         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                         int minute = mcurrentTime.get(Calendar.MINUTE);
@@ -130,6 +140,12 @@ public class CreateScheduleActivity extends AppCompatActivity {
                 }
         );
 
+        et_end_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                UtilMethods.deactivateSoftKeyboard(v, self);
+            }
+        });
     }
 
     @Override

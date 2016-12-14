@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
 
 import java.util.List;
 
@@ -18,12 +18,14 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
     private final List<String> mItems;
     private final Activity context;
     private final String headerName;
+    private final ScheduleClickListener itemClickListener;
 
-    public ListScheduleTimeWindowAdapter(Activity context, List<String> list, String headerName) {
+    public ListScheduleTimeWindowAdapter(Activity context, List<String> list, String headerName, ScheduleClickListener itemClickListener) {
         super();
         this.context = context;
         mItems = list;
         this.headerName = headerName;
+        this.itemClickListener = itemClickListener;
     }
 
     @Override
@@ -52,16 +54,18 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
             ((HeadViewHolder)viewHolder).iv_kill_entire_day.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "Pronto me borrare pero no es prioritario haha", Toast.LENGTH_SHORT).show();
+                    //TODO call a service and send the entire list to hell. After that need to dissapear this baby
+                    itemClickListener.onItemClicked(headerName, -1);
                 }
             });
         } else {
+            final int n = i-1;
             final String date = mItems.get(i-1);
             ((ItemViewHolder)viewHolder).tv_time_in_day.setText(date);
             ((ItemViewHolder)viewHolder).iv_kill_time.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "Pronto me borrare pero no es prioritario haha", Toast.LENGTH_SHORT).show();
+                    itemClickListener.onItemClicked(headerName, n);
                 }
             });
         }
@@ -70,6 +74,18 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    public void deletePosition(int position) {
+        mItems.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void deleteAll() {
+        for(int i=0; i<mItems.size();i++){
+            mItems.remove(i);
+        }
+        notifyDataSetChanged();
     }
 
     private class HeadViewHolder extends RecyclerView.ViewHolder{
