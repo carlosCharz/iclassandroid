@@ -91,7 +91,8 @@
             android:gravity="center"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/tv_reminder_obligatory_field"
             android:textColor="@color/white"
             android:textSize="16sp"/>

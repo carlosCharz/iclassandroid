@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="12dp"
+    android:layout_marginBottom="6dp">
+
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:weightSum="1"
+
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="0.7"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_notification_counsult_data"
+                    android:textSize="18sp"
+                    android:textColor="@color/oil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Alex - Calculo 1 - S./ 18"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/tv_notification_date_time"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Jueves 16/10 de 2 a 4pm"/>
+            </LinearLayout>
+
+            <TextView
+                android:textSize="12sp"
+                android:drawableLeft="@drawable/ic_timer_black"
+                android:drawableStart="@drawable/ic_timer_black"
+                android:gravity="center"
+                android:layout_weight="0.3"
+                android:id="@+id/tv_countdown_timer"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                tools:text="15:15"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:textSize="12sp"
+                android:id="@+id/b_cancel"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Cancelar" />
+
+            <Button
+                android:textSize="12sp"
+                android:id="@+id/b_confirm"
+                android:layout_weight="0.5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Confirmar"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_button_background"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
