@@ -35,6 +35,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private Button b_next;
     private ListTimesAdapter listTimeAdapter;
     private int oldPosition;
+    private int[] dateDelimiters = new int[2];
 
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
@@ -68,8 +69,12 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         et_begin_time = (EditText) view.findViewById(R.id.et_begin_time) ;
         et_end_time = (EditText) view.findViewById(R.id.et_end_time) ;
         b_next = (Button) view.findViewById(R.id.b_next);
-
         rv_available_hours = (RecyclerView) view.findViewById(R.id.rv_available_hours);
+
+        if(!(((RequestCounselActivity)getActivity()).getDateName()==null)){
+            tv_pick_date.setText(((RequestCounselActivity)getActivity()).getDateName());
+            setHoursRecycler();
+        }
     }
 
     private void setupActions() {
@@ -90,7 +95,9 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                 }else{
                     et_begin_time.requestFocus();
                     if(validated==1){
-                        Toast.makeText(getActivity(), "Debes reservar por lo menos 1 hora. Verifica que la hora de inicio sea menor que la hora de terminacion", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Debes reservar por lo menos 1 hora. La hora de inicio tiene que ser menor que la hora de termino.", Toast.LENGTH_SHORT).show();
+                    }else if (validated==0){
+                        Toast.makeText(getActivity(), "Debe delimitar su tiempo de asesoria.", Toast.LENGTH_SHORT).show();
                     }
                     return;
                 }
@@ -118,9 +125,12 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         if(et_begin_time.getText().toString().isEmpty()||et_end_time.getText().toString().isEmpty()) {
             return 0;
         }else{
-            int r = Integer.parseInt(et_end_time.getText().toString()) -
-                    Integer.parseInt(et_begin_time.getText().toString());
-            if(r<1){
+            int endTime = Integer.parseInt(et_end_time.getText().toString());
+            int beginTime = Integer.parseInt(et_begin_time.getText().toString());
+
+            boolean wrong = ((endTime - beginTime) < 0) || (dateDelimiters[0] > beginTime) ||
+                    (dateDelimiters[1] < endTime);
+            if(wrong){
                 return 1;
             }
         }
@@ -135,17 +145,31 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             String dateName = data.getStringExtra(Constants.BUNDLE_DATE);
             ((RequestCounselActivity)getActivity()).saveSchedule(dateName);
             tv_pick_date.setText(dateName);
+            setHoursRecycler();
+        }
+    }
 
-            rv_available_hours.setHasFixedSize(true);
-            rv_available_hours.setLayoutManager(new LinearLayoutManager(getActivity()));
+    private void setHoursRecycler() {
+        rv_available_hours.setHasFixedSize(true);
+        rv_available_hours.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            List<String> timesList = new ArrayList<>();
-            timesList.add("8 a 10");
-            timesList.add("11 a 15");
-            timesList.add("16 a 20");
-            timesList.add("21 a 23");
-            listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, this);
-            rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
+        List<String> timesList = new ArrayList<>();
+        timesList.add("8 a 10");
+        timesList.add("11 a 15");
+        timesList.add("16 a 20");
+        timesList.add("21 a 23");
+        listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, this);
+        rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
+
+        if(((RequestCounselActivity)getActivity()).getBeginTime()!=null &&
+                ((RequestCounselActivity)getActivity()).getEndTime()!=null){
+            for(int i = 0 ; i< timesList.size(); i++){
+                if(timesList.get(i).equals( ((RequestCounselActivity)getActivity()).getBeginTime() + " a " +
+                        ((RequestCounselActivity)getActivity()).getEndTime())){
+                    listTimeAdapter.updatePosition(true, i);
+                    oldPosition = i;
+                }
+            }
         }
     }
 
@@ -158,5 +182,9 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             listTimeAdapter.updatePosition(true, position);
         }
         oldPosition = position;
+        String strTime = listTimeAdapter.getItem(position);
+        String[] strBeginEndTime=strTime.split("a");
+        dateDelimiters[0]= Integer.parseInt(strBeginEndTime[0].trim());
+        dateDelimiters[1]= Integer.parseInt(strBeginEndTime[1].trim());
     }
 }

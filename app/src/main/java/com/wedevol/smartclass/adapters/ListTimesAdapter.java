@@ -71,6 +71,10 @@ public class ListTimesAdapter extends RecyclerView.Adapter<ListTimesAdapter.View
         notifyItemChanged(position);
     }
 
+    public String getItem(int position) {
+        return mItems.get(position);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         final TextView tv_time_name;
         final CardView cd_time_holder;

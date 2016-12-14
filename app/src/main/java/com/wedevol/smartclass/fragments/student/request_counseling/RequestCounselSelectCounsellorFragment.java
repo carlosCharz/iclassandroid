@@ -50,8 +50,6 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
     private void setupElements(View view) {
         oldPosition = -1;
         ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Asesor");
-
-
         b_next = (Button) view.findViewById(R.id.b_next);
 
         List<Instructor> counsellorList = new ArrayList<>();
@@ -90,6 +88,17 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
 
         listCounselorsAdapter = new ListCounselorsAdapter(getActivity(), counsellorList, this);
         rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listCounselorsAdapter));
+
+        if(((RequestCounselActivity)getActivity()).getCounsellor()==null){
+            b_next.setEnabled(false);
+        }else {
+            for(int i = 0 ; i< counsellorList.size(); i++){
+                if(counsellorList.get(i).getId() == ((RequestCounselActivity)getActivity()).getCounsellor().getId()){
+                    listCounselorsAdapter.updatePosition(true, i);
+                    oldPosition = i;
+                }
+            }
+        }
     }
 
     private void setupActions() {
@@ -125,5 +134,6 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
             listCounselorsAdapter.updatePosition(true, position);
         }
         oldPosition = position;
+        b_next.setEnabled(true);
     }
 }

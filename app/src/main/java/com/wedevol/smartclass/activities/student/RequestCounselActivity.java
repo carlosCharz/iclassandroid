@@ -15,12 +15,12 @@ import com.wedevol.smartclass.models.Instructor;
 
 /** Created by paolorossi on 12/9/16.*/
 public class RequestCounselActivity extends AppCompatActivity {
-    private Course course;
     private ImageView iv_toolbar_back;
-    private String dateName;
-    private String beginTime;
-    private String endTime;
-    private Instructor instructor;
+    private Course course = null;
+    private String dateName = null;
+    private String beginTime = null;
+    private String endTime = null;
+    private Instructor instructor = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,10 @@ public class RequestCounselActivity extends AppCompatActivity {
         this.instructor = instructor;
     }
 
+    public Instructor getCounsellor() {
+        return instructor;
+    }
+
     public String getInstructorName() {
 
         return instructor.getName();
@@ -89,10 +93,6 @@ public class RequestCounselActivity extends AppCompatActivity {
 
     public String getInstructorHourlyRate() {
         return ""+instructor.getHourlyRate();
-    }
-
-    public String getCourseName() {
-        return course.getName();
     }
 
     public String getDateName() {
@@ -105,5 +105,9 @@ public class RequestCounselActivity extends AppCompatActivity {
 
     public String getEndTime() {
         return endTime;
+    }
+
+    public Course getCourse() {
+        return course;
     }
 }

@@ -44,7 +44,7 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
         tv_counsellor_name.setText("El asesor seleccionado es : " + ((RequestCounselActivity)getActivity()).getInstructorName());
 
         TextView tv_selected_course_name = (TextView) view.findViewById(R.id.tv_selected_course_name);
-        tv_selected_course_name.setText("Curso : " + ((RequestCounselActivity)getActivity()).getCourseName());
+        tv_selected_course_name.setText("Curso : " + ((RequestCounselActivity)getActivity()).getCourse().getName());
 
         TextView tv_selected_date = (TextView) view.findViewById(R.id.tv_selected_date);
         tv_selected_date.setText("Fecha : " + ((RequestCounselActivity)getActivity()).getDateName());

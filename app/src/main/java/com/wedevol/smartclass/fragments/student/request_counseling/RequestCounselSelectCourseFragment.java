@@ -54,6 +54,12 @@ public class RequestCounselSelectCourseFragment extends Fragment{
 
         tv_pick_course = (TextView) view.findViewById(R.id.tv_pick_course);
         b_next = (Button) view.findViewById(R.id.b_next);
+
+        if(((RequestCounselActivity)getActivity()).getCourse() == null){
+            b_next.setEnabled(false);
+        }else{
+            tv_pick_course.setText(((RequestCounselActivity)getActivity()).getCourse().getName());
+        }
         //b_suggest_new_course = (Button) view.findViewById(R.id.b_suggest_new_course);
     }
 
@@ -103,6 +109,7 @@ public class RequestCounselSelectCourseFragment extends Fragment{
             String courseName = data.getStringExtra(Constants.BUNDLE_COURSE_NAME);
             ((RequestCounselActivity)getActivity()).saveCourse(courseId, courseName);
             tv_pick_course.setText(courseName);
+            b_next.setEnabled(true);
         }
     }
 }
