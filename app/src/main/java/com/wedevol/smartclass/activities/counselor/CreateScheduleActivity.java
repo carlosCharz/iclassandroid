@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
     private int beginTime = -1;
     private int endTime = 99999;
     private String weekOfDay;
+    private ImageView iv_toolbar_back;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,13 @@ public class CreateScheduleActivity extends AppCompatActivity {
         et_end_time = (EditText) findViewById(R.id.et_end_time);
         b_cancel = (Button) findViewById(R.id.b_cancel);
         b_save = (Button) findViewById(R.id.b_save);
+
+        iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
+
+        ImageView iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
+        iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_schedule_black));
+        TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
+        tv_detail_title.setText("Crear Horario");
     }
 
     private void setActions() {
@@ -144,6 +154,13 @@ public class CreateScheduleActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 UtilMethods.deactivateSoftKeyboard(v, self);
+            }
+        });
+
+        iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                self.finish();
             }
         });
     }

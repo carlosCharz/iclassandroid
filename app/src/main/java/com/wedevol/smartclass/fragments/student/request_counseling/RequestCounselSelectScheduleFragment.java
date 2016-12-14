@@ -1,6 +1,7 @@
 package com.wedevol.smartclass.fragments.student.request_counseling;
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,16 +13,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListTimesAdapter;
+import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
@@ -36,6 +40,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private ListTimesAdapter listTimeAdapter;
     private int oldPosition;
     private int[] dateDelimiters = new int[2];
+    private int endTime =-200000;
+    private int beginTime =-1;
 
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
@@ -111,6 +117,77 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             }
         });
 
+        et_begin_time.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        UtilMethods.deactivateSoftKeyboard(view, getActivity());
+                        Calendar mcurrentTime = Calendar.getInstance();
+                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        int minute = mcurrentTime.get(Calendar.MINUTE);
+                        TimePickerDialog mTimePicker;
+                        mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                if(selectedHour < endTime){
+                                    et_begin_time.setText(""+selectedHour);
+                                    beginTime = selectedHour;
+                                }else{
+                                    Toast.makeText(getActivity(), "La hora de inicio no puede ser mayor" +
+                                            " a la de termino.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, hour, minute, true);//Yes 24 hour time
+                        mTimePicker.setTitle("Elige el tiempo");
+                        mTimePicker.show();
+
+                    }
+                }
+        );
+
+        et_begin_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                UtilMethods.deactivateSoftKeyboard(v, getActivity());
+            }
+        });
+
+        et_end_time.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        UtilMethods.deactivateSoftKeyboard(view, getActivity());
+                        Calendar mcurrentTime = Calendar.getInstance();
+                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        int minute = mcurrentTime.get(Calendar.MINUTE);
+                        TimePickerDialog mTimePicker;
+                        mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                if(selectedHour > beginTime){
+                                    et_end_time.setText(""+selectedHour);
+                                    endTime = selectedHour;
+                                }else{
+                                    Toast.makeText(getActivity(), "La hora de termino debe ser mayor" +
+                                            " a la de inicio.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, hour, minute, true);//Yes 24 hour time
+                        mTimePicker.setTitle("Elige el tiempo");
+                        mTimePicker.show();
+
+                    }
+                }
+        );
+
+        et_end_time.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                UtilMethods.deactivateSoftKeyboard(v, getActivity());
+            }
+        });
+
+
         ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,8 +202,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         if(et_begin_time.getText().toString().isEmpty()||et_end_time.getText().toString().isEmpty()) {
             return 0;
         }else{
-            int endTime = Integer.parseInt(et_end_time.getText().toString());
-            int beginTime = Integer.parseInt(et_begin_time.getText().toString());
+            endTime = Integer.parseInt(et_end_time.getText().toString());
+            beginTime = Integer.parseInt(et_begin_time.getText().toString());
 
             boolean wrong = ((endTime - beginTime) < 0) || (dateDelimiters[0] > beginTime) ||
                     (dateDelimiters[1] < endTime);
