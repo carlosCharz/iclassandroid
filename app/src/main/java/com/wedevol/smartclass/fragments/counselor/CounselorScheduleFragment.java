@@ -39,7 +39,7 @@ public class CounselorScheduleFragment extends Fragment implements ScheduleClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_counselor_schedule, container, false);
         setElements(view);
         setActions();
         return view;

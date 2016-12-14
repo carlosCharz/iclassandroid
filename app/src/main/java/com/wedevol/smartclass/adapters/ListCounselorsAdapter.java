@@ -37,7 +37,7 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
     @Override
     public ListCounselorsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_elligible_counsellor, viewGroup, false);
+                .inflate(R.layout.cardview_elligible_counselor, viewGroup, false);
         return new ListCounselorsAdapter.ViewHolder(v);
     }
 
