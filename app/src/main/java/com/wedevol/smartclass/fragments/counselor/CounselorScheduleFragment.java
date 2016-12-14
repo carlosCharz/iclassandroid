@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.counselor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -10,14 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.counselor.CreateScheduleActivity;
 import com.wedevol.smartclass.adapters.ListScheduleTimeWindowAdapter;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class CounselorScheduleFragment extends Fragment{
-
     private FloatingActionButton fab_edit_schedule;
 
     @Override
@@ -75,7 +77,9 @@ public class CounselorScheduleFragment extends Fragment{
         fab_edit_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), CreateScheduleActivity.class);
+                intent.putExtra(Constants.BUNDLE_SIMPLE_DATE,true);
+                startActivity(intent);
             }
         });
     }

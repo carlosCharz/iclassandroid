@@ -12,18 +12,17 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListDatesAdapter;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 /** Created by paolo on 12/13/16.*/
-public class ListDatesActivity extends AppCompatActivity {
+public class ListCalendarDatesActivity extends AppCompatActivity {
     //private SearchView sv_search_course;
     private RecyclerView rv_dates;
     private List<String> detailedDates;
@@ -43,34 +42,43 @@ public class ListDatesActivity extends AppCompatActivity {
 
     private void setElements() {
         self = this;
+        boolean is_simple_date = getIntent().getBooleanExtra(Constants.BUNDLE_SIMPLE_DATE,false);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
         tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
-
-        tv_detail_title.setText("Fechas");
-        iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
-
-        //sv_search_course = (SearchView) findViewById(R.id.sv_search_course);
         rv_dates = (RecyclerView) findViewById(R.id.rv_dates);
 
-        detailedDates = new ArrayList<>();
+        if(!is_simple_date){
+            tv_detail_title.setText("Fechas");
+            iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
 
-        Calendar calendar = Calendar.getInstance();
-        for(int i=0; i<14; i++) {
-            SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy");
-            String now = sdfDate.format(calendar.getTime());
+            detailedDates = new ArrayList<>();
+            Calendar calendar = Calendar.getInstance();
+            for(int i=0; i<14; i++) {
+                SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy");
+                String now = sdfDate.format(calendar.getTime());
 
-            SimpleDateFormat sdfDayOfWeek = new SimpleDateFormat("EEEE");
-            String dayOfTheWeek = sdfDayOfWeek.format(calendar.getTime());
+                SimpleDateFormat sdfDayOfWeek = new SimpleDateFormat("EEEE");
+                String dayOfTheWeek = sdfDayOfWeek.format(calendar.getTime());
 
-            detailedDates.add(dayOfTheWeek + " - " + now);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+                detailedDates.add(dayOfTheWeek + " - " + now);
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+            }
+        } else {
+            tv_detail_title.setText("Dias de la semana");
+            iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_schedule_black));
+            detailedDates.add("Lunes");
+            detailedDates.add("Martes");
+            detailedDates.add("Miercoles");
+            detailedDates.add("Jueves");
+            detailedDates.add("Viernes");
+            detailedDates.add("Sabado");
+            detailedDates.add("Domingo");
         }
 
+        rv_dates.setAdapter(new ScaleInAnimationAdapter(new ListDatesAdapter(this, detailedDates, is_simple_date)));
         rv_dates.setLayoutManager(new LinearLayoutManager(this));
-        rv_dates.setAdapter(new ScaleInAnimationAdapter(new ListDatesAdapter(this, detailedDates)));
         rv_dates.setVisibility(View.VISIBLE);
     }
 

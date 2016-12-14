@@ -18,11 +18,13 @@ import java.util.List;
 public class ListDatesAdapter extends RecyclerView.Adapter<ListDatesAdapter.ViewHolder> {
     private final List<String> mItems;
     private final Activity context;
+    private final boolean is_simple_date;
 
-    public ListDatesAdapter(Activity context, List<String> list) {
+    public ListDatesAdapter(Activity context, List<String> list, boolean is_simple_date) {
         super();
         this.context = context;
         mItems = list;
+        this.is_simple_date = is_simple_date;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ListDatesAdapter extends RecyclerView.Adapter<ListDatesAdapter.View
         final String date = mItems.get(i);
 
         viewHolder.tv_date_name.setText(date);
-        viewHolder.tv_city_name.setText("Lima, Peru");
+        if(!is_simple_date) viewHolder.tv_city_name.setText("Lima, Peru");
 
         viewHolder.cd_date_holder.setOnClickListener(new View.OnClickListener() {
             @Override
