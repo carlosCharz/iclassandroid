@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</LinearLayout>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sv_schedule_holder"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingresa tu disponibilidad horaria"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_monday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_tuesday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_wednesday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_thursday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_friday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_saturday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_sunday_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_edit_schedule"
+                android:src="@drawable/ic_mode_edit_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
