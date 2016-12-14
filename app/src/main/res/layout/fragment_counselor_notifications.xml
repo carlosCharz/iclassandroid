@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:text="Solicitudes de asesoria. Tienes 24 horas para confimar."/>
 
         <android.support.v7.widget.RecyclerView
@@ -23,5 +23,12 @@
             android:stretchMode="columnWidth"
             android:clipToPadding="false"
             android:scrollbarStyle="outsideInset"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="* Cancelar o no responder una solicitud de asesoria en tu horario definido previamente como disponible conlleva a una penalizacion de puntos. Tenlo en consideracion."/>
     </LinearLayout>
 </ScrollView>
