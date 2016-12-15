@@ -129,13 +129,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                         mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                if(selectedHour < endTime){
-                                    et_begin_time.setText(""+selectedHour);
-                                    beginTime = selectedHour;
-                                }else{
-                                    Toast.makeText(getActivity(), "La hora de inicio no puede ser mayor" +
-                                            " a la de termino.", Toast.LENGTH_SHORT).show();
-                                }
+                                et_begin_time.setText(""+selectedHour);
+                                beginTime = selectedHour;
                             }
                         }, hour, minute, true);//Yes 24 hour time
                         mTimePicker.setTitle("Elige el tiempo");
@@ -164,13 +159,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                         mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                if(selectedHour > beginTime){
-                                    et_end_time.setText(""+selectedHour);
-                                    endTime = selectedHour;
-                                }else{
-                                    Toast.makeText(getActivity(), "La hora de termino debe ser mayor" +
-                                            " a la de inicio.", Toast.LENGTH_SHORT).show();
-                                }
+                                et_end_time.setText(""+selectedHour);
+                                endTime = selectedHour;
                             }
                         }, hour, minute, true);//Yes 24 hour time
                         mTimePicker.setTitle("Elige el tiempo");
