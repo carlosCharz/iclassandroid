@@ -64,7 +64,7 @@ public class StudentProfileFragment extends Fragment{
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
 
         //student.getClasses().size() + " cursos"
-        tv_student_level.setText("0 cursos");
+        tv_student_level.setText("Nivel 1");
         //(int) student.getRating()
         pb_student_progress.setProgress(45);
         //student.getTotalHours() + " hrs"

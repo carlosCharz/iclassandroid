@@ -55,7 +55,7 @@ public class CounselorProfileFragment extends Fragment{
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
         //student.getClasses().size() + " cursos"
-        tv_counselor_level.setText("20 cursos");
+        tv_counselor_level.setText("Nivel 1");
         //(int) student.getRating()
         pb_counselor_progress.setProgress(45);
         //student.getTotalHours() + " hrs"
@@ -66,13 +66,11 @@ public class CounselorProfileFragment extends Fragment{
         //TODO have to be integrated with retrofit
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
 
-        //student.getClasses().size() + " cursos"
-        tv_counselor_level.setText("20 cursos");
         //(int) student.getRating()
         pb_counselor_progress.setProgress(45);
         //student.getTotalHours() + " hrs"
         tv_counselor_counseling_time.setText("50 hrs");
-        tv_counselor_profile_type.setText("Alumno");
+        tv_counselor_profile_type.setText("Instructor");
         //student.getPhone()
         tv_counselor_profile_number.setText("99695670");
         //student.getEmail()

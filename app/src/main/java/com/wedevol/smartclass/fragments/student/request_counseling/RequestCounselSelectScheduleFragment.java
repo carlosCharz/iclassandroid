@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,8 +41,6 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private ListTimesAdapter listTimeAdapter;
     private int oldPosition;
     private int[] dateDelimiters = new int[2];
-    private int endTime =-200000;
-    private int beginTime =-1;
 
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
@@ -60,7 +59,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_counsel_select_schedule, container, false);
-
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setupElements(view);
         setupActions();
         return view;
@@ -130,12 +130,10 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 et_begin_time.setText(""+selectedHour);
-                                beginTime = selectedHour;
                             }
                         }, hour, minute, true);//Yes 24 hour time
                         mTimePicker.setTitle("Elige el tiempo");
                         mTimePicker.show();
-
                     }
                 }
         );
@@ -160,7 +158,6 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 et_end_time.setText(""+selectedHour);
-                                endTime = selectedHour;
                             }
                         }, hour, minute, true);//Yes 24 hour time
                         mTimePicker.setTitle("Elige el tiempo");
@@ -192,8 +189,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         if(et_begin_time.getText().toString().isEmpty()||et_end_time.getText().toString().isEmpty()) {
             return 0;
         }else{
-            endTime = Integer.parseInt(et_end_time.getText().toString());
-            beginTime = Integer.parseInt(et_begin_time.getText().toString());
+            int endTime = Integer.parseInt(et_end_time.getText().toString());
+            int beginTime = Integer.parseInt(et_begin_time.getText().toString());
 
             boolean wrong = ((endTime - beginTime) < 0) || (dateDelimiters[0] > beginTime) ||
                     (dateDelimiters[1] < endTime);
