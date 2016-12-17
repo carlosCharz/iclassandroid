@@ -33,7 +33,7 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
         View v;
         if(i==0){
             v = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.cardview_schedule_day_header, viewGroup, false);
+                    .inflate(R.layout.cardview_schedule_time_header, viewGroup, false);
             return new HeadViewHolder(v);
         }else{
             v = LayoutInflater.from(viewGroup.getContext())

@@ -93,7 +93,7 @@ public class RequestCounselSelectCourseFragment extends Fragment{
         /*b_suggest_new_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new SuggestCourseDialogFragment();
+                DialogFragment newFragment = new ChangePriceDialogFragment();
                 newFragment.show(getActivity().getSupportFragmentManager(), "Sugerir Curso");
             }
         });*/

@@ -14,4 +14,5 @@ public interface Constants {
     String BUNDLE_DATE = "bundle_date_day_of_week";
     String BUNDLE_SIMPLE_DATE = "bundle_is_simple_date";
 
+    String BUNDLE_LAYOUT_ID = "bundle_layout_id";
 }
