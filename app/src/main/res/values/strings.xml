@@ -57,4 +57,6 @@
     <string name="et_hint_login_password">Contraseña</string>
     <string name="tv_reminder_obligatory_field">* Campos obligatorios</string>
     <string name="nav_home">HOME</string>
+    <string name="connection_error">Error de conexion</string>
+    <string name="problem_with_internet">Problemas con el internet</string>
 </resources>
