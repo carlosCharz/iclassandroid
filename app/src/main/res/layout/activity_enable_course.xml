@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar_detail"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selecciona el curso en el que quieres dictar asesoria"/>
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/tv_pick_day"
+                android:layout_weight="0.25"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:drawableRight="@drawable/ic_keyboard_arrow_down_black"
+                android:drawableEnd="@drawable/ic_keyboard_arrow_down_black"/>
+
+            <Button
+                android:id="@+id/b_next"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Siguiente"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_button_background"/>
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="El curso no se encuentra en la lista?"/>
+
+            <Button
+                android:id="@+id/b_suggest"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/custom_button_background"
+                android:textColor="@color/white"
+                android:text="Sugerir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

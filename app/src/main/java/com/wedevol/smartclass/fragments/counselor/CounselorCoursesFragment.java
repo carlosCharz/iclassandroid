@@ -1,6 +1,7 @@
 package com.wedevol.smartclass.fragments.counselor;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.counselor.EnableCourseActivity;
 import com.wedevol.smartclass.adapters.ListCounselorCourseStateAdapter;
 
 import java.util.ArrayList;
@@ -82,7 +84,8 @@ public class CounselorCoursesFragment extends Fragment{
         b_new_counselor_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"No mapeado", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), EnableCourseActivity.class);
+                startActivity(intent);
             }
         });
     }

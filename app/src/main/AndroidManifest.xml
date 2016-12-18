@@ -38,6 +38,9 @@
         <activity android:name=".activities.counselor.CreateScheduleActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activities.counselor.EnableCourseActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
     </application>
 </manifest>
