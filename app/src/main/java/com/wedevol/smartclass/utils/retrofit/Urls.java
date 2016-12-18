@@ -9,11 +9,11 @@ public interface Urls {
     String ONE_COURSE = "/courses/"; //get
     String ALL_COURSES = "/courses"; //get
 
-    String NEW_STUDENT = "/courses"; //post
-    String ONE_STUDENT = "/courses/"; //get
+    String NEW_STUDENT = "/students"; //post
+    String ONE_STUDENT = "/students/"; //get
     String ALL_STUDENTS = "/students"; //get
 
-    String NEW_INSTRUCTOR = "/courses"; //post
-    String ONE_INSTRUCTOR = "/courses/"; //get
+    String NEW_INSTRUCTOR = "/instructors"; //post
+    String ONE_INSTRUCTOR = "/instructors/"; //get
     String ALL_INSTRUCTORS = "/instructors"; //get
 }

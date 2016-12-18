@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.utils.retrofit;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
@@ -41,7 +42,7 @@ public interface IClassServices {
 
     /**Instructors*/
     @GET(Urls.ONE_INSTRUCTOR)
-    void getInstructor(@Header("Authorization") String authorization, @Query("userId") int userId, Callback<JsonObject> callback);
+    void getInstructor(@Header("Authorization") String authorization, @Query("userId") int userId, Callback<JsonArray> callback);
     @GET(Urls.ALL_INSTRUCTORS)
     void getAllInstructors(@Header("Authorization") String authorization, Callback<JsonObject> callback);
     @FormUrlEncoded

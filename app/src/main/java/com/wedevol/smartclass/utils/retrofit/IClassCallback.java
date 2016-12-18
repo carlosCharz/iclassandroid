@@ -22,7 +22,7 @@ public class IClassCallback<T> implements Callback<T> {
 
     @Override
     public void success(T t, Response response) {
-        JsonObject jsonObject = (JsonObject)t;
+//        JsonObject jsonObject = (JsonObject)t;
 //        if(jsonObject.has("results") && !jsonObject.get("results").isJsonNull()){
 //            //requestToast = Toast.makeText(context,jsonObject.get("results").getAsJsonObject().get("message").getAsString(), Toast.LENGTH_SHORT);
 //            //requestToast.show();

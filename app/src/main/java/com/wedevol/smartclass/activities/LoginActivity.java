@@ -1,17 +1,23 @@
 package com.wedevol.smartclass.activities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
+
+import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 1;
@@ -21,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button b_signup;
     private ToggleButton tb_instructor_student;
     private boolean isInstructor = true;
+    private RestClient restClient;
+    private Activity self;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setElements() {
+        restClient = new RestClient(this);
+        self = this;
+
         et_email = (EditText) findViewById(R.id.et_email);
         et_password = (EditText) findViewById(R.id.et_password);
         b_login = (Button) findViewById(R.id.b_login);
@@ -57,8 +68,28 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
+                restClient.getWebservices().getInstructor("",1,new IClassCallback<JsonArray>(self) {
+                    @Override
+                    public void success(JsonArray jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        Log.d("The response format", jsonObject.toString());
+                    }
+                });
+
+                /**
+                 TODO Por alguna razon me esta devolviendo un array para un get unico...
+                restClient.getWebservices().getInstructor("",1,new IClassCallback<JsonObject>(self) {
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        //-12.103676, -76.948572 Our house location
+                        Log.d("The response format", jsonObject.toString());
+                    }
+                });
+                */
+
                 // TODO: Need to save on the shared preferences the user and its type once I m able to receive it.
-                new android.os.Handler().postDelayed(new Runnable() {
+                /*new android.os.Handler().postDelayed(new Runnable() {
                     public void run() {
                         b_login.setEnabled(true);
 
@@ -68,8 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         progressDialog.dismiss();
                     }
-                }, 1000);
-
+                }, 1000);*/
             }
         });
 
