@@ -12,8 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setElements() {
-        restClient = new RestClient(this);
+        //restClient = new RestClient(this);
         self = this;
 
         et_email = (EditText) findViewById(R.id.et_email);
@@ -47,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         b_login = (Button) findViewById(R.id.b_login);
         b_signup = (Button) findViewById(R.id.b_signup);
         tb_instructor_student = (ToggleButton) findViewById(R.id.tb_instructor_student);
-
     }
 
     private void setActions(){
@@ -68,38 +68,21 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
-                restClient.getWebservices().getInstructor("",1,new IClassCallback<JsonArray>(self) {
-                    @Override
-                    public void success(JsonArray jsonObject, Response response) {
-                        super.success(jsonObject, response);
-                        Log.d("The response format", jsonObject.toString());
-                    }
-                });
-
-                /**
-                 TODO Por alguna razon me esta devolviendo un array para un get unico...
-                restClient.getWebservices().getInstructor("",1,new IClassCallback<JsonObject>(self) {
+                /*restClient.getWebservices().getInstructor("",1,new IClassCallback<JsonObject>(self) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
-                        //-12.103676, -76.948572 Our house location
                         Log.d("The response format", jsonObject.toString());
                     }
-                });
-                */
+                });*/
 
-                // TODO: Need to save on the shared preferences the user and its type once I m able to receive it.
-                /*new android.os.Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        b_login.setEnabled(true);
+                b_login.setEnabled(true);
 
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);
-                        startActivity(intent);
+                Intent intent = new Intent(self, HomeActivity.class);
+                intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);
+                startActivity(intent);
 
-                        progressDialog.dismiss();
-                    }
-                }, 1000);*/
+                progressDialog.dismiss();
             }
         });
 

@@ -9,6 +9,7 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 
 /** Created by Paolo on 3/14/2016.*/
@@ -42,7 +43,7 @@ public interface IClassServices {
 
     /**Instructors*/
     @GET(Urls.ONE_INSTRUCTOR)
-    void getInstructor(@Header("Authorization") String authorization, @Query("userId") int userId, Callback<JsonArray> callback);
+    void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId, Callback<JsonObject> callback);
     @GET(Urls.ALL_INSTRUCTORS)
     void getAllInstructors(@Header("Authorization") String authorization, Callback<JsonObject> callback);
     @FormUrlEncoded

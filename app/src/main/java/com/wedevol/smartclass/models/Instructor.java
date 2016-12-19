@@ -1,5 +1,7 @@
 package com.wedevol.smartclass.models;
 
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,5 +50,96 @@ public class Instructor extends User {
 
     public double getHourlyRate() {
         return hourlyRate;
+    }
+
+    //TODO: json builder
+    public static class Builder {
+        private int mId;
+        private String mFirstName;
+        private String mLastName;
+        private String mPhone;
+        private String mEmail;
+        private String mPassword;
+        private String mPlaceOptions;
+        private double mRating;
+        private double mLevel;
+        private int mTotalHours;
+
+        public Builder(int id) {
+            mId = id;
+        }
+
+        public Builder firstName(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            mLastName = lastName;
+            return this;
+        }
+
+        public Builder phone(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Builder email(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+        public Builder mPassword(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Builder mPlaceOptions(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Builder mRating(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Builder mLevel(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Builder mTotalHours(String firstName) {
+            mFirstName = firstName;
+            return this;
+        }
+
+        public Instructor build() {
+            Instructor instructor = new Instructor();
+            instructor.setId(mId);
+            instructor.setFirstname(mFirstName);
+            instructor.setLastname(mLastName);
+            instructor.setPhone(mPhone);
+            instructor.setEmail(mEmail);
+            instructor.setPassword(mPassword);
+            //instructor.setPlaceOptions(mPlaceOptions);
+            instructor.setRating(mRating);
+            //instructor.setLevel(mLevel);
+            instructor.setTotalHours(mTotalHours);
+
+
+            return instructor;
+        }
+    }
+
+    public static Instructor parseCity(JsonObject responseObject) {
+        Builder cityBuilder;
+
+        cityBuilder = new Builder(responseObject.get("id").getAsInt());
+
+        if (responseObject.has("name") && !responseObject.get("name").isJsonNull()) {
+            cityBuilder.firstName(responseObject.get("name").getAsString());
+        }
+
+        return cityBuilder.build();
     }
 }

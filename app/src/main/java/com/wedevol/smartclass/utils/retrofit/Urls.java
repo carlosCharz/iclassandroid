@@ -14,6 +14,6 @@ public interface Urls {
     String ALL_STUDENTS = "/students"; //get
 
     String NEW_INSTRUCTOR = "/instructors"; //post
-    String ONE_INSTRUCTOR = "/instructors/"; //get
+    String ONE_INSTRUCTOR = "/instructors/{userId}"; //get
     String ALL_INSTRUCTORS = "/instructors"; //get
 }

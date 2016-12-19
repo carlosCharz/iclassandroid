@@ -71,20 +71,20 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setSupportActionBar(toolbar);
 
-
         isInstructor = getIntent().getBooleanExtra(Constants.BUNDLE_INSTRUCTOR, false);
 
-
         //TODO we should validate the kind of user here, given the type of user given at login
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.nav_fragment_drawer, FragmentDrawer.newInstance(isInstructor), "NavDrawer");
-        fragmentTransaction.commitNow();
 
-        FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentByTag("NavDrawer");
-        drawerFragment.setUp(R.id.nav_fragment_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
-        drawerFragment.setDrawerListener(this);
+        if(getSupportFragmentManager().findFragmentByTag("NavDrawer") == null) {
+            fragmentTransaction.replace(R.id.nav_fragment_drawer, FragmentDrawer.newInstance(isInstructor), "NavDrawer");
+            fragmentTransaction.commitNow();
+
+            FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentByTag("NavDrawer");
+            drawerFragment.setUp(R.id.nav_fragment_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+            drawerFragment.setDrawerListener(this);
+        }
 
         if(savedInstanceState != null){
             fragmentDrawableId = savedInstanceState.getInt("selectedFragmentIcon");
