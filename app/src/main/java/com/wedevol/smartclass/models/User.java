@@ -2,9 +2,7 @@ package com.wedevol.smartclass.models;
 
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /** Created by paolorossi on 12/7/16.*/
 public class User {
@@ -17,7 +15,7 @@ public class User {
     private Date birthday;
     private boolean gender;
     private String profilePictureUrl;
-    private List<String> placeOptions = new ArrayList<>();
+    private String placeOptions;
     private String university;
     private double rating;
     private int level;
@@ -27,7 +25,7 @@ public class User {
     }
 
     public User(int id, String firstname, String lastname, String phone, String email, String password,
-                Date birthday, boolean gender, String profilePictureUrl, List<String> placeOptions,
+                Date birthday, boolean gender, String profilePictureUrl, String placeOptions,
                 String university, double rating, int level, int totalHours){
         this.id = id;
         this.firstname = firstname;
@@ -143,11 +141,11 @@ public class User {
         this.profilePictureUrl = profilePictureUrl;
     }
 
-    public List<String> getPlaceOptions() {
+    public String getPlaceOptions() {
         return placeOptions;
     }
 
-    public void setPlaceOptions(List<String> placeOptions) {
+    public void setPlaceOptions(String placeOptions) {
         this.placeOptions = placeOptions;
     }
 

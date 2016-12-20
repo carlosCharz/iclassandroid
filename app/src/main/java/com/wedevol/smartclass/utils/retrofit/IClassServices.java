@@ -27,7 +27,7 @@ public interface IClassServices {
     @GET(Urls.ONE_COURSE)
     void getCourse(@Header("Authorization") String authorization, @Query("courseId") int courseId, Callback<JsonObject> callback);
     @GET(Urls.ALL_COURSES)
-    void getAllCourses(@Header("Authorization") String authorization, Callback<JsonObject> callback);
+    void getAllCourses(@Header("Authorization") String authorization, Callback<JsonArray> callback);
     @FormUrlEncoded
     @POST(Urls.NEW_COURSE)
     void newCourse(@Header("Authorization") String authorization, @Field("course") String course, Callback<JsonObject> callback);

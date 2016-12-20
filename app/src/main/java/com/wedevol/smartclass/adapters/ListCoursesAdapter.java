@@ -38,7 +38,7 @@ public class ListCoursesAdapter  extends RecyclerView.Adapter<ListCoursesAdapter
         final Course course = mItems.get(i);
 
         viewHolder.tv_course_name.setText(course.getName());
-        viewHolder.tv_course_university_career.setText(course.getUniversity() + " - " + course.getCareer());
+        viewHolder.tv_course_university_career.setText(course.getUniversity());
 
         viewHolder.cd_course_holder.setOnClickListener(new View.OnClickListener() {
             @Override

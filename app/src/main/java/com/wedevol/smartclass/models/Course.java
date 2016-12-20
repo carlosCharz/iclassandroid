@@ -1,7 +1,8 @@
 package com.wedevol.smartclass.models;
 
-/** Created by paolorossi on 12/8/16.*/
+import com.google.gson.JsonObject;
 
+/** Created by paolorossi on 12/8/16.*/
 public class Course {
     private int id;
     private String name;
@@ -10,7 +11,6 @@ public class Course {
     private String career;
 
     public Course(){
-
     }
 
     public Course(int id, String name, String description, String university, String career){
@@ -59,6 +59,70 @@ public class Course {
 
     public void setCareer(String career) {
         this.career = career;
+    }
+
+    public static class Builder {
+        private int mId;
+        private String mName;
+        private String mDescription;
+        private String mUniversity;
+        private String mCareer;
+
+        public Builder(int id) {
+            mId = id;
+        }
+
+        public Course.Builder name(String name) {
+            mName = name;
+            return this;
+        }
+
+        public Course.Builder description(String description) {
+            mDescription = description;
+            return this;
+        }
+
+        public Course.Builder university(String university) {
+            mUniversity = university;
+            return this;
+        }
+
+        public Course.Builder career(String career) {
+            mCareer = career;
+            return this;
+        }
+
+        public Course build() {
+            Course course = new Course();
+            course.setId(mId);
+            course.setName(mName);
+            course.setDescription(mDescription);
+            course.setUniversity(mUniversity);
+            course.setCareer(mCareer);
+            return course;
+        }
+    }
+
+    public static Course parseCourse(JsonObject responseObject) {
+        Course.Builder courseBuilder;
+        courseBuilder = new Course.Builder(responseObject.get("id").getAsInt());
+        if (responseObject.has("name") && !responseObject.get("name").isJsonNull()) {
+            courseBuilder.name(responseObject.get("name").getAsString());
+        }
+
+        if (responseObject.has("description") && !responseObject.get("description").isJsonNull()) {
+            courseBuilder.description(responseObject.get("description").getAsString());
+        }
+
+        if (responseObject.has("university") && !responseObject.get("university").isJsonNull()) {
+            courseBuilder.university(responseObject.get("university").getAsString());
+        }
+
+        if (responseObject.has("career") && !responseObject.get("career").isJsonNull()) {
+            courseBuilder.career(responseObject.get("career").getAsString());
+        }
+
+        return courseBuilder.build();
     }
 
 }

@@ -32,8 +32,6 @@ public class Class {
         this.id = id;
     }
 
-
-
     public String getStatus() {
         return status;
     }

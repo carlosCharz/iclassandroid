@@ -9,14 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListCoursesAdapter;
 import com.wedevol.smartclass.models.Course;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/9/16.*/
 public class ListCoursesActivity extends AppCompatActivity{
@@ -28,6 +34,8 @@ public class ListCoursesActivity extends AppCompatActivity{
     private ImageView iv_toolbar_back;
     private TextView tv_detail_title;
     private ImageView iv_toolbar_actual_screen;
+    private RestClient restClient;
+    private ProgressBar pb_charging;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,7 @@ public class ListCoursesActivity extends AppCompatActivity{
 
     private void setElements() {
         self = this;
+        restClient = new RestClient(self);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
         tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
@@ -47,35 +56,35 @@ public class ListCoursesActivity extends AppCompatActivity{
         tv_detail_title.setText("Cursos");
         iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
 
+        pb_charging = (ProgressBar) findViewById(R.id.pb_charging);
         //sv_search_course = (SearchView) findViewById(R.id.sv_search_course);
         rv_courses = (RecyclerView) findViewById(R.id.rv_courses);
 
+        final TextView tv_no_courses = (TextView) findViewById(R.id.tv_no_courses);
+
         courses = new ArrayList<>();
 
-        Course course = new Course(1, "IMU", "No hay descripcion", "PUCP", "EGC");
-        courses.add(course);
-        course = new Course(2, "Mineria de datos", "No hay descripcion", "PUCP", "Ing. Industrial");
-        courses.add(course);
-        course = new Course(3, "Bases de Datos", "No hay descripcion", "PUCP", "Ing. Informatica");
-        courses.add(course);
-        course = new Course(4, "Gestion de Empresas", "No hay descripcion", "PUCP", "Ing. Industrial");
-        courses.add(course);
-        course = new Course(5, "Lenguajes de Programacion 1", "No hay descripcion", "PUCP", "Ing. Informatica");
-        courses.add(course);
-        course = new Course(6, "Estructuras I", "No hay descripcion", "PUCP", "Ing. Civil");
-        courses.add(course);
-        course = new Course(7, "Filosofia VI", "No hay descripcion", "PUCP", "Filosofia");
-        courses.add(course);
-        course = new Course(8, "Introduccion a la vida universitaria", "No hay descripcion", "PUCP", "EGL");
-        courses.add(course);
-        course = new Course(9, "Matematicas I", "No hay descripcion", "PUCP", "EGL");
-        courses.add(course);
-        course = new Course(10, "Principios de Ciencias de la Computacion", "No hay descripcion", "PUCP", "Ing. Informatica");
-        courses.add(course);
+        restClient.getWebservices().getAllCourses("", new IClassCallback<JsonArray>(self){
+            @Override
+            public void success(JsonArray jsonArray, Response response) {
+                super.success(jsonArray, response);
+                for(int i = 0; i<jsonArray.size(); i++){
+                    Course course = Course.parseCourse(jsonArray.get(i).getAsJsonObject());
+                    courses.add(course);
+                }
 
-        rv_courses.setLayoutManager(new LinearLayoutManager(this));
-        rv_courses.setAdapter(new ListCoursesAdapter(this, courses));
-        rv_courses.setVisibility(View.VISIBLE);
+                if(courses.size() == 0 ){
+                    tv_no_courses.setVisibility(View.VISIBLE);
+                    rv_courses.setVisibility(View.GONE);
+                }else{
+                    rv_courses.setLayoutManager(new LinearLayoutManager(self));
+                    rv_courses.setAdapter(new ListCoursesAdapter(self, courses));
+                    rv_courses.setVisibility(View.VISIBLE);
+                    tv_no_courses.setVisibility(View.GONE);
+                }
+                pb_charging.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void setActions() {
