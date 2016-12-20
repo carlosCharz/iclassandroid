@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListNotificationsAdapter;
-import com.wedevol.smartclass.models.Class;
+import com.wedevol.smartclass.models.Lesson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,19 +32,19 @@ public class CounselorNotificationsFragment extends Fragment {
     }
 
     private void setElements(View view) {
-        List<Class> classList = new ArrayList<>();
-        Class classy = new Class();
-        classList.add(classy);
-        classy = new Class();
-        classList.add(classy);
-        classy = new Class();
-        classList.add(classy);
-        classy = new Class();
-        classList.add(classy);
+        List<Lesson> lessonList = new ArrayList<>();
+        Lesson classy = new Lesson();
+        lessonList.add(classy);
+        classy = new Lesson();
+        lessonList.add(classy);
+        classy = new Lesson();
+        lessonList.add(classy);
+        classy = new Lesson();
+        lessonList.add(classy);
 
         RecyclerView rv_notifications = (RecyclerView) view.findViewById(R.id.rv_notifications);
         rv_notifications.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_notifications.setAdapter(new ListNotificationsAdapter(getActivity(), classList));
+        rv_notifications.setAdapter(new ListNotificationsAdapter(getActivity(), lessonList));
     }
 
     private void setActions() {

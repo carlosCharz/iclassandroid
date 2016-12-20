@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListPendingCounselsAdapter;
-import com.wedevol.smartclass.models.Class;
+import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Schedule;
@@ -54,17 +54,17 @@ public class StudentLockerFragment extends Fragment{
         TextView tv_student_counselled_time = (TextView) view.findViewById(R.id.tv_student_counselled_time);
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-        //student.getClasses().size() + " cursos"
+        //student.getLessons().size() + " cursos"
         tv_student_level.setText("Nivel 1");
         //(int) student.getRating()
         pb_student_progress.setProgress(45);
         //student.getTotalHours() + " hrs"
         tv_student_counselled_time.setText("10 hrs");
 
-        List<Class> pendingCounsels = new ArrayList<>();
-        pendingCounsels.add(new Class(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounsels.add(new Class(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounsels.add(new Class(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        List<Lesson> pendingCounsels = new ArrayList<>();
+        pendingCounsels.add(new Lesson(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        pendingCounsels.add(new Lesson(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        pendingCounsels.add(new Lesson(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
 
         TextView tv_no_counsels = (TextView) view.findViewById(R.id.tv_no_counsels);
 

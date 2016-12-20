@@ -34,7 +34,7 @@ public interface IClassServices {
 
     /**Students*/
     @GET(Urls.ONE_STUDENT)
-    void getStudent(@Header("Authorization") String authorization, @Query("userId") int userId, Callback<JsonObject> callback);
+    void getStudent(@Header("Authorization") String authorization, @Path("userId") int userId, Callback<JsonObject> callback);
     @GET(Urls.ALL_STUDENTS)
     void getAllStudents(@Header("Authorization") String authorization, Callback<JsonObject> callback);
     @FormUrlEncoded

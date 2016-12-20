@@ -63,7 +63,7 @@ public class StudentProfileFragment extends Fragment{
         //TODO have to be integrated with retrofit
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
 
-        //student.getClasses().size() + " cursos"
+        //student.getLessons().size() + " cursos"
         tv_student_level.setText("Nivel 1");
         //(int) student.getRating()
         pb_student_progress.setProgress(45);
@@ -74,7 +74,7 @@ public class StudentProfileFragment extends Fragment{
         tv_student_profile_number.setText("99695670");
         //student.getEmail()
         tv_student_profile_email.setText("diagonal_zero@hotmail.com");
-        //student.getClasses().size() + " cursos"
+        //student.getLessons().size() + " cursos"
         tv_student_profile_courses_taken.setText("0 cursos");
         //student.getTotalHours() + " hrs"
         tv_student_profile_time.setText("0 hrs");

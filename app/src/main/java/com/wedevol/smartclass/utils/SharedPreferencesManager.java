@@ -10,7 +10,6 @@ import com.google.gson.JsonParser;
 import com.wedevol.smartclass.activities.LoginActivity;
 import com.wedevol.smartclass.models.User;
 
-
 /**
  * This class controls the data that is persisted in the android session for this particular app.
  * Use it to identify already logged users or take "global variables" for your use.
@@ -22,10 +21,12 @@ public class SharedPreferencesManager {
     private static final String UUID = "uuid";
     private static final String CURRENT_USER = "currentUser";
     private static final String FACEBOOK_PHOTO = null;
+    private static final String CURRENT_USER_TYPE = "currentUserType";
 
     private static SharedPreferencesManager self;
     private final SharedPreferences mPreferences;
     private final Context context;
+
 
     private SharedPreferencesManager(Context context) {
         this.context = context;
@@ -44,6 +45,12 @@ public class SharedPreferencesManager {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(TOKEN_USER, token);
         editor.putString(CURRENT_USER, jsonUserData);
+        editor.apply();
+    }
+
+    public void saveUserType(boolean userType){
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(CURRENT_USER_TYPE, userType);
         editor.apply();
     }
 
@@ -74,6 +81,10 @@ public class SharedPreferencesManager {
         }
     }
 
+    public boolean getUserType(){
+        return mPreferences.getBoolean(CURRENT_USER_TYPE, false);
+    }
+
     public String getUserToken(){
         return mPreferences.getString(TOKEN_USER, "");
     }
@@ -102,12 +113,9 @@ public class SharedPreferencesManager {
         }
     }
 
-
     public boolean shouldWeAskPermissions(String permission){
         return (mPreferences.getBoolean(permission, true));
     }
-
-
 
     public void markAsAskedPermissions(String permission){
         mPreferences.edit().putBoolean(permission, false).apply();

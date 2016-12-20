@@ -3,7 +3,7 @@ package com.wedevol.smartclass.models;
 import java.util.Date;
 
 /** Created by paolorossi on 12/8/16.*/
-public class Class {
+public class Lesson {
     private int id;
     private Instructor instructor;
     private Course course;
@@ -11,11 +11,11 @@ public class Class {
     private Date classDate;
     private String status;
 
-    public Class(){
+    public Lesson(){
 
     }
 
-    public Class(int id, Instructor instructor, Course course, Schedule schedule, Date classDate, String status){
+    public Lesson(int id, Instructor instructor, Course course, Schedule schedule, Date classDate, String status){
         this.id = id;
         this.instructor = instructor;
         this.course = course;

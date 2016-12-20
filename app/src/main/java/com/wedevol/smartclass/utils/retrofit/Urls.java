@@ -10,7 +10,7 @@ public interface Urls {
     String ALL_COURSES = "/courses"; //get
 
     String NEW_STUDENT = "/students"; //post
-    String ONE_STUDENT = "/students/"; //get
+    String ONE_STUDENT = "/students/{userId}"; //get
     String ALL_STUDENTS = "/students"; //get
 
     String NEW_INSTRUCTOR = "/instructors"; //post

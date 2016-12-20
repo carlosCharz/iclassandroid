@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListPendingCounselsAdapter;
-import com.wedevol.smartclass.models.Class;
+import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Schedule;
@@ -59,17 +59,17 @@ public class CounselorDesktopFragment extends Fragment {
         tv_counselor_rating_number.setText("4.7");
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-        //student.getClasses().size() + " cursos"
+        //student.getLessons().size() + " cursos"
         tv_counselor_level.setText("Nivel 2");
         //(int) student.getRating()
         pb_counselor_progress.setProgress(45);
         //student.getTotalHours() + " hrs"
         tv_counselor_counseling_time.setText("50 hrs");
 
-        List<Class> pendingCounselleds = new ArrayList<>();
-        pendingCounselleds.add(new Class(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounselleds.add(new Class(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounselleds.add(new Class(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        List<Lesson> pendingCounselleds = new ArrayList<>();
+        pendingCounselleds.add(new Lesson(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        pendingCounselleds.add(new Lesson(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        pendingCounselleds.add(new Lesson(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
 
         TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
 

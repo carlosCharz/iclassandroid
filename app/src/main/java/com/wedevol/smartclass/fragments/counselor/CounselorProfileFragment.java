@@ -54,7 +54,7 @@ public class CounselorProfileFragment extends Fragment{
         tv_counselor_rating_number.setText("4.7");
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-        //student.getClasses().size() + " cursos"
+        //student.getLessons().size() + " cursos"
         tv_counselor_level.setText("Nivel 1");
         //(int) student.getRating()
         pb_counselor_progress.setProgress(45);
@@ -75,7 +75,7 @@ public class CounselorProfileFragment extends Fragment{
         tv_counselor_profile_number.setText("99695670");
         //student.getEmail()
         tv_counselor_profile_email.setText("diagonal_zero@hotmail.com");
-        //student.getClasses().size() + " cursos"
+        //student.getLessons().size() + " cursos"
         tv_counselor_profile_courses_afilliated.setText("20 cursos");
         //student.getTotalHours() + " hrs"
         tv_counselor_profile_time_teaching.setText("50 hrs");

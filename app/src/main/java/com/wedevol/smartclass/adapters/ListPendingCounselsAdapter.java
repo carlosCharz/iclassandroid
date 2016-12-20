@@ -17,17 +17,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.models.Class;
+import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.utils.PhoneCallListener;
 
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
 public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPendingCounselsAdapter.ViewHolder> {
-    private final List<Class> mItems;
+    private final List<Lesson> mItems;
     private final Activity context;
 
-    public ListPendingCounselsAdapter(Activity context, List<Class> list) {
+    public ListPendingCounselsAdapter(Activity context, List<Lesson> list) {
         super();
         this.context = context;
         mItems = list;
@@ -42,7 +42,7 @@ public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPending
 
     @Override
     public void onBindViewHolder(final ListPendingCounselsAdapter.ViewHolder viewHolder, int i) {
-        final Class classy = mItems.get(i);
+        final Lesson classy = mItems.get(i);
         /*
         viewHolder.tv_pending_counsel_course_counseller.setText(classy.getCourse().getName() + " - "
                 + classy.getInstructorName().getReducedName(18));

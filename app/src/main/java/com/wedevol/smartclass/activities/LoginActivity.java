@@ -5,15 +5,16 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setElements() {
-        //restClient = new RestClient(this);
+        restClient = new RestClient(this);
         self = this;
 
         et_email = (EditText) findViewById(R.id.et_email);
@@ -58,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
                 /*if (!validate()) {
                     return;
                 }*/
-                b_login.setEnabled(false);
 
                 final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
                 progressDialog.setIndeterminate(true);
@@ -68,21 +68,23 @@ public class LoginActivity extends AppCompatActivity {
                 final String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
-                /*restClient.getWebservices().getInstructor("",1,new IClassCallback<JsonObject>(self) {
-                    @Override
-                    public void success(JsonObject jsonObject, Response response) {
-                        super.success(jsonObject, response);
-                        Log.d("The response format", jsonObject.toString());
-                    }
-                });*/
-
-                b_login.setEnabled(true);
-
-                Intent intent = new Intent(self, HomeActivity.class);
-                intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);
-                startActivity(intent);
-
-                progressDialog.dismiss();
+                if(isInstructor) {
+                    restClient.getWebservices().getInstructor("", 1, new IClassCallback<JsonObject>(self) {
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            login(jsonObject, progressDialog);
+                        }
+                    });
+                }else{
+                    restClient.getWebservices().getStudent("", 1, new IClassCallback<JsonObject>(self) {
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            login(jsonObject, progressDialog);
+                        }
+                    });
+                }
             }
         });
 
@@ -104,6 +106,19 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void login(JsonObject jsonObject, ProgressDialog progressDialog) {
+        Gson gson = new Gson();
+        SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
+        sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
+        sharedPreferencesManager.saveUserType(isInstructor);
+
+        Intent intent = new Intent(self, HomeActivity.class);
+        intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);
+        startActivity(intent);
+
+        progressDialog.dismiss();
     }
 
     public boolean validate() {

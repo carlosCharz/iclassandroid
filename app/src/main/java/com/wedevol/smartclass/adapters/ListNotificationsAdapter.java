@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.models.Class;
+import com.wedevol.smartclass.models.Lesson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 /** Created by paolo on 12/13/16.*/
 public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotificationsAdapter.ViewHolder> {
-    private final List<Class> mItems;
+    private final List<Lesson> mItems;
     private final Activity context;
     private final List<ViewHolder> viewHoldersList;
     private Handler handler = new Handler();
@@ -50,7 +50,7 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
     }
 
 
-    public ListNotificationsAdapter(Activity context, List<Class> list) {
+    public ListNotificationsAdapter(Activity context, List<Lesson> list) {
         super();
         this.context = context;
         mItems = list;
@@ -61,13 +61,13 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
     @Override
     public ListNotificationsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_notifications, viewGroup, false);
+                .inflate(R.layout.cardview_counselor_notification, viewGroup, false);
         return new ListNotificationsAdapter.ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ListNotificationsAdapter.ViewHolder viewHolder, int i) {
-        final Class classy = mItems.get(i);
+        final Lesson classy = mItems.get(i);
 
         viewHolder.tv_notification_counsult_data.setText("Alex - Calculo 1 - S./ 18");
         viewHolder.tv_notification_date_time.setText("Jueves 16/10 de 2 a 4pm");

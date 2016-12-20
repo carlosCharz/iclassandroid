@@ -8,7 +8,7 @@ import java.util.List;
 public class Student extends User{
     private List<Course> courses = new ArrayList<>();
     private List<String> coursesStatus = new ArrayList<>();
-    private List<Class> classes = new ArrayList<>();
+    private List<Lesson> lessons = new ArrayList<>();
 
 
     public Student(int id, String firstname, String lastname, String phone, String email, String password,
@@ -39,11 +39,11 @@ public class Student extends User{
         this.coursesStatus = coursesStatus;
     }
 
-    public List<Class> getClasses() {
-        return classes;
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setClasses(List<Class> classes) {
-        this.classes = classes;
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
     }
 }
