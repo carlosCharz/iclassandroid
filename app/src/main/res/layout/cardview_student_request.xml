@@ -9,7 +9,7 @@
     android:layout_marginBottom="6dp">
 
     <LinearLayout
-        android:padding="20dp"
+        android:padding="15dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_weight="0.7"
+                android:layout_weight="0.8"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/tv_request_counsult_data"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="@color/oil"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 <TextView
                     android:layout_marginTop="10dp"
                     android:id="@+id/tv_request_date_time"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Jueves 16/10 de 2 a 4pm"/>
@@ -46,9 +46,8 @@
                 android:textSize="12sp"
                 android:drawableRight="@drawable/ic_star_black"
                 android:drawableEnd="@drawable/ic_star_black"
-                android:drawablePadding="-50dp"
                 android:gravity="center"
-                android:layout_weight="0.3"
+                android:layout_weight="0.2"
                 android:id="@+id/tv_counselor_rating"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

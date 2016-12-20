@@ -34,7 +34,7 @@ public class ListRequestsAdapter extends RecyclerView.Adapter<ListRequestsAdapte
     @Override
     public void onBindViewHolder(final ListRequestsAdapter.ViewHolder viewHolder, int i) {
         final Lesson classy = mItems.get(i);
-        viewHolder.tv_request_counsult_data.setText("IMU - Richard Cancino - S/.20");
+        viewHolder.tv_request_counsult_data.setText("Richard - IMU - S/.20");
         viewHolder.tv_request_date_time.setText("12/12/16 - 20 a 24 horas");
         viewHolder.tv_counselor_rating.setText("4.7");
 

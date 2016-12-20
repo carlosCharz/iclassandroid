@@ -23,6 +23,11 @@
             android:stretchMode="columnWidth"
             android:clipToPadding="false"
             android:scrollbarStyle="outsideInset" />
-    </LinearLayout>
 
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* Cancelar una asesoria con menos de 24 horas de anticipacion conlleva a una penalizacion de XX puntos. Por favor tomar en consideracion."/>
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
