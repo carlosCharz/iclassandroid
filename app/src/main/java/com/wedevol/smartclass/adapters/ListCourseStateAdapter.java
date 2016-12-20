@@ -16,14 +16,14 @@ import com.wedevol.smartclass.utils.dialogs.ChangePriceDialogFragment;
 import java.util.List;
 
 /** Created by paolo on 12/15/16.*/
-public class ListCounselorCourseStateAdapter  extends RecyclerView.Adapter{
+public class ListCourseStateAdapter extends RecyclerView.Adapter{
     private final List<Pair<String,String>> mItems;
     private final Activity context;
     private final String headerName;
     private final String headerExplanation;
     private final boolean showHourlyRate;
 
-    public ListCounselorCourseStateAdapter(Activity context, List<Pair<String,String>> list, String headerName, String headerExplanation, boolean showHourlyRate) {
+    public ListCourseStateAdapter(Activity context, List<Pair<String,String>> list, String headerName, String headerExplanation, boolean showHourlyRate) {
         super();
         this.context = context;
         mItems = list;
@@ -38,11 +38,11 @@ public class ListCounselorCourseStateAdapter  extends RecyclerView.Adapter{
         if(i==0){
             v = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.cardview_course_state_header, viewGroup, false);
-            return new ListCounselorCourseStateAdapter.HeadViewHolder(v);
+            return new ListCourseStateAdapter.HeadViewHolder(v);
         }else{
             v = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.cardview_course_state_item, viewGroup, false);
-            return new ListCounselorCourseStateAdapter.ItemViewHolder(v);
+            return new ListCourseStateAdapter.ItemViewHolder(v);
         }
     }
 
@@ -54,26 +54,25 @@ public class ListCounselorCourseStateAdapter  extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         if(getItemViewType(i)==0) {
-            ((ListCounselorCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_name.setText(headerName);
-            ((ListCounselorCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_explanation.setText(headerExplanation);
+            ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_name.setText(headerName);
+            ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_explanation.setText(headerExplanation);
         } else {
             final Pair<String,String> courseAndRate = mItems.get(i-1);
-            ((ListCounselorCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(courseAndRate.first);
+            ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(courseAndRate.first);
             if(showHourlyRate){
-                ((ListCounselorCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
-                ((ListCounselorCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(courseAndRate.second);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(courseAndRate.second);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ChangePriceDialogFragment suggestCourseDialogFragment = ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price);
+                        suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
+
+                    }
+                });
             }else{
-                ((ListCounselorCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.GONE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.GONE);
             }
-
-            ((ListCounselorCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ChangePriceDialogFragment suggestCourseDialogFragment = ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price);
-                    suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
-
-                }
-            });
         }
     }
 

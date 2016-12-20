@@ -20,9 +20,11 @@ import com.wedevol.smartclass.utils.interfaces.Constants;
 public class EnableCourseActivity extends AppCompatActivity{
     private Button b_next;
     private Button b_suggest;
-    private TextView tv_pick_day;
+    private TextView tv_pick_course;
+    private TextView tv_course_selection_option;
     private Activity self;
     private ImageView iv_toolbar_back;
+    private boolean studentType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,12 @@ public class EnableCourseActivity extends AppCompatActivity{
     }
 
     private void setElements() {
+        studentType = getIntent().getBooleanExtra(Constants.STUDENT_TYPE, false);
         self = this;
         b_next = (Button) findViewById(R.id.b_next);
         b_suggest = (Button) findViewById(R.id.b_suggest);
-        tv_pick_day = (TextView) findViewById(R.id.tv_pick_day);
+        tv_pick_course = (TextView) findViewById(R.id.tv_pick_course);
+        tv_course_selection_option = (TextView) findViewById(R.id.tv_course_selection_option);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
 
@@ -44,6 +48,10 @@ public class EnableCourseActivity extends AppCompatActivity{
         iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         tv_detail_title.setText("Habilitar Curso");
+
+        if(studentType){
+            tv_course_selection_option.setText("Selecciona el curso en el que desees buscar asesorias.");
+        }
     }
 
     private void setActions() {
@@ -62,7 +70,7 @@ public class EnableCourseActivity extends AppCompatActivity{
             }
         });
 
-        tv_pick_day.setOnClickListener(new View.OnClickListener() {
+        tv_pick_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(self, ListCoursesActivity.class);
@@ -83,7 +91,7 @@ public class EnableCourseActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if((requestCode == Constants.CHOOSEN_COURSE) && (resultCode == Activity.RESULT_OK)) {
             String courseName = data.getStringExtra(Constants.BUNDLE_COURSE_NAME);
-            tv_pick_day.setText(courseName);
+            tv_pick_course.setText(courseName);
         }
     }
 }

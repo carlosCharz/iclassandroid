@@ -45,9 +45,9 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:background="@drawable/custom_button_background"
-            android:id="@+id/b_new_counselor_course"
+            android:id="@+id/b_new_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dictar nuevo curso"/>
+            android:text="Nuevo Curso con Asesoria"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

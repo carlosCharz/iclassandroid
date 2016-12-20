@@ -1,6 +1,5 @@
 package com.wedevol.smartclass.fragments.counselor;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,11 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.counselor.EnableCourseActivity;
-import com.wedevol.smartclass.adapters.ListCounselorCourseStateAdapter;
+import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +47,7 @@ public class CounselorCoursesFragment extends Fragment{
 
         RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
         rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_payed.setAdapter(new ListCounselorCourseStateAdapter(getActivity(), pairList,
+        rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
                 "PAGADO", "Eres un asesor de este curso", true));
 
         pairList = new ArrayList<>();
@@ -58,7 +56,7 @@ public class CounselorCoursesFragment extends Fragment{
 
         RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
         rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_verify_payment.setAdapter(new ListCounselorCourseStateAdapter(getActivity(), pairList,
+        rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
                 "VERIFICANDO PAGO", "Maximo 24 horas", true));
 
         pairList = new ArrayList<>();
@@ -66,7 +64,7 @@ public class CounselorCoursesFragment extends Fragment{
 
         RecyclerView rv_pending_payment = (RecyclerView) view.findViewById(R.id.rv_pending_payment);
         rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_pending_payment.setAdapter(new ListCounselorCourseStateAdapter(getActivity(), pairList,
+        rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
                 "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo", true));
 
         pairList = new ArrayList<>();
@@ -76,7 +74,7 @@ public class CounselorCoursesFragment extends Fragment{
 
         RecyclerView rv_to_validated = (RecyclerView) view.findViewById(R.id.rv_to_validated);
         rv_to_validated.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_to_validated.setAdapter(new ListCounselorCourseStateAdapter(getActivity(), pairList,
+        rv_to_validated.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
                 "POR VALIDAR", "Mira tu correo para terminar la verificacion", true));
     }
 
