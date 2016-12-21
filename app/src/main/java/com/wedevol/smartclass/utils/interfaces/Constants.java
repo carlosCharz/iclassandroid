@@ -5,6 +5,7 @@ public interface Constants {
     String USER_PHOTO = "user_photo";
 
     String STUDENT_TYPE = "student_type";
+    String INSTRUCTOR_TYPE = "instructor_type";
     boolean REQUEST_TYPE = true;
     boolean NON_REQUEST_TYPE = false;
 
@@ -31,5 +32,4 @@ public interface Constants {
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
     boolean SELECTABLE_COURSE = true;
     boolean NOT_SELECTABLE_COURSE = false;
-
 }

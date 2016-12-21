@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona los cursos por los cuales has realizado un deposito o una transferencia a la cuenta"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_verify_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_pending_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset"/>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_button_background"
+            android:id="@+id/b_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"/>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* La informacion de la cuenta bancaria se encuentra en la opcion Cuentas Bancarias en el menu."/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

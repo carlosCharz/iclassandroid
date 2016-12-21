@@ -23,13 +23,14 @@
                 android:text="Ingrese la informacion correspondiente al deposito"/>
 
             <TextView
+                android:id="@+id/tv_amount_to_pay"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Monto total a pagar: S/. 30"/>
+                android:text="Monto total a pagar: S/. 10"/>
 
             <TextView
                 android:textSize="18sp"

@@ -27,6 +27,7 @@ public class PayCoursesActivity extends AppCompatActivity{
     private EditText et_amount;
     private ToggleButton tb_currency;
     private ImageView iv_toolbar_actual_screen;
+    private TextView tv_amount_to_pay;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class PayCoursesActivity extends AppCompatActivity{
 
     private void setElements() {
         self = this;
+        boolean isInstructor= getIntent().getBooleanExtra(Constants.INSTRUCTOR_TYPE, false);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
         tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
@@ -45,6 +47,11 @@ public class PayCoursesActivity extends AppCompatActivity{
 
         tv_detail_title.setText("Pagar Curso");
         iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_pay_course_black));
+
+        if(isInstructor){
+            tv_amount_to_pay = (TextView) findViewById(R.id.tv_amount_to_pay);
+            tv_amount_to_pay.setText("Monto total a pagar: S/. 20");
+        }
 
         tv_pick_bank = (TextView) findViewById(R.id.tv_pick_bank);
         et_amount = (EditText) findViewById(R.id.et_amount);
