@@ -154,6 +154,11 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     fragmentTitle = "Cuentas Bancarias";
                     break;
                 case 7:
+                    fragment = new BankAccountFragment();
+                    fragmentDrawableId = R.drawable.ic_bank_account_black;
+                    fragmentTitle = "Cuentas Bancarias";
+                    break;
+                case 8:
                     mPreferencesManager.logout();
                 default:
                     break;
@@ -187,7 +192,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     break;
                 case 5:
                     fragment = new StudentPayCourseFragment();
-                    fragmentDrawableId = R.drawable.ic_course_black;
+                    fragmentDrawableId = R.drawable.ic_pay_course_black;
                     fragmentTitle = "Pagar Curso";
                     break;
                 case 6:

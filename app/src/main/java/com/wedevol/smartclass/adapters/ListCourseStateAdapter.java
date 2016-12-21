@@ -2,6 +2,7 @@ package com.wedevol.smartclass.adapters;
 
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.utils.dialogs.ChangePriceDialogFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolo on 12/15/16.*/
@@ -22,14 +24,22 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
     private final String headerName;
     private final String headerExplanation;
     private final boolean showHourlyRate;
+    private final boolean selectable;
+    private List<Boolean> positionsSelected;
 
-    public ListCourseStateAdapter(Activity context, List<Pair<String,String>> list, String headerName, String headerExplanation, boolean showHourlyRate) {
+    public ListCourseStateAdapter(Activity context, List<Pair<String,String>> list, String headerName,
+                                  String headerExplanation, boolean showHourlyRate, boolean selectable) {
         super();
         this.context = context;
         mItems = list;
         this.headerName = headerName;
         this.headerExplanation = headerExplanation;
         this.showHourlyRate = showHourlyRate;
+        this.selectable = selectable;
+        positionsSelected = new ArrayList<>();
+        for (int i = 0; i<mItems.size(); i++){
+            positionsSelected.add(false);
+        }
     }
 
     @Override
@@ -52,14 +62,14 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int i) {
         if(getItemViewType(i)==0) {
             ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_name.setText(headerName);
             ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_explanation.setText(headerExplanation);
         } else {
             final Pair<String,String> courseAndRate = mItems.get(i-1);
             ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(courseAndRate.first);
-            if(showHourlyRate){
+            if(showHourlyRate) {
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(courseAndRate.second);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
@@ -67,11 +77,27 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
                     public void onClick(View view) {
                         ChangePriceDialogFragment suggestCourseDialogFragment = ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price);
                         suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
-
                     }
                 });
-            }else{
+            } else {
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.GONE);
+            }
+
+            if(selectable){
+                if(!positionsSelected.get(i-1)){
+                    ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                } else {
+                    ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setBackgroundColor(ContextCompat.getColor(context, R.color.light_iron));
+                }
+
+                final int n = i;
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        positionsSelected.set(n-1, !positionsSelected.get(n-1));
+                        notifyItemChanged(n);
+                    }
+                });
             }
         }
     }

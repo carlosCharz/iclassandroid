@@ -48,7 +48,8 @@ public class StudentCoursesFragment extends Fragment{
         RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
         rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                "PAGADO", "Eres un asesor de este curso", Constants.DO_NOT_SHOW_PRICE));
+                "PAGADO", "Eres un alumno de este curso", Constants.DO_NOT_SHOW_COURSE_PRICE,
+                Constants.NOT_SELECTABLE_COURSE));
 
         pairList = new ArrayList<>();
         pairList.add (new Pair<>("Fisica 1",""));
@@ -57,7 +58,8 @@ public class StudentCoursesFragment extends Fragment{
         RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
         rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_PRICE));
+                "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_COURSE_PRICE,
+                Constants.NOT_SELECTABLE_COURSE ));
 
         pairList = new ArrayList<>();
         pairList.add (new Pair<>("Fisica 2",""));
@@ -65,7 +67,8 @@ public class StudentCoursesFragment extends Fragment{
         RecyclerView rv_pending_payment = (RecyclerView) view.findViewById(R.id.rv_pending_payment);
         rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo", Constants.DO_NOT_SHOW_PRICE));
+                "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder pedir asesores", Constants.DO_NOT_SHOW_COURSE_PRICE,
+                Constants.NOT_SELECTABLE_COURSE));
 
         pairList = new ArrayList<>();
         pairList.add (new Pair<>("Matematicas Basicas 1",""));
@@ -75,7 +78,8 @@ public class StudentCoursesFragment extends Fragment{
         RecyclerView rv_to_validated = (RecyclerView) view.findViewById(R.id.rv_to_validated);
         rv_to_validated.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_to_validated.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                "POR VALIDAR", "Mira tu correo para terminar la verificacion", Constants.DO_NOT_SHOW_PRICE));
+                "POR VALIDAR", "Mira tu correo para terminar la verificacion", Constants.DO_NOT_SHOW_COURSE_PRICE,
+                Constants.NOT_SELECTABLE_COURSE));
     }
 
     private void setActions() {
