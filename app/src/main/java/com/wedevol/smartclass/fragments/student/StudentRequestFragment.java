@@ -9,8 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.adapters.ListRequestsAdapter;
+import com.wedevol.smartclass.adapters.ListLessonsAdapter;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class StudentRequestFragment extends Fragment{
 
         RecyclerView rv_student_requests = (RecyclerView) view.findViewById(R.id.rv_student_requests);
         rv_student_requests.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_student_requests.setAdapter(new ListRequestsAdapter(getActivity(), undefinedClass));
+        rv_student_requests.setAdapter(new ListLessonsAdapter(getActivity(), undefinedClass, Constants.REQUEST_TYPE));
     }
 
     private void setActions() {

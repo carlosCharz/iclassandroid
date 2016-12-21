@@ -10,40 +10,49 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.List;
 
 /** Created by paolo on 12/20/16.*/
-public class ListRequestsAdapter extends RecyclerView.Adapter<ListRequestsAdapter.ViewHolder> {
+public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.ViewHolder> {
     private final List<Lesson> mItems;
     private final Activity context;
+    private final boolean type;
 
-    public ListRequestsAdapter(Activity context, List<Lesson> list) {
+    public ListLessonsAdapter(Activity context, List<Lesson> list, boolean type) {
         super();
         this.context = context;
         mItems = list;
+        this.type = type;
     }
 
     @Override
-    public ListRequestsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ListLessonsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.cardview_student_request, viewGroup, false);
-        return new ListRequestsAdapter.ViewHolder(v);
+        return new ListLessonsAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ListRequestsAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ListLessonsAdapter.ViewHolder viewHolder, int i) {
         final Lesson classy = mItems.get(i);
         viewHolder.tv_request_counsult_data.setText("Richard - IMU - S/.20");
         viewHolder.tv_request_date_time.setText("12/12/16 - 20 a 24 horas");
         viewHolder.tv_counselor_rating.setText("4.7");
 
-        viewHolder.b_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Call web service to cancel it
-            }
-        });
+        if(type == Constants.REQUEST_TYPE){
+            viewHolder.b_cancel.setVisibility(View.VISIBLE);
+            viewHolder.b_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Call web service to cancel it
+                }
+            });
+
+        }else{
+            viewHolder.b_cancel.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -21,6 +21,7 @@ import com.wedevol.smartclass.fragments.counselor.CounselorCounselledFragment;
 import com.wedevol.smartclass.fragments.counselor.CounselorCoursesFragment;
 import com.wedevol.smartclass.fragments.counselor.CounselorDesktopFragment;
 import com.wedevol.smartclass.fragments.counselor.CounselorNotificationsFragment;
+import com.wedevol.smartclass.fragments.counselor.CounselorPayCourseFragment;
 import com.wedevol.smartclass.fragments.counselor.CounselorProfileFragment;
 import com.wedevol.smartclass.fragments.counselor.CounselorScheduleFragment;
 import com.wedevol.smartclass.fragments.student.StudentCounselingFragment;
@@ -149,9 +150,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     fragmentTitle = "Mis Cursos";
                     break;
                 case 6:
-                    fragment = new BankAccountFragment();
-                    fragmentDrawableId = R.drawable.ic_bank_account_black;
-                    fragmentTitle = "Cuentas Bancarias";
+                    fragment = new CounselorPayCourseFragment();
+                    fragmentDrawableId = R.drawable.ic_pay_course_black;
+                    fragmentTitle = "Pagar Curso";
                     break;
                 case 7:
                     fragment = new BankAccountFragment();

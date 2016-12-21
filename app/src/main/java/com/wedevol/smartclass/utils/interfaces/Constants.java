@@ -3,7 +3,10 @@ package com.wedevol.smartclass.utils.interfaces;
 /** Created by paolorossi on 12/8/16.*/
 public interface Constants {
     String USER_PHOTO = "user_photo";
+
     String STUDENT_TYPE = "student_type";
+    boolean REQUEST_TYPE = true;
+    boolean NON_REQUEST_TYPE = false;
 
     //THIS ONES NEED TO BE VERIFIED
     int ERROR_CODE_TOKEN_NO_LONGER_BE_REFRESHED = 403;
@@ -28,4 +31,5 @@ public interface Constants {
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
     boolean SELECTABLE_COURSE = true;
     boolean NOT_SELECTABLE_COURSE = false;
+
 }
