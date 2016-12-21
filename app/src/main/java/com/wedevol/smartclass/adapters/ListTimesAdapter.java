@@ -36,7 +36,7 @@ public class ListTimesAdapter extends RecyclerView.Adapter<ListTimesAdapter.View
     @Override
     public ListTimesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_times, viewGroup, false);
+                .inflate(R.layout.cardview_time, viewGroup, false);
         return new ListTimesAdapter.ViewHolder(v);
     }
 

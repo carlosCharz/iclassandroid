@@ -30,7 +30,7 @@ public class ListDatesAdapter extends RecyclerView.Adapter<ListDatesAdapter.View
     @Override
     public ListDatesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_dates, viewGroup, false);
+                .inflate(R.layout.cardview_date, viewGroup, false);
         return new ListDatesAdapter.ViewHolder(v);
     }
 

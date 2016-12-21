@@ -29,7 +29,7 @@ public class ListCoursesAdapter  extends RecyclerView.Adapter<ListCoursesAdapter
     @Override
     public ListCoursesAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_courses, viewGroup, false);
+                .inflate(R.layout.cardview_course, viewGroup, false);
         return new ListCoursesAdapter.ViewHolder(v);
     }
 
