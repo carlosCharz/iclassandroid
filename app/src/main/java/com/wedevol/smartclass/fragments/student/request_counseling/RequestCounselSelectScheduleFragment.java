@@ -1,12 +1,12 @@
 package com.wedevol.smartclass.fragments.student.request_counseling;
 
 import android.app.Activity;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
@@ -22,11 +21,11 @@ import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListTimesAdapter;
 import com.wedevol.smartclass.utils.UtilMethods;
+import com.wedevol.smartclass.utils.dialogs.TimePickDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
@@ -72,8 +71,12 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Horario");
 
         tv_pick_date = (TextView) view.findViewById(R.id.tv_pick_date);
-        et_begin_time = (EditText) view.findViewById(R.id.et_begin_time) ;
-        et_end_time = (EditText) view.findViewById(R.id.et_end_time) ;
+        et_begin_time = (EditText) view.findViewById(R.id.et_begin_time);
+        et_begin_time.setInputType(InputType.TYPE_NULL);
+
+        et_end_time = (EditText) view.findViewById(R.id.et_end_time);
+        et_end_time.setInputType(InputType.TYPE_NULL);
+
         b_next = (Button) view.findViewById(R.id.b_next);
         rv_available_hours = (RecyclerView) view.findViewById(R.id.rv_available_hours);
 
@@ -121,19 +124,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        UtilMethods.deactivateSoftKeyboard(view, getActivity());
-                        Calendar mcurrentTime = Calendar.getInstance();
-                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                        int minute = mcurrentTime.get(Calendar.MINUTE);
-                        TimePickerDialog mTimePicker;
-                        mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                et_begin_time.setText(""+selectedHour);
-                            }
-                        }, hour, minute, true);//Yes 24 hour time
-                        mTimePicker.setTitle("Elige el tiempo");
-                        mTimePicker.show();
+                        TimePickDialogFragment timePickDialogFragment = TimePickDialogFragment.newInstance(et_begin_time);
+                        timePickDialogFragment.show(getActivity().getSupportFragmentManager(), "");
                     }
                 }
         );
@@ -149,20 +141,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        UtilMethods.deactivateSoftKeyboard(view, getActivity());
-                        Calendar mcurrentTime = Calendar.getInstance();
-                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                        int minute = mcurrentTime.get(Calendar.MINUTE);
-                        TimePickerDialog mTimePicker;
-                        mTimePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                et_end_time.setText(""+selectedHour);
-                            }
-                        }, hour, minute, true);//Yes 24 hour time
-                        mTimePicker.setTitle("Elige el tiempo");
-                        mTimePicker.show();
-
+                        TimePickDialogFragment timePickDialogFragment = TimePickDialogFragment.newInstance(et_end_time);
+                        timePickDialogFragment.show(getActivity().getSupportFragmentManager(), "");
                     }
                 }
         );
@@ -193,7 +173,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             int beginTime = Integer.parseInt(et_begin_time.getText().toString());
 
             boolean wrong = ((endTime - beginTime) < 0) || (dateDelimiters[0] > beginTime) ||
-                    (dateDelimiters[1] < endTime);
+                    (dateDelimiters[1] < endTime) || (endTime == beginTime);
             if(wrong){
                 return 1;
             }
