@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
-public class CounselorNotificationsFragment extends Fragment {
+public class InstructorNotificationsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,7 @@ public class CounselorNotificationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_counselor_notifications, container, false);
+        View view = inflater.inflate(R.layout.fragment_instructor_notifications, container, false);
         setElements(view);
         setActions();
         return view;

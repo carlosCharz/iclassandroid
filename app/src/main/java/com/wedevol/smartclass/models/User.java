@@ -1,5 +1,7 @@
 package com.wedevol.smartclass.models;
 
+import com.google.gson.Gson;
+
 import java.util.Date;
 
 /** Created by paolorossi on 12/7/16.*/
@@ -173,5 +175,10 @@ public class User {
 
     public void setTotalHours(int totalHours) {
         this.totalHours = totalHours;
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
-public class CounselorScheduleFragment extends Fragment implements ScheduleClickListener {
+public class InstructorScheduleFragment extends Fragment implements ScheduleClickListener {
     private FloatingActionButton fab_edit_schedule;
     private RecyclerView rv_monday_time;
     private RecyclerView rv_tuesday_time;
@@ -39,7 +39,7 @@ public class CounselorScheduleFragment extends Fragment implements ScheduleClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_counselor_schedule, container, false);
+        View view = inflater.inflate(R.layout.fragment_instructor_schedule, container, false);
         setElements(view);
         setActions();
         return view;

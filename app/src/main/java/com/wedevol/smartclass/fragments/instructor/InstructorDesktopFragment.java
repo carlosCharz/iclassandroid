@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
-public class CounselorDesktopFragment extends Fragment {
+public class InstructorDesktopFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class CounselorDesktopFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_counselor_desktop, container, false);
+        View view = inflater.inflate(R.layout.fragment_instructor_desktop, container, false);
         setElements(view);
         setActions();
         return view;

@@ -21,7 +21,7 @@ import java.util.List;
 
 /** Created by paolo on 12/20/16.*/
 
-public class CounselorPayCourseFragment extends Fragment {
+public class InstructorPayCourseFragment extends Fragment {
     private Button b_next;
 
     @Override
@@ -32,7 +32,7 @@ public class CounselorPayCourseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_counselor_pay_course, container, false);
+        View view = inflater.inflate(R.layout.fragment_instructor_pay_course, container, false);
         setElements(view);
         setActions();
         return view;

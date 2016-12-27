@@ -18,12 +18,12 @@ import android.widget.TextView;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.fragments.BankAccountFragment;
 import com.wedevol.smartclass.fragments.instructor.InstructorCounseledFragment;
-import com.wedevol.smartclass.fragments.instructor.CounselorCoursesFragment;
-import com.wedevol.smartclass.fragments.instructor.CounselorDesktopFragment;
-import com.wedevol.smartclass.fragments.instructor.CounselorNotificationsFragment;
-import com.wedevol.smartclass.fragments.instructor.CounselorPayCourseFragment;
-import com.wedevol.smartclass.fragments.instructor.CounselorProfileFragment;
-import com.wedevol.smartclass.fragments.instructor.CounselorScheduleFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorCoursesFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorDesktopFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorNotificationsFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorPayCourseFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorProfileFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorScheduleFragment;
 import com.wedevol.smartclass.fragments.student.StudentCounselingFragment;
 import com.wedevol.smartclass.fragments.student.StudentCoursesFragment;
 import com.wedevol.smartclass.fragments.student.StudentLockerFragment;
@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
             //fragmentTitle = "Mi Escritorio";
         }else{
             if(isInstructor){
-                fragmentTransaction.replace(R.id.main_fragment_container, new CounselorDesktopFragment());
+                fragmentTransaction.replace(R.id.main_fragment_container, new InstructorDesktopFragment());
                 fragmentDrawableId = R.drawable.ic_desktop_black;
                 fragmentTitle = "Home";
                 fragmentTransaction.commit();
@@ -116,22 +116,22 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         if(isInstructor){
             switch (position) {
                 case 0:
-                    fragment = new CounselorDesktopFragment();
+                    fragment = new InstructorDesktopFragment();
                     fragmentDrawableId = R.drawable.ic_desktop_black;
                     fragmentTitle = "Home";
                     break;
                 case 1:
-                    fragment = new CounselorProfileFragment();
+                    fragment = new InstructorProfileFragment();
                     fragmentDrawableId = R.drawable.ic_profile_black;
                     fragmentTitle = mPreferencesManager.getUserInfo().getFullName();
                     break;
                 case 2:
-                    fragment = new CounselorScheduleFragment();
+                    fragment = new InstructorScheduleFragment();
                     fragmentDrawableId = R.drawable.ic_schedule_black;
                     fragmentTitle = "Horario";
                     break;
                 case 3:
-                    fragment = new CounselorNotificationsFragment();
+                    fragment = new InstructorNotificationsFragment();
                     fragmentDrawableId = R.drawable.ic_notification_black;
                     fragmentTitle = "Mis Notificaciones";
                     break;
@@ -141,12 +141,12 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     fragmentTitle = "Mis Asesorías";
                     break;
                 case 5:
-                    fragment = new CounselorCoursesFragment();
+                    fragment = new InstructorCoursesFragment();
                     fragmentDrawableId = R.drawable.ic_course_black;
                     fragmentTitle = "Mis Cursos";
                     break;
                 case 6:
-                    fragment = new CounselorPayCourseFragment();
+                    fragment = new InstructorPayCourseFragment();
                     fragmentDrawableId = R.drawable.ic_pay_course_black;
                     fragmentTitle = "Pagar Curso";
                     break;

@@ -19,7 +19,7 @@ import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
 /** Created by paolorossi on 12/8/16.*/
-public class CounselorProfileFragment extends Fragment{
+public class InstructorProfileFragment extends Fragment{
     FloatingActionButton fab_edit_profile;
 
     @Override
@@ -30,7 +30,7 @@ public class CounselorProfileFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_counselor_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_instructor_profile, container, false);
         setElements(view);
         setActions();
         return view;

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
-public class CounselorCoursesFragment extends Fragment{
+public class InstructorCoursesFragment extends Fragment{
     private Button b_new_counselor_course;
 
     @Override
@@ -31,7 +31,7 @@ public class CounselorCoursesFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_counselor_courses, container, false);
+        View view = inflater.inflate(R.layout.fragment_instructor_courses, container, false);
         setElements(view);
         setActions();
         return view;

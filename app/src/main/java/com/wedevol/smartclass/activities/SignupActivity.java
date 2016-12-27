@@ -19,10 +19,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.soundcloud.android.crop.Crop;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.Instructor;
+import com.wedevol.smartclass.models.Student;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,6 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit.client.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -48,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
     private final int CAMERA_REQUEST_CODE = 1;
     private final int GALLERY_REQUEST_CODE = 2;
     private Activity self;
+    private RestClient restClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +66,8 @@ public class SignupActivity extends AppCompatActivity {
 
     private void setElements() {
         self = this;
+        restClient = new RestClient();
+
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         ImageView iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
         tv_detail_title.setText("Crear cuenta");
@@ -132,8 +141,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!validate()) {
-                    //onSignupFailed();
-                    //return;
+                    return;
                 }
 
                 b_signup.setEnabled(false);
@@ -143,25 +151,74 @@ public class SignupActivity extends AppCompatActivity {
                 progressDialog.setMessage("Creando cuenta ...");
                 progressDialog.show();
 
+                String type = (String) sp_type.getSelectedItem();
+
+                //current attributes
                 String name = et_name.getText().toString();
                 String lastName = et_lastname.getText().toString();
                 String phone = et_phone.getText().toString();
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
-                // TODO: Implement your own signup logic here
+                if(type.equals("Alumno")){
+                    Student student = new Student();
+                    student.setFirstname(name);
+                    student.setLastname(lastName);
+                    student.setPhone(phone);
+                    student.setEmail(email);
+                    student.setPassword(password);
 
-                new android.os.Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        b_signup.setEnabled(true);
-                        setResult(RESULT_OK, null);
-                        finish();
-                        //onSignupFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 1000);
+                    /* student only attributes
+                    birthday = 2016-12-27T14:44:28.186Z",
+                    gender = "string",
+                    profilePictureUrl = "string",
+                    university = "string"
+                    */
+
+                    //missing attributes:
+                    /* id should not be send
+                    placeOptions = []
+                    rating = 0
+                    level = 0
+                    totalHours = 0*/
+
+                    restClient.getWebservices().newStudent("", student.toJson(), new IClassCallback<JsonObject>(self){
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            b_signup.setEnabled(true);
+                            setResult(RESULT_OK, null);
+                            finish();
+                            progressDialog.dismiss();
+                        }
+                    });
+                }else{
+                    Instructor instructor = new Instructor();
+                    instructor.setFirstname(name);
+                    instructor.setLastname(lastName);
+                    instructor.setPhone(phone);
+                    instructor.setEmail(email);
+                    instructor.setPassword(password);
+
+                    //missing attributes:
+                    /*
+                    id should not be send
+                    placeOptions = []
+                    rating = 0
+                    level = 0
+                    totalHours = 0*/
+
+                    restClient.getWebservices().newInstructor("", instructor.toJson(), new IClassCallback<JsonObject>(self){
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            b_signup.setEnabled(true);
+                            setResult(RESULT_OK, null);
+                            finish();
+                            progressDialog.dismiss();
+                        }
+                    });
+                }
             }
         });
 
@@ -182,6 +239,10 @@ public class SignupActivity extends AppCompatActivity {
         String phone = et_phone.getText().toString();
         String email = et_email.getText().toString();
         String password = et_password.getText().toString();
+
+        if(sp_type.getSelectedItem().equals("¿Alumno o asesor?")){
+            valid = false;
+        }
 
         if (name.isEmpty() || name.length() < 3) {
             et_name.setError("por lo menos 3 caracteres");

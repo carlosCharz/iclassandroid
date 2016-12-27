@@ -61,7 +61,7 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
     @Override
     public ListNotificationsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_counselor_notification, viewGroup, false);
+                .inflate(R.layout.cardview_instructor_notification, viewGroup, false);
         return new ListNotificationsAdapter.ViewHolder(v);
     }
 
