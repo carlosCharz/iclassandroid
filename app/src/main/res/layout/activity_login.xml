@@ -20,6 +20,15 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/iclass_logo_content_description" />
 
+        <TextView
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="iClass"/>
+
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

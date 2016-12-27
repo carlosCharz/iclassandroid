@@ -34,6 +34,9 @@
 
         <TextView
             android:id="@+id/tv_pick_date"
+            android:background="@drawable/custom_combo_background"
+            android:textSize="18sp"
+            android:hint="Horario"
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

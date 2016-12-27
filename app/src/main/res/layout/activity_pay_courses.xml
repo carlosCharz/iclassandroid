@@ -33,6 +33,7 @@
                 android:text="Monto total a pagar: S/. 10"/>
 
             <TextView
+                android:background="@drawable/custom_combo_background"
                 android:textSize="18sp"
                 android:hint="Banco"
                 android:layout_marginTop="40dp"

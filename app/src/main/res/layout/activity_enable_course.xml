@@ -24,6 +24,9 @@
                 android:text="Selecciona el curso en el que quieres dictar asesoría"/>
 
             <TextView
+                android:textSize="18sp"
+                android:hint="Curso"
+                android:background="@drawable/custom_combo_background"
                 android:layout_marginTop="30dp"
                 android:id="@+id/tv_pick_course"
                 android:layout_weight="0.25"
