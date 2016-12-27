@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.activities.counselor;
+package com.wedevol.smartclass.activities.instructor;
 
 import android.app.Activity;
 import android.content.Intent;

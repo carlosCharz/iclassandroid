@@ -35,10 +35,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.ListDatesActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.counselor.CreateScheduleActivity"
+        <activity android:name=".activities.instructor.CreateScheduleActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.counselor.EnableCourseActivity"
+        <activity android:name=".activities.instructor.EnableCourseActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.PayCoursesActivity"
             android:screenOrientation="portrait"/>

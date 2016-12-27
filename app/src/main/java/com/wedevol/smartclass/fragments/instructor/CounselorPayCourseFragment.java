@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.fragments.counselor;
+package com.wedevol.smartclass.fragments.instructor;
 
 import android.content.Intent;
 import android.os.Bundle;

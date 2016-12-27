@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.models.Student;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
@@ -45,7 +46,7 @@ public class StudentProfileFragment extends Fragment{
     }
 
     private void setElements(View view){
-        Student student = new Student();
+        Student student = (Student) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
         iv_user_profile_photo = (ImageView)  view.findViewById(R.id.iv_user_profile_photo);
         tv_student_level = (TextView) view.findViewById(R.id.tv_student_level);
@@ -58,26 +59,15 @@ public class StudentProfileFragment extends Fragment{
         tv_student_profile_time = (TextView) view.findViewById(R.id.tv_student_profile_time);
         fab_edit_profile = (FloatingActionButton) view.findViewById(R.id.fab_edit_profile);
 
-
-        //TODO this is the setter for the student with its view
-        //TODO have to be integrated with retrofit
-        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-
-        //student.getLessons().size() + " cursos"
-        tv_student_level.setText("Nivel 1");
-        //(int) student.getRating()
-        pb_student_progress.setProgress(45);
-        //student.getTotalHours() + " hrs"
-        tv_student_counselled_time.setText("0 hrs");
+        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, student.getProfilePictureUrl(), Constants.USER_PHOTO);
+        tv_student_level.setText("Nivel "+ student.getLevel());
+        pb_student_progress.setProgress(((Double)student.getRating()).intValue());
+        tv_student_counselled_time.setText(student.getTotalHours() + " hrs");
         tv_student_profile_type.setText("Alumno");
-        //student.getPhone()
-        tv_student_profile_number.setText("99695670");
-        //student.getEmail()
-        tv_student_profile_email.setText("diagonal_zero@hotmail.com");
-        //student.getLessons().size() + " cursos"
-        tv_student_profile_courses_taken.setText("0 cursos");
-        //student.getTotalHours() + " hrs"
-        tv_student_profile_time.setText("0 hrs");
+        tv_student_profile_number.setText(student.getPhone());
+        tv_student_profile_email.setText(student.getEmail());
+        tv_student_profile_courses_taken.setText(student.getCourses().size()+" cursos");
+        tv_student_profile_time.setText(student.getTotalHours() + " hrs");
     }
 
     private void setActions() {

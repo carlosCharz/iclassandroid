@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.fragments.counselor;
+package com.wedevol.smartclass.fragments.instructor;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.counselor.CreateScheduleActivity;
+import com.wedevol.smartclass.activities.instructor.CreateScheduleActivity;
 import com.wedevol.smartclass.adapters.ListScheduleTimeWindowAdapter;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;

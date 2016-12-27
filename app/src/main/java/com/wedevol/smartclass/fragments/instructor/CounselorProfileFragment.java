@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.fragments.counselor;
+package com.wedevol.smartclass.fragments.instructor;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
-import com.wedevol.smartclass.models.Student;
+import com.wedevol.smartclass.models.Instructor;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
@@ -36,7 +37,7 @@ public class CounselorProfileFragment extends Fragment{
     }
 
     private void setElements(View view){
-        Student student = new Student();
+        Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
         ImageView iv_user_profile_photo = (ImageView)  view.findViewById(R.id.iv_user_profile_photo);
         TextView tv_counselor_level = (TextView) view.findViewById(R.id.tv_counselor_level);
@@ -51,34 +52,17 @@ public class CounselorProfileFragment extends Fragment{
         TextView tv_counselor_profile_time_teaching = (TextView) view.findViewById(R.id.tv_counselor_profile_time_teaching);
         fab_edit_profile = (FloatingActionButton) view.findViewById(R.id.fab_edit_profile);
 
-        tv_counselor_rating_number.setText("4.7");
+        tv_counselor_rating_number.setText(""+ instructor.getRating());
 
-        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-        //student.getLessons().size() + " cursos"
-        tv_counselor_level.setText("Nivel 1");
-        //(int) student.getRating()
-        pb_counselor_progress.setProgress(45);
-        //student.getTotalHours() + " hrs"
-        tv_counselor_counseling_time.setText("50 hrs");
-
-
-        //TODO this is the setter for the student with its view
-        //TODO have to be integrated with retrofit
-        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-
-        //(int) student.getRating()
-        pb_counselor_progress.setProgress(45);
-        //student.getTotalHours() + " hrs"
-        tv_counselor_counseling_time.setText("50 hrs");
+        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
+        tv_counselor_level.setText("Nivel "+ instructor.getLevel());
+        pb_counselor_progress.setProgress(((Double) instructor.getRating()).intValue());
+        tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         tv_counselor_profile_type.setText("Instructor");
-        //student.getPhone()
-        tv_counselor_profile_number.setText("99695670");
-        //student.getEmail()
-        tv_counselor_profile_email.setText("diagonal_zero@hotmail.com");
-        //student.getLessons().size() + " cursos"
-        tv_counselor_profile_courses_afilliated.setText("20 cursos");
-        //student.getTotalHours() + " hrs"
-        tv_counselor_profile_time_teaching.setText("50 hrs");
+        tv_counselor_profile_number.setText(instructor.getPhone());
+        tv_counselor_profile_email.setText(instructor.getEmail());
+        tv_counselor_profile_courses_afilliated.setText(instructor.getEnrolledCourses().size()+" cursos");
+        tv_counselor_profile_time_teaching.setText(instructor.getTotalHours() + " hrs");
     }
 
     private void setActions() {

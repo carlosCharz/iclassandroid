@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.fragments.counselor;
+package com.wedevol.smartclass.fragments.instructor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.counselor.EnableCourseActivity;
+import com.wedevol.smartclass.activities.instructor.EnableCourseActivity;
 import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 

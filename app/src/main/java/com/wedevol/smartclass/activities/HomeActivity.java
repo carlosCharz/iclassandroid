@@ -17,13 +17,13 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.fragments.BankAccountFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorCounseledFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorCoursesFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorDesktopFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorNotificationsFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorPayCourseFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorProfileFragment;
-import com.wedevol.smartclass.fragments.counselor.CounselorScheduleFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorCounseledFragment;
+import com.wedevol.smartclass.fragments.instructor.CounselorCoursesFragment;
+import com.wedevol.smartclass.fragments.instructor.CounselorDesktopFragment;
+import com.wedevol.smartclass.fragments.instructor.CounselorNotificationsFragment;
+import com.wedevol.smartclass.fragments.instructor.CounselorPayCourseFragment;
+import com.wedevol.smartclass.fragments.instructor.CounselorProfileFragment;
+import com.wedevol.smartclass.fragments.instructor.CounselorScheduleFragment;
 import com.wedevol.smartclass.fragments.student.StudentCounselingFragment;
 import com.wedevol.smartclass.fragments.student.StudentCoursesFragment;
 import com.wedevol.smartclass.fragments.student.StudentLockerFragment;
@@ -55,7 +55,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private void setupElements(Bundle savedInstanceState) {
         //initializing retrofit, PreferencesManager, User
-
         mPreferencesManager = SharedPreferencesManager.getInstance(this);
         isInstructor = mPreferencesManager.getUserType();
         //Initializing fragments, toolbar and navDrawer
@@ -124,7 +123,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 case 1:
                     fragment = new CounselorProfileFragment();
                     fragmentDrawableId = R.drawable.ic_profile_black;
-                    fragmentTitle = "Luis Becerra";
+                    fragmentTitle = mPreferencesManager.getUserInfo().getFullName();
                     break;
                 case 2:
                     fragment = new CounselorScheduleFragment();
@@ -137,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     fragmentTitle = "Mis Notificaciones";
                     break;
                 case 4:
-                    fragment = new CounselorCounseledFragment();
+                    fragment = new InstructorCounseledFragment();
                     fragmentDrawableId = R.drawable.ic_counsel_black;
                     fragmentTitle = "Mis Asesorías";
                     break;
@@ -171,7 +170,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 case 1:
                     fragment = new StudentProfileFragment();
                     fragmentDrawableId = R.drawable.ic_profile_black;
-                    fragmentTitle = "Paolo Rossi";
+                    fragmentTitle = mPreferencesManager.getUserInfo().getFullName();
                     break;
                 case 2:
                     fragment = new StudentCoursesFragment();
