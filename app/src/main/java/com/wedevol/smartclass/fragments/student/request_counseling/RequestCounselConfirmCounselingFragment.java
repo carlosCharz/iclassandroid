@@ -37,7 +37,7 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
     }
 
     private void setupElements(View view) {
-        ((RequestCounselActivity)getActivity()).setToolbarTitle("Confirmar Asesoria");
+        ((RequestCounselActivity)getActivity()).setToolbarTitle("Confirmar Asesoría");
         b_finish = (Button) view.findViewById(R.id.b_finish);
 
         TextView tv_counsellor_name = (TextView) view.findViewById(R.id.tv_selected_counsellor_name);

@@ -48,6 +48,6 @@
             android:id="@+id/b_new_course"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nuevo Curso con Asesoria"/>
+            android:text="Nuevo Curso con Asesoría"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -85,7 +85,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
                     if(validated==1){
                         Toast.makeText(self, "Debes reservar por lo menos 1 hora. La hora de inicio tiene que ser menor que la hora de termino.", Toast.LENGTH_SHORT).show();
                     }else if (validated==0){
-                        Toast.makeText(self, "Debe delimitar su tiempo de asesoria.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(self, "Debe delimitar su tiempo de asesoría.", Toast.LENGTH_SHORT).show();
                     }
                     return;
                 }

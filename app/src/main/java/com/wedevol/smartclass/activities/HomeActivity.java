@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 case 4:
                     fragment = new CounselorCounseledFragment();
                     fragmentDrawableId = R.drawable.ic_counsel_black;
-                    fragmentTitle = "Mis Asesorias";
+                    fragmentTitle = "Mis Asesorías";
                     break;
                 case 5:
                     fragment = new CounselorCoursesFragment();
@@ -189,7 +189,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 case 4:
                     fragment = new StudentCounselingFragment();
                     fragmentDrawableId = R.drawable.ic_counsel_black;
-                    fragmentTitle = "Mis Asesorias";
+                    fragmentTitle = "Mis Asesorías";
                     break;
                 case 5:
                     fragment = new StudentPayCourseFragment();

@@ -14,7 +14,7 @@
             android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selecciona los cursos por los cuales has realizado un deposito o una transferencia a la cuenta"/>
+            android:text="Selecciona los cursos por los cuales has realizado un depósito o una transferencia a la cuenta"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_verify_payment"

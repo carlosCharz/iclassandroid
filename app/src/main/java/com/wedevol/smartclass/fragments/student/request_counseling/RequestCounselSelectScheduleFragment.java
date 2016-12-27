@@ -106,7 +106,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                     if(validated==1){
                         Toast.makeText(getActivity(), "Debes reservar por lo menos 1 hora. La hora de inicio tiene que ser menor que la hora de termino.", Toast.LENGTH_SHORT).show();
                     }else if (validated==0){
-                        Toast.makeText(getActivity(), "Debe delimitar su tiempo de asesoria.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Debe delimitar su tiempo de asesoría.", Toast.LENGTH_SHORT).show();
                     }
                     return;
                 }

@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Historial de asesorias"
+            android:text="Historial de asesorías"
             android:layout_marginBottom="20dp"/>
 
         <android.support.v7.widget.RecyclerView

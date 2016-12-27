@@ -42,9 +42,9 @@ public class CounselorCoursesFragment extends Fragment{
         b_new_counselor_course = (Button) view.findViewById(R.id.b_new_counselor_course);
 
         List<Pair<String,String>> pairList = new ArrayList<>();
-        pairList.add (new Pair<>("Calculo 1","S/.15"));
-        pairList.add (new Pair<>("Calculo 2","S/.20"));
-        pairList.add (new Pair<>("Calculo 3","S/.25"));
+        pairList.add (new Pair<>("Cálculo 1","S/.15"));
+        pairList.add (new Pair<>("Cálculo 2","S/.20"));
+        pairList.add (new Pair<>("Cálculo 3","S/.25"));
 
         RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
         rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));

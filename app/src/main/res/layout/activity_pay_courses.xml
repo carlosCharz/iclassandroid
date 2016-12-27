@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingrese la informacion correspondiente al deposito"/>
+                android:text="Ingrese la informacion correspondiente al depósito"/>
 
             <TextView
                 android:id="@+id/tv_amount_to_pay"
@@ -81,7 +81,7 @@
                     android:id="@+id/et_transaction_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Numero de Transaccion"
+                    android:hint="Numero de Transacción"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="* El sistemas se demora 24 horas en confirmar el deposito luego de registrado en la aplicacion"/>
+                android:text="* El sistemas se demora 24 horas en confirmar el depósito luego de registrado en la aplicacion"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

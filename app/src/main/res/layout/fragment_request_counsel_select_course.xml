@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Escoge el curso en el que deseas asesoria"/>
+        android:text="Escoge el curso en el que deseas asesoría"/>
 
     <TextView
         android:id="@+id/tv_pick_course"

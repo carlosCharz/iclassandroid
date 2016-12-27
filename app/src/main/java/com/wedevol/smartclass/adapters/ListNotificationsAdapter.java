@@ -69,7 +69,7 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
     public void onBindViewHolder(final ListNotificationsAdapter.ViewHolder viewHolder, int i) {
         final Lesson classy = mItems.get(i);
 
-        viewHolder.tv_notification_counsult_data.setText("Alex - Calculo 1 - S./ 18");
+        viewHolder.tv_notification_counsult_data.setText("Alex - Cálculo 1 - S./ 18");
         viewHolder.tv_notification_date_time.setText("Jueves 16/10 de 2 a 4pm");
         synchronized (viewHoldersList) {
             Calendar calendar = Calendar.getInstance();

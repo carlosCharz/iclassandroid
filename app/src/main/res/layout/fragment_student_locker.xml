@@ -75,7 +75,7 @@
                 android:id="@+id/tv_announcement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Proximas asesorias"
+                android:text="Proximas asesorías"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp"/>
 

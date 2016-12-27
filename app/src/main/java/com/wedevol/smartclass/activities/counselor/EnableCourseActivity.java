@@ -50,7 +50,7 @@ public class EnableCourseActivity extends AppCompatActivity{
         tv_detail_title.setText("Habilitar Curso");
 
         if(studentType){
-            tv_course_selection_option.setText("Selecciona el curso en el que desees buscar asesorias.");
+            tv_course_selection_option.setText("Selecciona el curso en el que desees buscar asesorías.");
         }
     }
 

@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Asesorias pendientes de confirmacion"
+            android:text="Asesorías pendientes de confirmacion"
             android:layout_marginBottom="20dp"/>
 
         <android.support.v7.widget.RecyclerView
@@ -28,6 +28,6 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="* Cancelar una asesoria con menos de 24 horas de anticipacion conlleva a una penalizacion de XX puntos. Por favor tomar en consideracion."/>
+            android:text="* Cancelar una asesoría con menos de 24 horas de anticipacion conlleva a una penalizacion de XX puntos. Por favor tomar en consideracion."/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
