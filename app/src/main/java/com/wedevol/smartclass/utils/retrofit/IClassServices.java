@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import retrofit.Callback;
+import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -28,9 +29,6 @@ public interface IClassServices {
     void getCourse(@Header("Authorization") String authorization, @Query("courseId") int courseId, Callback<JsonObject> callback);
     @GET(Urls.ALL_COURSES)
     void getAllCourses(@Header("Authorization") String authorization, Callback<JsonArray> callback);
-    @FormUrlEncoded
-    @POST(Urls.NEW_COURSE)
-    void newCourse(@Header("Authorization") String authorization, @Field("course") String course, Callback<JsonObject> callback);
 
     /**Students*/
     @GET(Urls.ONE_STUDENT)
@@ -49,4 +47,20 @@ public interface IClassServices {
     @FormUrlEncoded
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Field("instructor") String instructor, Callback<JsonObject> callback);
+
+    /**Student enrollment */
+    @GET(Urls.GET_STUDENT_COURSES)
+    void getStudentCourses(@Header("Authorization") String authorization, @Path("studentId") int studentId, Callback<JsonObject> callback);
+
+    /**Schedule */
+    @POST(Urls.NEW_SCHEDULE)
+    void newSchedule(@Header("Authorization") String authorization, @Field("schedule") String schedule, Callback<JsonObject> callback);
+
+    @DELETE(Urls.DELETE_SCHEDULE)
+    void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId, Callback<JsonObject> callback);
+
+    /**Instructor enrollment */
+    @GET(Urls.ALL_INSTRUCTOR_COURSES)
+    void getAllInstructorCourses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId, Callback<JsonObject> callback);
+
 }

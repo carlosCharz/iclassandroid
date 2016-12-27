@@ -1,7 +1,5 @@
 package com.wedevol.smartclass.models;
 
-import com.google.gson.JsonObject;
-
 import java.util.Date;
 
 /** Created by paolorossi on 12/7/16.*/
@@ -42,10 +40,6 @@ public class User {
         this.level = level;
         this.totalHours = totalHours;
 
-    }
-
-    public static User parseUser(JsonObject json) {
-        return null;
     }
 
     public int getId() {

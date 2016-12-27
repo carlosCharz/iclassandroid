@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.wedevol.smartclass.activities.LoginActivity;
+import com.wedevol.smartclass.models.Instructor;
+import com.wedevol.smartclass.models.Student;
 import com.wedevol.smartclass.models.User;
 
 /**
@@ -43,7 +45,7 @@ public class SharedPreferencesManager {
 
     public void saveUser(String token, String jsonUserData){
         SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(TOKEN_USER, token);
+        //editor.putString(TOKEN_USER, token);
         editor.putString(CURRENT_USER, jsonUserData);
         editor.apply();
     }
@@ -75,7 +77,11 @@ public class SharedPreferencesManager {
 
         if(!userJson.isEmpty()){
             JsonObject json = (JsonObject)jsonParser.parse(userJson);
-            return  User.parseUser(json);
+            if(getUserType()){//true = isInstructor
+                return  Instructor.parseInstructor(json);
+            }else{
+                return  Student.parseStudent(json);
+            }
         }else{
             return  null;
         }

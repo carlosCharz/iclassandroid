@@ -30,16 +30,13 @@ import com.wedevol.smartclass.fragments.student.StudentLockerFragment;
 import com.wedevol.smartclass.fragments.student.StudentPayCourseFragment;
 import com.wedevol.smartclass.fragments.student.StudentProfileFragment;
 import com.wedevol.smartclass.fragments.student.StudentRequestFragment;
-import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.navigation.FragmentDrawer;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
-import com.wedevol.smartclass.utils.interfaces.Constants;
 
 /* Created by paolorossi on 12/7/16. */
 public class HomeActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
     private DrawerLayout mDrawerLayout;
     private SharedPreferencesManager mPreferencesManager;
-    private User currentUser;
     private ImageView iv_toolbar_actual_screen;
     private int fragmentDrawableId;
     private boolean isInstructor;
@@ -60,7 +57,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         //initializing retrofit, PreferencesManager, User
 
         mPreferencesManager = SharedPreferencesManager.getInstance(this);
-        currentUser = mPreferencesManager.getUserInfo();
+        isInstructor = mPreferencesManager.getUserType();
         //Initializing fragments, toolbar and navDrawer
         rl_activity_main = (RelativeLayout) findViewById(R.id.rl_activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         setSupportActionBar(toolbar);
 
-        isInstructor = getIntent().getBooleanExtra(Constants.BUNDLE_INSTRUCTOR, false);
+        //isInstructor = getIntent().getBooleanExtra(Constants.BUNDLE_INSTRUCTOR, false);
 
         //TODO we should validate the kind of user here, given the type of user given at login
         FragmentManager fragmentManager = getSupportFragmentManager();

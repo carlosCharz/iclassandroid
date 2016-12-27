@@ -27,14 +27,10 @@ public class FragmentDrawer extends Fragment {
     private RecyclerView recyclerView;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    private NavigationDrawerAdapter adapter;
     private View containerView;
     private FragmentDrawerListener drawerListener;
-    private TextView tv_user_name;
-    private ImageView iv_user_image;
     private View view;
     private SharedPreferencesManager mPreferencesManager;
-    private User currentUser;
     private boolean isInstructor;
 
     public FragmentDrawer() {
@@ -54,9 +50,8 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isInstructor = getArguments().getBoolean("isInstructor");
         mPreferencesManager = SharedPreferencesManager.getInstance(getActivity());
-
+        isInstructor = mPreferencesManager.getUserType();
     }
 
     @Override
@@ -69,15 +64,14 @@ public class FragmentDrawer extends Fragment {
     }
 
     public void setupElements(){
-        currentUser = mPreferencesManager.getUserInfo();
+        TextView tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
+        ImageView iv_user_image = (ImageView) view.findViewById(R.id.iv_user_image);
+        User user = mPreferencesManager.getUserInfo();
+        tv_user_name.setText(user.getReducedName(22));
+        UtilMethods.setPhoto(getActivity(), iv_user_image, user.getProfilePictureUrl(),
+                Constants.USER_PHOTO);
 
-        tv_user_name = (TextView) view.findViewById(R.id.tv_user_name);
         recyclerView = (RecyclerView) view.findViewById(R.id.drawerList);
-        iv_user_image = (ImageView) view.findViewById(R.id.iv_user_image);
-
-        //tv_user_name.setText("Placeholder on FragDrawer"/*currentUser.getFullName()*/);
-        //mPreferencesManager.getUserInfo().getProfilePictureUrl() should go instead of ""
-        UtilMethods.setPhoto(getActivity(), iv_user_image, "", Constants.USER_PHOTO);
         setupRecyclerView();
     }
 
@@ -112,7 +106,7 @@ public class FragmentDrawer extends Fragment {
     }
 
     private void setupRecyclerView(){
-        adapter = new NavigationDrawerAdapter(getActivity(), getData());
+        NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

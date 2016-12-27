@@ -53,7 +53,7 @@ public class Instructor extends User {
     }
 
     //TODO: json builder
-    public static class Builder {
+    private static class Builder {
         private int mId;
         private String mFirstName;
         private String mLastName;
@@ -65,50 +65,51 @@ public class Instructor extends User {
         private int mLevel;
         private int mTotalHours;
 
-        public Builder(int id) {
+        Builder(int id) {
             mId = id;
         }
 
-        public Builder firstName(String firstName) {
+        Builder firstName(String firstName) {
             mFirstName = firstName;
             return this;
         }
 
-        public Builder lastName(String lastName) {
+        Builder lastName(String lastName) {
             mLastName = lastName;
             return this;
         }
 
-        public Builder phone(String firstName) {
+        Builder phone(String firstName) {
             mPhone = firstName;
             return this;
         }
 
-        public Builder email(String email) {
+        Builder email(String email) {
             mEmail = email;
             return this;
         }
-        public Builder password(String password) {
+
+        Builder password(String password) {
             mPassword = password;
             return this;
         }
 
-        public Builder placeOptions(String placeOptions) {
+        Builder placeOptions(String placeOptions) {
             mPlaceOptions = placeOptions;
             return this;
         }
 
-        public Builder rating(double rating) {
+        Builder rating(double rating) {
             mRating = rating;
             return this;
         }
 
-        public Builder level(int level) {
+        Builder level(int level) {
             mLevel = level;
             return this;
         }
 
-        public Builder totalHours(int totalHours) {
+        Builder totalHours(int totalHours) {
             mTotalHours = totalHours;
             return this;
         }
@@ -131,44 +132,44 @@ public class Instructor extends User {
     }
 
     public static Instructor parseInstructor(JsonObject responseObject) {
-        Builder cityBuilder;
-        cityBuilder = new Builder(responseObject.get("id").getAsInt());
+        Builder instructorBuilder;
+        instructorBuilder = new Builder(responseObject.get("id").getAsInt());
         if (responseObject.has("firstName") && !responseObject.get("firstName").isJsonNull()) {
-            cityBuilder.firstName(responseObject.get("firstName").getAsString());
+            instructorBuilder.firstName(responseObject.get("firstName").getAsString());
         }
 
         if (responseObject.has("lastName") && !responseObject.get("lastName").isJsonNull()) {
-            cityBuilder.lastName(responseObject.get("lastName").getAsString());
+            instructorBuilder.lastName(responseObject.get("lastName").getAsString());
         }
 
         if (responseObject.has("phone") && !responseObject.get("phone").isJsonNull()) {
-            cityBuilder.phone(responseObject.get("phone").getAsString());
+            instructorBuilder.phone(responseObject.get("phone").getAsString());
         }
 
         if (responseObject.has("email") && !responseObject.get("email").isJsonNull()) {
-            cityBuilder.email(responseObject.get("email").getAsString());
+            instructorBuilder.email(responseObject.get("email").getAsString());
         }
 
         if (responseObject.has("password") && !responseObject.get("password").isJsonNull()) {
-            cityBuilder.password(responseObject.get("password").getAsString());
+            instructorBuilder.password(responseObject.get("password").getAsString());
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            cityBuilder.placeOptions(responseObject.get("placeOptions").getAsString());
+            instructorBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
-            cityBuilder.rating(responseObject.get("rating").getAsDouble());
+            instructorBuilder.rating(responseObject.get("rating").getAsDouble());
         }
 
         if (responseObject.has("level") && !responseObject.get("level").isJsonNull()) {
-            cityBuilder.level(responseObject.get("level").getAsInt());
+            instructorBuilder.level(responseObject.get("level").getAsInt());
         }
 
         if (responseObject.has("totalHours") && !responseObject.get("totalHours").isJsonNull()) {
-            cityBuilder.totalHours(responseObject.get("totalHours").getAsInt());
+            instructorBuilder.totalHours(responseObject.get("totalHours").getAsInt());
         }
 
-        return cityBuilder.build();
+        return instructorBuilder.build();
     }
 }
