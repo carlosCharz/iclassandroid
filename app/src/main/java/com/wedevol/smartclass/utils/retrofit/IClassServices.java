@@ -33,8 +33,6 @@ public interface IClassServices {
     /**Students*/
     @GET(Urls.ONE_STUDENT)
     void getStudent(@Header("Authorization") String authorization, @Path("userId") int userId, Callback<JsonObject> callback);
-    @GET(Urls.ALL_STUDENTS)
-    void getAllStudents(@Header("Authorization") String authorization, Callback<JsonObject> callback);
     @FormUrlEncoded
     @POST(Urls.NEW_STUDENT)
     void newStudent(@Header("Authorization") String authorization, @Field("student") String student, Callback<JsonObject> callback);
@@ -42,15 +40,13 @@ public interface IClassServices {
     /**Instructors*/
     @GET(Urls.ONE_INSTRUCTOR)
     void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId, Callback<JsonObject> callback);
-    @GET(Urls.ALL_INSTRUCTORS)
-    void getAllInstructors(@Header("Authorization") String authorization, Callback<JsonObject> callback);
     @FormUrlEncoded
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Field("instructor") String instructor, Callback<JsonObject> callback);
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
-    void getStudentCourses(@Header("Authorization") String authorization, @Path("studentId") int studentId, Callback<JsonObject> callback);
+    void getStudentCourses(@Header("Authorization") String authorization, @Path("studentId") int studentId, Callback<JsonArray> callback);
 
     /**Schedule */
     @POST(Urls.NEW_SCHEDULE)
@@ -61,6 +57,5 @@ public interface IClassServices {
 
     /**Instructor enrollment */
     @GET(Urls.ALL_INSTRUCTOR_COURSES)
-    void getAllInstructorCourses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId, Callback<JsonObject> callback);
-
+    void getInstructorCourses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId, Callback<JsonObject> callback);
 }

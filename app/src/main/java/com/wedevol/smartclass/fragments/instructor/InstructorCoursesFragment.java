@@ -11,13 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.activities.instructor.EnableCourseActivity;
 import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/8/16.*/
 public class InstructorCoursesFragment extends Fragment{
@@ -38,8 +44,18 @@ public class InstructorCoursesFragment extends Fragment{
     }
 
     private void setElements(View view) {
+        RestClient restClient = new RestClient(getActivity());
 
         b_new_counselor_course = (Button) view.findViewById(R.id.b_new_counselor_course);
+
+        int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
+        restClient.getWebservices().getStudentCourses("", id, new IClassCallback<JsonArray>(getActivity()){
+            @Override
+            public void success(JsonArray jsonObject, Response response) {
+                super.success(jsonObject, response);
+
+            }
+        });
 
         List<Pair<String,String>> pairList = new ArrayList<>();
         pairList.add (new Pair<>("Cálculo 1","S/.15"));

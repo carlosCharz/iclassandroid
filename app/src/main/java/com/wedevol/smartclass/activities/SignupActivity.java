@@ -97,7 +97,7 @@ public class SignupActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
 
-        List<String> courseArray =  new ArrayList<String>();
+        List<String> courseArray =  new ArrayList<>();
         courseArray.add("Selecciona un curso");
         courseArray.add("Cálculo 1");
         courseArray.add("Cálculo 2");

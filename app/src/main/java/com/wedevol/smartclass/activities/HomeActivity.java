@@ -233,4 +233,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public View getMainLayout(){
         return rl_activity_main;
     }
+
+    public SharedPreferencesManager getmPreferencesManager (){
+        return mPreferencesManager;
+    }
 }
