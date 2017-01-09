@@ -14,10 +14,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
+import com.wedevol.smartclass.models.Schedule;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.dialogs.TimePickDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/14/16.*/
 public class CreateScheduleActivity extends AppCompatActivity {
@@ -29,6 +36,9 @@ public class CreateScheduleActivity extends AppCompatActivity {
     private Activity self;
     private String weekOfDay;
     private ImageView iv_toolbar_back;
+    private RestClient restClient;
+
+    private String choosenWeekDay;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
 
     private void setElements() {
         self = this;
+        restClient = new RestClient(this);
 
         tv_pick_day = (TextView) findViewById(R.id.tv_pick_day);
         et_begin_time = (EditText) findViewById(R.id.et_begin_time);
@@ -89,7 +100,20 @@ public class CreateScheduleActivity extends AppCompatActivity {
                     }
                     return;
                 }
-                self.finish();
+
+                Schedule schedule = new Schedule();
+                schedule.setWeekDay(choosenWeekDay);
+                schedule.setStartTime(Integer.parseInt(et_begin_time.getText().toString()));
+                schedule.setEndTime(Integer.parseInt(et_end_time.getText().toString()));
+                schedule.setInstructorId(SharedPreferencesManager.getInstance(self).getUserInfo().getId());
+
+                restClient.getWebservices().newSchedule("", schedule.toJson(), new IClassCallback<JsonObject>(self) {
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        self.finish();
+                    }
+                });
             }
         });
 
@@ -127,6 +151,31 @@ public class CreateScheduleActivity extends AppCompatActivity {
         if((requestCode == Constants.CHOOSEN_DATE) && (resultCode == Activity.RESULT_OK)) {
             weekOfDay = data.getStringExtra(Constants.BUNDLE_DATE);
             tv_pick_day.setText(weekOfDay);
+
+            switch (weekOfDay){
+                case "Lunes":
+                    choosenWeekDay = "mon";
+                    break;
+                case "Martes":
+                    choosenWeekDay = "tue";
+                    break;
+                case "Miercoles":
+                    choosenWeekDay = "wed";
+                    break;
+                case "Jueves":
+                    choosenWeekDay = "thu";
+                    break;
+                case "Viernes":
+                    choosenWeekDay = "fri";
+                    break;
+                case "Sabado":
+                    choosenWeekDay = "sat";
+                    break;
+                case "Domingo":
+                    choosenWeekDay = "sun";
+                    break;
+            }
+
         }
     }
 

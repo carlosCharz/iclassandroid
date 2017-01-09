@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.models;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /** Created by paolorossi on 12/8/16.*/
@@ -9,6 +10,7 @@ public class Schedule {
     private int startTime;
     private int endTime;
     private String classDate;
+    private int instructorId;
 
     public int getId() {
         return id;
@@ -55,6 +57,19 @@ public class Schedule {
     * */
     public String printSchedule() {
         return startTime + " - " + endTime;
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public void setInstructorId(int instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public int getInstructorId() {
+        return instructorId;
     }
 
     private static class Builder {

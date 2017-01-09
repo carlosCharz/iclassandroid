@@ -60,7 +60,6 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
             ((HeadViewHolder)viewHolder).iv_kill_entire_day.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO call a service and send the entire list to hell. After that need to dissapear this baby
                     itemClickListener.onItemClicked(headerName, -1);
                 }
             });
@@ -96,9 +95,17 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
 
     public void deleteAll() {
         for(int i=0; i<mItems.size();i++){
-            mItems.remove(i);
+            RestClient restClient = new RestClient(context);
+            final int finalI = i;
+            restClient.getWebservices().deleteSchedule("", mItems.get(i).getId(), new IClassCallback<JsonObject>(context) {
+                @Override
+                public void success(JsonObject jsonObject, Response response) {
+                    super.success(jsonObject, response);
+                    mItems.remove(finalI);
+                    notifyDataSetChanged();
+                }
+            });
         }
-        notifyDataSetChanged();
     }
 
     private class HeadViewHolder extends RecyclerView.ViewHolder{

@@ -3,8 +3,6 @@ package com.wedevol.smartclass.utils.retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import java.util.Date;
-
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
@@ -61,12 +59,12 @@ public interface IClassServices {
     @GET(Urls.GET_STUDENT_COURSES)
     void getStudentCourses(@Header("Authorization") String authorization, @Path("studentId") int studentId, Callback<JsonArray> callback);
 
-    /**Schedule */
-    @POST(Urls.NEW_SCHEDULE)
-    void newSchedule(@Header("Authorization") String authorization, @Field("schedule") String schedule, Callback<JsonObject> callback);
-
     @DELETE(Urls.DELETE_SCHEDULE)
     void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId, Callback<JsonObject> callback);
+
+    /**Schedule */
+    @POST(Urls.NEW_SCHEDULE)
+    void newSchedule(@Header("Authorization") String authorization, @Body String schedule, Callback<JsonObject> callback);
 
     @GET(Urls.LIST_INSTRUCTOR_SCHEDULE)
     void listSchedule(@Header("Authorization") String authorization, @Query("instructorId") int instructorId, Callback<JsonArray> callback);
