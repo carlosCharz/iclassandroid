@@ -15,16 +15,12 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
-import com.wedevol.smartclass.adapters.ListPendingCounselsAdapter;
+import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
 import com.wedevol.smartclass.models.Lesson;
-import com.wedevol.smartclass.models.Course;
-import com.wedevol.smartclass.models.Instructor;
-import com.wedevol.smartclass.models.Schedule;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
@@ -70,7 +66,7 @@ public class StudentLockerFragment extends Fragment{
 
         RecyclerView rv_pending_counsels = (RecyclerView) view.findViewById(R.id.rv_pending_counsels);
         rv_pending_counsels.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_pending_counsels.setAdapter(new ListPendingCounselsAdapter(getActivity(), pendingCounsels));
+        rv_pending_counsels.setAdapter(new ListPendingLessonsAdapter(getActivity(), pendingCounsels));
 
         if(pendingCounsels.size() == 0){
             tv_no_counsels.setVisibility(View.VISIBLE);

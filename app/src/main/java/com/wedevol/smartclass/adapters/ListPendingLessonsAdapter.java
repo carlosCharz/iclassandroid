@@ -23,25 +23,25 @@ import com.wedevol.smartclass.utils.PhoneCallListener;
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
-public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPendingCounselsAdapter.ViewHolder> {
+public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingLessonsAdapter.ViewHolder> {
     private final List<Lesson> mItems;
     private final Activity context;
 
-    public ListPendingCounselsAdapter(Activity context, List<Lesson> list) {
+    public ListPendingLessonsAdapter(Activity context, List<Lesson> list) {
         super();
         this.context = context;
         mItems = list;
     }
 
     @Override
-    public ListPendingCounselsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ListPendingLessonsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.cardview_student_pending_counseling, viewGroup, false);
-        return new ListPendingCounselsAdapter.ViewHolder(v);
+        return new ListPendingLessonsAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ListPendingCounselsAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ListPendingLessonsAdapter.ViewHolder viewHolder, int i) {
         final Lesson lesson = mItems.get(i);
 
         viewHolder.tv_pending_counsel_course_counseller.setText(lesson.getCourseName() + " - " +

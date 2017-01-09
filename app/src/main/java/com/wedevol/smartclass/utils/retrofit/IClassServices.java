@@ -72,4 +72,10 @@ public interface IClassServices {
     /**Instructor enrollment */
     @GET(Urls.ALL_INSTRUCTOR_COURSES)
     void getInstructorCourses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId, Callback<JsonObject> callback);
+
+    /**Classes*/
+    @POST(Urls.UPDATE_CLASS)
+    void updateLesson(@Header("Authorization") String authorization, @Body String lesson, Callback<JsonObject> callback);
+
+
 }

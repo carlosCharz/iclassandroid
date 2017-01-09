@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.adapters.ListNotificationsAdapter;
+import com.wedevol.smartclass.adapters.ListRequestedLessonsAdapter;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/8/16.*/
 public class InstructorNotificationsFragment extends Fragment {
@@ -31,20 +37,23 @@ public class InstructorNotificationsFragment extends Fragment {
         return view;
     }
 
-    private void setElements(View view) {
-        List<Lesson> lessonList = new ArrayList<>();
-        Lesson classy = new Lesson();
-        lessonList.add(classy);
-        classy = new Lesson();
-        lessonList.add(classy);
-        classy = new Lesson();
-        lessonList.add(classy);
-        classy = new Lesson();
-        lessonList.add(classy);
+    private void setElements(final View view) {
+        RestClient restClient = new RestClient(getContext());
+        final List<Lesson> requestedlessonList = new ArrayList<>();
 
-        RecyclerView rv_notifications = (RecyclerView) view.findViewById(R.id.rv_notifications);
-        rv_notifications.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_notifications.setAdapter(new ListNotificationsAdapter(getActivity(), lessonList));
+        restClient.getWebservices().homeInstructor("", 1, "8/1/2017", 2, new IClassCallback<JsonArray>(getActivity()) {
+            @Override
+            public void success(JsonArray jsonArray, Response response) {
+                super.success(jsonArray, response);
+                for(JsonElement jsonElement: jsonArray){
+                    requestedlessonList.add(Lesson.parseLesson(jsonElement.getAsJsonObject()));
+                }
+
+                RecyclerView rv_notifications = (RecyclerView) view.findViewById(R.id.rv_notifications);
+                rv_notifications.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv_notifications.setAdapter(new ListRequestedLessonsAdapter(getActivity(), requestedlessonList));
+            }
+        });
     }
 
     private void setActions() {

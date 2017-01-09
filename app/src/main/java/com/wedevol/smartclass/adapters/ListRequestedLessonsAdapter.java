@@ -10,20 +10,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+import retrofit.client.Response;
+
 /** Created by paolo on 12/13/16.*/
-public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotificationsAdapter.ViewHolder> {
+public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListRequestedLessonsAdapter.ViewHolder> {
     private final List<Lesson> mItems;
     private final Activity context;
     private final List<ViewHolder> viewHoldersList;
@@ -50,7 +55,7 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
     }
 
 
-    public ListNotificationsAdapter(Activity context, List<Lesson> list) {
+    public ListRequestedLessonsAdapter(Activity context, List<Lesson> list) {
         super();
         this.context = context;
         mItems = list;
@@ -59,37 +64,55 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
     }
 
     @Override
-    public ListNotificationsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ListRequestedLessonsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.cardview_instructor_notification, viewGroup, false);
-        return new ListNotificationsAdapter.ViewHolder(v);
+        return new ListRequestedLessonsAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ListNotificationsAdapter.ViewHolder viewHolder, int i) {
-        final Lesson classy = mItems.get(i);
+    public void onBindViewHolder(final ListRequestedLessonsAdapter.ViewHolder viewHolder, final int i) {
+        final Lesson lesson = mItems.get(i);
 
-        viewHolder.tv_notification_counsult_data.setText("Alex - Cálculo 1 - S./ 18");
-        viewHolder.tv_notification_date_time.setText("Jueves 16/10 de 2 a 4pm");
+        viewHolder.tv_notification_counsult_data.setText(lesson.getCourseName() + " - " +
+                lesson.getObjectveFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
+        viewHolder.tv_notification_date_time.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
+                " a " + lesson.getEndTime() + " horas");
         synchronized (viewHoldersList) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_MONTH, new Random().nextInt(3));
-            viewHolder.setData(calendar.getTime());
-            //viewHolder.setData(classy.getSchedule().getClassDate());
+            Date date = new Date(Date.parse(lesson.getClassDate()));
+            date.setHours(lesson.getStartTime());
+            viewHolder.setData(date);
             if(viewHoldersList.size()< mItems.size()) viewHoldersList.add(viewHolder);
         }
 
+        final int finalI = i;
         viewHolder.b_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                RestClient restClient = new RestClient(context);
+                lesson.setStatus("confirmed");
+                restClient.getWebservices().updateLesson("", lesson.toJson(), new IClassCallback<JsonObject>(context) {
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        mItems.remove(finalI);
+                    }
+                });
             }
         });
 
         viewHolder.b_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                RestClient restClient = new RestClient(context);
+                lesson.setStatus("rejected");
+                restClient.getWebservices().updateLesson("", lesson.toJson(), new IClassCallback<JsonObject>(context) {
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        mItems.remove(finalI);
+                    }
+                });
             }
         });
     }

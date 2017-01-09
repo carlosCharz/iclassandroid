@@ -32,4 +32,7 @@ interface Urls {
 
     //Instructor enrollment
     String ALL_INSTRUCTOR_COURSES = "/instructors/{instructorId}/courses"; //get
+
+    //Classes
+    String UPDATE_CLASS = "/classes/{classId}"; //update
 }

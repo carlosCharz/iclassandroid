@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.models;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /** Created by paolorossi on 12/8/16.*/
@@ -134,6 +135,11 @@ public class Lesson {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 
     private static class Builder {

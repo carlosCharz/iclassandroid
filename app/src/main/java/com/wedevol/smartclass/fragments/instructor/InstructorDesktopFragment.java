@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.adapters.ListPendingCounselsAdapter;
+import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
 import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -83,7 +83,7 @@ public class InstructorDesktopFragment extends Fragment {
 
                 RecyclerView rv_pending_counselings = (RecyclerView) view.findViewById(R.id.rv_pending_counselings);
                 rv_pending_counselings.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_pending_counselings.setAdapter(new ListPendingCounselsAdapter(getActivity(), pendingCounselleds));
+                rv_pending_counselings.setAdapter(new ListPendingLessonsAdapter(getActivity(), pendingCounselleds));
 
                 if(pendingCounselleds.size() == 0){
                     TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
