@@ -17,7 +17,8 @@ interface Urls {
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post
     String ONE_INSTRUCTOR = "/instructors/{userId}"; //get
-    String ALL_INSTRUCTORS = "/instructors"; //get
+    String HOME_INSTRUCTOR = "/instructors/{instructorId}/classes";//home
+
 
     //Student Enrollment
     String GET_STUDENT_COURSES = "/students/{studentId}/courses"; //get

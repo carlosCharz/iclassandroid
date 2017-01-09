@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.Switch;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_password;
     private Button b_login;
     private Button b_signup;
-    private ToggleButton tb_instructor_student;
+    private Switch s_instructor_student;
     private boolean isInstructor = true;
     private RestClient restClient;
     private Activity self;
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         b_login = (Button) findViewById(R.id.b_login);
         b_signup = (Button) findViewById(R.id.b_signup);
-        tb_instructor_student = (ToggleButton) findViewById(R.id.tb_instructor_student);
+        s_instructor_student = (Switch) findViewById(R.id.s_instructor_student);
     }
 
     private void setActions(){
@@ -97,13 +97,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        tb_instructor_student.setOnClickListener(new View.OnClickListener() {
+        s_instructor_student.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 isInstructor = !isInstructor;
                 String message;
-                if(isInstructor){ message = "Entrando como instructor";} else message = "Entrando como alumno";
-                Toast.makeText(view.getContext(), message, Toast.LENGTH_SHORT).show();
+                if(isInstructor){ message = "Instructor";} else message = "Alumno";
+                s_instructor_student.setText(message);
             }
         });
     }

@@ -42,15 +42,12 @@ public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPending
 
     @Override
     public void onBindViewHolder(final ListPendingCounselsAdapter.ViewHolder viewHolder, int i) {
-        final Lesson classy = mItems.get(i);
-        /*
-        viewHolder.tv_pending_counsel_course_counseller.setText(classy.getCourse().getName() + " - "
-                + classy.getInstructorName().getReducedName(18));
-        viewHolder.tv_pending_counsel_date.setText(""+classy.getClassDate() + " - "
-                + classy.getSchedule().printSchedule());
-        */
-        viewHolder.tv_pending_counsel_course_counseller.setText("IMU - Richard Cancino - S/.20");
-        viewHolder.tv_pending_counsel_date.setText("12/12/16 - 20 a 24 horas");
+        final Lesson lesson = mItems.get(i);
+
+        viewHolder.tv_pending_counsel_course_counseller.setText(lesson.getCourseName() + " - " +
+                lesson.getObjectveFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
+        viewHolder.tv_pending_counsel_date.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
+                        " a " + lesson.getEndTime() + " horas");
 
         viewHolder.iv_call_counseller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +57,11 @@ public class ListPendingCounselsAdapter extends RecyclerView.Adapter<ListPending
                 TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
                 telephonyManager.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:+5199695670"));
+                callIntent.setData(Uri.parse("tel:+51" + lesson.getPhone()));
                 if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 context.startActivity(callIntent);
-
             }
         });
 

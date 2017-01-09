@@ -15,21 +15,24 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListPendingCounselsAdapter;
 import com.wedevol.smartclass.models.Lesson;
-import com.wedevol.smartclass.models.Course;
-import com.wedevol.smartclass.models.Instructor;
-import com.wedevol.smartclass.models.Schedule;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/9/16.*/
 public class InstructorDesktopFragment extends Fragment {
+    RestClient restClient;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +47,9 @@ public class InstructorDesktopFragment extends Fragment {
         return view;
     }
 
-    private void setElements(View view) {
+    private void setElements(final View view) {
+        restClient = new RestClient(getContext());
+
         ImageView iv_user_profile_photo = (ImageView) view.findViewById(R.id.iv_user_profile_photo);
         TextView tv_counselor_level = (TextView) view.findViewById(R.id.tv_counselor_level);
         ProgressBar pb_counselor_progress = (ProgressBar) view.findViewById(R.id.pb_counselor_progress);
@@ -66,21 +71,27 @@ public class InstructorDesktopFragment extends Fragment {
         //student.getTotalHours() + " hrs"
         tv_counselor_counseling_time.setText("50 hrs");
 
-        List<Lesson> pendingCounselleds = new ArrayList<>();
-        pendingCounselleds.add(new Lesson(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounselleds.add(new Lesson(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounselleds.add(new Lesson(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        final List<Lesson> pendingCounselleds = new ArrayList<>();
 
-        TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
+        restClient.getWebservices().homeInstructor("", 1, "8/1/2017", 2, new IClassCallback<JsonArray>(getActivity()) {
+            @Override
+            public void success(JsonArray jsonArray, Response response) {
+                super.success(jsonArray, response);
+                for(JsonElement jsonElement: jsonArray){
+                    pendingCounselleds.add(Lesson.parseLesson(jsonElement.getAsJsonObject()));
+                }
 
-        RecyclerView rv_pending_counselings = (RecyclerView) view.findViewById(R.id.rv_pending_counselings);
-        rv_pending_counselings.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_pending_counselings.setAdapter(new ListPendingCounselsAdapter(getActivity(), pendingCounselleds));
+                RecyclerView rv_pending_counselings = (RecyclerView) view.findViewById(R.id.rv_pending_counselings);
+                rv_pending_counselings.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv_pending_counselings.setAdapter(new ListPendingCounselsAdapter(getActivity(), pendingCounselleds));
 
-        if(pendingCounselleds.size() == 0){
-            tv_no_counselings.setVisibility(View.VISIBLE);
-            rv_pending_counselings.setVisibility(View.GONE);
-        }
+                if(pendingCounselleds.size() == 0){
+                    TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
+                    tv_no_counselings.setVisibility(View.VISIBLE);
+                    rv_pending_counselings.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void setActions() {

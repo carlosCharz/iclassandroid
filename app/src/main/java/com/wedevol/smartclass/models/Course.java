@@ -61,33 +61,33 @@ public class Course {
         this.career = career;
     }
 
-    public static class Builder {
+    static class Builder {
         private int mId;
         private String mName;
         private String mDescription;
         private String mUniversity;
         private String mCareer;
 
-        public Builder(int id) {
+        Builder(int id) {
             mId = id;
         }
 
-        public Course.Builder name(String name) {
+        Course.Builder name(String name) {
             mName = name;
             return this;
         }
 
-        public Course.Builder description(String description) {
+        Course.Builder description(String description) {
             mDescription = description;
             return this;
         }
 
-        public Course.Builder university(String university) {
+        Course.Builder university(String university) {
             mUniversity = university;
             return this;
         }
 
-        public Course.Builder career(String career) {
+        Course.Builder career(String career) {
             mCareer = career;
             return this;
         }
@@ -124,5 +124,4 @@ public class Course {
 
         return courseBuilder.build();
     }
-
 }

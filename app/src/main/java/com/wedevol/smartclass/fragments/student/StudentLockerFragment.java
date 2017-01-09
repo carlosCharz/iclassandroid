@@ -62,9 +62,9 @@ public class StudentLockerFragment extends Fragment{
         tv_student_counselled_time.setText("10 hrs");
 
         List<Lesson> pendingCounsels = new ArrayList<>();
-        pendingCounsels.add(new Lesson(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounsels.add(new Lesson(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        pendingCounsels.add(new Lesson(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        //pendingCounsels.add(new Lesson(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        //pendingCounsels.add(new Lesson(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        //pendingCounsels.add(new Lesson(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
 
         TextView tv_no_counsels = (TextView) view.findViewById(R.id.tv_no_counsels);
 

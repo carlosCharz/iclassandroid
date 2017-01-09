@@ -59,10 +59,15 @@
                 android:hint="@string/et_hint_login_password"/>
         </android.support.design.widget.TextInputLayout>
 
-        <ToggleButton
-            android:id="@+id/tb_instructor_student"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <Switch
+            android:id="@+id/s_instructor_student"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Alumno"
+            android:switchMinWidth="100dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/b_login"

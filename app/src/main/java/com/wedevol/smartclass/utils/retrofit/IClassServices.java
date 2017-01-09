@@ -3,7 +3,10 @@ package com.wedevol.smartclass.utils.retrofit;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.Date;
+
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -26,23 +29,35 @@ public interface IClassServices {
 
     /**Courses*/
     @GET(Urls.ONE_COURSE)
-    void getCourse(@Header("Authorization") String authorization, @Query("courseId") int courseId, Callback<JsonObject> callback);
+    void getCourse(@Header("Authorization") String authorization, @Query("courseId") int courseId,
+                   Callback<JsonObject> callback);
+
     @GET(Urls.ALL_COURSES)
     void getAllCourses(@Header("Authorization") String authorization, Callback<JsonArray> callback);
 
     /**Students*/
     @GET(Urls.ONE_STUDENT)
-    void getStudent(@Header("Authorization") String authorization, @Path("userId") int userId, Callback<JsonObject> callback);
-    @FormUrlEncoded
+    void getStudent(@Header("Authorization") String authorization, @Path("userId") int userId,
+                    Callback<JsonObject> callback);
+
     @POST(Urls.NEW_STUDENT)
-    void newStudent(@Header("Authorization") String authorization, @Field("student") String student, Callback<JsonObject> callback);
+    void newStudent(@Header("Authorization") String authorization, @Body String student,
+                    Callback<JsonObject> callback);
 
     /**Instructors*/
     @GET(Urls.ONE_INSTRUCTOR)
-    void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId, Callback<JsonObject> callback);
-    @FormUrlEncoded
+    void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId,
+                       Callback<JsonObject> callback);
+
     @POST(Urls.NEW_INSTRUCTOR)
-    void newInstructor(@Header("Authorization") String authorization, @Field("instructor") String instructor, Callback<JsonObject> callback);
+    void newInstructor(@Header("Authorization") String authorization, @Body String instructor,
+                       Callback<JsonObject> callback);
+
+    @GET(Urls.HOME_INSTRUCTOR)
+    void homeInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                        @Query("actualDate") String date, @Query("actualTime") int actualTime, Callback<JsonArray> callback);
+
+
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
