@@ -75,7 +75,7 @@ public class ListNotificationsAdapter  extends RecyclerView.Adapter<ListNotifica
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_MONTH, new Random().nextInt(3));
             viewHolder.setData(calendar.getTime());
-            //viewHolder.setData(classy.getSchedule().getDate());
+            //viewHolder.setData(classy.getSchedule().getClassDate());
             if(viewHoldersList.size()< mItems.size()) viewHoldersList.add(viewHolder);
         }
 

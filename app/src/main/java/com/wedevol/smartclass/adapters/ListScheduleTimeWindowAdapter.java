@@ -9,18 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.Schedule;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
 
 import java.util.List;
 
 /** Created by paolo on 12/14/16.*/
 public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
-    private final List<String> mItems;
+    private final List<Schedule> mItems;
     private final Activity context;
     private final String headerName;
     private final ScheduleClickListener itemClickListener;
 
-    public ListScheduleTimeWindowAdapter(Activity context, List<String> list, String headerName, ScheduleClickListener itemClickListener) {
+    public ListScheduleTimeWindowAdapter(Activity context, List<Schedule> list, String headerName, ScheduleClickListener itemClickListener) {
         super();
         this.context = context;
         mItems = list;
@@ -60,8 +61,8 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
             });
         } else {
             final int n = i-1;
-            final String date = mItems.get(i-1);
-            ((ItemViewHolder)viewHolder).tv_time_in_day.setText(date);
+            final Schedule schedule = mItems.get(i-1);
+            ((ItemViewHolder)viewHolder).tv_time_in_day.setText(schedule.getStartTime() + " a "+ schedule.getEndTime());
             ((ItemViewHolder)viewHolder).iv_kill_time.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -73,7 +74,7 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mItems.size() + 1;
     }
 
     public void deletePosition(int position) {

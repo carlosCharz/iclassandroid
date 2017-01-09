@@ -11,17 +11,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.instructor.CreateScheduleActivity;
 import com.wedevol.smartclass.adapters.ListScheduleTimeWindowAdapter;
+import com.wedevol.smartclass.models.Schedule;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit.client.Response;
+
 /** Created by paolorossi on 12/8/16.*/
 public class InstructorScheduleFragment extends Fragment implements ScheduleClickListener {
+    private ScheduleClickListener self;
     private FloatingActionButton fab_edit_schedule;
     private RecyclerView rv_monday_time;
     private RecyclerView rv_tuesday_time;
@@ -45,69 +54,93 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
         return view;
     }
 
-    private void setElements(View view){
-        List<String> timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
+    private void setElements(final View view){
+        self = this;
+        RestClient restClient = new RestClient(getContext());
 
-        rv_monday_time = (RecyclerView) view.findViewById(R.id.rv_monday_time);
-        rv_monday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_monday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "LUNES", this));
+        int instructorId = SharedPreferencesManager.getInstance(getContext()).getUserInfo().getId();
+        restClient.getWebservices().listSchedule("", instructorId, new IClassCallback<JsonArray>(getActivity()) {
+            @Override
+            public void success(JsonArray jsonArray, Response response) {
+                super.success(jsonArray, response);
+                List<Schedule> monList = new ArrayList<>(),
+                        tueList = new ArrayList<>(),
+                        wedList = new ArrayList<>(),
+                        thuList = new ArrayList<>(),
+                        friList = new ArrayList<>(),
+                        satList = new ArrayList<>(),
+                        sunList = new ArrayList<>();
 
-        timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
+                for(JsonElement jsonElement: jsonArray){
+                    Schedule schedule = Schedule.parseSchedule(jsonElement.getAsJsonObject());
+                    switch (schedule.getWeekDay()){
+                        case "mon":
+                            monList.add(schedule);
+                            break;
+                        case "tue":
+                            tueList.add(schedule);
+                            break;
+                        case "wed":
+                            wedList.add(schedule);
+                            break;
+                        case "thu":
+                            thuList.add(schedule);
+                            break;
+                        case "fri":
+                            friList.add(schedule);
+                            break;
+                        case "sat":
+                            satList.add(schedule);
+                            break;
+                        case "sun":
+                            sunList.add(schedule);
+                            break;
+                    }
+                }
 
-        rv_tuesday_time = (RecyclerView) view.findViewById(R.id.rv_tuesday_time);
-        rv_tuesday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_tuesday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "MARTES", this));
+                if(monList.size()>0) {
+                    rv_monday_time = (RecyclerView) view.findViewById(R.id.rv_monday_time);
+                    rv_monday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_monday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), monList, "LUNES", self));
+                }
 
-        timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
+                if(tueList.size()>0) {
+                    rv_tuesday_time = (RecyclerView) view.findViewById(R.id.rv_tuesday_time);
+                    rv_tuesday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_tuesday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), tueList, "MARTES", self));
+                }
 
-        rv_wednesday_time = (RecyclerView) view.findViewById(R.id.rv_wednesday_time);
-        rv_wednesday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_wednesday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "MIERCOLES", this));
+                if(wedList.size()>0) {
+                    rv_wednesday_time = (RecyclerView) view.findViewById(R.id.rv_wednesday_time);
+                    rv_wednesday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_wednesday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), wedList, "MIERCOLES", self));
+                }
 
-        timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
+                if(thuList.size()>0) {
+                    rv_thursday_time = (RecyclerView) view.findViewById(R.id.rv_thursday_time);
+                    rv_thursday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_thursday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), thuList, "JUEVES", self));
+                }
 
-        rv_thursday_time = (RecyclerView) view.findViewById(R.id.rv_thursday_time);
-        rv_thursday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_thursday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "JUEVES", this));
+                if(friList.size()>0) {
+                    rv_friday_time = (RecyclerView) view.findViewById(R.id.rv_friday_time);
+                    rv_friday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_friday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), friList, "VIERNES", self));
+                }
 
-        timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
+                if(satList.size()>0) {
+                    rv_saturday_time = (RecyclerView) view.findViewById(R.id.rv_saturday_time);
+                    rv_saturday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_saturday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), satList, "SABADO", self));
+                }
 
-        rv_friday_time = (RecyclerView) view.findViewById(R.id.rv_friday_time);
-        rv_friday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_friday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "VIERNES", this));
-
-        timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
-
-        rv_saturday_time = (RecyclerView) view.findViewById(R.id.rv_saturday_time);
-        rv_saturday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_saturday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "SABADO", this));
-
-        timeList = new ArrayList<>();
-        timeList.add("8:00 a 12:00");
-        timeList.add("13:00 a 15:00");
-        timeList.add("16:00 a 22:00");
-
-        rv_sunday_time = (RecyclerView) view.findViewById(R.id.rv_sunday_time);
-        rv_sunday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_sunday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), timeList, "DOMINGO", this));
+                if(sunList.size() > 0) {
+                    rv_sunday_time = (RecyclerView) view.findViewById(R.id.rv_sunday_time);
+                    rv_sunday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_sunday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), sunList, "DOMINGO", self));
+                }
+            }
+        });
 
         fab_edit_schedule = (FloatingActionButton) view.findViewById(R.id.fab_edit_schedule);
     }

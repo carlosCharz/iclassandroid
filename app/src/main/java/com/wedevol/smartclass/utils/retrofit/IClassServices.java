@@ -57,8 +57,6 @@ public interface IClassServices {
     void homeInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
                         @Query("actualDate") String date, @Query("actualTime") int actualTime, Callback<JsonArray> callback);
 
-
-
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
     void getStudentCourses(@Header("Authorization") String authorization, @Path("studentId") int studentId, Callback<JsonArray> callback);
@@ -69,6 +67,9 @@ public interface IClassServices {
 
     @DELETE(Urls.DELETE_SCHEDULE)
     void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId, Callback<JsonObject> callback);
+
+    @GET(Urls.LIST_INSTRUCTOR_SCHEDULE)
+    void listSchedule(@Header("Authorization") String authorization, @Query("instructorId") int instructorId, Callback<JsonArray> callback);
 
     /**Instructor enrollment */
     @GET(Urls.ALL_INSTRUCTOR_COURSES)
