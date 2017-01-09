@@ -55,6 +55,9 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
 
         TextView tv_selected_hourly_rate = (TextView) view.findViewById(R.id.tv_selected_hourly_rate);
         tv_selected_hourly_rate.setText("Tarifa S/./H : " + ((RequestCounselActivity)getActivity()).getInstructorHourlyRate());
+
+
+
     }
 
     private void setupActions() {

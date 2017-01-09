@@ -25,7 +25,6 @@ interface Urls {
     String GET_STUDENT_COURSES = "/students/{studentId}/courses"; //get
 
     //Schedule
-    //String ALL_SCHEDULES = "/schedules"; //get
     String NEW_SCHEDULE = "/schedules"; //post
     String DELETE_SCHEDULE = "/schedules/{scheduleId}"; //delete
     String LIST_INSTRUCTOR_SCHEDULE = "/schedules/week"; //list instructorId=1
@@ -36,4 +35,8 @@ interface Urls {
 
     //Classes
     String UPDATE_CLASS = "/classes/{classId}"; //update
+    String FREE_HOURS_FOR_CLASS = "/schedules/fetch";
+    String NEW_CLASS = "/classes";
+
+
 }

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
@@ -24,11 +25,14 @@ import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.dialogs.TimePickDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/12/16.*/
 public class RequestCounselSelectScheduleFragment extends Fragment implements ItemClickListener {
@@ -40,6 +44,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private ListTimesAdapter listTimeAdapter;
     private int oldPosition;
     private int[] dateDelimiters = new int[2];
+    private ItemClickListener self;
 
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
@@ -67,7 +72,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
 
     private void setupElements(View view) {
         oldPosition = -1;
-
+        self = this;
         ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Horario");
 
         tv_pick_date = (TextView) view.findViewById(R.id.tv_pick_date);
@@ -154,7 +159,6 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             }
         });
 
-
         ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,24 +201,34 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         rv_available_hours.setHasFixedSize(true);
         rv_available_hours.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<String> timesList = new ArrayList<>();
-        timesList.add("8 a 10");
-        timesList.add("11 a 15");
-        timesList.add("16 a 20");
-        timesList.add("21 a 23");
-        listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, this);
-        rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
+        final List<String> timesList = new ArrayList<>();
 
-        if(((RequestCounselActivity)getActivity()).getBeginTime()!=null &&
-                ((RequestCounselActivity)getActivity()).getEndTime()!=null){
-            for(int i = 0 ; i< timesList.size(); i++){
-                if(timesList.get(i).equals( ((RequestCounselActivity)getActivity()).getBeginTime() + " a " +
-                        ((RequestCounselActivity)getActivity()).getEndTime())){
-                    listTimeAdapter.updatePosition(true, i);
-                    oldPosition = i;
-                }
-            }
-        }
+        RestClient restClient = new RestClient(getContext());
+        restClient.getWebservices().getFreeHours("", ((RequestCounselActivity)getActivity()).getCourse().getId(),
+                "8/1/2017", 0, 24, new IClassCallback<JsonArray>(getActivity()) {
+                    @Override
+                    public void success(JsonArray jsonArray, Response response) {
+                        super.success(jsonArray, response);
+
+                        timesList.add("8 a 10");
+                        timesList.add("11 a 15");
+                        timesList.add("16 a 20");
+                        timesList.add("21 a 23");
+                        listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, self);
+                        rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
+
+                        if(((RequestCounselActivity)getActivity()).getBeginTime()!=null &&
+                                ((RequestCounselActivity)getActivity()).getEndTime()!=null){
+                            for(int i = 0 ; i< timesList.size(); i++){
+                                if(timesList.get(i).equals( ((RequestCounselActivity)getActivity()).getBeginTime() + " a " +
+                                        ((RequestCounselActivity)getActivity()).getEndTime())){
+                                    listTimeAdapter.updatePosition(true, i);
+                                    oldPosition = i;
+                                }
+                            }
+                        }
+                    }
+                });
     }
 
     @Override

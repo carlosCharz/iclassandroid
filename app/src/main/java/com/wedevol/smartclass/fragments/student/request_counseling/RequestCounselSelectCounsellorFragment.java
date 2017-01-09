@@ -9,22 +9,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListCounselorsAdapter;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/12/16.*/
 public class RequestCounselSelectCounsellorFragment extends Fragment implements ItemClickListener {
     private Button b_next;
     private int oldPosition;
     private ListCounselorsAdapter listCounselorsAdapter;
+    private ItemClickListener self;
 
     public static Fragment newInstance() {
         RequestCounselSelectCounsellorFragment RequestCounselSelectCounsellorFragment = new RequestCounselSelectCounsellorFragment();
@@ -47,58 +52,75 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
         return view;
     }
 
-    private void setupElements(View view) {
+    private void setupElements(final View view) {
+        self = this;
         oldPosition = -1;
         ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Asesor");
         b_next = (Button) view.findViewById(R.id.b_next);
 
-        List<Instructor> counsellorList = new ArrayList<>();
+        final List<Instructor> instructorList = new ArrayList<>();
 
-        Instructor counsellor = new Instructor();
-        counsellor.setId(1);
-        counsellor.setHourlyRate(55);
-        counsellor.setFirstname("Paolo");
-        counsellor.setRating(4.4);
-        counsellorList.add(counsellor);
+        RestClient restClient = new RestClient(getContext());
+        RequestCounselActivity requestCounselActivity = ((RequestCounselActivity)getActivity());
 
-        counsellor = new Instructor();
-        counsellor.setId(2);
-        counsellor.setHourlyRate(55);
-        counsellor.setFirstname("Luis");
-        counsellor.setRating(5.0);
-        counsellorList.add(counsellor);
+        restClient.getWebservices().getFreeHours("", requestCounselActivity.getCourse().getId(),
+                "8/1/2017", Integer.parseInt(requestCounselActivity.getBeginTime()),
+                Integer.parseInt(requestCounselActivity.getEndTime()),
+                new IClassCallback<JsonArray>(getActivity()) {
+                    @Override
+                    public void success(JsonArray jsonArray, Response response) {
+                        super.success(jsonArray, response);
 
-        counsellor = new Instructor();
-        counsellor.setId(3);
-        counsellor.setHourlyRate(55);
-        counsellor.setFirstname("Richard");
-        counsellor.setRating(1.0);
-        counsellorList.add(counsellor);
+                        Instructor instructor = new Instructor();
+                        instructor.setId(1);
+                        instructor.setHourlyRate(55);
+                        instructor.setFirstname("Paolo");
+                        instructor.setRating(4.4);
+                        instructorList.add(instructor);
 
-        counsellor = new Instructor();
-        counsellor.setId(4);
-        counsellor.setHourlyRate(55);
-        counsellor.setFirstname("Carlos");
-        counsellor.setRating(2.4);
-        counsellorList.add(counsellor);
+                        instructor = new Instructor();
+                        instructor.setId(2);
+                        instructor.setHourlyRate(55);
+                        instructor.setFirstname("Luis");
+                        instructor.setRating(5.0);
+                        instructorList.add(instructor);
 
-        RecyclerView rv_elligible_counsellors = (RecyclerView) view.findViewById(R.id.rv_elligible_counsellor);
-        rv_elligible_counsellors.setHasFixedSize(true);
-        rv_elligible_counsellors.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        instructor = new Instructor();
+                        instructor.setId(3);
+                        instructor.setHourlyRate(55);
+                        instructor.setFirstname("Richard");
+                        instructor.setRating(1.0);
+                        instructorList.add(instructor);
 
-        listCounselorsAdapter = new ListCounselorsAdapter(getActivity(), counsellorList, this);
-        rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listCounselorsAdapter));
+                        instructor = new Instructor();
+                        instructor.setId(4);
+                        instructor.setHourlyRate(55);
+                        instructor.setFirstname("Carlos");
+                        instructor.setRating(2.4);
+                        instructorList.add(instructor);
 
-        if(((RequestCounselActivity)getActivity()).getCounsellor()==null){
-            b_next.setEnabled(false);
-        }else {
-            for(int i = 0 ; i< counsellorList.size(); i++){
-                if(counsellorList.get(i).getId() == ((RequestCounselActivity)getActivity()).getCounsellor().getId()){
-                    listCounselorsAdapter.updatePosition(true, i);
-                    oldPosition = i;
+
+
+                        RecyclerView rv_elligible_counsellors = (RecyclerView) view.findViewById(R.id.rv_elligible_counsellor);
+                        rv_elligible_counsellors.setHasFixedSize(true);
+                        rv_elligible_counsellors.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+                        listCounselorsAdapter = new ListCounselorsAdapter(getActivity(), instructorList, self);
+                        rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listCounselorsAdapter));
+
+                        if(((RequestCounselActivity)getActivity()).getCounsellor()==null){
+                            b_next.setEnabled(false);
+                        }else {
+                            for(int i = 0; i< instructorList.size(); i++){
+                                if(instructorList.get(i).getId() == ((RequestCounselActivity)getActivity()).getCounsellor().getId()){
+                                    listCounselorsAdapter.updatePosition(true, i);
+                                    oldPosition = i;
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-        }
+        );
     }
 
     private void setupActions() {

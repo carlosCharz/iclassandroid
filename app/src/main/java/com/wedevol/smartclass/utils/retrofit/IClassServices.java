@@ -19,7 +19,8 @@ public interface IClassServices {
     /**Login methods*/
     @FormUrlEncoded
     @POST(Urls.LOGIN_URL)
-    void loginEmailUser(@Field("email") String email, @Field("password") String password, Callback<JsonObject> callback);
+    void loginEmailUser(@Field("email") String email,
+                        @Field("password") String password, Callback<JsonObject> callback);
 
     @FormUrlEncoded
     @POST(Urls.LOGOUT)
@@ -42,7 +43,7 @@ public interface IClassServices {
     void newStudent(@Header("Authorization") String authorization, @Body String student,
                     Callback<JsonObject> callback);
 
-    @GET(Urls.HOME_INSTRUCTOR)
+    @GET(Urls.HOME_STUDENT)
     void studentLessons(@Header("Authorization") String authorization, @Path("studentId") int studentId,
                         @Query("actualDate") String date, @Query("actualTime") int actualTime,
                         @Query("status") String status, Callback<JsonArray> callback);
@@ -63,25 +64,38 @@ public interface IClassServices {
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
-    void getStudentCourses(@Header("Authorization") String authorization, @Path("studentId") int studentId, Callback<JsonArray> callback);
+    void getStudentCourses(@Header("Authorization") String authorization,
+                           @Path("studentId") int studentId, Callback<JsonArray> callback);
 
     @DELETE(Urls.DELETE_SCHEDULE)
-    void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId, Callback<JsonObject> callback);
+    void deleteSchedule(@Header("Authorization") String authorization,
+                        @Path("scheduleId") int scheduleId, Callback<JsonObject> callback);
 
     /**Schedule */
     @POST(Urls.NEW_SCHEDULE)
-    void newSchedule(@Header("Authorization") String authorization, @Body String schedule, Callback<JsonObject> callback);
+    void newSchedule(@Header("Authorization") String authorization,
+                     @Body String schedule, Callback<JsonObject> callback);
 
     @GET(Urls.LIST_INSTRUCTOR_SCHEDULE)
-    void listSchedule(@Header("Authorization") String authorization, @Query("instructorId") int instructorId, Callback<JsonArray> callback);
+    void listSchedule(@Header("Authorization") String authorization,
+                      @Query("instructorId") int instructorId, Callback<JsonArray> callback);
 
     /**Instructor enrollment */
     @GET(Urls.ALL_INSTRUCTOR_COURSES)
-    void getInstructorCourses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId, Callback<JsonObject> callback);
+    void getInstructorCourses(@Header("Authorization") String authorization,
+                              @Path("instructorId") int instructorId, Callback<JsonObject> callback);
 
     /**Classes*/
     @POST(Urls.UPDATE_CLASS)
-    void updateLesson(@Header("Authorization") String authorization, @Body String lesson, Callback<JsonObject> callback);
+    void updateLesson(@Header("Authorization") String authorization, @Body String lesson,
+                      Callback<JsonObject> callback);
 
+    @GET(Urls.FREE_HOURS_FOR_CLASS)
+    void getFreeHours(@Header("Authorization") String authorization, @Query("courseId") int courseId,
+                      @Query("classDate") String classDate, @Query("startTime") int startTime,
+                      @Query("endTime") int endTime, Callback<JsonArray> callback);
 
+    @POST(Urls.NEW_CLASS)
+    void createLesson(@Header("Authorization") String authorization, @Body String lesson,
+                      Callback<JsonObject> callback);
 }
