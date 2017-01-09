@@ -74,7 +74,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
         final Lesson lesson = mItems.get(i);
 
         viewHolder.tv_notification_counsult_data.setText(lesson.getCourseName() + " - " +
-                lesson.getObjectveFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
+                lesson.getSenderFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
         viewHolder.tv_notification_date_time.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
                 " a " + lesson.getEndTime() + " horas");
         synchronized (viewHoldersList) {

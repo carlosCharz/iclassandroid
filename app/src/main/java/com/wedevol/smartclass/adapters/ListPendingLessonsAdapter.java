@@ -45,7 +45,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         final Lesson lesson = mItems.get(i);
 
         viewHolder.tv_pending_counsel_course_counseller.setText(lesson.getCourseName() + " - " +
-                lesson.getObjectveFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
+                lesson.getSenderFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
         viewHolder.tv_pending_counsel_date.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
                         " a " + lesson.getEndTime() + " horas");
 

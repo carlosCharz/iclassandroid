@@ -96,6 +96,6 @@ public interface IClassServices {
                       @Query("endTime") int endTime, Callback<JsonArray> callback);
 
     @POST(Urls.NEW_CLASS)
-    void createLesson(@Header("Authorization") String authorization, @Body String lesson,
-                      Callback<JsonObject> callback);
+    void newLesson(@Header("Authorization") String authorization, @Body String lesson,
+                   Callback<JsonObject> callback);
 }

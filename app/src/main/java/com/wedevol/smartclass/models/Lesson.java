@@ -13,9 +13,10 @@ public class Lesson {
     private int courseId;
     private String courseName;
     private String userType;
-    private int objectiveId;
-    private String objectveFirstName;
-    private String objectveLastName;
+    private int senderId;
+    private String senderFirstName;
+    private String senderLastName;
+    private int receptorId;
     private String phone;
     private int price;
     private String currency;
@@ -89,28 +90,28 @@ public class Lesson {
         this.userType = userType;
     }
 
-    public int getObjectiveId() {
-        return objectiveId;
+    public int getSenderId() {
+        return senderId;
     }
 
-    public void setObjectiveId(int objectiveId) {
-        this.objectiveId = objectiveId;
+    public void setSenderId(int senderId) {
+        this.senderId = senderId;
     }
 
-    public String getObjectveFirstName() {
-        return objectveFirstName;
+    public String getSenderFirstName() {
+        return senderFirstName;
     }
 
-    public void setObjectveFirstName(String objectveFirstName) {
-        this.objectveFirstName = objectveFirstName;
+    public void setSenderFirstName(String senderFirstName) {
+        this.senderFirstName = senderFirstName;
     }
 
-    public String getObjectveLastName() {
-        return objectveLastName;
+    public String getSenderLastName() {
+        return senderLastName;
     }
 
-    public void setObjectveLastName(String objectveLastName) {
-        this.objectveLastName = objectveLastName;
+    public void setSenderLastName(String senderLastName) {
+        this.senderLastName = senderLastName;
     }
 
     public String getPhone() {
@@ -135,6 +136,14 @@ public class Lesson {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public int getReceptorId() {
+        return receptorId;
+    }
+
+    public void setReceptorId(int receptorId) {
+        this.receptorId = receptorId;
     }
 
     public String toJson() {
@@ -237,9 +246,9 @@ public class Lesson {
             lesson.setCourseId(mCourseId);
             lesson.setCourseName(mCourseName);
             lesson.setUserType(mUserType);
-            lesson.setObjectiveId(mObjectiveId);
-            lesson.setObjectveFirstName(mObjectveFirstName);
-            lesson.setObjectveLastName(mObjectveLastName);
+            lesson.setSenderId(mObjectiveId);
+            lesson.setSenderFirstName(mObjectveFirstName);
+            lesson.setSenderLastName(mObjectveLastName);
             lesson.setPhone(mPhone);
             lesson.setPrice(mPrice);
             lesson.setCurrency(mCurrency);
