@@ -19,7 +19,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
+import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -59,21 +61,19 @@ public class InstructorDesktopFragment extends Fragment {
 
         Drawable progress = rb_counselor_rating.getProgressDrawable();
         DrawableCompat.setTint(progress, Color.WHITE);
-        rb_counselor_rating.setRating(4.7f);
 
-        tv_counselor_rating_number.setText("4.7");
+        Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
-        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-        //student.getLessons().size() + " cursos"
-        tv_counselor_level.setText("Nivel 2");
-        //(int) student.getRating()
-        pb_counselor_progress.setProgress(45);
-        //student.getTotalHours() + " hrs"
-        tv_counselor_counseling_time.setText("50 hrs");
+        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
+        tv_counselor_rating_number.setText(""+ instructor.getRating());
+        tv_counselor_level.setText("Nivel "+ instructor.getLevel());
+        pb_counselor_progress.setProgress(((Double) instructor.getRating()).intValue());
+        tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
+        rb_counselor_rating.setRating((float)instructor.getRating());
 
         final List<Lesson> pendingCounselleds = new ArrayList<>();
 
-        restClient.getWebservices().homeInstructor("", 1, "8/1/2017", 2, new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "confirmed", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

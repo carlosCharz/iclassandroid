@@ -42,6 +42,11 @@ public interface IClassServices {
     void newStudent(@Header("Authorization") String authorization, @Body String student,
                     Callback<JsonObject> callback);
 
+    @GET(Urls.HOME_INSTRUCTOR)
+    void studentLessons(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                        @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                        @Query("status") String status, Callback<JsonArray> callback);
+
     /**Instructors*/
     @GET(Urls.ONE_INSTRUCTOR)
     void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId,
@@ -52,8 +57,9 @@ public interface IClassServices {
                        Callback<JsonObject> callback);
 
     @GET(Urls.HOME_INSTRUCTOR)
-    void homeInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
-                        @Query("actualDate") String date, @Query("actualTime") int actualTime, Callback<JsonArray> callback);
+    void instructorLessons(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                           @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                           @Query("status") String status, Callback<JsonArray> callback);
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)

@@ -12,7 +12,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListRequestedLessonsAdapter;
+import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -40,8 +42,9 @@ public class InstructorNotificationsFragment extends Fragment {
     private void setElements(final View view) {
         RestClient restClient = new RestClient(getContext());
         final List<Lesson> requestedlessonList = new ArrayList<>();
+        Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
-        restClient.getWebservices().homeInstructor("", 1, "8/1/2017", 2, new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "pending", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

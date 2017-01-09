@@ -12,7 +12,8 @@ interface Urls {
     //Student
     String NEW_STUDENT = "/students"; //post
     String ONE_STUDENT = "/students/{userId}"; //get
-    String ALL_STUDENTS = "/students"; //get
+    String HOME_STUDENT = "/students/{studentId}/classes?actualDate=09/01/2017&actualTime=8&status=confirmed";
+
 
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post

@@ -13,15 +13,23 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.models.Student;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/9/16.*/
 public class StudentLockerFragment extends Fragment{
@@ -41,7 +49,9 @@ public class StudentLockerFragment extends Fragment{
         return view;
     }
 
-    private void setElements(View view) {
+    private void setElements(final View view) {
+        RestClient restClient = new RestClient(getContext());
+
         b_ask_counsel = (Button) view.findViewById(R.id.b_ask_counsel);
 
         ImageView iv_user_profile_photo = (ImageView) view.findViewById(R.id.iv_user_profile_photo);
@@ -50,28 +60,34 @@ public class StudentLockerFragment extends Fragment{
         TextView tv_student_counselled_time = (TextView) view.findViewById(R.id.tv_student_counselled_time);
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, "", Constants.USER_PHOTO);
-        //student.getLessons().size() + " cursos"
-        tv_student_level.setText("Nivel 1");
-        //(int) student.getRating()
-        pb_student_progress.setProgress(45);
-        //student.getTotalHours() + " hrs"
-        tv_student_counselled_time.setText("10 hrs");
 
-        List<Lesson> pendingCounsels = new ArrayList<>();
-        //pendingCounsels.add(new Lesson(1, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        //pendingCounsels.add(new Lesson(2, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
-        //pendingCounsels.add(new Lesson(3, new Instructor(), new Course(), new Schedule(), new Date(), "status"));
+        Student student = (Student) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+        UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, student.getProfilePictureUrl(), Constants.USER_PHOTO);
+        tv_student_level.setText("Nivel "+ student.getLevel());
+        pb_student_progress.setProgress(((Double)student.getRating()).intValue());
+        tv_student_counselled_time.setText(student.getTotalHours() + " hrs");
 
-        TextView tv_no_counsels = (TextView) view.findViewById(R.id.tv_no_counsels);
+        final List<Lesson> pendingLessons = new ArrayList<>();
 
-        RecyclerView rv_pending_counsels = (RecyclerView) view.findViewById(R.id.rv_pending_counsels);
-        rv_pending_counsels.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv_pending_counsels.setAdapter(new ListPendingLessonsAdapter(getActivity(), pendingCounsels));
+        restClient.getWebservices().studentLessons("", student.getId(), "8/1/2017", 2, "confirmed", new IClassCallback<JsonArray>(getActivity()) {
+            @Override
+            public void success(JsonArray jsonArray, Response response) {
+                super.success(jsonArray, response);
+                for(JsonElement jsonElement: jsonArray){
+                    pendingLessons.add(Lesson.parseLesson(jsonElement.getAsJsonObject()));
+                }
 
-        if(pendingCounsels.size() == 0){
-            tv_no_counsels.setVisibility(View.VISIBLE);
-            rv_pending_counsels.setVisibility(View.GONE);
-        }
+                TextView tv_no_counsels = (TextView) view.findViewById(R.id.tv_no_counsels);
+                RecyclerView rv_pending_counsels = (RecyclerView) view.findViewById(R.id.rv_pending_counsels);
+                rv_pending_counsels.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv_pending_counsels.setAdapter(new ListPendingLessonsAdapter(getActivity(), pendingLessons));
+
+                if(pendingLessons.size() == 0){
+                    tv_no_counsels.setVisibility(View.VISIBLE);
+                    rv_pending_counsels.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void setActions() {
