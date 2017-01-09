@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Schedule;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolo on 12/14/16.*/
 public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
@@ -77,9 +82,16 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
         return mItems.size() + 1;
     }
 
-    public void deletePosition(int position) {
-        mItems.remove(position);
-        notifyDataSetChanged();
+    public void deletePosition(final int position) {
+        RestClient restClient = new RestClient(context);
+        restClient.getWebservices().deleteSchedule("", mItems.get(position).getId(), new IClassCallback<JsonObject>(context) {
+            @Override
+            public void success(JsonObject jsonObject, Response response) {
+                super.success(jsonObject, response);
+                mItems.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     public void deleteAll() {
