@@ -147,8 +147,27 @@ public class Lesson {
     }
 
     public String toJson() {
+        JsonObject jsonObject = new JsonObject();
+        //"classDate": 0,
+        jsonObject.addProperty("classDate", this.getClassDate());
+        //"courseId": 0,
+        jsonObject.addProperty("courseId", this.getCourseId());
+        //"endTime": 0,
+        jsonObject.addProperty("endTime", this.getEndTime());
+        // "instructorId": 0,
+        jsonObject.addProperty("instructorId", this.getReceptorId());
+        //"startTime": 0,
+        jsonObject.addProperty("startTime", this.getStartTime());
+        //"status": "string",
+        jsonObject.addProperty("status", this.getStatus());
+        //"studentId": 0,
+        jsonObject.addProperty("studentId", this.getSenderId());
+        //"weekDay": "string"
+        //jsonObject.addProperty("weekDay", this.getW());
+
+        /* Missing { "requestedAt": "2017-01-09T21:22:00.933Z" }*/
         Gson gson = new Gson();
-        return gson.toJson(this);
+        return gson.toJson(jsonObject);
     }
 
     private static class Builder {

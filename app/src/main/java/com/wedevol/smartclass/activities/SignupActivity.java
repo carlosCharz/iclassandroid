@@ -32,6 +32,8 @@ import com.wedevol.smartclass.utils.retrofit.RestClient;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -162,6 +164,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(type.equals("Alumno")){
                     Student student = new Student();
+                    Calendar calendar = new GregorianCalendar(1991,0,10);
+                    student.setBirthday(calendar.getTime());
                     student.setFirstname(name);
                     student.setLastname(lastName);
                     student.setPhone(phone);
@@ -196,17 +200,11 @@ public class SignupActivity extends AppCompatActivity {
                     Instructor instructor = new Instructor();
                     instructor.setFirstname(name);
                     instructor.setLastname(lastName);
+                    Calendar calendar = new GregorianCalendar(1991,0,10);
+                    instructor.setBirthday(calendar.getTime());
                     instructor.setPhone(phone);
                     instructor.setEmail(email);
                     instructor.setPassword(password);
-
-                    //missing attributes:
-                    /*
-                    id should not be send
-                    placeOptions = []
-                    rating = 0
-                    level = 0
-                    totalHours = 0*/
 
                     restClient.getWebservices().newInstructor("", instructor.toJson(), new IClassCallback<JsonObject>(self){
                         @Override
