@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.dialogs.ChangePriceDialogFragment;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.List;
 
 /** Created by paolo on 12/15/16.*/
 public class ListCourseStateAdapter extends RecyclerView.Adapter{
-    private final List<Pair<String,String>> mItems;
+    private final List<Course> mItems;
     private final Activity context;
     private final String headerName;
     private final String headerExplanation;
@@ -27,7 +27,7 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
     private final boolean selectable;
     private List<Boolean> positionsSelected;
 
-    public ListCourseStateAdapter(Activity context, List<Pair<String,String>> list, String headerName,
+    public ListCourseStateAdapter(Activity context, List<Course> list, String headerName,
                                   String headerExplanation, boolean showHourlyRate, boolean selectable) {
         super();
         this.context = context;
@@ -67,11 +67,11 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
             ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_name.setText(headerName);
             ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_explanation.setText(headerExplanation);
         } else {
-            final Pair<String,String> courseAndRate = mItems.get(i-1);
-            ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(courseAndRate.first);
+            final Course course = mItems.get(i-1);
+            ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(course.getName());
             if(showHourlyRate) {
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
-                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(courseAndRate.second);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(""+course.getBaseHourlyRate());
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -90,12 +90,11 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
                     ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setBackgroundColor(ContextCompat.getColor(context, R.color.light_iron));
                 }
 
-                final int n = i;
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        positionsSelected.set(n-1, !positionsSelected.get(n-1));
-                        notifyItemChanged(n);
+                        positionsSelected.set(i-1, !positionsSelected.get(i-1));
+                        notifyItemChanged(i);
                     }
                 });
             }

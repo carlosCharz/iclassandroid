@@ -44,7 +44,7 @@ public class InstructorNotificationsFragment extends Fragment {
         final List<Lesson> requestedlessonList = new ArrayList<>();
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
-        restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "pending", new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "requested", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

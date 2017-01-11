@@ -61,6 +61,10 @@ public class Course {
         this.career = career;
     }
 
+    public int getBaseHourlyRate() {
+        return 25;
+    }
+
     static class Builder {
         private int mId;
         private String mName;

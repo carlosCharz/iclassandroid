@@ -57,6 +57,10 @@ public interface IClassServices {
                            @Query("actualDate") String date, @Query("actualTime") int actualTime,
                            @Query("status") String status, Callback<JsonArray> callback);
 
+    @POST(Urls.INSTRUCTOR_ENROLL_ON_COURSE)
+    void enrollOnCourseInstructor(@Header("Authorization") String authorization, @Body JsonObject instructorEnrollment,
+                       Callback<JsonObject> callback);
+
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
     void getStudentCourses(@Header("Authorization") String authorization,
@@ -76,9 +80,9 @@ public interface IClassServices {
                       @Query("instructorId") int instructorId, Callback<JsonArray> callback);
 
     /**Instructor enrollment */
-    @GET(Urls.ALL_INSTRUCTOR_COURSES)
+    @GET(Urls.GET_INSTRUCTOR_COURSES)
     void getInstructorCourses(@Header("Authorization") String authorization,
-                              @Path("instructorId") int instructorId, Callback<JsonObject> callback);
+                              @Path("instructorId") int instructorId, Callback<JsonArray> callback);
 
     /**Classes*/
     @POST(Urls.UPDATE_CLASS)

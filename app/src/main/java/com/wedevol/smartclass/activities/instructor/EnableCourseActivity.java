@@ -11,10 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListCoursesActivity;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.dialogs.SuggestCourseDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
+
+import retrofit.client.Response;
 
 /** Created by paolo on 12/17/16.*/
 public class EnableCourseActivity extends AppCompatActivity{
@@ -25,6 +31,8 @@ public class EnableCourseActivity extends AppCompatActivity{
     private Activity self;
     private ImageView iv_toolbar_back;
     private boolean studentType;
+    private RestClient restClient;
+    private int courseId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,8 @@ public class EnableCourseActivity extends AppCompatActivity{
     private void setElements() {
         studentType = getIntent().getBooleanExtra(Constants.STUDENT_TYPE, false);
         self = this;
+        restClient = new RestClient(this);
+
         b_next = (Button) findViewById(R.id.b_next);
         b_suggest = (Button) findViewById(R.id.b_suggest);
         tv_pick_course = (TextView) findViewById(R.id.tv_pick_course);
@@ -58,7 +68,24 @@ public class EnableCourseActivity extends AppCompatActivity{
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                self.finish();
+                JsonObject jsonObject = new JsonObject();
+
+                JsonObject jsonObjectId = new JsonObject();
+                jsonObjectId.addProperty("instructorId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
+                jsonObjectId.addProperty("courseId", courseId);
+                jsonObject.add("id", jsonObjectId);
+
+                jsonObject.addProperty("status", "payed");//jsonObject.addProperty("status", "pendingPayment");
+                jsonObject.addProperty("price", 25);
+                jsonObject.addProperty("currency", "S/.");
+
+                restClient.getWebservices().enrollOnCourseInstructor("", jsonObject, new IClassCallback<JsonObject>(self){
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        self.finish();
+                    }
+                });
             }
         });
 
@@ -91,6 +118,7 @@ public class EnableCourseActivity extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if((requestCode == Constants.CHOOSEN_COURSE) && (resultCode == Activity.RESULT_OK)) {
             String courseName = data.getStringExtra(Constants.BUNDLE_COURSE_NAME);
+            courseId = data.getIntExtra(Constants.BUNDLE_COURSE_ID, -1);
             tv_pick_course.setText(courseName);
         }
     }

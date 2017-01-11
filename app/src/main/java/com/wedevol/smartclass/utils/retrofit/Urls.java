@@ -12,14 +12,14 @@ interface Urls {
     //Student
     String NEW_STUDENT = "/students"; //post
     String ONE_STUDENT = "/students/{userId}"; //get
-    String HOME_STUDENT = "/students/{studentId}/classes?actualDate=09/01/2017&actualTime=8&status=confirmed";
+    String HOME_STUDENT = "/students/{studentId}/classes";
 
 
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post
     String ONE_INSTRUCTOR = "/instructors/{userId}"; //get
     String HOME_INSTRUCTOR = "/instructors/{instructorId}/classes";//home
-
+    String INSTRUCTOR_ENROLL_ON_COURSE = "/instructorenrollments";
 
     //Student Enrollment
     String GET_STUDENT_COURSES = "/students/{studentId}/courses"; //get
@@ -31,12 +31,11 @@ interface Urls {
 
 
     //Instructor enrollment
-    String ALL_INSTRUCTOR_COURSES = "/instructors/{instructorId}/courses"; //get
+    String GET_INSTRUCTOR_COURSES = "/instructors/{instructorId}/courses"; //get
 
     //Classes
     String UPDATE_CLASS = "/classes/{classId}"; //update
     String FREE_HOURS_FOR_CLASS = "/schedules/fetch";
     String NEW_CLASS = "/classes";
-
 
 }
