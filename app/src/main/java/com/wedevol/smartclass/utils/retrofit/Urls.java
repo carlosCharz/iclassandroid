@@ -2,8 +2,8 @@ package com.wedevol.smartclass.utils.retrofit;
 
 /** Created by Paolo on 3/14/2016*/
 interface Urls {
-    String LOGIN_URL = "";
-    String LOGOUT = "";
+    String LOGIN_URL_INSTRUCTOR = "/auth/instructor/login";
+    String LOGIN_URL_STUDENT = "/auth/instructor/login";
 
     //Courses
     String ONE_COURSE = "/courses/"; //get

@@ -1,16 +1,15 @@
 package com.wedevol.smartclass.models;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Schedule {
-    private int id;
-    private String weekDay;
-    private int startTime;
-    private int endTime;
-    private String classDate;
-    private int instructorId;
+    private int id = -1;
+    private String weekDay = "";
+    private int startTime = -1;
+    private int endTime = -1;
+    private String classDate = "";
+    private int instructorId = -1;
 
     public int getId() {
         return id;
@@ -59,9 +58,17 @@ public class Schedule {
         return startTime + " - " + endTime;
     }
 
-    public String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("instructorId", this.getInstructorId());
+        jsonObject.addProperty("weekDay", this.getWeekDay());
+        jsonObject.addProperty("classDate", "10/1/2022");
+        jsonObject.addProperty("startTime", this.getStartTime());
+        jsonObject.addProperty("endTime", this.getEndTime());
+        jsonObject.addProperty("available", true);
+
+        return jsonObject;
     }
 
     public void setInstructorId(int instructorId) {

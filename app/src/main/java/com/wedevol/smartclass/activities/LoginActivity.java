@@ -56,9 +56,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                /*if (!validate()) {
+                if (!validate()) {
                     return;
-                }*/
+                }
 
                 final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
                 progressDialog.setIndeterminate(true);
@@ -67,9 +67,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 final String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("email", email);
+                jsonObject.addProperty("password", password);
 
                 if(isInstructor) {
-                    restClient.getWebservices().getInstructor("", 1, new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().authInstructor("", jsonObject, new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -77,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    restClient.getWebservices().getStudent("", 1, new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().authStudent("", jsonObject, new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -139,7 +142,6 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             et_password.setError(null);
         }
-
         return valid;
     }
 }

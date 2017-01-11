@@ -3,11 +3,11 @@ package com.wedevol.smartclass.models;
 /** Created by paolo on 12/20/16.*/
 
 public class BankAccount {
-    private String bankName;
-    private String bankAccountType;
-    private String bankAccountId;
-    private String bankAccountProvinceType;
-    private String bankAccountProvinceId;
+    private String bankName = "";
+    private String bankAccountType = "";
+    private String bankAccountId = "";
+    private String bankAccountProvinceType = "";
+    private String bankAccountProvinceId = "";
 
     public BankAccount(String bankName, String bankAccountType, String bankAccountId, String bankAccountProvinceType, String bankAccountProvinceId) {
         this.bankName = bankName;

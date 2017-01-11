@@ -32,8 +32,6 @@ import com.wedevol.smartclass.utils.retrofit.RestClient;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -146,8 +144,6 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                b_signup.setEnabled(false);
-
                 final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Creando cuenta ...");
@@ -164,44 +160,35 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(type.equals("Alumno")){
                     Student student = new Student();
-                    Calendar calendar = new GregorianCalendar(1991,0,10);
-                    student.setBirthday(calendar.getTime());
                     student.setFirstname(name);
                     student.setLastname(lastName);
                     student.setPhone(phone);
                     student.setEmail(email);
                     student.setPassword(password);
 
-                    /* student only attributes
-                    birthday = 2016-12-27T14:44:28.186Z",
-                    gender = "string",
-                    profilePictureUrl = "string",
-                    university = "string"
-                    */
-
+                    /* student only attributes birthday = 2016-12-27T14:44:28.186Z",
+                    gender = "string", profilePictureUrl = "string", university = "string"
                     //missing attributes:
                     /* id should not be send
-                    placeOptions = []
-                    rating = 0
-                    level = 0
-                    totalHours = 0*/
+                    placeOptions = [] rating = 0 level = 0 totalHours = 0*/
 
-                    restClient.getWebservices().newStudent("", student.toJson(), new IClassCallback<JsonObject>(self){
-                        @Override
-                        public void success(JsonObject jsonObject, Response response) {
-                            super.success(jsonObject, response);
-                            b_signup.setEnabled(true);
-                            setResult(RESULT_OK, null);
-                            finish();
-                            progressDialog.dismiss();
-                        }
-                    });
+                    try {
+                        restClient.getWebservices().newStudent("", student.toJson(), new IClassCallback<JsonObject>(self){
+                            @Override
+                            public void success(JsonObject jsonObject, Response response) {
+                                super.success(jsonObject, response);
+                                setResult(RESULT_OK, null);
+                                finish();
+                                progressDialog.dismiss();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }else{
                     Instructor instructor = new Instructor();
                     instructor.setFirstname(name);
                     instructor.setLastname(lastName);
-                    Calendar calendar = new GregorianCalendar(1991,0,10);
-                    instructor.setBirthday(calendar.getTime());
                     instructor.setPhone(phone);
                     instructor.setEmail(email);
                     instructor.setPassword(password);
@@ -210,7 +197,6 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
-                            b_signup.setEnabled(true);
                             setResult(RESULT_OK, null);
                             finish();
                             progressDialog.dismiss();
@@ -219,7 +205,6 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
-
         iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

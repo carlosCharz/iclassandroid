@@ -4,11 +4,11 @@ import com.google.gson.JsonObject;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Course {
-    private int id;
-    private String name;
-    private String description;
-    private String university;
-    private String career;
+    private int id = -1;
+    private String name = "";
+    private String description = "";
+    private String university = "";
+    private String career = "";
 
     public Course(){
     }

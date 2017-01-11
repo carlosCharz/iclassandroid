@@ -2,16 +2,10 @@ package com.wedevol.smartclass.models;
 
 import com.google.gson.JsonObject;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Student extends User{
-    private List<Course> courses = new ArrayList<>();
-    private List<String> coursesStatus = new ArrayList<>();
-    private List<Lesson> lessons = new ArrayList<>();
-
 
     public Student(int id, String firstname, String lastname, String phone, String email, String password,
                    Date birthday, boolean gender, String profilePictureUrl, String placeOptions,
@@ -23,30 +17,6 @@ public class Student extends User{
 
     public Student() {
         super();
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    public List<String> getCoursesStatus() {
-        return coursesStatus;
-    }
-
-    public void setCoursesStatus(List<String> coursesStatus) {
-        this.coursesStatus = coursesStatus;
-    }
-
-    public List<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(List<Lesson> lessons) {
-        this.lessons = lessons;
     }
 
     private static class Builder {
@@ -167,5 +137,20 @@ public class Student extends User{
         }
 
         return studentBuilder.build();
+    }
+
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        //"firstName": "string",
+        jsonObject.addProperty("firstName", this.getFirstname());
+        //"lastName": "string",
+        jsonObject.addProperty("lastName", this.getLastname());
+        //"phone": "string",
+        jsonObject.addProperty("phone", this.getPhone());
+        //"email": "string",
+        jsonObject.addProperty("email", this.getEmail());
+        //"password": "string",
+        jsonObject.addProperty("password", this.getPassword());
+        return jsonObject;
     }
 }

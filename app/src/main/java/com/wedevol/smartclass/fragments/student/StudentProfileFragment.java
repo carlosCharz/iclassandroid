@@ -66,7 +66,7 @@ public class StudentProfileFragment extends Fragment{
         tv_student_profile_type.setText("Alumno");
         tv_student_profile_number.setText(student.getPhone());
         tv_student_profile_email.setText(student.getEmail());
-        tv_student_profile_courses_taken.setText(student.getCourses().size()+" cursos");
+        tv_student_profile_courses_taken.setText(0+" cursos");
         tv_student_profile_time.setText(student.getTotalHours() + " hrs");
     }
 

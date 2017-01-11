@@ -1,25 +1,26 @@
 package com.wedevol.smartclass.models;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.Date;
 
 /** Created by paolorossi on 12/7/16.*/
 public class User {
-    private int id;
-    private String firstname;
-    private String lastname;
-    private String phone;
-    private String email;
-    private String password;
-    private Date birthday;
-    private boolean gender;
-    private String profilePictureUrl;
-    private String placeOptions;
-    private String university;
-    private double rating;
-    private int level;
-    private int totalHours;
+    private int id = -1;
+    private String firstname = "";
+    private String lastname = "";
+    private String phone = "";
+    private String email = "";
+    private String password = "";
+    private Date birthday = new Date();
+    private boolean gender = false;
+    private String profilePictureUrl = "";
+    private String placeOptions = "";
+    private String university = "";
+    private double rating = -1;
+    private int level = -1;
+    private int totalHours = -1;
 
     public User(){
     }
@@ -177,7 +178,7 @@ public class User {
         this.totalHours = totalHours;
     }
 
-    public String toJson() {
+    public String toJsonString() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }

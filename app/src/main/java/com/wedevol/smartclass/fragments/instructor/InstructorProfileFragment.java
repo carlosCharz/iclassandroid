@@ -61,7 +61,7 @@ public class InstructorProfileFragment extends Fragment{
         tv_counselor_profile_type.setText("Instructor");
         tv_counselor_profile_number.setText(instructor.getPhone());
         tv_counselor_profile_email.setText(instructor.getEmail());
-        tv_counselor_profile_courses_afilliated.setText(instructor.getEnrolledCourses().size()+" cursos");
+        tv_counselor_profile_courses_afilliated.setText(0 +" cursos");
         tv_counselor_profile_time_teaching.setText(instructor.getTotalHours() + " hrs");
     }
 

@@ -1,19 +1,12 @@
 package com.wedevol.smartclass.models;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Instructor extends User {
-    private List<Course> enrolledCourses = new ArrayList<>();
-    private List<Schedule> schedules = new ArrayList<>();
-    private double hourlyRate;
+    private double hourlyRate = -0.1;
 
     public Instructor(){
 
@@ -25,22 +18,6 @@ public class Instructor extends User {
         super( id,  firstname,  lastname,  phone,  email,  password,
                 birthday,  gender,  profilePictureUrl, placeOptions,
                 university,  rating,  level,  totalHours);
-    }
-
-    public List<Course> getEnrolledCourses() {
-        return enrolledCourses;
-    }
-
-    public void setEnrolledCourses(List<Course> enrolledCourses) {
-        this.enrolledCourses = enrolledCourses;
-    }
-
-    public List<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
     }
 
     public String getName() {
@@ -176,38 +153,28 @@ public class Instructor extends User {
         return instructorBuilder.build();
     }
 
-    public String toJson(){
+    public JsonObject toJson(){
         JsonObject jsonObject = new JsonObject();
-        //"birthday": "2017-01-09T21:22:01.004Z",
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String birth = df.format(this.getBirthday());
-        jsonObject.addProperty("birthday", birth);
-        //"email": "string",
-        jsonObject.addProperty("email", this.getEmail());
         //"firstName": "string",
         jsonObject.addProperty("firstName", this.getFirstname());
-        //"gender": "string",
-        jsonObject.addProperty("gender", "M");
         //"lastName": "string",
         jsonObject.addProperty("lastName", this.getLastname());
-        //"level": 0,
-        jsonObject.addProperty("level", 0);
-        //"password": "string",
-        jsonObject.addProperty("password", this.getPassword());
         //"phone": "string",
         jsonObject.addProperty("phone", this.getPhone());
-        //"placeOptions": ["string"],
-        jsonObject.addProperty("placeOptions", "[]");
-        //"profilePictureUrl": "string",
-        jsonObject.addProperty("profilePictureUrl", "None");
-        //"rating": 0,
-        jsonObject.addProperty("rating", 0);
-        //"totalHours": 0,
-        jsonObject.addProperty("totalHours", 0);
-        //"university": "string"
-        jsonObject.addProperty("university", "None");
+        //"email": "string",
+        jsonObject.addProperty("email", this.getEmail());
+        //"password": "string",
+        jsonObject.addProperty("password", this.getPassword());
 
-        Gson gson = new Gson();
-        return gson.toJson(jsonObject);
+        //"birthday": "2017-01-09T21:22:01.004Z", //DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); //String birth = df.format(this.getBirthday()); //jsonObject.addProperty("birthday", birth);
+        //"gender": "string", //jsonObject.addProperty("gender", "M");
+        //"level": 0, //jsonObject.addProperty("level", 0);
+        //"placeOptions": ["string"], //jsonObject.addProperty("placeOptions", "[]");
+        //"profilePictureUrl": "string", //jsonObject.addProperty("profilePictureUrl", "None");
+        //"rating": 0, //jsonObject.addProperty("rating", 0);
+        //"totalHours": 0, //jsonObject.addProperty("totalHours", 0);
+        //"university": "string" //jsonObject.addProperty("university", "None");
+
+        return jsonObject;
     }
 }
