@@ -69,23 +69,36 @@ public class EnableCourseActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 JsonObject jsonObject = new JsonObject();
-
                 JsonObject jsonObjectId = new JsonObject();
-                jsonObjectId.addProperty("instructorId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
                 jsonObjectId.addProperty("courseId", courseId);
-                jsonObject.add("id", jsonObjectId);
 
-                jsonObject.addProperty("status", "payed");//jsonObject.addProperty("status", "pendingPayment");
-                jsonObject.addProperty("price", 25);
-                jsonObject.addProperty("currency", "S/.");
-
-                restClient.getWebservices().enrollOnCourseInstructor("", jsonObject, new IClassCallback<JsonObject>(self){
-                    @Override
-                    public void success(JsonObject jsonObject, Response response) {
-                        super.success(jsonObject, response);
-                        self.finish();
-                    }
-                });
+                if(!studentType){
+                    jsonObjectId.addProperty("instructorId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
+                    jsonObject.add("id", jsonObjectId);
+                    jsonObject.addProperty("status", "payed");//jsonObject.addProperty("status", "pendingPayment");
+                    jsonObject.addProperty("price", 25);
+                    jsonObject.addProperty("currency", "S/.");
+                    restClient.getWebservices().enrollOnCourseInstructor("", jsonObject, new IClassCallback<JsonObject>(self){
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            self.finish();
+                        }
+                    });
+                } else {
+                    jsonObjectId.addProperty("studentId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
+                    jsonObject.add("id", jsonObjectId);
+                    jsonObject.addProperty("status", "payed");//jsonObject.addProperty("status", "pendingPayment");
+                    jsonObject.addProperty("price", 25);
+                    jsonObject.addProperty("currency", "S/.");
+                    restClient.getWebservices().enrollOnCourseStudent("", jsonObject, new IClassCallback<JsonObject>(self){
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            self.finish();
+                        }
+                    });
+                }
             }
         });
 

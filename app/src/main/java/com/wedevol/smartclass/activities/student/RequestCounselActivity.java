@@ -21,6 +21,8 @@ public class RequestCounselActivity extends AppCompatActivity {
     private String beginTime = null;
     private String endTime = null;
     private Instructor instructor = null;
+    private String strDate;
+    private String strDateName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,31 @@ public class RequestCounselActivity extends AppCompatActivity {
 
     public void saveSchedule(String dateName) {
         this.dateName = dateName;
+        String [] dateAndDatename = dateName.split("-");
+        this.strDate = dateAndDatename[1].trim();
+        switch(dateAndDatename[0]){
+            case "lunes":
+                this.strDateName = "mon";
+                break;
+            case "martes":
+                this.strDateName = "tue";
+                break;
+            case "miercoles":
+                this.strDateName = "wed";
+                break;
+            case "jueves":
+                this.strDateName = "thu";
+                break;
+            case "viernes":
+                this.strDateName = "fri";
+                break;
+            case "sabado":
+                this.strDateName = "sat";
+                break;
+            case "domingo":
+                this.strDateName = "sun";
+                break;
+        }
     }
 
     public void saveScheduleTimes(String beginTime, String endTime) {
@@ -97,6 +124,14 @@ public class RequestCounselActivity extends AppCompatActivity {
 
     public String getDateName() {
         return dateName;
+    }
+
+    public String getDate() {
+        return strDate;
+    }
+
+    public String getDName() {
+        return strDateName;
     }
 
     public String getBeginTime() {

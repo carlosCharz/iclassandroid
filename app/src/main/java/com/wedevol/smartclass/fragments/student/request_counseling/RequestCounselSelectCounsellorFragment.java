@@ -71,36 +71,6 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);
 
-                        Instructor instructor = new Instructor();
-                        instructor.setId(1);
-                        instructor.setHourlyRate(55);
-                        instructor.setFirstname("Paolo");
-                        instructor.setRating(4.4);
-                        instructorList.add(instructor);
-
-                        instructor = new Instructor();
-                        instructor.setId(2);
-                        instructor.setHourlyRate(55);
-                        instructor.setFirstname("Luis");
-                        instructor.setRating(5.0);
-                        instructorList.add(instructor);
-
-                        instructor = new Instructor();
-                        instructor.setId(3);
-                        instructor.setHourlyRate(55);
-                        instructor.setFirstname("Richard");
-                        instructor.setRating(1.0);
-                        instructorList.add(instructor);
-
-                        instructor = new Instructor();
-                        instructor.setId(4);
-                        instructor.setHourlyRate(55);
-                        instructor.setFirstname("Carlos");
-                        instructor.setRating(2.4);
-                        instructorList.add(instructor);
-
-
-
                         RecyclerView rv_elligible_counsellors = (RecyclerView) view.findViewById(R.id.rv_elligible_counsellor);
                         rv_elligible_counsellors.setHasFixedSize(true);
                         rv_elligible_counsellors.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -43,6 +43,9 @@ public interface IClassServices {
                         @Query("actualDate") String date, @Query("actualTime") int actualTime,
                         @Query("status") String status, Callback<JsonArray> callback);
 
+    @POST(Urls.STUDENT_ENROLL_ON_COURSE)
+    void enrollOnCourseStudent(@Header("Authorization") String authorization, @Body JsonObject course, IClassCallback<JsonObject> iClassCallback);
+
     /**Instructors*/
     @GET(Urls.ONE_INSTRUCTOR)
     void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId,

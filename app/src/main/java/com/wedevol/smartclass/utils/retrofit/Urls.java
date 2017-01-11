@@ -3,7 +3,7 @@ package com.wedevol.smartclass.utils.retrofit;
 /** Created by Paolo on 3/14/2016*/
 interface Urls {
     String LOGIN_URL_INSTRUCTOR = "/auth/instructor/login";
-    String LOGIN_URL_STUDENT = "/auth/instructor/login";
+    String LOGIN_URL_STUDENT = "/auth/student/login";
 
     //Courses
     String ONE_COURSE = "/courses/"; //get
@@ -13,7 +13,7 @@ interface Urls {
     String NEW_STUDENT = "/students"; //post
     String ONE_STUDENT = "/students/{userId}"; //get
     String HOME_STUDENT = "/students/{studentId}/classes";
-
+    String STUDENT_ENROLL_ON_COURSE = "/studentenrollments";
 
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post
@@ -37,5 +37,6 @@ interface Urls {
     String UPDATE_CLASS = "/classes/{classId}"; //update
     String FREE_HOURS_FOR_CLASS = "/schedules/fetch";
     String NEW_CLASS = "/classes";
+
 
 }

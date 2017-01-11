@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -193,6 +194,9 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             String dateName = data.getStringExtra(Constants.BUNDLE_DATE);
             ((RequestCounselActivity)getActivity()).saveSchedule(dateName);
             tv_pick_date.setText(dateName);
+
+            Log.d("ss", dateName);
+            //TODO reprocess hour and time
             setHoursRecycler();
         }
     }
@@ -205,15 +209,11 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
 
         RestClient restClient = new RestClient(getContext());
         restClient.getWebservices().getFreeHours("", ((RequestCounselActivity)getActivity()).getCourse().getId(),
-                "8/1/2017", 0, 24, new IClassCallback<JsonArray>(getActivity()) {
+                ((RequestCounselActivity)getActivity()).getDate(), 0, 24, new IClassCallback<JsonArray>(getActivity()) {
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);
 
-                        timesList.add("8 a 10");
-                        timesList.add("11 a 15");
-                        timesList.add("16 a 20");
-                        timesList.add("21 a 23");
                         listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, self);
                         rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
 
