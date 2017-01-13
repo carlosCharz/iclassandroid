@@ -75,14 +75,14 @@ public class RequestCounselActivity extends AppCompatActivity {
         this.dateName = dateName;
         String [] dateAndDatename = dateName.split("-");
         this.strDate = dateAndDatename[1].trim();
-        switch(dateAndDatename[0]){
+        switch(dateAndDatename[0].trim()){
             case "lunes":
                 this.strDateName = "mon";
                 break;
             case "martes":
                 this.strDateName = "tue";
                 break;
-            case "miercoles":
+            case "miércoles":
                 this.strDateName = "wed";
                 break;
             case "jueves":
@@ -91,7 +91,7 @@ public class RequestCounselActivity extends AppCompatActivity {
             case "viernes":
                 this.strDateName = "fri";
                 break;
-            case "sabado":
+            case "sábado":
                 this.strDateName = "sat";
                 break;
             case "domingo":
@@ -105,11 +105,11 @@ public class RequestCounselActivity extends AppCompatActivity {
         this.endTime = endTime;
     }
 
-    public void setCounsellor(Instructor instructor) {
+    public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
 
-    public Instructor getCounsellor() {
+    public Instructor getInstructor() {
         return instructor;
     }
 
@@ -122,6 +122,10 @@ public class RequestCounselActivity extends AppCompatActivity {
         return ""+instructor.getHourlyRate();
     }
 
+    public int getInstructorId() {
+        return instructor.getId();
+    }
+
     public String getDateName() {
         return dateName;
     }
@@ -130,7 +134,7 @@ public class RequestCounselActivity extends AppCompatActivity {
         return strDate;
     }
 
-    public String getDName() {
+    public String getWeekDayName() {
         return strDateName;
     }
 

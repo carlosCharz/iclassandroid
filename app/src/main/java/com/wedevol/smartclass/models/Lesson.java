@@ -1,6 +1,5 @@
 package com.wedevol.smartclass.models;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /** Created by paolorossi on 12/8/16.*/
@@ -20,6 +19,7 @@ public class Lesson {
     private String phone = "";
     private int price = -1;
     private String currency = "";
+    private String weekDay = "";
 
     public Lesson(){
 
@@ -144,6 +144,14 @@ public class Lesson {
 
     public void setReceptorId(int receptorId) {
         this.receptorId = receptorId;
+    }
+
+    public void setWeekDay(String weekDay) {
+        this.weekDay = weekDay;
+    }
+
+    public String getWeekDay() {
+        return weekDay;
     }
 
     private static class Builder {
@@ -328,7 +336,7 @@ public class Lesson {
         //"studentId": 0,
         jsonObject.addProperty("studentId", this.getSenderId());
         //"weekDay": "string"
-        //jsonObject.addProperty("weekDay", this.getW());
+        jsonObject.addProperty("weekDay", this.getWeekDay());
 
         /* Missing { "requestedAt": "2017-01-09T21:22:00.933Z" }*/
         return jsonObject;

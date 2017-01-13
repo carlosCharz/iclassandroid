@@ -94,10 +94,15 @@ public interface IClassServices {
 
     @GET(Urls.FREE_HOURS_FOR_CLASS)
     void getFreeHours(@Header("Authorization") String authorization, @Query("courseId") int courseId,
-                      @Query("classDate") String classDate, @Query("startTime") int startTime,
-                      @Query("endTime") int endTime, Callback<JsonArray> callback);
+                      @Query("weekDay") String weekDay, Callback<JsonArray> callback);
 
     @POST(Urls.NEW_CLASS)
     void newLesson(@Header("Authorization") String authorization, @Body JsonObject lesson,
                    Callback<JsonObject> callback);
+
+    @GET(Urls.GET_CLASS_INSTRUCTORS ) //?courseId=1&weekDay=mon&startTime=10&endTime=12
+    void getInstructorsForClass(@Header("Authorization") String authorization, @Query("courseId") int courseId,
+                                @Query("weekDay") String weekDay, @Query("startTime") int startTime,
+                                @Query("endTime") int endTime, Callback<JsonArray> callback);
+
 }

@@ -77,12 +77,13 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
                 Lesson lesson = new Lesson();
                 lesson.setStatus("requested");
                 lesson.setCurrency("S/.");
-                lesson.setClassDate("8/1/2017");
+                lesson.setClassDate(requestCounselActivity.getDate());
                 lesson.setStartTime(Integer.parseInt(requestCounselActivity.getBeginTime()));
                 lesson.setEndTime(Integer.parseInt(requestCounselActivity.getEndTime()));
                 lesson.setCourseId(requestCounselActivity.getCourse().getId());
                 lesson.setSenderId(SharedPreferencesManager.getInstance(getContext()).getUserInfo().getId());
-                lesson.setReceptorId(1);
+                lesson.setReceptorId(requestCounselActivity.getInstructorId());
+                lesson.setWeekDay(requestCounselActivity.getWeekDayName());
                 //lesson.setReceptorId(requestCounselActivity.getInstructorId());
 
                 restClient.getWebservices().newLesson("", lesson.toJson(), new IClassCallback<JsonObject>(getActivity()) {

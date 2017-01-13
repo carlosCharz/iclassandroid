@@ -56,7 +56,7 @@ public class ListDatesActivity extends AppCompatActivity {
 
             Calendar calendar = Calendar.getInstance();
             for(int i=0; i<14; i++) {
-                SimpleDateFormat sdfDate = new SimpleDateFormat("MM/dd/yy");
+                SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
                 String now = sdfDate.format(calendar.getTime());
 
                 SimpleDateFormat sdfDayOfWeek = new SimpleDateFormat("EEEE");

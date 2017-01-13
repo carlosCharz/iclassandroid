@@ -37,6 +37,6 @@ interface Urls {
     String UPDATE_CLASS = "/classes/{classId}"; //update
     String FREE_HOURS_FOR_CLASS = "/schedules/fetch";
     String NEW_CLASS = "/classes";
-
+    String GET_CLASS_INSTRUCTORS = "/instructors/fetch"; //?courseId=1&weekDay=mon&startTime=10&endTime=12
 
 }

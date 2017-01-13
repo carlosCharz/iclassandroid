@@ -25,14 +25,14 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import retrofit.client.Response;
 
 /** Created by paolorossi on 12/12/16.*/
-public class RequestCounselSelectCounsellorFragment extends Fragment implements ItemClickListener {
+public class RequestCounselSelectInstructorFragment extends Fragment implements ItemClickListener {
     private Button b_next;
     private int oldPosition;
     private ListCounselorsAdapter listCounselorsAdapter;
     private ItemClickListener self;
 
     public static Fragment newInstance() {
-        RequestCounselSelectCounsellorFragment RequestCounselSelectCounsellorFragment = new RequestCounselSelectCounsellorFragment();
+        RequestCounselSelectInstructorFragment RequestCounselSelectCounsellorFragment = new RequestCounselSelectInstructorFragment();
         Bundle args = new Bundle();
         RequestCounselSelectCounsellorFragment.setArguments(args);
         return RequestCounselSelectCounsellorFragment;
@@ -63,13 +63,19 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
         RestClient restClient = new RestClient(getContext());
         RequestCounselActivity requestCounselActivity = ((RequestCounselActivity)getActivity());
 
-        restClient.getWebservices().getFreeHours("", requestCounselActivity.getCourse().getId(),
-                "8/1/2017", Integer.parseInt(requestCounselActivity.getBeginTime()),
-                Integer.parseInt(requestCounselActivity.getEndTime()),
+        //TODO think is not gonna work.
+        restClient.getWebservices().getInstructorsForClass("", requestCounselActivity.getCourse().getId(),
+                requestCounselActivity.getWeekDayName(), Integer.parseInt(requestCounselActivity.getBeginTime()),
+                Integer.parseInt(requestCounselActivity.getEndTime()), /** Need to see where to pursue assesor for X hour*/
                 new IClassCallback<JsonArray>(getActivity()) {
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);
+
+                        for(int i = 0; i < jsonArray.size(); i++){
+                            instructorList.add(Instructor.parseInstructor(jsonArray.get(i).getAsJsonObject()));
+                        }
+
 
                         RecyclerView rv_elligible_counsellors = (RecyclerView) view.findViewById(R.id.rv_elligible_counsellor);
                         rv_elligible_counsellors.setHasFixedSize(true);
@@ -78,11 +84,11 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
                         listCounselorsAdapter = new ListCounselorsAdapter(getActivity(), instructorList, self);
                         rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listCounselorsAdapter));
 
-                        if(((RequestCounselActivity)getActivity()).getCounsellor()==null){
+                        if(((RequestCounselActivity)getActivity()).getInstructor()==null){
                             b_next.setEnabled(false);
                         }else {
                             for(int i = 0; i< instructorList.size(); i++){
-                                if(instructorList.get(i).getId() == ((RequestCounselActivity)getActivity()).getCounsellor().getId()){
+                                if(instructorList.get(i).getId() == ((RequestCounselActivity)getActivity()).getInstructor().getId()){
                                     listCounselorsAdapter.updatePosition(true, i);
                                     oldPosition = i;
                                 }
@@ -97,7 +103,7 @@ public class RequestCounselSelectCounsellorFragment extends Fragment implements 
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((RequestCounselActivity)getActivity()).setCounsellor(listCounselorsAdapter.getItemInPosition(oldPosition));
+                ((RequestCounselActivity)getActivity()).setInstructor(listCounselorsAdapter.getItemInPosition(oldPosition));
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()

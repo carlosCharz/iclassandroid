@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
@@ -120,7 +120,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.rl_request_counseling_holder, RequestCounselSelectCounsellorFragment.newInstance())
+                        .replace(R.id.rl_request_counseling_holder, RequestCounselSelectInstructorFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
             }
@@ -194,9 +194,6 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             String dateName = data.getStringExtra(Constants.BUNDLE_DATE);
             ((RequestCounselActivity)getActivity()).saveSchedule(dateName);
             tv_pick_date.setText(dateName);
-
-            Log.d("ss", dateName);
-            //TODO reprocess hour and time
             setHoursRecycler();
         }
     }
@@ -209,10 +206,18 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
 
         RestClient restClient = new RestClient(getContext());
         restClient.getWebservices().getFreeHours("", ((RequestCounselActivity)getActivity()).getCourse().getId(),
-                ((RequestCounselActivity)getActivity()).getDate(), 0, 24, new IClassCallback<JsonArray>(getActivity()) {
+                ((RequestCounselActivity)getActivity()).getWeekDayName(), new IClassCallback<JsonArray>(getActivity()) {
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);
+
+                        for(int i = 0 ; i< jsonArray.size(); i++){
+                            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+                            int startTime = jsonObject.get("startTime").getAsInt();
+                            int endTime= jsonObject.get("endTime").getAsInt();
+                            String timeInterval = startTime + " a " + endTime;
+                            timesList.add(timeInterval);
+                        }
 
                         listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, self);
                         rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
