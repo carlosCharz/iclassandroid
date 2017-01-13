@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.instructor;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,11 +46,31 @@ public class InstructorCoursesFragment extends Fragment{
     }
 
     private void setElements(final View view) {
-        RestClient restClient = new RestClient(getActivity());
-
         b_new_counselor_course = (Button) view.findViewById(R.id.b_new_counselor_course);
+        getCourses(view);
+    }
 
+    private void setActions() {
+        b_new_counselor_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EnableCourseActivity.class);
+                startActivityForResult(intent, Constants.CHOOSEN_COURSE);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.CHOOSEN_COURSE) && (resultCode == Activity.RESULT_OK)) {
+            getCourses(this.getView());
+        }
+    }
+
+    private void getCourses(final View view) {
         int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
+        RestClient restClient = new RestClient(getActivity());
 
         restClient.getWebservices().getInstructorCourses("", id, new IClassCallback<JsonArray>(getActivity()){
             @Override
@@ -65,45 +86,18 @@ public class InstructorCoursesFragment extends Fragment{
 
                 RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
                 rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList,
-                        "PAGADO", "Eres un asesor de este curso", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
-
-                /*
-                RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
+                rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList, "PAGADO", "Eres un asesor de este curso", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
+                /* RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
                 rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                        "VERIFICANDO PAGO", "Maximo 24 horas", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
-
-                pairList = new ArrayList<>();
-                pairList.add (new Pair<>("Fisica 2","S/.25"));
+                rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList, "VERIFICANDO PAGO", "Maximo 24 horas", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
 
                 RecyclerView rv_pending_payment = (RecyclerView) view.findViewById(R.id.rv_pending_payment);
                 rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                        "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo", Constants.SHOW_COURSE_PRICE,
-                        Constants.NOT_SELECTABLE_COURSE));
-
-                pairList = new ArrayList<>();
-                pairList.add (new Pair<>("Matematicas Basicas 1","S/.25"));
-                pairList.add (new Pair<>("Tecnicas de Programacion","S/.50"));
-                pairList.add (new Pair<>("Algoritmia","S/.25"));
+                rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList, "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
 
                 RecyclerView rv_to_validated = (RecyclerView) view.findViewById(R.id.rv_to_validated);
                 rv_to_validated.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_to_validated.setAdapter(new ListCourseStateAdapter(getActivity(), pairList,
-                        "POR VALIDAR", "Mira tu correo para terminar la verificacion", Constants.SHOW_COURSE_PRICE,
-                        Constants.NOT_SELECTABLE_COURSE));
-                */
-            }
-        });
-    }
-
-    private void setActions() {
-        b_new_counselor_course.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EnableCourseActivity.class);
-                startActivity(intent);
+                rv_to_validated.setAdapter(new ListCourseStateAdapter(getActivity(), pairList, "POR VALIDAR", "Mira tu correo para terminar la verificacion", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE)); */
             }
         });
     }

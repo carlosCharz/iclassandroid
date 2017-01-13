@@ -56,6 +56,86 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
 
     private void setElements(final View view){
         self = this;
+        getWeekSchedule(view);
+
+        fab_edit_schedule = (FloatingActionButton) view.findViewById(R.id.fab_edit_schedule);
+    }
+
+    private void setActions() {
+        fab_edit_schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateScheduleActivity.class);
+                intent.putExtra(Constants.BUNDLE_SIMPLE_DATE, true);
+                startActivityForResult(intent, Constants.CHOOSEN_SCHEDULE);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.CHOOSEN_SCHEDULE) && (resultCode == Activity.RESULT_OK)) {
+            getWeekSchedule(this.getView());
+        }
+    }
+
+    @Override
+    public void onItemClicked(String day, int position) {
+        switch (day){
+            case "LUNES":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_monday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_monday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+            case "MARTES":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_tuesday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_tuesday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+            case "MIERCOLES":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_wednesday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_wednesday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+            case "JUEVES":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_thursday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_thursday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+            case "VIERNES":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_friday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_friday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+            case "SABADO":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_saturday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_saturday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+            case "DOMINGO":
+                if(position==-1){
+                    ((ListScheduleTimeWindowAdapter)rv_sunday_time.getAdapter()).deleteAll();
+                }else{
+                    ((ListScheduleTimeWindowAdapter)rv_sunday_time.getAdapter()).deletePosition(position);
+                }
+                break;
+        }
+    }
+
+    private void getWeekSchedule(final View view) {
         RestClient restClient = new RestClient(getContext());
 
         int instructorId = SharedPreferencesManager.getInstance(getContext()).getUserInfo().getId();
@@ -141,82 +221,5 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
                 }
             }
         });
-
-        fab_edit_schedule = (FloatingActionButton) view.findViewById(R.id.fab_edit_schedule);
-    }
-
-    private void setActions() {
-        fab_edit_schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CreateScheduleActivity.class);
-                intent.putExtra(Constants.BUNDLE_SIMPLE_DATE, true);
-                startActivityForResult(intent, Constants.CHOOSEN_SCHEDULE);
-            }
-        });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if((requestCode == Constants.CHOOSEN_SCHEDULE) && (resultCode == Activity.RESULT_OK)) {
-            //data.getByteArrayExtra();
-            //Toast.makeText(getActivity(), "La data si volvio" , Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onItemClicked(String day, int position) {
-        switch (day){
-            case "LUNES":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_monday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_monday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-            case "MARTES":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_tuesday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_tuesday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-            case "MIERCOLES":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_wednesday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_wednesday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-            case "JUEVES":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_thursday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_thursday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-            case "VIERNES":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_friday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_friday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-            case "SABADO":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_saturday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_saturday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-            case "DOMINGO":
-                if(position==-1){
-                    ((ListScheduleTimeWindowAdapter)rv_sunday_time.getAdapter()).deleteAll();
-                }else{
-                    ((ListScheduleTimeWindowAdapter)rv_sunday_time.getAdapter()).deletePosition(position);
-                }
-                break;
-        }
     }
 }

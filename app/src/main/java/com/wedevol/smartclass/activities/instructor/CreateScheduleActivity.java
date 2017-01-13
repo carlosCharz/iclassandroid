@@ -111,6 +111,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
+                        setResult(Activity.RESULT_OK);
                         self.finish();
                     }
                 });
