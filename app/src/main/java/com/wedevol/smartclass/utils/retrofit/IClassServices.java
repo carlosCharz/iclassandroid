@@ -9,6 +9,7 @@ import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -88,8 +89,8 @@ public interface IClassServices {
                               @Path("instructorId") int instructorId, Callback<JsonArray> callback);
 
     /**Classes*/
-    @POST(Urls.UPDATE_CLASS)
-    void updateLesson(@Header("Authorization") String authorization, @Body JsonObject lesson,
+    @PUT(Urls.UPDATE_CLASS)
+    void updateLesson(@Header("Authorization") String authorization, @Path("classId") int classId, @Body JsonObject lesson,
                       Callback<JsonObject> callback);
 
     @GET(Urls.FREE_HOURS_FOR_CLASS)

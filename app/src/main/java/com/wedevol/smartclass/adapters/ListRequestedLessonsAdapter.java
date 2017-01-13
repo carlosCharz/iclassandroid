@@ -22,7 +22,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 import retrofit.client.Response;
 
@@ -90,7 +89,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
             public void onClick(View view) {
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("confirmed");
-                restClient.getWebservices().updateLesson("", lesson.toJson(), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(true), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
@@ -105,7 +104,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
             public void onClick(View view) {
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("rejected");
-                restClient.getWebservices().updateLesson("", lesson.toJson(), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(true), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
@@ -141,9 +140,6 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
 
         void updateTimeRemaining() {
             try {
-                //SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Calendar start_date = Calendar.getInstance();
-
                 Calendar end_date = Calendar.getInstance();
                 end_date.setTime(date);
 
@@ -154,9 +150,8 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
                     long seconds = timeDiff / 1000 % 60;
                     long minutes = timeDiff / (60 * 1000) % 60;
                     long hours = timeDiff / (60 * 60 * 1000) % 24;
-                    //long days = (int) diff / (24 * 60 * 60 * 1000);
-                    long days = TimeUnit.MILLISECONDS.toDays(timeDiff);
-
+                    long days = (int) timeDiff / (24 * 60 * 60 * 1000);
+                    //long days = TimeUnit.MILLISECONDS.toDays(timeDiff);
 
                     String left = "";
                     if (days > 0)

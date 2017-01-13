@@ -169,6 +169,7 @@ public class Lesson {
         private String mPhone;
         private int mPrice;
         private String mCurrency;
+        private String mWeekDay;
 
         Builder(int id) {
             mId = id;
@@ -239,6 +240,11 @@ public class Lesson {
             return this;
         }
 
+        Lesson.Builder weekDay(String weekDay) {
+            mWeekDay = weekDay;
+            return this;
+        }
+
         Lesson build() {
             Lesson lesson = new Lesson();
             lesson.setId(mId);
@@ -255,7 +261,7 @@ public class Lesson {
             lesson.setPhone(mPhone);
             lesson.setPrice(mPrice);
             lesson.setCurrency(mCurrency);
-
+            lesson.setWeekDay(mWeekDay);
             return lesson;
         }
     }
@@ -316,12 +322,20 @@ public class Lesson {
         if (responseObject.has("currency") && !responseObject.get("currency").isJsonNull()) {
             lessonBuilder.currency(responseObject.get("currency").getAsString());
         }
+
+        //"currency":"S/."
+        if (responseObject.has("weekDay") && !responseObject.get("weekDay").isJsonNull()) {
+            lessonBuilder.weekDay(responseObject.get("weekDay").getAsString());
+        }
         return lessonBuilder.build();
     }
 
-    public JsonObject toJson() {
+    public JsonObject toJson(boolean updating) {
         JsonObject jsonObject = new JsonObject();
-        //"classDate": 0,
+
+        if (updating){
+            jsonObject.addProperty("classId", this.getId());
+        }   //"classDate": 0,
         jsonObject.addProperty("classDate", this.getClassDate());
         //"courseId": 0,
         jsonObject.addProperty("courseId", this.getCourseId());
@@ -337,8 +351,7 @@ public class Lesson {
         jsonObject.addProperty("studentId", this.getSenderId());
         //"weekDay": "string"
         jsonObject.addProperty("weekDay", this.getWeekDay());
-
-        /* Missing { "requestedAt": "2017-01-09T21:22:00.933Z" }*/
+         /* Missing { "requestedAt": "2017-01-09T21:22:00.933Z" }*/
         return jsonObject;
     }
 }
