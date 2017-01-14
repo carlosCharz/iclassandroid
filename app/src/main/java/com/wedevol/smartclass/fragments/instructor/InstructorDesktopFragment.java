@@ -71,6 +71,8 @@ public class InstructorDesktopFragment extends Fragment {
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         rb_counselor_rating.setRating((float)instructor.getRating());
 
+
+
         final List<Lesson> pendingCounselleds = new ArrayList<>();
 
         restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "confirmed", new IClassCallback<JsonArray>(getActivity()) {

@@ -86,7 +86,7 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
                 lesson.setWeekDay(requestCounselActivity.getWeekDayName());
                 //lesson.setReceptorId(requestCounselActivity.getInstructorId());
 
-                restClient.getWebservices().newLesson("", lesson.toJson(false), new IClassCallback<JsonObject>(getActivity()) {
+                restClient.getWebservices().newLesson("", lesson.toJson(), new IClassCallback<JsonObject>(getActivity()) {
                             @Override
                             public void success(JsonObject jsonObject, Response response) {
                                 super.success(jsonObject, response);

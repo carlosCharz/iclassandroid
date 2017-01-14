@@ -1,6 +1,9 @@
 package com.wedevol.smartclass.models;
 
+import android.app.Activity;
+
 import com.google.gson.JsonObject;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Lesson {
@@ -268,6 +271,7 @@ public class Lesson {
 
     public static Lesson parseLesson(JsonObject responseObject) {
         Lesson.Builder lessonBuilder;
+
         //"classId":1
         lessonBuilder = new Lesson.Builder(responseObject.get("classId").getAsInt());
         //"startTime":8,
@@ -286,6 +290,7 @@ public class Lesson {
         if (responseObject.has("classStatus") && !responseObject.get("classStatus").isJsonNull()) {
             lessonBuilder.status(responseObject.get("classStatus").getAsString());
         }
+
         //"courseId":1,
         if (responseObject.has("courseId") && !responseObject.get("courseId").isJsonNull()) {
             lessonBuilder.courseId(responseObject.get("courseId").getAsInt());
@@ -298,10 +303,7 @@ public class Lesson {
         if (responseObject.has("userType") && !responseObject.get("userType").isJsonNull()) {
             lessonBuilder.userType(responseObject.get("userType").getAsString());
         }
-        //"userId":1,
-        if (responseObject.has("userId") && !responseObject.get("userId").isJsonNull()) {
-            lessonBuilder.objectiveId(responseObject.get("userId").getAsInt());
-        }
+
         //"firstName":"Luis",
         if (responseObject.has("firstName") && !responseObject.get("firstName").isJsonNull()) {
             lessonBuilder.objectveFirstName(responseObject.get("firstName").getAsString());
@@ -327,15 +329,19 @@ public class Lesson {
         if (responseObject.has("weekDay") && !responseObject.get("weekDay").isJsonNull()) {
             lessonBuilder.weekDay(responseObject.get("weekDay").getAsString());
         }
+
+        //"userId":1,
+        if (responseObject.has("userId") && !responseObject.get("userId").isJsonNull()) {
+            lessonBuilder.objectiveId(responseObject.get("userId").getAsInt());
+        }
+
+
         return lessonBuilder.build();
     }
 
-    public JsonObject toJson(boolean updating) {
+    public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
 
-        if (updating){
-            jsonObject.addProperty("classId", this.getId());
-        }   //"classDate": 0,
         jsonObject.addProperty("classDate", this.getClassDate());
         //"courseId": 0,
         jsonObject.addProperty("courseId", this.getCourseId());
@@ -352,6 +358,31 @@ public class Lesson {
         //"weekDay": "string"
         jsonObject.addProperty("weekDay", this.getWeekDay());
          /* Missing { "requestedAt": "2017-01-09T21:22:00.933Z" }*/
+        return jsonObject;
+    }
+
+    public JsonObject updateJson(Activity context) {
+        JsonObject jsonObject = new JsonObject();
+
+        //"classId": 0,
+        jsonObject.addProperty("classId", this.getId());
+        //"classDate": 0,
+        jsonObject.addProperty("classDate", this.getClassDate());
+        //"courseId": 0,
+        jsonObject.addProperty("courseId", this.getCourseId());
+        //"endTime": 0,
+        jsonObject.addProperty("endTime", this.getEndTime());
+        //"startTime": 0,
+        jsonObject.addProperty("startTime", this.getStartTime());
+        //"weekDay": "string"
+        jsonObject.addProperty("weekDay", this.getWeekDay());
+        // "instructorId": 0,
+        jsonObject.addProperty("instructorId", SharedPreferencesManager.getInstance(context).getUserInfo().getId());
+        // "studentId": 0,
+        jsonObject.addProperty("studentId", this.getSenderId());
+        //"status": "string",
+        jsonObject.addProperty("status", this.getStatus());
+
         return jsonObject;
     }
 }

@@ -89,7 +89,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
             public void onClick(View view) {
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("confirmed");
-                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(true), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
@@ -104,7 +104,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
             public void onClick(View view) {
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("rejected");
-                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(true), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
