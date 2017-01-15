@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -16,6 +15,8 @@ import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListCoursesAdapter;
 import com.wedevol.smartclass.models.Course;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -26,15 +27,12 @@ import retrofit.client.Response;
 
 /** Created by paolorossi on 12/9/16.*/
 public class ListCoursesActivity extends AppCompatActivity{
-    private SearchView sv_search_course;
     private RecyclerView rv_courses;
     private List<Course> courses;
     private Activity self;
 
     private ImageView iv_toolbar_back;
-    private TextView tv_detail_title;
     private ImageView iv_toolbar_actual_screen;
-    private RestClient restClient;
     private ProgressBar pb_charging;
 
     @Override
@@ -46,11 +44,12 @@ public class ListCoursesActivity extends AppCompatActivity{
     }
 
     private void setElements() {
+        boolean isStudentCourse= getIntent().getBooleanExtra(Constants.STUDENT_COURSE_TYPE, false);
         self = this;
-        restClient = new RestClient(self);
+        RestClient restClient = new RestClient(self);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
-        tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
+        TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
 
         tv_detail_title.setText("Cursos");
@@ -64,27 +63,44 @@ public class ListCoursesActivity extends AppCompatActivity{
 
         courses = new ArrayList<>();
 
-        restClient.getWebservices().getAllCourses("", new IClassCallback<JsonArray>(self){
-            @Override
-            public void success(JsonArray jsonArray, Response response) {
-                super.success(jsonArray, response);
-                for(int i = 0; i<jsonArray.size(); i++){
-                    Course course = Course.parseCourse(jsonArray.get(i).getAsJsonObject());
-                    courses.add(course);
+        if(isStudentCourse){
+            restClient.getWebservices().getStudentCourses("",
+                    SharedPreferencesManager.getInstance(self).getUserInfo().getId(),
+                    new IClassCallback<JsonArray>(self){
+                        @Override
+                        public void success(JsonArray jsonArray, Response response) {
+                            super.success(jsonArray, response);
+                            getCourses(jsonArray, tv_no_courses);
+                        }
+                    });
+        }else{
+            restClient.getWebservices().getAllCourses("", new IClassCallback<JsonArray>(self){
+                @Override
+                public void success(JsonArray jsonArray, Response response) {
+                    super.success(jsonArray, response);
+                    getCourses(jsonArray, tv_no_courses);
                 }
+            });
+        }
+    }
 
-                if(courses.size() == 0 ){
-                    tv_no_courses.setVisibility(View.VISIBLE);
-                    rv_courses.setVisibility(View.GONE);
-                }else{
-                    rv_courses.setLayoutManager(new LinearLayoutManager(self));
-                    rv_courses.setAdapter(new ListCoursesAdapter(self, courses));
-                    rv_courses.setVisibility(View.VISIBLE);
-                    tv_no_courses.setVisibility(View.GONE);
-                }
-                pb_charging.setVisibility(View.GONE);
-            }
-        });
+    private void getCourses(JsonArray jsonArray, TextView tv_no_courses) {
+
+        for(int i = 0; i<jsonArray.size(); i++){
+            Course course = Course.parseCourse(jsonArray.get(i).getAsJsonObject());
+            courses.add(course);
+        }
+
+        if(courses.size() == 0 ){
+            tv_no_courses.setVisibility(View.VISIBLE);
+            rv_courses.setVisibility(View.GONE);
+        }else{
+            rv_courses.setLayoutManager(new LinearLayoutManager(self));
+            rv_courses.setAdapter(new ListCoursesAdapter(self, courses));
+            rv_courses.setVisibility(View.VISIBLE);
+            tv_no_courses.setVisibility(View.GONE);
+        }
+        pb_charging.setVisibility(View.GONE);
     }
 
     private void setActions() {
@@ -101,28 +117,12 @@ public class ListCoursesActivity extends AppCompatActivity{
                 /*TODO needs to open a drawer that enters from the right*/
             }
         });
-/*
-        sv_search_course.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        /* sv_search_course.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                searchCourse(query);
-                return false;
-            }
-
+            public boolean onQueryTextSubmit(String query) { searchCourse(query); return false;}
             @Override
-            public boolean onQueryTextChange(String newText) {
-                searchCourse(newText);
-                return false;
-            }
-
-            private void searchCourse(String wordFragment) {
-                List<Course> searchedCourses = new ArrayList<>();
-
-
-                rv_courses.setAdapter(new ListCoursesAdapter(self, searchedCourses));
-            }
-        });
-*/
-
+            public boolean onQueryTextChange(String newText) { searchCourse(newText);return false;}
+            private void searchCourse(String wordFragment) { List<Course> searchedCourses = new ArrayList<>();rv_courses.setAdapter(new ListCoursesAdapter(self, searchedCourses));}
+        });*/
     }
 }

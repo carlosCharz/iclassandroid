@@ -57,9 +57,9 @@ public class BankAccountFragment extends Fragment{
         }
 
         List<BankAccount> bankAccountList = new ArrayList<>();
-        bankAccountList.add(new BankAccount("BCP", "Cuenta en soles", "1991-8189-1198", "Cuenta interbancaria en soles", "1198-1811-1561"));
-        bankAccountList.add(new BankAccount("Interbank", "Cuenta en soles", "1291-8139-3198", "Cuenta interbancaria en soles", "1111-1111-1561"));
-        bankAccountList.add(new BankAccount("Paypal", "Cuenta en soles", "1291-8189-1138", "Cuenta interbancaria en soles", "1198-1811-1110"));
+        //bankAccountList.add(new BankAccount("BCP", "Cuenta en soles", "1991-8189-1198", "Cuenta interbancaria en soles", "1198-1811-1561"));
+        //bankAccountList.add(new BankAccount("Interbank", "Cuenta en soles", "1291-8139-3198", "Cuenta interbancaria en soles", "1111-1111-1561"));
+        //bankAccountList.add(new BankAccount("Paypal", "Cuenta en soles", "1291-8189-1138", "Cuenta interbancaria en soles", "1198-1811-1110"));
 
         RecyclerView rv_bank_accounts = (RecyclerView) view.findViewById(R.id.rv_bank_accounts);
         rv_bank_accounts.setLayoutManager(new LinearLayoutManager(getActivity()));

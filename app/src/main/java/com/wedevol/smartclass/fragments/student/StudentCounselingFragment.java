@@ -35,10 +35,6 @@ public class StudentCounselingFragment extends Fragment {
 
     private void setElements(View view) {
         List<Lesson> undefinedClass = new ArrayList<>();
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
         RecyclerView rv_counseling_history = (RecyclerView) view.findViewById(R.id.rv_counseling_history);
         rv_counseling_history.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_counseling_history.setAdapter(new ListLessonsAdapter(getActivity(), undefinedClass,

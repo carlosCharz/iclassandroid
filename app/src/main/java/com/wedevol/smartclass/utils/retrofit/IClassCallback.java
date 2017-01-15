@@ -3,7 +3,6 @@ package com.wedevol.smartclass.utils.retrofit;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
@@ -43,10 +42,10 @@ public class IClassCallback<T> implements Callback<T> {
 
     private boolean validateToken(RetrofitError error) {
         boolean validToken = true;
-        RestError errorClient = new RestError(error);
-        if (errorClient.getCode() == Constants.ERROR_CODE_TOKEN_NO_LONGER_BE_REFRESHED) {
-            validToken = false;
-        }
+        //RestError errorClient = new RestError(error);
+        //if (errorClient.getCode() == Constants.ERROR_CODE_TOKEN_NO_LONGER_BE_REFRESHED) {
+        //    validToken = false;
+        //}
         return validToken;
     }
 }

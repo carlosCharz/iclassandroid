@@ -6,18 +6,19 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import retrofit.RetrofitError;
+import retrofit.mime.TypedByteArray;
 
 /** Created by Paolo on 3/14/2016*/
-public class ErrorMessage {
+class ErrorMessage {
     private final RetrofitError errorRetrofit;
     private final Context context;
 
-    public ErrorMessage(RetrofitError error, Context context){
+    ErrorMessage(RetrofitError error, Context context){
         this.errorRetrofit = error;
         this.context = context;
     }
 
-    public int getTypeError(){
+    int getTypeError(){
         int typeError;
         if (errorRetrofit.getResponse() != null) {
             typeError = Constants.REQUEST_SERVER_ERROR_CODE;
@@ -30,12 +31,11 @@ public class ErrorMessage {
         return typeError;
     }
 
-    public String showError(){
+    String showError(){
         String error_message = context.getString(R.string.connection_error);
         try {
             if (getTypeError() == Constants.REQUEST_SERVER_ERROR_CODE) {
-                RestError errorClient = (RestError) errorRetrofit.getBodyAs(RestError.class);
-                error_message = errorClient.getReasons();
+                error_message =  new String(((TypedByteArray)errorRetrofit.getResponse().getBody()).getBytes());
             } else {
                 if (getTypeError() == Constants.REQUEST_NETWORK_CONNECTION_ERROR_CODE) {
                     error_message = context.getString(R.string.problem_with_internet);

@@ -46,6 +46,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private int oldPosition;
     private int[] dateDelimiters = new int[2];
     private ItemClickListener self;
+    private RequestCounselActivity requestCounselActivity;
 
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
@@ -74,7 +75,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private void setupElements(View view) {
         oldPosition = -1;
         self = this;
-        ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Horario");
+        requestCounselActivity = ((RequestCounselActivity)getActivity());
+        requestCounselActivity.setToolbarTitle("Seleccionar Horario");
 
         tv_pick_date = (TextView) view.findViewById(R.id.tv_pick_date);
         et_begin_time = (EditText) view.findViewById(R.id.et_begin_time);
@@ -86,7 +88,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         b_next = (Button) view.findViewById(R.id.b_next);
         rv_available_hours = (RecyclerView) view.findViewById(R.id.rv_available_hours);
 
-        if(!(((RequestCounselActivity)getActivity()).getDateName()==null)){
+        if(!(requestCounselActivity.getDateName()==null)){
             tv_pick_date.setText(((RequestCounselActivity)getActivity()).getDateName());
             setHoursRecycler();
         }
@@ -106,7 +108,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             public void onClick(View view) {
                 int validated = validateTime();
                 if(validated==2){
-                    ((RequestCounselActivity)getActivity()).saveScheduleTimes(et_begin_time.getText().toString(), et_end_time.getText().toString());
+                    requestCounselActivity.saveScheduleTimes(et_begin_time.getText().toString(), et_end_time.getText().toString());
                 }else{
                     et_begin_time.requestFocus();
                     if(validated==1){
@@ -160,7 +162,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             }
         });
 
-        ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
+        requestCounselActivity.setToolbarBackButtonAction(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity()
@@ -192,7 +194,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         getActivity();
         if((requestCode == Constants.CHOOSEN_DATE) && (resultCode == Activity.RESULT_OK)) {
             String dateName = data.getStringExtra(Constants.BUNDLE_DATE);
-            ((RequestCounselActivity)getActivity()).saveSchedule(dateName);
+            requestCounselActivity.saveSchedule(dateName);
             tv_pick_date.setText(dateName);
             setHoursRecycler();
         }
@@ -205,8 +207,8 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         final List<String> timesList = new ArrayList<>();
 
         RestClient restClient = new RestClient(getContext());
-        restClient.getWebservices().getFreeHours("", ((RequestCounselActivity)getActivity()).getCourse().getId(),
-                ((RequestCounselActivity)getActivity()).getWeekDayName(), new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().getFreeHours("", requestCounselActivity.getCourse().getId(),
+                requestCounselActivity.getWeekDayName(), new IClassCallback<JsonArray>(getActivity()) {
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);
@@ -222,11 +224,10 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                         listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, self);
                         rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
 
-                        if(((RequestCounselActivity)getActivity()).getBeginTime()!=null &&
-                                ((RequestCounselActivity)getActivity()).getEndTime()!=null){
+                        if(requestCounselActivity.getBeginTime()!=null && requestCounselActivity.getEndTime()!=null){
                             for(int i = 0 ; i< timesList.size(); i++){
-                                if(timesList.get(i).equals( ((RequestCounselActivity)getActivity()).getBeginTime() + " a " +
-                                        ((RequestCounselActivity)getActivity()).getEndTime())){
+                                if(timesList.get(i).equals( requestCounselActivity.getBeginTime() + " a " +
+                                        requestCounselActivity.getEndTime())){
                                     listTimeAdapter.updatePosition(true, i);
                                     oldPosition = i;
                                 }

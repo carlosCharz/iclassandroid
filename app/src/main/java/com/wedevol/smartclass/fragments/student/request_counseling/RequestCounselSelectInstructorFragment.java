@@ -30,6 +30,7 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
     private int oldPosition;
     private ListCounselorsAdapter listCounselorsAdapter;
     private ItemClickListener self;
+    private RequestCounselActivity requestCounselActivity;
 
     public static Fragment newInstance() {
         RequestCounselSelectInstructorFragment RequestCounselSelectCounsellorFragment = new RequestCounselSelectInstructorFragment();
@@ -55,13 +56,13 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
     private void setupElements(final View view) {
         self = this;
         oldPosition = -1;
-        ((RequestCounselActivity)getActivity()).setToolbarTitle("Seleccionar Asesor");
+        requestCounselActivity = ((RequestCounselActivity)getActivity());
+        requestCounselActivity.setToolbarTitle("Seleccionar Asesor");
         b_next = (Button) view.findViewById(R.id.b_next);
 
         final List<Instructor> instructorList = new ArrayList<>();
 
         RestClient restClient = new RestClient(getContext());
-        RequestCounselActivity requestCounselActivity = ((RequestCounselActivity)getActivity());
 
         //TODO think is not gonna work.
         restClient.getWebservices().getInstructorsForClass("", requestCounselActivity.getCourse().getId(),
@@ -84,11 +85,11 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
                         listCounselorsAdapter = new ListCounselorsAdapter(getActivity(), instructorList, self);
                         rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listCounselorsAdapter));
 
-                        if(((RequestCounselActivity)getActivity()).getInstructor()==null){
+                        if(requestCounselActivity.getInstructor()==null){
                             b_next.setEnabled(false);
                         }else {
                             for(int i = 0; i< instructorList.size(); i++){
-                                if(instructorList.get(i).getId() == ((RequestCounselActivity)getActivity()).getInstructor().getId()){
+                                if(instructorList.get(i).getId() == requestCounselActivity.getInstructor().getId()){
                                     listCounselorsAdapter.updatePosition(true, i);
                                     oldPosition = i;
                                 }
@@ -103,7 +104,7 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((RequestCounselActivity)getActivity()).setInstructor(listCounselorsAdapter.getItemInPosition(oldPosition));
+                requestCounselActivity.setInstructor(listCounselorsAdapter.getItemInPosition(oldPosition));
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
@@ -113,7 +114,7 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
             }
         });
 
-        ((RequestCounselActivity)getActivity()).setToolbarBackButtonAction(new View.OnClickListener() {
+        requestCounselActivity.setToolbarBackButtonAction(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity()

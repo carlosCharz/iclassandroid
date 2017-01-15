@@ -41,17 +41,12 @@ public class InstructorPayCourseFragment extends Fragment {
     private void setElements(View view) {
 
         List<Course> courseList = new ArrayList<>();
-        courseList.add (new Course());
-        courseList.add (new Course());
 
         RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
         rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), courseList,
                 "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_COURSE_PRICE,
                 Constants.SELECTABLE_COURSE));
-
-        courseList = new ArrayList<>();
-        //courseList.add();
 
         RecyclerView rv_pending_payment = (RecyclerView) view.findViewById(R.id.rv_pending_payment);
         rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -34,10 +34,6 @@ public class InstructorCounseledFragment extends Fragment {
 
     private void setElements(View view) {
         List<Lesson> undefinedClass = new ArrayList<>();
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
         RecyclerView rv_counseled_history = (RecyclerView) view.findViewById(R.id.rv_counseled_history);
         rv_counseled_history.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_counseled_history.setAdapter(new ListLessonsAdapter(getActivity(), undefinedClass,

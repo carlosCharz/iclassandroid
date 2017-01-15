@@ -6,12 +6,12 @@ public interface Constants {
 
     String STUDENT_TYPE = "student_type";
     String INSTRUCTOR_TYPE = "instructor_type";
+    String STUDENT_COURSE_TYPE = "student_course_type";
     boolean REQUEST_TYPE = true;
     boolean NON_REQUEST_TYPE = false;
 
     //THIS ONES NEED TO BE VERIFIED
-    int ERROR_CODE_TOKEN_NO_LONGER_BE_REFRESHED = 403;
-    int REQUEST_SERVER_ERROR_CODE = 500;
+    int REQUEST_SERVER_ERROR_CODE = 400;
     int REQUEST_NETWORK_CONNECTION_ERROR_CODE = 300;
     int REQUEST_RETROFIT_ERROR_CODE = 205;
 

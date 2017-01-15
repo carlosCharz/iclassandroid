@@ -68,6 +68,7 @@ public class RequestCounselSelectCourseFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ListCoursesActivity.class);
+                intent.putExtra(Constants.STUDENT_COURSE_TYPE, true);
                 startActivityForResult(intent, Constants.CHOOSEN_COURSE);
             }
         });

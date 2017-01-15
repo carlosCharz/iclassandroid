@@ -35,10 +35,6 @@ public class StudentRequestFragment extends Fragment{
 
     private void setElements(View view){
         List<Lesson> undefinedClass = new ArrayList<>();
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
-        undefinedClass.add(new Lesson());
 
         RecyclerView rv_student_requests = (RecyclerView) view.findViewById(R.id.rv_student_requests);
         rv_student_requests.setLayoutManager(new LinearLayoutManager(getActivity()));

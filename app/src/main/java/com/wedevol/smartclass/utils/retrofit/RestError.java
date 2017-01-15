@@ -6,28 +6,22 @@ import com.google.gson.JsonParser;
 import retrofit.RetrofitError;
 
 /** Created by Paolo on 3/14/2016*/
-public class RestError {
+class RestError {
     private int code;
     private String message;
-    private String reasons;
 
-    public RestError(RetrofitError error) {
+    RestError(RetrofitError error) {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonError = (JsonObject) jsonParser.parse(error.getBody().toString());
-        code = jsonError.get("code").getAsInt();
-        message = jsonError.get("message").getAsString();
-        reasons = jsonError.get("reasons").getAsString();
+        code = jsonError.get("errorCode").getAsInt();
+        message = jsonError.get("errorMessage").getAsString();
     }
 
-    public int getCode() {
+    int getCode() {
         return code;
     }
 
-    public String getMessage() {
+    String getMessage() {
         return message;
-    }
-
-    public String getReasons() {
-        return reasons;
     }
 }
