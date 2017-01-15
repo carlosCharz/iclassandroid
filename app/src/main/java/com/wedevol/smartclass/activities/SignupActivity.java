@@ -51,8 +51,6 @@ public class SignupActivity extends AppCompatActivity {
     private ImageView iv_toolbar_back;
     private File mDestinationFile;
     private String mPhotoLocationPath;
-    private final int CAMERA_REQUEST_CODE = 1;
-    private final int GALLERY_REQUEST_CODE = 2;
     private Activity self;
     private RestClient restClient;
     private int courseId = -1;
@@ -291,7 +289,7 @@ public class SignupActivity extends AppCompatActivity {
             if (mDestinationFile != null) {
                 mPhotoLocationPath = mDestinationFile.getAbsolutePath();
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mDestinationFile));
-                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+                startActivityForResult(cameraIntent, Constants.CAMERA_REQUEST_CODE);
             }
 
         }
@@ -301,7 +299,7 @@ public class SignupActivity extends AppCompatActivity {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
         galleryIntent.setType("image/*");
         if (galleryIntent.resolveActivity(this.getPackageManager()) != null) {
-            startActivityForResult(galleryIntent, GALLERY_REQUEST_CODE);
+            startActivityForResult(galleryIntent, Constants.GALLERY_REQUEST_CODE);
         }
     }
 
@@ -310,11 +308,11 @@ public class SignupActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK ) {
-            if (requestCode == GALLERY_REQUEST_CODE) {
+            if (requestCode == Constants.GALLERY_REQUEST_CODE) {
                 mPhotoLocationPath = UtilMethods.getGalleryImagePath(this, data.getData());
             }
 
-            if (requestCode == GALLERY_REQUEST_CODE || requestCode == CAMERA_REQUEST_CODE) {
+            if (requestCode == Constants.GALLERY_REQUEST_CODE || requestCode == Constants.CAMERA_REQUEST_CODE) {
                 File file = UtilMethods.getImageFile();
                 if (file != null) {
                     Uri photoUri = Uri.fromFile(new File(mPhotoLocationPath));

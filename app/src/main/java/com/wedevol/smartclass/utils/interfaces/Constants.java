@@ -15,10 +15,12 @@ public interface Constants {
     int REQUEST_NETWORK_CONNECTION_ERROR_CODE = 300;
     int REQUEST_RETROFIT_ERROR_CODE = 205;
 
-    int CHOOSEN_COURSE = 1;
-    int CHOOSEN_DATE = 2;
-    int CHOOSEN_SCHEDULE = 3;
-    int CHOOSEN_BANK = 4;
+    int CAMERA_REQUEST_CODE = 1;
+    int GALLERY_REQUEST_CODE = 2;
+    int CHOOSEN_COURSE = 3;
+    int CHOOSEN_DATE = 4;
+    int CHOOSEN_SCHEDULE = 5;
+    int CHOOSEN_BANK = 6;
 
     String BUNDLE_INSTRUCTOR = "bundle_is_instructor";
     String BUNDLE_COURSE_ID = "bundle_couse_id";
