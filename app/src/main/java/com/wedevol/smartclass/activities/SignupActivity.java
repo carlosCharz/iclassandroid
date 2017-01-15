@@ -46,7 +46,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText et_password;
     private Button b_signup;
     private Spinner sp_type;
-    private Spinner sp_course;
+    private TextView tv_course;
     private CircleImageView civ_profile_photo;
     private ImageView iv_toolbar_back;
     private File mDestinationFile;
@@ -55,6 +55,7 @@ public class SignupActivity extends AppCompatActivity {
     private final int GALLERY_REQUEST_CODE = 2;
     private Activity self;
     private RestClient restClient;
+    private int courseId = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,9 +81,9 @@ public class SignupActivity extends AppCompatActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         b_signup = (Button) findViewById(R.id.b_signup);
         sp_type = (Spinner) findViewById(R.id.sp_type);
-        sp_course = (Spinner) findViewById(R.id.sp_course);
+        tv_course = (TextView) findViewById(R.id.tv_course);
         sp_type.setVisibility(View.VISIBLE);
-        sp_course.setVisibility(View.VISIBLE);
+        tv_course.setVisibility(View.VISIBLE);
         civ_profile_photo = (CircleImageView) findViewById(R.id.civ_profile_photo);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
@@ -96,18 +97,6 @@ public class SignupActivity extends AppCompatActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
-
-        List<String> courseArray =  new ArrayList<>();
-        courseArray.add("Selecciona un curso");
-        courseArray.add("Cálculo 1");
-        courseArray.add("Cálculo 2");
-        courseArray.add("Física 1");
-        courseArray.add("Química 1");
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, courseArray);
-
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_course.setAdapter(adapter2);
     }
 
     private void setActions() {
@@ -178,6 +167,7 @@ public class SignupActivity extends AppCompatActivity {
                             public void success(JsonObject jsonObject, Response response) {
                                 super.success(jsonObject, response);
                                 setResult(RESULT_OK, null);
+                                //TODO freeCourse(); using courseId we must create a new free course.
                                 finish();
                                 progressDialog.dismiss();
                             }
@@ -211,8 +201,15 @@ public class SignupActivity extends AppCompatActivity {
                 self.finish();
             }
         });
-    }
 
+        tv_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(self, ListCoursesActivity.class);
+                startActivityForResult(intent, Constants.CHOOSEN_COURSE);
+            }
+        });
+    }
 
     public boolean validate() {
         boolean valid = true;
@@ -316,6 +313,7 @@ public class SignupActivity extends AppCompatActivity {
             if (requestCode == GALLERY_REQUEST_CODE) {
                 mPhotoLocationPath = UtilMethods.getGalleryImagePath(this, data.getData());
             }
+
             if (requestCode == GALLERY_REQUEST_CODE || requestCode == CAMERA_REQUEST_CODE) {
                 File file = UtilMethods.getImageFile();
                 if (file != null) {
@@ -326,6 +324,12 @@ public class SignupActivity extends AppCompatActivity {
                 UtilMethods.setPhoto(this, civ_profile_photo, mPhotoLocationPath, Constants.USER_PHOTO);
             } else if (requestCode == Crop.REQUEST_CROP) {
                 //Result from cropping. Do nothing
+            }
+
+            if((requestCode == Constants.CHOOSEN_COURSE)) {
+                String courseName = data.getStringExtra(Constants.BUNDLE_COURSE_NAME);
+                courseId = data.getIntExtra(Constants.BUNDLE_COURSE_ID, -1);
+                tv_course.setText(courseName);
             }
         }else{
             mPhotoLocationPath = null;
