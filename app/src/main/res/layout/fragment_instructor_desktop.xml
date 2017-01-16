@@ -101,6 +101,14 @@
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp"/>
 
+            <ProgressBar
+                android:layout_below="@+id/tv_announcement"
+                android:id="@+id/pb_charging"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="center"
+                android:visibility="visible"/>
+
             <android.support.v7.widget.RecyclerView
                 android:layout_below="@id/tv_announcement"
                 android:id="@+id/rv_pending_counselings"

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
@@ -43,6 +44,7 @@ public class InstructorHistoricLessonsFragment extends Fragment {
 
     private void setElements(final View view) {
         RestClient restClient = new RestClient(getActivity());
+        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
         final List<Lesson> historicalLessons = new ArrayList<>();
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
@@ -64,6 +66,8 @@ public class InstructorHistoricLessonsFragment extends Fragment {
                     tv_no_counselings.setVisibility(View.VISIBLE);
                     rv_counseled_history.setVisibility(View.GONE);
                 }
+
+                pb_charging.setVisibility(View.GONE);
             }
         });
     }

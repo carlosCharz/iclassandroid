@@ -15,14 +15,38 @@
             android:textSize="20sp"
             android:text="Solicitudes de asesoría. Tienes 24 horas para confimar."/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_notifications"
-            android:layout_marginTop="20dp"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchMode="columnWidth"
-            android:clipToPadding="false"
-            android:scrollbarStyle="outsideInset"/>
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pb_charging"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="center"
+                android:visibility="visible"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_notifications"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchMode="columnWidth"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideInset"/>
+
+            <TextView
+                android:id="@+id/tv_no_counselings"
+                android:drawableTop="@drawable/ic_counsel_black"
+                android:gravity="center"
+                android:layout_margin="50dp"
+                android:textSize="22sp"
+                android:text="No hay solicitudes pendientes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
         <TextView
             android:layout_marginTop="20dp"

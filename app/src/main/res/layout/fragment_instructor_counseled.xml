@@ -16,6 +16,13 @@
             android:text="Historial de asesorías"
             android:layout_marginBottom="20dp"/>
 
+        <ProgressBar
+            android:id="@+id/pb_charging"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:gravity="center"
+            android:visibility="visible"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
