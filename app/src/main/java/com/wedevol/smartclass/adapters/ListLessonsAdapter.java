@@ -36,10 +36,14 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
 
     @Override
     public void onBindViewHolder(final ListLessonsAdapter.ViewHolder viewHolder, int i) {
-        final Lesson classy = mItems.get(i);
-        viewHolder.tv_request_counsult_data.setText("Richard - IMU - S/.20");
-        viewHolder.tv_request_date_time.setText("12/12/16 - 20 a 24 horas");
-        viewHolder.tv_counselor_rating.setText("4.7");
+        final Lesson lesson = mItems.get(i);
+        viewHolder.tv_request_counsult_data.setText(lesson.getCourseName() + " - " +
+                lesson.getSenderFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
+        viewHolder.tv_request_date_time.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
+                " a " + lesson.getEndTime() + " horas");
+        viewHolder.tv_counselor_rating.setText("0.0");
+        viewHolder.tv_lesson_status.setText(lesson.getPresentationStatus());
+
 
         if(type == Constants.REQUEST_TYPE){
             viewHolder.b_cancel.setVisibility(View.VISIBLE);
@@ -64,6 +68,7 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
         final TextView tv_request_date_time;
         final TextView tv_request_counsult_data;
         final TextView tv_counselor_rating;
+        final TextView tv_lesson_status;
         final Button b_cancel;
 
         ViewHolder(View itemView) {
@@ -71,6 +76,7 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
             tv_request_date_time = (TextView) itemView.findViewById(R.id.tv_request_date_time);
             tv_request_counsult_data = (TextView) itemView.findViewById(R.id.tv_request_counsult_data);
             tv_counselor_rating = (TextView) itemView.findViewById(R.id.tv_counselor_rating);
+            tv_lesson_status = (TextView) itemView.findViewById(R.id.tv_lesson_status);
             b_cancel = (Button) itemView.findViewById(R.id.b_cancel);
         }
     }

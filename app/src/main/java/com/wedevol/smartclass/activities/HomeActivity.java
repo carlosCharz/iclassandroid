@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.fragments.BankAccountFragment;
-import com.wedevol.smartclass.fragments.instructor.InstructorCounseledFragment;
+import com.wedevol.smartclass.fragments.instructor.InstructorHistoricLessonsFragment;
 import com.wedevol.smartclass.fragments.instructor.InstructorCoursesFragment;
 import com.wedevol.smartclass.fragments.instructor.InstructorDesktopFragment;
 import com.wedevol.smartclass.fragments.instructor.InstructorNotificationsFragment;
@@ -136,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     fragmentTitle = "Mis Notificaciones";
                     break;
                 case 4:
-                    fragment = new InstructorCounseledFragment();
+                    fragment = new InstructorHistoricLessonsFragment();
                     fragmentDrawableId = R.drawable.ic_counsel_black;
                     fragmentTitle = "Mis Asesorías";
                     break;

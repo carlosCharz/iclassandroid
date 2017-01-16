@@ -42,16 +42,31 @@
                     tools:text="Jueves 16/10 de 2 a 4pm"/>
             </LinearLayout>
 
-            <TextView
-                android:textSize="12sp"
-                android:drawableRight="@drawable/ic_star_black"
-                android:drawableEnd="@drawable/ic_star_black"
-                android:gravity="center"
+            <LinearLayout
                 android:layout_weight="0.2"
-                android:id="@+id/tv_counselor_rating"
+                android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                tools:text="4.7"/>
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textSize="16sp"
+                    android:drawableRight="@drawable/ic_star_black"
+                    android:drawableEnd="@drawable/ic_star_black"
+                    android:gravity="center"
+                    android:id="@+id/tv_counselor_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="4.7"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:id="@+id/tv_lesson_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Aceptada"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

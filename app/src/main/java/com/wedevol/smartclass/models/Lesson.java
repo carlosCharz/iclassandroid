@@ -40,6 +40,25 @@ public class Lesson {
         return status;
     }
 
+    public String getPresentationStatus() {
+        String presentationStatus = "";
+        switch (status){
+            case "requested":
+                presentationStatus = "Requerida";
+                break;
+            case "confirmed":
+                presentationStatus = "Confirmada";
+                break;
+            case "rejected":
+                presentationStatus = "Rechazada";
+                break;
+            case "ignored":
+                presentationStatus = "Ignorada";
+                break;
+        }
+        return presentationStatus;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
