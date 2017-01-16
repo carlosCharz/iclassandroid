@@ -51,8 +51,8 @@ public class InstructorDesktopFragment extends Fragment {
 
     private void setElements(final View view) {
         restClient = new RestClient(getContext());
-
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
+
         ImageView iv_user_profile_photo = (ImageView) view.findViewById(R.id.iv_user_profile_photo);
         TextView tv_counselor_level = (TextView) view.findViewById(R.id.tv_counselor_level);
         ProgressBar pb_counselor_progress = (ProgressBar) view.findViewById(R.id.pb_counselor_progress);
