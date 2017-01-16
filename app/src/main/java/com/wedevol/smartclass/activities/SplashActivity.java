@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import com.crashlytics.android.Crashlytics;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
+import io.fabric.sdk.android.Fabric;
 
 /** Created by paolorossi on 12/8/16.*/
 public class SplashActivity extends AppCompatActivity{
@@ -19,6 +21,7 @@ public class SplashActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_splash);
         mSharedPreferencesManager = SharedPreferencesManager.getInstance(this);
 
