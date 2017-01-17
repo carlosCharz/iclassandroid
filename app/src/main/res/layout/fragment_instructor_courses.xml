@@ -20,6 +20,17 @@
                 android:gravity="center"
                 android:visibility="visible"/>
 
+            <TextView
+                android:id="@+id/tv_no_courses"
+                android:drawableTop="@drawable/ic_course_black"
+                android:gravity="center"
+                android:layout_margin="50dp"
+                android:textSize="22sp"
+                android:text="No tienes cursos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
             <LinearLayout
                 android:layout_below="@id/pb_charging"
                 android:orientation="vertical"

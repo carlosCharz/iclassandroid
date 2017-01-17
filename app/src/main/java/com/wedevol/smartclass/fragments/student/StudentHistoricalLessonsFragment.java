@@ -27,8 +27,7 @@ import java.util.List;
 import retrofit.client.Response;
 
 /** Created by paolorossi on 12/8/16.*/
-public class StudentRequestFragment extends Fragment{
-
+public class StudentHistoricalLessonsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,35 +36,35 @@ public class StudentRequestFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_student_requests, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_counselings, container, false);
         setElements(view);
         setActions();
         return view;
     }
 
-    private void setElements(final View view){
+    private void setElements(final View view) {
         RestClient restClient = new RestClient(getActivity());
+        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
+        final List<Lesson> historicalLessons = new ArrayList<>();
         Student student = (Student) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
-        final List<Lesson> requestedlessonList = new ArrayList<>();
-        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
-
-        restClient.getWebservices().studentLessons("", student.getId(), "8/1/2017", 2, "requested", new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().studentLessons("", student.getId(), "8/1/2016", 2, "confirmed,requested,rejected,ignored", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
                 for(JsonElement jsonElement: jsonArray){
-                    requestedlessonList.add(Lesson.parseLesson(jsonElement.getAsJsonObject()));
+                    historicalLessons.add(Lesson.parseLesson(jsonElement.getAsJsonObject()));
                 }
 
-                RecyclerView rv_student_requests = (RecyclerView) view.findViewById(R.id.rv_student_requests);
-                rv_student_requests.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_student_requests.setAdapter(new ListLessonsAdapter(getActivity(), requestedlessonList, Constants.REQUEST_TYPE));
+                RecyclerView rv_counseling_history = (RecyclerView) view.findViewById(R.id.rv_counseling_history);
+                rv_counseling_history.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv_counseling_history.setAdapter(new ListLessonsAdapter(getActivity(), historicalLessons,
+                        Constants.NON_REQUEST_TYPE));
 
-                if(requestedlessonList.size() == 0){
+                if(historicalLessons.size() == 0){
                     TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
                     tv_no_counselings.setVisibility(View.VISIBLE);
-                    rv_student_requests.setVisibility(View.GONE);
+                    rv_counseling_history.setVisibility(View.GONE);
                 }
 
                 pb_charging.setVisibility(View.GONE);
@@ -74,5 +73,6 @@ public class StudentRequestFragment extends Fragment{
     }
 
     private void setActions() {
+
     }
 }

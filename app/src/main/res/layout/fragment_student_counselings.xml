@@ -16,13 +16,25 @@
             android:text="Historial de asesorías"
             android:layout_marginBottom="20dp"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_counseling_history"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchMode="columnWidth"
-            android:clipToPadding="false"
-            android:scrollbarStyle="outsideInset"/>
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/pb_charging"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="center"
+                android:visibility="visible"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_counseling_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchMode="columnWidth"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideInset"/>
+        </RelativeLayout>
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

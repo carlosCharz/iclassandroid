@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -90,6 +91,8 @@ public class InstructorCoursesFragment extends Fragment{
 
                 if(courseList.size() == 0 ){
                     rv_payed.setVisibility(View.GONE);
+                    TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
+                    tv_no_courses.setVisibility(View.VISIBLE);
                 }else{
                     rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList, "PAGADO", "Eres un asesor de este curso", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));

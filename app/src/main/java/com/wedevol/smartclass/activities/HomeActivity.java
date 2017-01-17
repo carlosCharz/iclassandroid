@@ -24,7 +24,7 @@ import com.wedevol.smartclass.fragments.instructor.InstructorNotificationsFragme
 import com.wedevol.smartclass.fragments.instructor.InstructorPayCourseFragment;
 import com.wedevol.smartclass.fragments.instructor.InstructorProfileFragment;
 import com.wedevol.smartclass.fragments.instructor.InstructorScheduleFragment;
-import com.wedevol.smartclass.fragments.student.StudentCounselingFragment;
+import com.wedevol.smartclass.fragments.student.StudentHistoricalLessonsFragment;
 import com.wedevol.smartclass.fragments.student.StudentCoursesFragment;
 import com.wedevol.smartclass.fragments.student.StudentLockerFragment;
 import com.wedevol.smartclass.fragments.student.StudentPayCourseFragment;
@@ -183,7 +183,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     fragmentTitle = "Mis Solicitudes";
                     break;
                 case 4:
-                    fragment = new StudentCounselingFragment();
+                    fragment = new StudentHistoricalLessonsFragment();
                     fragmentDrawableId = R.drawable.ic_counsel_black;
                     fragmentTitle = "Mis Asesorías";
                     break;

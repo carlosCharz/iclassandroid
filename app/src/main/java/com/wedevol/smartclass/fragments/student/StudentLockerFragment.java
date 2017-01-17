@@ -51,8 +51,8 @@ public class StudentLockerFragment extends Fragment{
 
     private void setElements(final View view) {
         RestClient restClient = new RestClient(getContext());
-
         b_ask_counsel = (Button) view.findViewById(R.id.b_ask_counsel);
+        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
 
         ImageView iv_user_profile_photo = (ImageView) view.findViewById(R.id.iv_user_profile_photo);
         TextView tv_student_level = (TextView) view.findViewById(R.id.tv_student_level);
@@ -86,6 +86,8 @@ public class StudentLockerFragment extends Fragment{
                     tv_no_counsels.setVisibility(View.VISIBLE);
                     rv_pending_counsels.setVisibility(View.GONE);
                 }
+
+                pb_charging.setVisibility(View.GONE);
             }
         });
     }

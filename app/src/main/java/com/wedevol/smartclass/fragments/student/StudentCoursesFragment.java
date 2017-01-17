@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -46,7 +48,7 @@ public class StudentCoursesFragment extends Fragment{
 
     private void setElements(final View view) {
         RestClient restClient = new RestClient(getActivity());
-
+        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
         b_new_course = (Button) view.findViewById(R.id.b_new_course);
 
         int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
@@ -62,12 +64,13 @@ public class StudentCoursesFragment extends Fragment{
                 }
 
                 RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
-                rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList,
-                        "PAGADO", "Eres un asesor de este curso", Constants.DO_NOT_SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
 
-                /*
-                RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
+                if(courseList.size()>0){
+                    rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList,
+                            "PAGADO", "Eres un asesor de este curso", Constants.DO_NOT_SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
+
+                /* RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
                 rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
                 rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), courseList,
                         "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE ));
@@ -82,8 +85,14 @@ public class StudentCoursesFragment extends Fragment{
                 rv_to_validated.setLayoutManager(new LinearLayoutManager(getActivity()));
                 rv_to_validated.setAdapter(new ListCourseStateAdapter(getActivity(), courseList,
                         "POR VALIDAR", "Mira tu correo para terminar la verificacion", Constants.DO_NOT_SHOW_COURSE_PRICE,
-                        Constants.NOT_SELECTABLE_COURSE));
-                */
+                        Constants.NOT_SELECTABLE_COURSE));*/
+                } else {
+                    rv_payed.setVisibility(View.GONE);
+                    TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
+                    tv_no_courses.setVisibility(View.VISIBLE);
+                }
+
+                pb_charging.setVisibility(View.GONE);
             }
         });
     }
