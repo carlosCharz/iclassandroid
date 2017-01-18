@@ -22,19 +22,10 @@ public interface IClassServices {
     @POST(Urls.LOGIN_URL_STUDENT)
     void authStudent(@Header("email") String authorization, @Body JsonObject request, Callback<JsonObject> callback);
 
-    /**Courses*/
-    @GET(Urls.ONE_COURSE)
-    void getCourse(@Header("Authorization") String authorization, @Query("courseId") int courseId,
-                   Callback<JsonObject> callback);
-
     @GET(Urls.ALL_COURSES)
     void getAllCourses(@Header("Authorization") String authorization, Callback<JsonArray> callback);
 
     /**Students*/
-    @GET(Urls.ONE_STUDENT)
-    void getStudent(@Header("Authorization") String authorization, @Path("userId") int userId,
-                    Callback<JsonObject> callback);
-
     @POST(Urls.NEW_STUDENT)
     void newStudent(@Header("Authorization") String authorization, @Body JsonObject student,
                     Callback<JsonObject> callback);
@@ -48,10 +39,6 @@ public interface IClassServices {
     void enrollOnCourseStudent(@Header("Authorization") String authorization, @Body JsonObject course, IClassCallback<JsonObject> iClassCallback);
 
     /**Instructors*/
-    @GET(Urls.ONE_INSTRUCTOR)
-    void getInstructor(@Header("Authorization") String authorization, @Path("userId") int userId,
-                       Callback<JsonObject> callback);
-
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
                        Callback<JsonObject> callback);

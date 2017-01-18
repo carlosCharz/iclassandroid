@@ -6,18 +6,15 @@ interface Urls {
     String LOGIN_URL_STUDENT = "/auth/student/login";
 
     //Courses
-    String ONE_COURSE = "/courses/"; //get
     String ALL_COURSES = "/courses"; //get
 
     //Student
     String NEW_STUDENT = "/students"; //post
-    String ONE_STUDENT = "/students/{userId}"; //get
     String HOME_STUDENT = "/students/{studentId}/classes";
     String STUDENT_ENROLL_ON_COURSE = "/studentenrollments";
 
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post
-    String ONE_INSTRUCTOR = "/instructors/{userId}"; //get
     String HOME_INSTRUCTOR = "/instructors/{instructorId}/classes";//home
     String INSTRUCTOR_ENROLL_ON_COURSE = "/instructorenrollments";
 
@@ -29,7 +26,6 @@ interface Urls {
     String DELETE_SCHEDULE = "/schedules/{scheduleId}"; //delete
     String LIST_INSTRUCTOR_SCHEDULE = "/schedules/week"; //list instructorId=1
 
-
     //Instructor enrollment
     String GET_INSTRUCTOR_COURSES = "/instructors/{instructorId}/courses"; //get
 
@@ -38,5 +34,4 @@ interface Urls {
     String FREE_HOURS_FOR_CLASS = "/schedules/fetch";
     String NEW_CLASS = "/classes";
     String GET_CLASS_INSTRUCTORS = "/instructors/fetch"; //?courseId=1&weekDay=mon&startTime=10&endTime=12
-
 }

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /** Created by paolo on 12/13/16.*/
@@ -87,13 +88,21 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
         viewHolder.b_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewHolder.b_cancel.setEnabled(false);
                 RestClient restClient = new RestClient(context);
-                lesson.setStatus("confirmed");
+                lesson.setStatus("rejected");
                 restClient.getWebservices().updateLesson("", lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
                         mItems.remove(finalI);
+                        notifyItemChanged(finalI);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error){
+                        super.failure(error);
+                        viewHolder.b_cancel.setEnabled(true);
                     }
                 });
             }
@@ -102,13 +111,21 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
         viewHolder.b_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                viewHolder.b_confirm.setEnabled(false);
                 RestClient restClient = new RestClient(context);
-                lesson.setStatus("rejected");
+                lesson.setStatus("confirmed");
                 restClient.getWebservices().updateLesson("", lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
                         mItems.remove(finalI);
+                        notifyItemChanged(finalI);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error){
+                        super.failure(error);
+                        viewHolder.b_confirm.setEnabled(true);
                     }
                 });
             }
