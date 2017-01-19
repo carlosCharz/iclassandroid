@@ -1,8 +1,13 @@
 package com.wedevol.smartclass.models;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Instructor extends User {
@@ -166,7 +171,12 @@ public class Instructor extends User {
         //"password": "string",
         jsonObject.addProperty("password", this.getPassword());
         //placeOptions": ["string"],
-        jsonObject.addProperty("placeOptions", "university");
+        List<String> list = new ArrayList<>();
+        list.add("university");
+        list.add("house");
+        Gson gson = new Gson();
+        JsonElement element = gson.toJsonTree(list, new TypeToken<ArrayList<String>>() {}.getType());
+        jsonObject.add("placeOptions", element);
 
         //"birthday": "2017-01-09T21:22:01.004Z", //DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); //String birth = df.format(this.getBirthday()); //jsonObject.addProperty("birthday", birth);
         //"gender": "string", //jsonObject.addProperty("gender", "M");
