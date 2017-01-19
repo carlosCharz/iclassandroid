@@ -165,11 +165,12 @@ public class Instructor extends User {
         jsonObject.addProperty("email", this.getEmail());
         //"password": "string",
         jsonObject.addProperty("password", this.getPassword());
+        //placeOptions": ["string"],
+        jsonObject.addProperty("placeOptions", "university");
 
         //"birthday": "2017-01-09T21:22:01.004Z", //DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); //String birth = df.format(this.getBirthday()); //jsonObject.addProperty("birthday", birth);
         //"gender": "string", //jsonObject.addProperty("gender", "M");
         //"level": 0, //jsonObject.addProperty("level", 0);
-        //"placeOptions": ["string"], //jsonObject.addProperty("placeOptions", "[]");
         //"profilePictureUrl": "string", //jsonObject.addProperty("profilePictureUrl", "None");
         //"rating": 0, //jsonObject.addProperty("rating", 0);
         //"totalHours": 0, //jsonObject.addProperty("totalHours", 0);

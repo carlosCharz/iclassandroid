@@ -13,7 +13,6 @@ import retrofit.client.Response;
 /** Created by Paolo on 3/14/2016.*/
 public class IClassCallback<T> implements Callback<T> {
     private final Context context;
-    private Toast requestToast;
 
     public IClassCallback(Context context) {
         this.context = context;
