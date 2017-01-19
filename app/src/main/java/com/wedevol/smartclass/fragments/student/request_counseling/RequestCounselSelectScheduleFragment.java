@@ -47,6 +47,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     private int[] dateDelimiters = new int[2];
     private ItemClickListener self;
     private RequestCounselActivity requestCounselActivity;
+    private View currentView;
 
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
@@ -73,6 +74,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     }
 
     private void setupElements(View view) {
+        currentView = view;
         oldPosition = -1;
         self = this;
         requestCounselActivity = ((RequestCounselActivity)getActivity());
@@ -212,26 +214,31 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);
+                        TextView tv_no_schedules = (TextView) currentView.findViewById(R.id.tv_no_schedules);
+                        if(jsonArray.size()>0){
+                            tv_no_schedules.setVisibility(View.GONE);
+                            for(int i = 0 ; i< jsonArray.size(); i++){
+                                JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
+                                int startTime = jsonObject.get("startTime").getAsInt();
+                                int endTime= jsonObject.get("endTime").getAsInt();
+                                String timeInterval = startTime + " a " + endTime;
+                                timesList.add(timeInterval);
+                            }
 
-                        for(int i = 0 ; i< jsonArray.size(); i++){
-                            JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
-                            int startTime = jsonObject.get("startTime").getAsInt();
-                            int endTime= jsonObject.get("endTime").getAsInt();
-                            String timeInterval = startTime + " a " + endTime;
-                            timesList.add(timeInterval);
-                        }
+                            listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, self);
+                            rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
 
-                        listTimeAdapter = new ListTimesAdapter(getActivity(), timesList, self);
-                        rv_available_hours.setAdapter(new ScaleInAnimationAdapter(listTimeAdapter));
-
-                        if(requestCounselActivity.getBeginTime()!=null && requestCounselActivity.getEndTime()!=null){
-                            for(int i = 0 ; i< timesList.size(); i++){
-                                if(timesList.get(i).equals( requestCounselActivity.getBeginTime() + " a " +
-                                        requestCounselActivity.getEndTime())){
-                                    listTimeAdapter.updatePosition(true, i);
-                                    oldPosition = i;
+                            if(requestCounselActivity.getBeginTime()!=null && requestCounselActivity.getEndTime()!=null){
+                                for(int i = 0 ; i< timesList.size(); i++){
+                                    if(timesList.get(i).equals( requestCounselActivity.getBeginTime() + " a " +
+                                            requestCounselActivity.getEndTime())){
+                                        listTimeAdapter.updatePosition(true, i);
+                                        oldPosition = i;
+                                    }
                                 }
                             }
+                        } else{
+                            tv_no_schedules.setVisibility(View.VISIBLE);
                         }
                     }
                 });

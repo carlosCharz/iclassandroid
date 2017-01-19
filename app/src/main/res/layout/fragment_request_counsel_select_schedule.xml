@@ -52,16 +52,34 @@
             android:layout_height="wrap_content"
             android:text="Horas disponibles"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_available_hours"
-            android:layout_marginTop="15dp"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:stretchMode="columnWidth"
-            android:clipToPadding="false"
-            android:scrollbarStyle="outsideInset"/>
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_available_hours"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:stretchMode="columnWidth"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideInset"/>
+
+            <TextView
+                android:id="@+id/tv_no_schedules"
+                android:drawableTop="@drawable/ic_schedule_black"
+                android:gravity="center"
+                android:layout_margin="50dp"
+                android:textSize="22sp"
+                android:text="Ningun asesor atiende en este horario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+
 
         <TextView
             android:layout_marginTop="30dp"

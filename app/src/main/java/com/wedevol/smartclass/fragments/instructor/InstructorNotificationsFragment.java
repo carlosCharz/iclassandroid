@@ -71,6 +71,5 @@ public class InstructorNotificationsFragment extends Fragment {
     }
 
     private void setActions() {
-
     }
 }
