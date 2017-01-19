@@ -109,6 +109,7 @@
             <TextView
                 android:background="@drawable/custom_combo_background"
                 android:id="@+id/tv_course"
+                android:hint="Curso gratis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
