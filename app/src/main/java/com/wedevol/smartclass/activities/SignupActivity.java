@@ -152,15 +152,12 @@ public class SignupActivity extends AppCompatActivity {
                     student.setPhone(phone);
                     student.setEmail(email);
                     student.setPassword(password);
-
+                    JsonObject studentObject = student.toJson();
+                    studentObject.addProperty("courseId", courseId);
                     /* student only attributes birthday = 2016-12-27T14:44:28.186Z",
-                    gender = "string", profilePictureUrl = "string", university = "string"
-                    //missing attributes:
-                    /* id should not be send
-                    placeOptions = [] rating = 0 level = 0 totalHours = 0*/
-
+                    gender = "string", profilePictureUrl = "string", university = "string"*/
                     try {
-                        restClient.getWebservices().newStudent("", student.toJson(), new IClassCallback<JsonObject>(self){
+                        restClient.getWebservices().newStudent("", studentObject, new IClassCallback<JsonObject>(self){
                             @Override
                             public void success(JsonObject jsonObject, Response response) {
                                 super.success(jsonObject, response);
@@ -180,8 +177,10 @@ public class SignupActivity extends AppCompatActivity {
                     instructor.setPhone(phone);
                     instructor.setEmail(email);
                     instructor.setPassword(password);
+                    JsonObject instructorObject = instructor.toJson();
+                    instructorObject.addProperty("courseId", courseId);
 
-                    restClient.getWebservices().newInstructor("", instructor.toJson(), new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().newInstructor("", instructorObject, new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
