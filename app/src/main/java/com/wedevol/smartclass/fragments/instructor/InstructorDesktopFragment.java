@@ -57,10 +57,11 @@ public class InstructorDesktopFragment extends Fragment {
         TextView tv_counselor_level = (TextView) view.findViewById(R.id.tv_counselor_level);
         ProgressBar pb_counselor_progress = (ProgressBar) view.findViewById(R.id.pb_counselor_progress);
         TextView tv_counselor_counseling_time = (TextView) view.findViewById(R.id.tv_counselor_counseling_time);
-        RatingBar rb_counselor_rating = (RatingBar) view.findViewById(R.id.rb_counselor_rating_stars);
+        RatingBar rb_counselor_rating_stars = (RatingBar) view.findViewById(R.id.rb_counselor_rating_stars);
         TextView tv_counselor_rating_number = (TextView) view.findViewById(R.id.tv_counselor_rating_number);
 
-        Drawable progress = rb_counselor_rating.getProgressDrawable();
+
+        Drawable progress = rb_counselor_rating_stars.getProgressDrawable();
         DrawableCompat.setTint(progress, Color.WHITE);
 
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
@@ -70,9 +71,7 @@ public class InstructorDesktopFragment extends Fragment {
         tv_counselor_level.setText("Nivel "+ instructor.getLevel());
         pb_counselor_progress.setProgress(((Double) instructor.getRating()).intValue());
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
-        rb_counselor_rating.setRating((float)instructor.getRating());
-
-
+        rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
         final List<Lesson> pendingCounselleds = new ArrayList<>();
 

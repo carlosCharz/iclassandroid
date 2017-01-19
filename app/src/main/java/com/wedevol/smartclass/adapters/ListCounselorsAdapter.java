@@ -53,7 +53,7 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
 
         viewHolder.tv_counsellor_name.setText(instructor.getName());
         viewHolder.tv_counsellor_rating.setText("" + instructor.getRating());
-        viewHolder.tv_counsellor_hourly_rate.setText("S/./H "+ instructor.getHourlyRate());
+        viewHolder.tv_counsellor_hourly_rate.setText("S/./H "+ instructor.getPrice());
 
         final int n = i;
         viewHolder.cd_counsellor_holder.setOnClickListener(new View.OnClickListener() {

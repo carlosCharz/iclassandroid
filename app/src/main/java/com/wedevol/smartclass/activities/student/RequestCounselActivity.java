@@ -119,7 +119,7 @@ public class RequestCounselActivity extends AppCompatActivity {
     }
 
     public String getInstructorHourlyRate() {
-        return ""+instructor.getHourlyRate();
+        return ""+instructor.getPrice();
     }
 
     public int getInstructorId() {

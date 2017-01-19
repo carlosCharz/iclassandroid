@@ -50,8 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    >
+                    android:layout_marginBottom="8dp">
                     <RatingBar
                         android:id="@+id/rb_counselor_rating_stars"
                         style = "?android:attr/ratingBarStyleSmall"
@@ -61,6 +60,8 @@
                         android:max="5"/>
 
                     <TextView
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp"
                         android:id="@+id/tv_counselor_rating_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

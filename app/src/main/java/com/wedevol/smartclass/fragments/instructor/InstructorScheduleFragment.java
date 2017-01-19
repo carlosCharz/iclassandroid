@@ -223,17 +223,12 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
                     rv_sunday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), sunList, "DOMINGO", self));
                 }
 
+                TextView tv_no_schedules = (TextView) view.findViewById(R.id.tv_no_schedules);
                 if(monList.size() == 0 && tueList.size() == 0 && wedList.size() == 0 && thuList.size() == 0
                         && friList.size() == 0 && satList.size() == 0 && sunList.size() == 0){
-                    TextView tv_no_schedules = (TextView) view.findViewById(R.id.tv_no_schedules);
                     tv_no_schedules.setVisibility(View.VISIBLE);
-                    rv_monday_time.setVisibility(View.GONE);
-                    rv_tuesday_time.setVisibility(View.GONE);
-                    rv_wednesday_time.setVisibility(View.GONE);
-                    rv_thursday_time.setVisibility(View.GONE);
-                    rv_friday_time.setVisibility(View.GONE);
-                    rv_saturday_time.setVisibility(View.GONE);
-                    rv_sunday_time.setVisibility(View.GONE);
+                }else{
+                    tv_no_schedules.setVisibility(View.GONE);
                 }
 
                 pb_charging.setVisibility(View.GONE);

@@ -11,7 +11,7 @@ import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
 public class Instructor extends User {
-    private double hourlyRate = -0.1;
+    private int price = -1;
 
     public Instructor(){
 
@@ -29,12 +29,12 @@ public class Instructor extends User {
         return getFirstname();
     }
 
-    public void setHourlyRate(double hourlyRate) {
-        this.hourlyRate = hourlyRate;
+    public int getPrice() {
+        return price;
     }
 
-    public double getHourlyRate() {
-        return hourlyRate;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     //TODO: json builder
@@ -49,6 +49,7 @@ public class Instructor extends User {
         private double mRating;
         private int mLevel;
         private int mTotalHours;
+        private int mPrice;
 
         Builder(int id) {
             mId = id;
@@ -99,6 +100,11 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder price(int price) {
+            mPrice = price;
+            return this;
+        }
+
         public Instructor build() {
             Instructor instructor = new Instructor();
             instructor.setId(mId);
@@ -111,7 +117,7 @@ public class Instructor extends User {
             instructor.setRating(mRating);
             instructor.setLevel(mLevel);
             instructor.setTotalHours(mTotalHours);
-
+            instructor.setPrice(mPrice);
             return instructor;
         }
     }
@@ -153,6 +159,10 @@ public class Instructor extends User {
 
         if (responseObject.has("totalHours") && !responseObject.get("totalHours").isJsonNull()) {
             instructorBuilder.totalHours(responseObject.get("totalHours").getAsInt());
+        }
+
+        if (responseObject.has("price") && !responseObject.get("price").isJsonNull()) {
+            instructorBuilder.price(responseObject.get("price").getAsInt());
         }
 
         return instructorBuilder.build();

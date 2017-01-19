@@ -11,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.models.Student;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
+
+import retrofit.client.Response;
 
 /** Created by paolorossi on 12/8/16.*/
 public class StudentProfileFragment extends Fragment{
@@ -68,6 +73,22 @@ public class StudentProfileFragment extends Fragment{
         tv_student_profile_email.setText(student.getEmail());
         tv_student_profile_courses_taken.setText(0+" cursos");
         tv_student_profile_time.setText(student.getTotalHours() + " hrs");
+
+        RestClient restClient = new RestClient(getContext());
+        restClient.getWebservices().getStudentCourses("",
+                SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
+                new IClassCallback<JsonArray>(getActivity()){
+                    @Override
+                    public void success(JsonArray jsonArray, Response response) {
+                        super.success(jsonArray, response);
+                        if(jsonArray.size()>0){
+                            if(jsonArray.size() == 1 )
+                                tv_student_profile_courses_taken.setText(jsonArray.size()+" curso");
+                            else
+                                tv_student_profile_courses_taken.setText(jsonArray.size()+" cursos");
+                        }
+                    }
+                });
     }
 
     private void setActions() {

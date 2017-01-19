@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -62,8 +61,8 @@ public class StudentHistoricalLessonsFragment extends Fragment {
                         Constants.NON_REQUEST_TYPE));
 
                 if(historicalLessons.size() == 0){
-                    TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
-                    tv_no_counselings.setVisibility(View.VISIBLE);
+                    //TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
+                    //tv_no_counselings.setVisibility(View.VISIBLE);
                     rv_counseling_history.setVisibility(View.GONE);
                 }
 
