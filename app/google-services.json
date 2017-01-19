@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "31756421202",
+    "firebase_url": "https://iclass-cc840.firebaseio.com",
+    "project_id": "iclass-cc840",
+    "storage_bucket": "iclass-cc840.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31756421202:android:7619dd7582c47257",
+        "android_client_info": {
+          "package_name": "com.wedevol.smartclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31756421202-928uosflpmfv8gd7g2hl3ghg7qokcorg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPVFtxqlycAFRNkpdbhvko60_zgrgoajk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
