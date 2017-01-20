@@ -1,6 +1,8 @@
 package com.wedevol.smartclass.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -13,12 +15,14 @@ import android.widget.TextView;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.dialogs.ChangePriceDialogFragment;
+import com.wedevol.smartclass.utils.interfaces.PriceChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolo on 12/15/16.*/
-public class ListCourseStateAdapter extends RecyclerView.Adapter{
+@SuppressLint("ParcelCreator")
+public class ListCourseStateAdapter extends RecyclerView.Adapter implements PriceChangeListener {
     private final List<Course> mItems;
     private final Activity context;
     private final String headerName;
@@ -26,10 +30,12 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
     private final boolean showHourlyRate;
     private final boolean selectable;
     private List<Boolean> positionsSelected;
+    private ListCourseStateAdapter self;
 
     public ListCourseStateAdapter(Activity context, List<Course> list, String headerName,
                                   String headerExplanation, boolean showHourlyRate, boolean selectable) {
         super();
+        self = this;
         this.context = context;
         mItems = list;
         this.headerName = headerName;
@@ -71,15 +77,18 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
             final Course course = mItems.get(finalI-1);
             ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(course.getName());
             if(showHourlyRate) {
+
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(""+course.getPrice());
+
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         ChangePriceDialogFragment suggestCourseDialogFragment =
                                 ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price, course.getId(),
-                                        course.getCurrency(), course.getStatus());
+                                        course.getCurrency(), course.getStatus(), finalI-1, self);
                         suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
+
                     }
                 });
             } else {
@@ -97,7 +106,7 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
                     @Override
                     public void onClick(View view) {
                         positionsSelected.set(finalI-1, !positionsSelected.get(finalI-1));
-                        notifyItemChanged(finalI);
+                        notifyItemChanged(finalI-1);
                     }
                 });
             }
@@ -107,6 +116,22 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
     @Override
     public int getItemCount() {
         return mItems.size()+1;
+    }
+
+    @Override
+    public void onPriceChanged(int position, int newPrice) {
+        mItems.get(position).setPrice(newPrice);
+        notifyItemChanged(position+1);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 
     private class HeadViewHolder extends RecyclerView.ViewHolder{

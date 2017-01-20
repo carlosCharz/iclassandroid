@@ -7,6 +7,7 @@ public interface Constants {
     String STUDENT_TYPE = "student_type";
     String INSTRUCTOR_TYPE = "instructor_type";
     String STUDENT_COURSE_TYPE = "student_course_type";
+
     boolean REQUEST_TYPE = true;
     boolean NON_REQUEST_TYPE = false;
 
@@ -31,6 +32,8 @@ public interface Constants {
     String BUNDLE_BANK_NAME = "bundle_bank_name";
     String BUNDLE_CURRENCY = "bundle_currency_value";
     String BUNDLE_STATUS = "bundle_status";
+    String BUNDLE_POSITION = "bundle_position";
+    String BUNDLE_PRICE_CHANGE_LISTENER = "bundle_price_listener";
 
     boolean SHOW_COURSE_PRICE = true;
     boolean DO_NOT_SHOW_COURSE_PRICE = false;

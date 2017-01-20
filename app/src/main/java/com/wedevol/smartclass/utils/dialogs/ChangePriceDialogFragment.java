@@ -14,6 +14,7 @@ import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.interfaces.PriceChangeListener;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -26,12 +27,15 @@ public class ChangePriceDialogFragment extends DialogFragment {
     }
 
     public static ChangePriceDialogFragment newInstance(int layoutShowedId, int courseId, String currency,
-                                                        String status) {
+                                                        String status, int position, PriceChangeListener priceChangeListener) {
         Bundle args = new Bundle();
         args.putInt(Constants.BUNDLE_LAYOUT_ID, layoutShowedId);
         args.putInt(Constants.BUNDLE_COURSE_ID, courseId);
         args.putString(Constants.BUNDLE_CURRENCY, currency);
         args.putString(Constants.BUNDLE_STATUS, status);
+        args.putInt(Constants.BUNDLE_POSITION, position);
+        args.putParcelable(Constants.BUNDLE_PRICE_CHANGE_LISTENER, priceChangeListener);
+
 
         ChangePriceDialogFragment fragment = new ChangePriceDialogFragment();
         fragment.setArguments(args);
@@ -49,6 +53,8 @@ public class ChangePriceDialogFragment extends DialogFragment {
         final int courseId = getArguments().getInt(Constants.BUNDLE_COURSE_ID);
         final String currency = getArguments().getString(Constants.BUNDLE_CURRENCY);
         final String status = getArguments().getString(Constants.BUNDLE_STATUS);
+        final int position = getArguments().getInt(Constants.BUNDLE_POSITION);
+        final PriceChangeListener priceChangeListener = getArguments().getParcelable(Constants.BUNDLE_PRICE_CHANGE_LISTENER);
 
         View view = inflater.inflate(layoutShowedId/*R.layout.dialog_suggest_course*/, null);
         final TextView tv_dialog_course_price = (TextView) view.findViewById(R.id.tv_dialog_course_price);
@@ -61,7 +67,7 @@ public class ChangePriceDialogFragment extends DialogFragment {
                         String course_price = tv_dialog_course_price.getText().toString();
 
                         if(!course_price.isEmpty()) {
-                            int instructorPrice = Integer.parseInt(course_price);
+                            final int instructorPrice = Integer.parseInt(course_price);
                             int instructorId = SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId();
 
                             JsonObject jsonCourse = new JsonObject();
@@ -85,6 +91,7 @@ public class ChangePriceDialogFragment extends DialogFragment {
                                 @Override
                                 public void success(JsonObject jsonObject, Response response) {
                                     super.success(jsonObject, response);
+                                    priceChangeListener.onPriceChanged(position, instructorPrice);
                                     dialog.dismiss();
                                 }
                             });
