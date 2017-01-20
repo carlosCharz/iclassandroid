@@ -104,8 +104,6 @@
                     android:drawableRight="@drawable/ic_toggle_password_black"/>
             </android.support.design.widget.TextInputLayout>
 
-
-
             <TextView
                 android:background="@drawable/custom_combo_background"
                 android:id="@+id/tv_course"

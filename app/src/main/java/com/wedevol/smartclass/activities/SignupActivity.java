@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
@@ -81,10 +82,7 @@ public class SignupActivity extends AppCompatActivity {
         b_signup = (Button) findViewById(R.id.b_signup);
         sp_type = (Spinner) findViewById(R.id.sp_type);
         tv_course = (TextView) findViewById(R.id.tv_course);
-        sp_type.setVisibility(View.VISIBLE);
-        tv_course.setVisibility(View.VISIBLE);
         civ_profile_photo = (CircleImageView) findViewById(R.id.civ_profile_photo);
-
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
 
         List<String> typeArray =  new ArrayList<>();
@@ -214,50 +212,58 @@ public class SignupActivity extends AppCompatActivity {
 
     public boolean validate() {
         boolean valid = true;
-
         String name = et_name.getText().toString();
         String lastName = et_lastname.getText().toString();
         String phone = et_phone.getText().toString();
         String email = et_email.getText().toString();
         String password = et_password.getText().toString();
+        String courseName = tv_course.getText().toString();
 
         if(sp_type.getSelectedItem().equals("¿Alumno o asesor?")){
             valid = false;
+            Toast.makeText(this, "Debe elegir ser asesor o alumno", Toast.LENGTH_SHORT).show();
         }
 
         if (name.isEmpty() || name.length() < 3) {
-            et_name.setError("por lo menos 3 caracteres");
+            et_name.setError("El nombre deberia tener por lo menos 3 caracteres");
             valid = false;
         } else {
             et_name.setError(null);
         }
 
         if (lastName.isEmpty() || lastName.length() < 3) {
-            et_lastname.setError("por lo menos 3 caracteres");
+            et_lastname.setError("El apellido deberia tener por lo menos 3 caracteres");
             valid = false;
         } else {
             et_lastname.setError(null);
         }
 
-        if (phone.isEmpty() || phone.length() < 5) {
-            et_phone.setError("por lo menos 5 dígitos");
+        if (phone.isEmpty() || phone.length() < 7) {
+            et_phone.setError("El telefono es de por lo menos 7 dígitos");
             valid = false;
         } else {
             et_phone.setError(null);
         }
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            et_email.setError("colocar un email válido");
+            et_email.setError("Colocar un email válido");
             valid = false;
         } else {
             et_email.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            et_password.setError("entre 4 y 10 caracteres alfanuméricos");
+        if (password.isEmpty() || password.length() < 4 || password.length() > 20) {
+            et_password.setError("La contrasenha debe tener minimo 4 o maximo 20 caracteres");
             valid = false;
         } else {
             et_password.setError(null);
+        }
+
+        if(courseName.isEmpty()){
+            tv_course.setError("Debe elegir un curso gratuito");
+            valid = false;
+        }else{
+            tv_course.setError(null);
         }
 
         return valid;

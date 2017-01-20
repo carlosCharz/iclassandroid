@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">iClass</string>
+
+    <!-- Login -->
+
+    <string name="forgot_pass_text"><u>¿Olvidaste tu contraseña?</u></string>
+    <string name="login_btn_label">Iniciar sesión</string>
+    <string name="new_user_label">¿Nuevo usuario?</string>
+    <string name="signup_btn_label">Regístrate</string>
+    <string name="coach_text"><u>¿Asesor?</u></string>
+    <string name="create_account_text">Registrar</string>
+
+    <!-- Sign up-->
+    <string name="et_hint_signup_email">Email *</string>
+    <string name="et_hint_signup_password">Contraseña *</string>
+    <string name="et_hint_signup_name">Nombre *</string>
+    <string name="et_hint_signup_lastname">Apellido *</string>
+    <string name="et_hint_signup_telephone_number">Teléfono *</string>
+
+    <!-- Coach code -->
+    <string name="coach_title">Asesor</string>
+    <string name="validate_text">Validar</string>
+    <string name="title_activity_coach_profile">CoachProfileActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Schedule -->
+    <string name="add_schedule_line_text"><u>agregar línea</u></string>
+
+    <!-- Student Profile -->
+    <string name="title_activity_student_profile">StudentProfileActivity</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="nav_item_profile">PERFIL</string>
+    <string name="nav_item_schedule">HORARIO</string>
+    <string name="nav_item_notification">NOTIFICACIONES</string>
+    <string name="nav_item_consultation">MIS ASESORIAS</string>
+    <string name="nav_item_course">MIS CURSOS</string>
+    <string name="nav_item_pay_course">PAGAR CURSO</string>
+    <string name="nav_item_bank_account">CUENTAS BANCARIAS</string>
+    <string name="nav_item_exit">CERRAR SESION</string>
+    <string name="drawer_open">Opening</string>
+    <string name="drawer_close">Closing</string>
+    <string name="iclass_logo_content_description">iClass Logo - Content Description</string>
+    <string name="nav_item_requests">MIS SOLICITUDES</string>
+    <string name="nav_item_desk">ESCRITORIO</string>
+    <string name="nav_item_locker">LOCKER</string>
+    <string name="no_hay_asesorias_pendientes">No hay asesorías pendientes</string>
+    <string name="solicitar_asesoria">Solicitar Asesoría</string>
+    <string name="take_photo">Tomar foto</string>
+    <string name="choose_from_gallery">Elegir de la galeria</string>
+    <string name="choose_option">Escoge una opcion</string>
+    <string name="suggest">Sugerir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="et_hint_login_email">Email</string>
+    <string name="et_hint_login_password">Contraseña</string>
+    <string name="tv_reminder_obligatory_field">* Campos obligatorios</string>
+    <string name="nav_home">HOME</string>
+    <string name="connection_error">Error de conexion</string>
+    <string name="problem_with_internet">Problemas con el internet</string>
+</resources>
