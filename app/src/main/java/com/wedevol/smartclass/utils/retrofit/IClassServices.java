@@ -75,6 +75,11 @@ public interface IClassServices {
     void getInstructorCourses(@Header("Authorization") String authorization,
                               @Path("instructorId") int instructorId, Callback<JsonArray> callback);
 
+    @PUT(Urls.UPDATE_COURSE)
+    void updateInstructorCourse(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                      @Path("courseId") int courseId, @Body JsonObject course, Callback<JsonObject> callback);
+
+
     /**Classes*/
     @PUT(Urls.UPDATE_CLASS)
     void updateLesson(@Header("Authorization") String authorization, @Path("classId") int classId, @Body JsonObject lesson,

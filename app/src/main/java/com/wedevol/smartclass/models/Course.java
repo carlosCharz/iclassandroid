@@ -7,18 +7,13 @@ public class Course {
     private int id = -1;
     private String name = "";
     private String description = "";
+    private String faculty = "";
     private String university = "";
-    private String career = "";
+    private String status;
+    private int price;
+    private String currency;
 
     public Course(){
-    }
-
-    public Course(int id, String name, String description, String university, String career){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.university = university;
-        this.career = career;
     }
 
     public int getId() {
@@ -53,24 +48,47 @@ public class Course {
         this.university = university;
     }
 
-    public String getCareer() {
-        return career;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public void setCareer(String career) {
-        this.career = career;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
-    public int getBaseHourlyRate() {
-        return 25;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     static class Builder {
         private int mId;
         private String mName;
         private String mDescription;
+        private String mFaculty;
         private String mUniversity;
-        private String mCareer;
+        private String mStatus;
+        private int mPrice;
+        private String mCurrency;
 
         Builder(int id) {
             mId = id;
@@ -86,23 +104,42 @@ public class Course {
             return this;
         }
 
+        Course.Builder faculty(String faculty) {
+            mFaculty = faculty;
+            return this;
+        }
+
         Course.Builder university(String university) {
             mUniversity = university;
             return this;
         }
 
-        Course.Builder career(String career) {
-            mCareer = career;
+        Course.Builder status(String status) {
+            mStatus = status;
             return this;
         }
+
+        Course.Builder price(int price) {
+            mPrice = price;
+            return this;
+        }
+
+        Course.Builder currency(String currency) {
+            mCurrency = currency;
+            return this;
+        }
+
 
         public Course build() {
             Course course = new Course();
             course.setId(mId);
             course.setName(mName);
             course.setDescription(mDescription);
+            course.setFaculty(mFaculty);
             course.setUniversity(mUniversity);
-            course.setCareer(mCareer);
+            course.setStatus(mStatus);
+            course.setPrice(mPrice);
+            course.setCurrency(mCurrency);
             return course;
         }
     }
@@ -118,12 +155,24 @@ public class Course {
             courseBuilder.description(responseObject.get("description").getAsString());
         }
 
+        if (responseObject.has("faculty") && !responseObject.get("faculty").isJsonNull()) {
+            courseBuilder.faculty(responseObject.get("faculty").getAsString());
+        }
+
         if (responseObject.has("university") && !responseObject.get("university").isJsonNull()) {
             courseBuilder.university(responseObject.get("university").getAsString());
         }
 
-        if (responseObject.has("career") && !responseObject.get("career").isJsonNull()) {
-            courseBuilder.career(responseObject.get("career").getAsString());
+        if (responseObject.has("status") && !responseObject.get("status").isJsonNull()) {
+            courseBuilder.status(responseObject.get("status").getAsString());
+        }
+
+        if (responseObject.has("price") && !responseObject.get("price").isJsonNull()) {
+            courseBuilder.price(responseObject.get("price").getAsInt());
+        }
+
+        if (responseObject.has("currency") && !responseObject.get("currency").isJsonNull()) {
+            courseBuilder.currency(responseObject.get("currency").getAsString());
         }
 
         return courseBuilder.build();

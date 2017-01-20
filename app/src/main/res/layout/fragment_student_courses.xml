@@ -52,7 +52,15 @@
             android:scrollbarStyle="outsideInset"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_to_validated"
+            android:id="@+id/rv_open"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideInset"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_free"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchMode="columnWidth"

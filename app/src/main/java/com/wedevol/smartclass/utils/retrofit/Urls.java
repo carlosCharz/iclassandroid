@@ -18,6 +18,9 @@ interface Urls {
     String HOME_INSTRUCTOR = "/instructors/{instructorId}/classes";//home
     String INSTRUCTOR_ENROLL_ON_COURSE = "/instructorenrollments";
 
+    //Course
+    String UPDATE_COURSE = "/instructors/{instructorId}/courses/{courseId}/enrollment";//put
+
     //Student Enrollment
     String GET_STUDENT_COURSES = "/students/{studentId}/courses"; //get
 

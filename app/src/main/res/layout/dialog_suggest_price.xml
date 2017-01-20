@@ -24,7 +24,7 @@
 
     <EditText
         android:layout_margin="10dp"
-        android:id="@+id/tv_dialog_course_name"
+        android:id="@+id/tv_dialog_course_price"
         android:hint="Precio"
         android:inputType="number"
         android:layout_width="match_parent"

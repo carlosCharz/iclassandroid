@@ -80,37 +80,82 @@ public class InstructorCoursesFragment extends Fragment{
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
 
-                List<Course> courseList = new ArrayList<>();
+                List<Course> payedCourseList = new ArrayList<>(), freeCourseList = new ArrayList<>(),
+                        openCourseList = new ArrayList<>(), pendingCourseList = new ArrayList<>(),
+                        veryfiedCourseList = new ArrayList<>();
 
                 for(int i = 0; i < jsonArray.size(); i++){
                     JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
-                    courseList.add(Course.parseCourse(jsonObject));
+                    Course course = Course.parseCourse(jsonObject);
+                    switch (course.getStatus()){
+                        case "payed":
+                            payedCourseList.add(course);
+                            break;
+                        case "pendingPayment":
+                            pendingCourseList.add(course);
+                            break;
+                        case "verifyingPayment":
+                            veryfiedCourseList.add(course);
+                            break;
+                        case "open":
+                            openCourseList.add(course);
+                            break;
+                        case "free":
+                            freeCourseList.add(course);
+                            break;
+                    }
                 }
 
                 RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
+                RecyclerView rv_pending_payment = (RecyclerView) view.findViewById(R.id.rv_pending_payment);
+                RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
+                RecyclerView rv_open = (RecyclerView) view.findViewById(R.id.rv_open);
+                RecyclerView rv_free = (RecyclerView) view.findViewById(R.id.rv_free);
 
-                if(courseList.size() == 0 ){
+                if(payedCourseList.size()>0) {
+                    rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), payedCourseList,
+                            "PAGADO", "Eres un asesor de este curso", Constants.SHOW_COURSE_PRICE,
+                            Constants.SELECTABLE_COURSE));
+                }
+
+                if(pendingCourseList.size()>0) {
+                    rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pendingCourseList,
+                            "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo",
+                            Constants.SHOW_COURSE_PRICE,
+                            Constants.SELECTABLE_COURSE));
+                }
+
+                if(veryfiedCourseList.size()>0) {
+                    rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), veryfiedCourseList,
+                            "VERIFICANDO PAGO", "Maximo 24 horas", Constants.SHOW_COURSE_PRICE,
+                            Constants.SELECTABLE_COURSE));
+                }
+
+                if(openCourseList.size()>0) {
+                    rv_open.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_open.setAdapter(new ListCourseStateAdapter(getActivity(), openCourseList,
+                            "ABIERTO", "Para todos", Constants.SHOW_COURSE_PRICE,
+                            Constants.SELECTABLE_COURSE));
+                }
+
+                if(freeCourseList.size()>0) {
+                    rv_free.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_free.setAdapter(new ListCourseStateAdapter(getActivity(), freeCourseList,
+                            "GRATIS", "Por promocion", Constants.SHOW_COURSE_PRICE,
+                            Constants.SELECTABLE_COURSE));
+                }
+
+                if(payedCourseList.size() == 0 && openCourseList.size() == 0 && pendingCourseList.size() == 0 &&
+                        veryfiedCourseList.size() == 0 && freeCourseList.size() == 0){
                     rv_payed.setVisibility(View.GONE);
                     TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
                     tv_no_courses.setVisibility(View.VISIBLE);
-                }else{
-                    rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList, "PAGADO", "Eres un asesor de este curso", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
-                    rv_payed.setVisibility(View.VISIBLE);
                 }
 
                 pb_charging.setVisibility(View.GONE);
-                /* RecyclerView rv_verify_payment = (RecyclerView) view.findViewById(R.id.rv_verify_payment);
-                rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList, "VERIFICANDO PAGO", "Maximo 24 horas", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
-
-                RecyclerView rv_pending_payment = (RecyclerView) view.findViewById(R.id.rv_pending_payment);
-                rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pairList, "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE));
-
-                RecyclerView rv_to_validated = (RecyclerView) view.findViewById(R.id.rv_to_validated);
-                rv_to_validated.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_to_validated.setAdapter(new ListCourseStateAdapter(getActivity(), pairList, "POR VALIDAR", "Mira tu correo para terminar la verificacion", Constants.SHOW_COURSE_PRICE, Constants.NOT_SELECTABLE_COURSE)); */
             }
         });
     }

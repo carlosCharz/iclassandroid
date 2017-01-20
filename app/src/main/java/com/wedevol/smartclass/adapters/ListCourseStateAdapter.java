@@ -62,20 +62,23 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, final int i) {
-        if(getItemViewType(i)==0) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int i) {
+        final int finalI = i;
+        if(getItemViewType(finalI)==0) {
             ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_name.setText(headerName);
             ((ListCourseStateAdapter.HeadViewHolder)viewHolder).tv_header_explanation.setText(headerExplanation);
         } else {
-            final Course course = mItems.get(i-1);
+            final Course course = mItems.get(finalI-1);
             ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(course.getName());
             if(showHourlyRate) {
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
-                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(""+course.getBaseHourlyRate());
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(""+course.getPrice());
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ChangePriceDialogFragment suggestCourseDialogFragment = ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price);
+                        ChangePriceDialogFragment suggestCourseDialogFragment =
+                                ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price, course.getId(),
+                                        course.getCurrency(), course.getStatus());
                         suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
                     }
                 });
@@ -84,7 +87,7 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
             }
 
             if(selectable){
-                if(!positionsSelected.get(i-1)){
+                if(!positionsSelected.get(finalI-1)){
                     ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
                 } else {
                     ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setBackgroundColor(ContextCompat.getColor(context, R.color.light_iron));
@@ -93,8 +96,8 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter{
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        positionsSelected.set(i-1, !positionsSelected.get(i-1));
-                        notifyItemChanged(i);
+                        positionsSelected.set(finalI-1, !positionsSelected.get(finalI-1));
+                        notifyItemChanged(finalI);
                     }
                 });
             }

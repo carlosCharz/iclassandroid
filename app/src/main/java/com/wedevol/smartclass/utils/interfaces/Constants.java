@@ -29,9 +29,11 @@ public interface Constants {
     String BUNDLE_SIMPLE_DATE = "bundle_is_simple_date";
     String BUNDLE_LAYOUT_ID = "bundle_layout_id";
     String BUNDLE_BANK_NAME = "bundle_bank_name";
+    String BUNDLE_CURRENCY = "bundle_currency_value";
+    String BUNDLE_STATUS = "bundle_status";
 
     boolean SHOW_COURSE_PRICE = true;
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
-    boolean SELECTABLE_COURSE = true;
-    boolean NOT_SELECTABLE_COURSE = false;
+    boolean SELECTABLE_COURSE = false;
+    boolean NOT_SELECTABLE_COURSE = true;
 }
