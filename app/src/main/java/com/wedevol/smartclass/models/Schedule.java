@@ -10,6 +10,7 @@ public class Schedule {
     private int endTime = -1;
     private String classDate = "";
     private int instructorId = -1;
+    private boolean available = true;
 
     public int getId() {
         return id;
@@ -51,6 +52,22 @@ public class Schedule {
         this.classDate = classDate;
     }
 
+    public void setInstructorId(int instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    public int getInstructorId() {
+        return instructorId;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     /**
      * Prints the schedule in a presentation format.
     * */
@@ -60,34 +77,31 @@ public class Schedule {
 
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
-
         jsonObject.addProperty("instructorId", this.getInstructorId());
         jsonObject.addProperty("weekDay", this.getWeekDay());
         jsonObject.addProperty("classDate", "10/1/2022");
         jsonObject.addProperty("startTime", this.getStartTime());
         jsonObject.addProperty("endTime", this.getEndTime());
-        jsonObject.addProperty("available", true);
-
+        jsonObject.addProperty("available", this.isAvailable());
         return jsonObject;
-    }
-
-    public void setInstructorId(int instructorId) {
-        this.instructorId = instructorId;
-    }
-
-    public int getInstructorId() {
-        return instructorId;
     }
 
     private static class Builder {
         private int mId;
+        private int mInstructorId;
         private int mStartTime;
         private int mEndTime;
         private String mClassDate;
         private String mWeekDay;
+        private boolean mAvailable;
 
         Builder(int id) {
             mId = id;
+        }
+
+        Schedule.Builder instructorId(int instructorId) {
+            mInstructorId = instructorId;
+            return this;
         }
 
         Schedule.Builder startTime(int startTime) {
@@ -110,13 +124,20 @@ public class Schedule {
             return this;
         }
 
+        Schedule.Builder available(boolean available) {
+            mAvailable = available;
+            return this;
+        }
+
         Schedule build() {
             Schedule schedule = new Schedule();
             schedule.setId(mId);
+            schedule.setInstructorId(mInstructorId);
             schedule.setStartTime(mStartTime);
             schedule.setEndTime(mEndTime);
             schedule.setClassDate(mClassDate);
             schedule.setWeekDay(mWeekDay);
+            schedule.setAvailable(mAvailable);
             return schedule;
         }
     }
@@ -125,6 +146,11 @@ public class Schedule {
         Schedule.Builder scheduleBuilder;
         //"id":2,
         scheduleBuilder = new Schedule.Builder(responseObject.get("id").getAsInt());
+
+        if (responseObject.has("instructorId") && !responseObject.get("instructorId").isJsonNull()) {
+            scheduleBuilder.instructorId(responseObject.get("instructorId").getAsInt());
+        }
+
         //"weekDay":"mon",
         if (responseObject.has("weekDay") && !responseObject.get("weekDay").isJsonNull()) {
             scheduleBuilder.weekDay(responseObject.get("weekDay").getAsString());
@@ -141,6 +167,11 @@ public class Schedule {
         if (responseObject.has("endTime") && !responseObject.get("endTime").isJsonNull()) {
             scheduleBuilder.endTime(responseObject.get("endTime").getAsInt());
         }
+        //"available":true,
+        if (responseObject.has("available") && !responseObject.get("available").isJsonNull()) {
+            scheduleBuilder.available(responseObject.get("available").getAsBoolean());
+        }
+
         return scheduleBuilder.build();
     }
 }

@@ -180,6 +180,8 @@ public class Instructor extends User {
         jsonObject.addProperty("email", this.getEmail());
         //"password": "string",
         jsonObject.addProperty("password", this.getPassword());
+        //"fcmToken": "string"
+        jsonObject.addProperty("fcmToken", this.getFcmToken());
         //placeOptions": ["string"],
         List<String> list = new ArrayList<>();
         list.add("university");

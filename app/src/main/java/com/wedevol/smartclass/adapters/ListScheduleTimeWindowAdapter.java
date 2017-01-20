@@ -82,8 +82,20 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
     }
 
     public void deletePosition(final int position) {
+        Schedule schedule = mItems.get(position);
+        deleteSchedule(schedule, position);
+    }
+
+    public void deleteAll() {
+        for(int i=0; i<mItems.size();i++){
+            deleteSchedule(mItems.get(i), i);
+        }
+    }
+
+    private void deleteSchedule(Schedule schedule, final int position) {
         RestClient restClient = new RestClient(context);
-        restClient.getWebservices().deleteSchedule("", mItems.get(position).getId(), new IClassCallback<JsonObject>(context) {
+        schedule.setAvailable(false);
+        restClient.getWebservices().updateSchedule("", schedule.getId(), schedule.toJson(), new IClassCallback<JsonObject>(context) {
             @Override
             public void success(JsonObject jsonObject, Response response) {
                 super.success(jsonObject, response);
@@ -91,21 +103,6 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
                 notifyDataSetChanged();
             }
         });
-    }
-
-    public void deleteAll() {
-        for(int i=0; i<mItems.size();i++){
-            RestClient restClient = new RestClient(context);
-            final int finalI = i;
-            restClient.getWebservices().deleteSchedule("", mItems.get(i).getId(), new IClassCallback<JsonObject>(context) {
-                @Override
-                public void success(JsonObject jsonObject, Response response) {
-                    super.success(jsonObject, response);
-                    mItems.remove(finalI);
-                    notifyDataSetChanged();
-                }
-            });
-        }
     }
 
     private class HeadViewHolder extends RecyclerView.ViewHolder{

@@ -156,28 +156,30 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
 
                 for(JsonElement jsonElement: jsonArray){
                     Schedule schedule = Schedule.parseSchedule(jsonElement.getAsJsonObject());
-                    switch (schedule.getWeekDay()){
-                        case "mon":
-                            monList.add(schedule);
-                            break;
-                        case "tue":
-                            tueList.add(schedule);
-                            break;
-                        case "wed":
-                            wedList.add(schedule);
-                            break;
-                        case "thu":
-                            thuList.add(schedule);
-                            break;
-                        case "fri":
-                            friList.add(schedule);
-                            break;
-                        case "sat":
-                            satList.add(schedule);
-                            break;
-                        case "sun":
-                            sunList.add(schedule);
-                            break;
+                    if(schedule.isAvailable()){
+                        switch (schedule.getWeekDay()){
+                            case "mon":
+                                monList.add(schedule);
+                                break;
+                            case "tue":
+                                tueList.add(schedule);
+                                break;
+                            case "wed":
+                                wedList.add(schedule);
+                                break;
+                            case "thu":
+                                thuList.add(schedule);
+                                break;
+                            case "fri":
+                                friList.add(schedule);
+                                break;
+                            case "sat":
+                                satList.add(schedule);
+                                break;
+                            case "sun":
+                                sunList.add(schedule);
+                                break;
+                        }
                     }
                 }
 

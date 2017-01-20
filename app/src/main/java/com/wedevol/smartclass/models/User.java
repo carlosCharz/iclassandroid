@@ -20,6 +20,7 @@ public class User {
     private double rating = -1;
     private int level = -1;
     private int totalHours = -1;
+    private String fcmToken = "";
 
     public User(){
     }
@@ -175,6 +176,14 @@ public class User {
 
     public void setTotalHours(int totalHours) {
         this.totalHours = totalHours;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
     }
 
     public String toJsonString() {

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.JsonObject;
 import com.soundcloud.android.crop.Crop;
 import com.wedevol.smartclass.R;
@@ -152,8 +153,10 @@ public class SignupActivity extends AppCompatActivity {
                     student.setPhone(phone);
                     student.setEmail(email);
                     student.setPassword(password);
+                    student.setFcmToken(FirebaseInstanceId.getInstance().getToken());
                     JsonObject studentObject = student.toJson();
                     studentObject.addProperty("courseId", courseId);
+
                     /* student only attributes birthday = 2016-12-27T14:44:28.186Z",
                     gender = "string", profilePictureUrl = "string", university = "string"*/
                     try {
@@ -177,6 +180,7 @@ public class SignupActivity extends AppCompatActivity {
                     instructor.setPhone(phone);
                     instructor.setEmail(email);
                     instructor.setPassword(password);
+                    instructor.setFcmToken(FirebaseInstanceId.getInstance().getToken());
                     JsonObject instructorObject = instructor.toJson();
                     instructorObject.addProperty("courseId", courseId);
 
