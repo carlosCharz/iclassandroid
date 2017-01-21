@@ -160,7 +160,7 @@ public class Student extends User{
         //"password": "string",
         jsonObject.addProperty("password", this.getPassword());
         //"fcmToken": "string"
-        jsonObject.addProperty("fcmToken", this.getFcmToken());
+        //jsonObject.addProperty("fcmToken", this.getFcmToken());
         //placeOptions": ["string"],
         List<String> list = new ArrayList<>();
         list.add("university");

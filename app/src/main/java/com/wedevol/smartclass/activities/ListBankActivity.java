@@ -49,11 +49,11 @@ public class ListBankActivity extends AppCompatActivity {
         rv_banks = (RecyclerView) findViewById(R.id.rv_banks);
 
         List<String> banks = new ArrayList<>();
-        banks.add("BCP");
-        banks.add("MiBanco");
-        banks.add("Wiesse");
-        banks.add("Interbank");
-        banks.add("El bolsillo de Luchito");
+        //banks.add("BCP");
+        //banks.add("MiBanco");
+        //banks.add("Wiesse");
+        //banks.add("Interbank");
+        //banks.add("El bolsillo de Luchito");
 
         if(banks.size() == 0 ){
             rv_banks.setVisibility(View.GONE);
