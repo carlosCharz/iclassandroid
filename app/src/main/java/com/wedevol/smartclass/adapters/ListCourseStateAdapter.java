@@ -77,10 +77,8 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
             final Course course = mItems.get(finalI-1);
             ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_name.setText(course.getName());
             if(showHourlyRate) {
-
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.VISIBLE);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setText(""+course.getPrice());
-
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).rl_course_holder.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

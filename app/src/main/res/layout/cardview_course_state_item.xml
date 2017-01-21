@@ -19,6 +19,9 @@
             tools:text="Cálculo 1"/>
 
         <TextView
+            android:drawableRight="@drawable/ic_mode_edit_black"
+            android:drawableEnd="@drawable/ic_mode_edit_black"
+            android:gravity="center"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:id="@+id/tv_course_hourly_rate"
