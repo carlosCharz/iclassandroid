@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -42,13 +43,14 @@ public class SuggestCourseDialogFragment extends DialogFragment {
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(layoutShowedId/*R.layout.dialog_suggest_course*/, null))
+        final View view = inflater.inflate(layoutShowedId/*R.layout.dialog_suggest_course*/, null);
+        builder.setView(view)
                 // Add action buttons
                 .setPositiveButton(R.string.suggest, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, int id) {
                         // TODO this should send a message to our services for suggesting the new course
-                        TextView tv_dialog_course_name = (TextView) getActivity().findViewById(R.id.tv_dialog_course_name);
+                        TextView tv_dialog_course_name = (TextView) view.findViewById(R.id.tv_dialog_course_name);
                         String courseName = tv_dialog_course_name.getText().toString();
                         if(!courseName.isEmpty()){
                             JsonObject jsonObject = new JsonObject();
