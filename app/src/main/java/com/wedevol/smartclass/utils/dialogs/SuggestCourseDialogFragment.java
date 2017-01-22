@@ -49,7 +49,6 @@ public class SuggestCourseDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.suggest, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(final DialogInterface dialog, int id) {
-                        // TODO this should send a message to our services for suggesting the new course
                         TextView tv_dialog_course_name = (TextView) view.findViewById(R.id.tv_dialog_course_name);
                         String courseName = tv_dialog_course_name.getText().toString();
                         if(!courseName.isEmpty()){
