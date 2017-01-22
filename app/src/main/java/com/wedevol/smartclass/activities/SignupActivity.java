@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,12 +92,26 @@ public class SignupActivity extends AppCompatActivity {
         typeArray.add("Asesor");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typeArray);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
     }
 
     private void setActions() {
+        sp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(position == 2){
+                    tv_course.setVisibility(View.GONE);
+                } else {
+                    tv_course.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+        });
+
         //for the event on the right drawable
         et_password.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -180,7 +195,6 @@ public class SignupActivity extends AppCompatActivity {
                     instructor.setPassword(password);
                     instructor.setFcmToken(FirebaseInstanceId.getInstance().getToken());
                     JsonObject instructorObject = instructor.toJson();
-                    instructorObject.addProperty("courseId", courseId);
 
                     restClient.getWebservices().newInstructor("", instructorObject, new IClassCallback<JsonObject>(self){
                         @Override
@@ -194,6 +208,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
         });
+
         iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,8 +233,9 @@ public class SignupActivity extends AppCompatActivity {
         String email = et_email.getText().toString();
         String password = et_password.getText().toString();
         String courseName = tv_course.getText().toString();
+        String selectedUserType= sp_type.getSelectedItem().toString();
 
-        if(sp_type.getSelectedItem().equals("¿Alumno o asesor?")){
+        if(selectedUserType.equals("¿Alumno o asesor?")){
             valid = false;
             Toast.makeText(this, "Debe elegir ser asesor o alumno", Toast.LENGTH_SHORT).show();
         }
@@ -252,14 +268,14 @@ public class SignupActivity extends AppCompatActivity {
             et_email.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 20) {
+        if (password.isEmpty() || password.length() < 6 || password.length() > 20) {
             et_password.setError("La contrasenha debe tener minimo 4 o maximo 20 caracteres");
             valid = false;
         } else {
             et_password.setError(null);
         }
 
-        if(courseName.isEmpty()){
+        if(selectedUserType.equals("Alumno") && courseName.isEmpty()){
             tv_course.setError("Debe elegir un curso gratuito");
             valid = false;
         }else{
