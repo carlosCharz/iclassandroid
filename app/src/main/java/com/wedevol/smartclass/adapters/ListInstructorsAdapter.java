@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Created by paolo on 12/13/16.*/
-public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsAdapter.ViewHolder> {
+public class ListInstructorsAdapter extends RecyclerView.Adapter<ListInstructorsAdapter.ViewHolder> {
     private final List<Instructor> mItems;
     private final List<Boolean> positionsSelected;
     private final Activity context;
     private ItemClickListener itemClickListener;
 
-    public ListCounselorsAdapter(Activity context, List<Instructor> list, ItemClickListener itemClickListener) {
+    public ListInstructorsAdapter(Activity context, List<Instructor> list, ItemClickListener itemClickListener) {
         super();
         this.context = context;
         mItems = list;
@@ -35,14 +35,14 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
     }
 
     @Override
-    public ListCounselorsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ListInstructorsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.cardview_elligible_counselor, viewGroup, false);
-        return new ListCounselorsAdapter.ViewHolder(v);
+                .inflate(R.layout.cardview_elligible_instructor, viewGroup, false);
+        return new ListInstructorsAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ListCounselorsAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ListInstructorsAdapter.ViewHolder viewHolder, int i) {
         final Instructor instructor = mItems.get(i);
 
         if(!positionsSelected.get(i)){
@@ -54,6 +54,7 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
         viewHolder.tv_counsellor_name.setText(instructor.getName());
         viewHolder.tv_counsellor_rating.setText("" + instructor.getRating());
         viewHolder.tv_counsellor_hourly_rate.setText("S/./H "+ instructor.getPrice());
+        viewHolder.tv_counsellor_level.setText("" + instructor.getLevel());
 
         final int n = i;
         viewHolder.cd_counsellor_holder.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +83,7 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
         final TextView tv_counsellor_name;
         final TextView tv_counsellor_rating;
         final TextView tv_counsellor_hourly_rate;
+        final TextView tv_counsellor_level;
         final CardView cd_counsellor_holder;
 
         ViewHolder(View itemView) {
@@ -89,6 +91,7 @@ public class ListCounselorsAdapter  extends RecyclerView.Adapter<ListCounselorsA
             tv_counsellor_name = (TextView) itemView.findViewById(R.id.tv_counsellor_name);
             tv_counsellor_rating = (TextView) itemView.findViewById(R.id.tv_counsellor_rating);
             tv_counsellor_hourly_rate = (TextView) itemView.findViewById(R.id.tv_counsellor_hourly_rate);
+            tv_counsellor_level = (TextView) itemView.findViewById(R.id.tv_counsellor_level);
             cd_counsellor_holder = (CardView) itemView.findViewById(R.id.cd_counsellor_holder);
         }
     }

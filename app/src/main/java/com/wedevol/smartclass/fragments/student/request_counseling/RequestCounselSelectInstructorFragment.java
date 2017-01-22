@@ -12,7 +12,7 @@ import android.widget.Button;
 import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
-import com.wedevol.smartclass.adapters.ListCounselorsAdapter;
+import com.wedevol.smartclass.adapters.ListInstructorsAdapter;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -28,7 +28,7 @@ import retrofit.client.Response;
 public class RequestCounselSelectInstructorFragment extends Fragment implements ItemClickListener {
     private Button b_next;
     private int oldPosition;
-    private ListCounselorsAdapter listCounselorsAdapter;
+    private ListInstructorsAdapter listInstructorsAdapter;
     private ItemClickListener self;
     private RequestCounselActivity requestCounselActivity;
 
@@ -82,15 +82,15 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
                         rv_elligible_counsellors.setHasFixedSize(true);
                         rv_elligible_counsellors.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-                        listCounselorsAdapter = new ListCounselorsAdapter(getActivity(), instructorList, self);
-                        rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listCounselorsAdapter));
+                        listInstructorsAdapter = new ListInstructorsAdapter(getActivity(), instructorList, self);
+                        rv_elligible_counsellors.setAdapter(new ScaleInAnimationAdapter(listInstructorsAdapter));
 
                         if(requestCounselActivity.getInstructor()==null){
                             b_next.setEnabled(false);
                         }else {
                             for(int i = 0; i< instructorList.size(); i++){
                                 if(instructorList.get(i).getId() == requestCounselActivity.getInstructor().getId()){
-                                    listCounselorsAdapter.updatePosition(true, i);
+                                    listInstructorsAdapter.updatePosition(true, i);
                                     oldPosition = i;
                                 }
                             }
@@ -104,7 +104,7 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
         b_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestCounselActivity.setInstructor(listCounselorsAdapter.getItemInPosition(oldPosition));
+                requestCounselActivity.setInstructor(listInstructorsAdapter.getItemInPosition(oldPosition));
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
@@ -127,10 +127,10 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
     @Override
     public void onItemClicked(int position) {
         if(oldPosition!=-1){
-            listCounselorsAdapter.updatePosition(false, oldPosition);
-            listCounselorsAdapter.updatePosition(true, position);
+            listInstructorsAdapter.updatePosition(false, oldPosition);
+            listInstructorsAdapter.updatePosition(true, position);
         }else{
-            listCounselorsAdapter.updatePosition(true, position);
+            listInstructorsAdapter.updatePosition(true, position);
         }
         oldPosition = position;
         b_next.setEnabled(true);
