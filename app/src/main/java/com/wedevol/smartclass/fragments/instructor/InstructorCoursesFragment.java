@@ -123,21 +123,21 @@ public class InstructorCoursesFragment extends Fragment{
                     rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pendingCourseList,
                             "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo",
-                            Constants.SHOW_COURSE_PRICE,
+                            Constants.DO_NOT_SHOW_COURSE_PRICE,
                             Constants.SELECTABLE_COURSE));
                 }
 
                 if(veryfiedCourseList.size()>0) {
                     rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), veryfiedCourseList,
-                            "VERIFICANDO PAGO", "Maximo 24 horas", Constants.SHOW_COURSE_PRICE,
+                            "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_COURSE_PRICE,
                             Constants.SELECTABLE_COURSE));
                 }
 
                 if(openCourseList.size()>0) {
                     rv_open.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_open.setAdapter(new ListCourseStateAdapter(getActivity(), openCourseList,
-                            "ABIERTO", "Para todos", Constants.SHOW_COURSE_PRICE,
+                            "ABIERTO", "Para todos", Constants.DO_NOT_SHOW_COURSE_PRICE,
                             Constants.SELECTABLE_COURSE));
                 }
 

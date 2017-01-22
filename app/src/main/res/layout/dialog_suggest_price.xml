@@ -20,7 +20,7 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="El precio sugerido para este curso es X. Ingrese la tarifa por hora que desea." />
+        android:text="El precio sugerido para este curso es S/. 15. Ingrese la tarifa por hora que desea." />
 
     <EditText
         android:layout_margin="10dp"

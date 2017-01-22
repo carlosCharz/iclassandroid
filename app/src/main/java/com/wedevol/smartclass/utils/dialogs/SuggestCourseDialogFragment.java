@@ -9,8 +9,13 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
+
+import retrofit.client.Response;
 
 /** Created by paolo on 12/17/16.*/
 public class SuggestCourseDialogFragment extends DialogFragment {
@@ -41,10 +46,27 @@ public class SuggestCourseDialogFragment extends DialogFragment {
                 // Add action buttons
                 .setPositiveButton(R.string.suggest, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, int id) {
                         // TODO this should send a message to our services for suggesting the new course
                         TextView tv_dialog_course_name = (TextView) getActivity().findViewById(R.id.tv_dialog_course_name);
-                        dialog.dismiss();
+                        String courseName = tv_dialog_course_name.getText().toString();
+                        if(!courseName.isEmpty()){
+                            JsonObject jsonObject = new JsonObject();
+                            jsonObject.addProperty("name", courseName);
+                            jsonObject.addProperty("description", courseName);
+                            jsonObject.addProperty("faculty", courseName);
+                            jsonObject.addProperty("university", "PUCP");
+                            jsonObject.addProperty("status", "suggested");
+
+                            RestClient restClient = new RestClient(getActivity());
+                            restClient.getWebservices().suggestCourse("", jsonObject, new IClassCallback<JsonObject>(getActivity()){
+                                @Override
+                                public void success(JsonObject jsonObject, Response response) {
+                                    super.success(jsonObject, response);
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
