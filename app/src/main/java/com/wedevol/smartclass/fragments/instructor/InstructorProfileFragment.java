@@ -15,6 +15,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.models.Instructor;
@@ -78,9 +79,8 @@ public class InstructorProfileFragment extends Fragment{
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
         RestClient restClient = new RestClient(getContext());
-        restClient.getWebservices().getInstructorCourses("",
-                SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
-                new IClassCallback<JsonArray>(getActivity()){
+        restClient.getWebservices().getInstructorCourses("", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
+                "payed", new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);

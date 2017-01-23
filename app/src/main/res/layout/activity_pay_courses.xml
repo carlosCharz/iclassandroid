@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingrese la informacion correspondiente al depósito"/>
+                android:text="Ingrese la información correspondiente al depósito"/>
 
             <TextView
                 android:id="@+id/tv_amount_to_pay"
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="* El sistemas se demora 24 horas en confirmar el depósito luego de registrado en la aplicacion"/>
+                android:text="* El sistema se demora 24 horas en confirmar el depósito luego de registrado en la aplicación"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

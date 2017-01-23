@@ -52,7 +52,7 @@ public class InstructorPayCourseFragment extends Fragment {
         RestClient restClient = new RestClient(getActivity());
 
         restClient.getWebservices().getInstructorCourses("", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
-                new IClassCallback<JsonArray>(getActivity()){
+                "pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);

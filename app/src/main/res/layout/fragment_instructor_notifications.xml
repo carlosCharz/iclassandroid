@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Solicitudes de asesoría. Tienes 24 horas para confimar."/>
+            android:text="Solicitudes de asesoría. Tienes 24 horas para confirmar."/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -53,6 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="* Cancelar o no responder una solicitud de asesoría en tu horario definido previamente como disponible conlleva a una penalizacion de puntos. Tenlo en consideracion."/>
+            android:text="* Cancelar o no responder una solicitud de asesoría en tu horario definido previamente como disponible conlleva a una penalización de puntos. Tenlo en consideración."/>
     </LinearLayout>
 </ScrollView>

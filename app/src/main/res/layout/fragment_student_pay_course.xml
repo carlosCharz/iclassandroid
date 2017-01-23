@@ -46,6 +46,6 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="* La informacion de la cuenta bancaria se encuentra en la opcion Cuentas Bancarias en el menu."/>
+            android:text="* La información de la cuenta bancaria se encuentra en la opción Cuentas Bancarias en el menú."/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

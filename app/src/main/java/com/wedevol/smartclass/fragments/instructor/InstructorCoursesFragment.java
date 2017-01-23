@@ -75,13 +75,13 @@ public class InstructorCoursesFragment extends Fragment{
         int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
         RestClient restClient = new RestClient(getActivity());
 
-        restClient.getWebservices().getInstructorCourses("", id, new IClassCallback<JsonArray>(getActivity()){
+        restClient.getWebservices().getInstructorCourses("", id, "requested,free,payed,pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
 
                 List<Course> payedCourseList = new ArrayList<>(), freeCourseList = new ArrayList<>(),
-                        openCourseList = new ArrayList<>(), pendingCourseList = new ArrayList<>(),
+                        requestedCourseList = new ArrayList<>(), pendingCourseList = new ArrayList<>(),
                         veryfiedCourseList = new ArrayList<>();
 
                 for(int i = 0; i < jsonArray.size(); i++){
@@ -97,8 +97,8 @@ public class InstructorCoursesFragment extends Fragment{
                         case "verifyingPayment":
                             veryfiedCourseList.add(course);
                             break;
-                        case "open":
-                            openCourseList.add(course);
+                        case "requested":
+                            requestedCourseList.add(course);
                             break;
                         case "free":
                             freeCourseList.add(course);
@@ -134,10 +134,10 @@ public class InstructorCoursesFragment extends Fragment{
                             Constants.SELECTABLE_COURSE));
                 }
 
-                if(openCourseList.size()>0) {
+                if(requestedCourseList.size()>0) {
                     rv_open.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_open.setAdapter(new ListCourseStateAdapter(getActivity(), openCourseList,
-                            "ABIERTO", "Para todos", Constants.DO_NOT_SHOW_COURSE_PRICE,
+                    rv_open.setAdapter(new ListCourseStateAdapter(getActivity(), requestedCourseList,
+                            "REQUERIDO", "Verificaremos que eres apto para asesorar", Constants.DO_NOT_SHOW_COURSE_PRICE,
                             Constants.SELECTABLE_COURSE));
                 }
 
@@ -148,7 +148,7 @@ public class InstructorCoursesFragment extends Fragment{
                             Constants.SELECTABLE_COURSE));
                 }
 
-                if(payedCourseList.size() == 0 && openCourseList.size() == 0 && pendingCourseList.size() == 0 &&
+                if(payedCourseList.size() == 0 && requestedCourseList.size() == 0 && pendingCourseList.size() == 0 &&
                         veryfiedCourseList.size() == 0 && freeCourseList.size() == 0){
                     rv_payed.setVisibility(View.GONE);
                     TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);

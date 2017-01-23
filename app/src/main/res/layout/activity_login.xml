@@ -100,15 +100,5 @@
             android:background="@drawable/custom_button_background"
             android:padding="12dp"
             android:text="@string/signup_btn_label"/>
-
-        <TextView
-            android:gravity="center"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/tv_reminder_obligatory_field"
-            android:textColor="@color/white"
-            android:textSize="16sp"/>
     </LinearLayout>
 </ScrollView>

@@ -77,7 +77,7 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Se le informara al asesor de la asesoría. Espere a que el asesor responda la solicitud de asesoría. Tiempo maximo de espera: 12 horas."/>
+            android:text="Se le informara al asesor de la asesoría. Espere a que el asesor responda la solicitud de asesoría. Tiempo máximo de espera: 12 horas."/>
 
         <LinearLayout
             android:layout_marginTop="30dp"
