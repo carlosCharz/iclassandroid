@@ -16,6 +16,24 @@
             android:layout_height="wrap_content"
             android:text="Selecciona los cursos por los cuales has realizado un depósito o una transferencia a la cuenta"/>
 
+        <ProgressBar
+            android:id="@+id/pb_charging"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:gravity="center"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_no_courses"
+            android:drawableTop="@drawable/ic_course_black"
+            android:gravity="center"
+            android:layout_margin="50dp"
+            android:textSize="22sp"
+            android:text="No tienes cursos por cancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_verify_payment"
             android:layout_width="match_parent"

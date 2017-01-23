@@ -17,7 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
-import com.wedevol.smartclass.activities.instructor.EnableCourseActivity;
+import com.wedevol.smartclass.activities.EnableCourseActivity;
 import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.interfaces.Constants;

@@ -49,8 +49,9 @@ public class InstructorPayCourseFragment extends Fragment {
     private void setElements(final View view) {
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
         b_next = (Button) view.findViewById(R.id.b_next);
+        b_next.setEnabled(false);
+        
         RestClient restClient = new RestClient(getActivity());
-
         restClient.getWebservices().getInstructorCourses("", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
                 "pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
                     @Override
@@ -88,10 +89,13 @@ public class InstructorPayCourseFragment extends Fragment {
                                     "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder pedir asesores", Constants.DO_NOT_SHOW_COURSE_PRICE,
                                     Constants.SELECTABLE_COURSE));
                         }
+
                         if(pendingCourseList.size() == 0 && veryfiedCourseList.size() == 0 ){
                             TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
                             tv_no_courses.setVisibility(View.VISIBLE);
                             b_next.setEnabled(false);
+                        }else{
+                            b_next.setEnabled(true);
                         }
 
                         pb_charging.setVisibility(View.GONE);

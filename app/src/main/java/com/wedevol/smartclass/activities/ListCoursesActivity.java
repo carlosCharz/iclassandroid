@@ -64,9 +64,8 @@ public class ListCoursesActivity extends AppCompatActivity{
         courses = new ArrayList<>();
 
         if(isStudentCourse){
-            restClient.getWebservices().getStudentCourses("",
-                    SharedPreferencesManager.getInstance(self).getUserInfo().getId(),
-                    new IClassCallback<JsonArray>(self){
+            restClient.getWebservices().getStudentCourses("", SharedPreferencesManager.getInstance(self).getUserInfo().getId(),
+                    "payed,free", new IClassCallback<JsonArray>(self){
                         @Override
                         public void success(JsonArray jsonArray, Response response) {
                             super.success(jsonArray, response);

@@ -1,4 +1,4 @@
-package com.wedevol.smartclass.activities.instructor;
+package com.wedevol.smartclass.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.ListCoursesActivity;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.dialogs.SuggestCourseDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -75,7 +74,7 @@ public class EnableCourseActivity extends AppCompatActivity{
                 if(!studentType){
                     jsonObjectId.addProperty("instructorId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
                     jsonObject.add("id", jsonObjectId);
-                    jsonObject.addProperty("status", "payed");//jsonObject.addProperty("status", "pendingPayment");
+                    jsonObject.addProperty("status", "payed");
                     jsonObject.addProperty("price", 25);
                     jsonObject.addProperty("currency", "S/.");
                     restClient.getWebservices().enrollOnCourseInstructor("", jsonObject, new IClassCallback<JsonObject>(self){
@@ -89,7 +88,7 @@ public class EnableCourseActivity extends AppCompatActivity{
                 } else {
                     jsonObjectId.addProperty("studentId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
                     jsonObject.add("id", jsonObjectId);
-                    jsonObject.addProperty("status", "payed");//jsonObject.addProperty("status", "pendingPayment");
+                    jsonObject.addProperty("status", "payed");
                     jsonObject.addProperty("price", 25);
                     jsonObject.addProperty("currency", "S/.");
                     restClient.getWebservices().enrollOnCourseStudent("", jsonObject, new IClassCallback<JsonObject>(self){

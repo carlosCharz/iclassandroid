@@ -170,8 +170,6 @@ public class SignupActivity extends AppCompatActivity {
                     JsonObject studentObject = student.toJson();
                     studentObject.addProperty("courseId", courseId);
 
-                    /* student only attributes birthday = 2016-12-27T14:44:28.186Z",
-                    gender = "string", profilePictureUrl = "string", university = "string"*/
                     try {
                         restClient.getWebservices().newStudent("", studentObject, new IClassCallback<JsonObject>(self){
                             @Override

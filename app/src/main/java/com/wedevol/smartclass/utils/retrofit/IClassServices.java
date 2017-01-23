@@ -58,7 +58,7 @@ public interface IClassServices {
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
     void getStudentCourses(@Header("Authorization") String authorization,
-                           @Path("studentId") int studentId, Callback<JsonArray> callback);
+                           @Path("studentId") int studentId, @Query("status") String status, Callback<JsonArray> callback);
 
     /**Schedule */
     @POST(Urls.NEW_SCHEDULE)

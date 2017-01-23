@@ -16,7 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
-import com.wedevol.smartclass.activities.instructor.EnableCourseActivity;
+import com.wedevol.smartclass.activities.EnableCourseActivity;
 import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -52,35 +52,11 @@ public class StudentCoursesFragment extends Fragment{
         b_new_course = (Button) view.findViewById(R.id.b_new_course);
 
         int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
-        restClient.getWebservices().getStudentCourses("", id, new IClassCallback<JsonArray>(getActivity()){
+        restClient.getWebservices().getStudentCourses("", id, "requested,free,payed,pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
 
-                List<Course> courseList = new ArrayList<>();
-
-                for(int i = 0; i < jsonArray.size(); i++){
-                    JsonObject jsonObject = jsonArray.get(i).getAsJsonObject();
-                    courseList.add(Course.parseCourse(jsonObject));
-                }
-
-                RecyclerView rv_payed = (RecyclerView) view.findViewById(R.id.rv_payed);
-
-                if(courseList.size() == 0 ){
-                    rv_payed.setVisibility(View.GONE);
-                    TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
-                    tv_no_courses.setVisibility(View.VISIBLE);
-                }else{
-                    rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), courseList, "PAGADO",
-                            "Eres un estudiante de este curso", Constants.DO_NOT_SHOW_COURSE_PRICE,
-                            Constants.NOT_SELECTABLE_COURSE));
-                    rv_payed.setVisibility(View.VISIBLE);
-                }
-
-                pb_charging.setVisibility(View.GONE);
-
-                /*
                 List<Course> payedCourseList = new ArrayList<>();
                 List<Course> freeCourseList = new ArrayList<>();
                 List<Course> openCourseList = new ArrayList<>();
@@ -100,7 +76,7 @@ public class StudentCoursesFragment extends Fragment{
                         case "verifyingPayment":
                             veryfiedCourseList.add(course);
                             break;
-                        case "open":
+                        case "requested":
                             openCourseList.add(course);
                             break;
                         case "free":
@@ -137,7 +113,7 @@ public class StudentCoursesFragment extends Fragment{
                 if(openCourseList.size()>0) {
                     rv_open.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_open.setAdapter(new ListCourseStateAdapter(getActivity(), openCourseList,
-                            "ABIERTO", "Para todos", Constants.DO_NOT_SHOW_COURSE_PRICE,
+                            "Gratis", "Por promocion", Constants.DO_NOT_SHOW_COURSE_PRICE,
                             Constants.NOT_SELECTABLE_COURSE));
                 }
 
@@ -155,7 +131,7 @@ public class StudentCoursesFragment extends Fragment{
                     tv_no_courses.setVisibility(View.VISIBLE);
                 }
 
-                pb_charging.setVisibility(View.GONE);*/
+                pb_charging.setVisibility(View.GONE);
             }
         });
     }
