@@ -266,8 +266,8 @@ public class SignupActivity extends AppCompatActivity {
             et_email.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 6 || password.length() > 20) {
-            et_password.setError("La contrasenha debe tener minimo 4 o maximo 20 caracteres");
+        if (password.isEmpty() || password.length() <= 6 || password.length() >= 20) {
+            et_password.setError("La contrasenha debe tener minimo 6 o maximo 20 caracteres");
             valid = false;
         } else {
             et_password.setError(null);

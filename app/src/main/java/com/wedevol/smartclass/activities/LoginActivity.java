@@ -136,8 +136,8 @@ public class LoginActivity extends AppCompatActivity {
             et_email.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            et_password.setError("La contraseña debe tener entre 4 y 10 caracteres alfanuméricos");
+        if (password.isEmpty() || password.length() < 6) {
+            et_password.setError("La contraseña debe tener minimo 6 caracteres alfanuméricos");
             valid = false;
         } else {
             et_password.setError(null);
