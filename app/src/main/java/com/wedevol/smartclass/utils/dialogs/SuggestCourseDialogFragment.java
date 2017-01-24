@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -57,7 +58,12 @@ public class SuggestCourseDialogFragment extends DialogFragment {
                             jsonObject.addProperty("description", courseName);
                             jsonObject.addProperty("faculty", courseName);
                             jsonObject.addProperty("university", "PUCP");
-                            jsonObject.addProperty("status", "suggested");
+                            if(SharedPreferencesManager.getInstance(getActivity()).getUserType()){
+                                jsonObject.addProperty("userType", "instructor");
+                            }else{
+                                jsonObject.addProperty("userType", "student");
+                            }
+                            jsonObject.addProperty("userId", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId());
 
                             RestClient restClient = new RestClient(getActivity());
                             restClient.getWebservices().suggestCourse("", jsonObject, new IClassCallback<JsonObject>(getActivity()){

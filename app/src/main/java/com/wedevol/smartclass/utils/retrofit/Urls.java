@@ -7,7 +7,7 @@ interface Urls {
 
     //Courses
     String ALL_COURSES = "/courses"; //get
-    String SUGGEST_COURSE = "/courses";
+    String SUGGEST_COURSE = "/coursesuggestions";
 
     //Student
     String NEW_STUDENT = "/students"; //post
