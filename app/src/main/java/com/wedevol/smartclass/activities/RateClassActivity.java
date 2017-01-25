@@ -54,7 +54,7 @@ public class RateClassActivity extends AppCompatActivity {
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
 
         ImageView iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
-        iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
+        iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_star_black));
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         tv_detail_title.setText("Calificar Curso");
     }
