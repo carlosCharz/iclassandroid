@@ -10,6 +10,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 /** Created by paolo on 1/25/17.*/
 public class RateClassActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class RateClassActivity extends AppCompatActivity {
     private RatingBar rb_class_calification;
     private ImageView iv_toolbar_back;
     private RateClassActivity self;
+    private boolean isInstructor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,24 @@ public class RateClassActivity extends AppCompatActivity {
 
     private void setElements() {
         self = this;
+        isInstructor = SharedPreferencesManager.getInstance(this).getUserType();
+        String courseName = getIntent().getStringExtra(Constants.BUNDLE_COURSE_NAME);
+        int lessonId = getIntent().getIntExtra(Constants.BUNDLE_LESSON_ID, -1);
 
         TextView tv_course_user_type_announcement = (TextView) findViewById(R.id.tv_course_user_type_announcement);
         rb_class_calification = (RatingBar) findViewById(R.id.rb_class_calification);
         b_send = (Button) findViewById(R.id.b_send);
         b_cancel = (Button) findViewById(R.id.b_cancel);
 
-        //TODO correct spelling
-        tv_course_user_type_announcement.setText("Acabas de completar tu asesoria! Como te parecio tu alumno? Calificalo");
+        String formatableAnnouncement = "Acabas de completar tu asesoría de %s! Como te pareció tu %s? Califícalo";
+        String announcement;
+
+        if (isInstructor) {
+            announcement = String.format(formatableAnnouncement, courseName, "alumno");
+        }else{
+            announcement = String.format(formatableAnnouncement, courseName, "asesor");
+        }
+        tv_course_user_type_announcement.setText(announcement);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
 
@@ -51,6 +64,11 @@ public class RateClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int num= rb_class_calification.getNumStars();
+                if(isInstructor){
+
+                }else{
+
+                }
             }
         });
 

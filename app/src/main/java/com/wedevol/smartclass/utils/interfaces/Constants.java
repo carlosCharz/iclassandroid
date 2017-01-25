@@ -34,9 +34,11 @@ public interface Constants {
     String BUNDLE_STATUS = "bundle_status";
     String BUNDLE_POSITION = "bundle_position";
     String BUNDLE_PRICE_CHANGE_LISTENER = "bundle_price_listener";
+    String BUNDLE_LESSON_ID = "bundle_lesson_id";
 
     boolean SHOW_COURSE_PRICE = true;
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
     boolean SELECTABLE_COURSE = false;
     boolean NOT_SELECTABLE_COURSE = true;
+
 }

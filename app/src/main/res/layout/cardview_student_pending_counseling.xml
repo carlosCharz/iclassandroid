@@ -77,10 +77,10 @@
                 android:layout_height="match_parent"
                 android:padding="10dp">
                 <ImageView
-                    android:id="@+id/iv_detail_counseller"
+                    android:id="@+id/iv_rate_lesson"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_profile_black"/>
+                    android:src="@drawable/ic_star_black"/>
             </LinearLayout>
             <LinearLayout
                 android:padding="10dp"

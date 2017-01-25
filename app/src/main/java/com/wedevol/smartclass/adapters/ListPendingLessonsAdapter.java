@@ -17,8 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.RateClassActivity;
 import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.utils.PhoneCallListener;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 
 import java.util.List;
 
@@ -65,10 +67,13 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
             }
         });
 
-        viewHolder.iv_detail_counseller.setOnClickListener(new View.OnClickListener() {
+        viewHolder.iv_rate_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO go to assesor detail
+                Intent intent = new Intent(context, RateClassActivity.class);
+                intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
+                intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
+                context.startActivity(intent);
             }
         });
 
@@ -89,7 +94,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         final TextView tv_pending_counsel_course_counseller;
         final TextView tv_pending_counsel_date;
         final ImageView iv_call_counseller;
-        final ImageView iv_detail_counseller;
+        final ImageView iv_rate_lesson;
         final ImageView iv_detail_course;
 
         ViewHolder(View itemView) {
@@ -97,7 +102,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
             tv_pending_counsel_course_counseller = (TextView) itemView.findViewById(R.id.tv_pending_counsel_course_counseller);
             tv_pending_counsel_date = (TextView) itemView.findViewById(R.id.tv_pending_counsel_date);
             iv_call_counseller = (ImageView) itemView.findViewById(R.id.iv_call_counseller);
-            iv_detail_counseller = (ImageView) itemView.findViewById(R.id.iv_detail_counseller);
+            iv_rate_lesson = (ImageView) itemView.findViewById(R.id.iv_rate_lesson);
             iv_detail_course = (ImageView) itemView.findViewById(R.id.iv_detail_course);
         }
     }
