@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_detail"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_course_user_type_announcement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Acabas de completar tu asesoria! Como te parecio tu alumno? Calificalo"/>
+
+        <RatingBar
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:id="@+id/rb_class_calification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="3"
+            android:max="5"/>
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Surgio algun problema? Comunicate con nosotros!"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="luis.becerra@pucp.pe"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="https://www.facebook.com/iClassApp/"/>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/b_cancel"
+                android:layout_weight="0.5"
+                android:layout_margin="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"/>
+
+            <Button
+                android:id="@+id/b_send"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_button_background"
+                android:layout_weight="0.5"
+                android:layout_margin="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Enviar"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
