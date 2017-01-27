@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.instructor;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.EditProfileActivity;
 import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
@@ -98,7 +100,8 @@ public class InstructorProfileFragment extends Fragment{
         fab_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UtilMethods.showSnackbar(((HomeActivity)getActivity()).getMainLayout(), "Funcion aun no implementada", Color.YELLOW, "REDO", Color.MAGENTA);
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

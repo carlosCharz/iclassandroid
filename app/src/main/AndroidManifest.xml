@@ -45,9 +45,12 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.ListBankActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
         <activity android:name=".activities.RateClassActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EditProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
+
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -22,11 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.soundcloud.android.crop.Crop;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Student;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -49,6 +51,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText et_password;
     private Button b_signup;
     private Spinner sp_type;
+    private Spinner sp_university;
     private TextView tv_course;
     private CircleImageView civ_profile_photo;
     private ImageView iv_toolbar_back;
@@ -82,6 +85,7 @@ public class SignupActivity extends AppCompatActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         b_signup = (Button) findViewById(R.id.b_signup);
         sp_type = (Spinner) findViewById(R.id.sp_type);
+        sp_university = (Spinner) findViewById(R.id.sp_university);
         tv_course = (TextView) findViewById(R.id.tv_course);
         civ_profile_photo = (CircleImageView) findViewById(R.id.civ_profile_photo);
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
@@ -94,6 +98,16 @@ public class SignupActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, typeArray);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
+
+        List<String> universityArray =  new ArrayList<>();
+        typeArray.add("Universidad");
+        typeArray.add("PUCP");
+        typeArray.add("UPC");
+        typeArray.add("Universidad de Lima");
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, universityArray);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_university.setAdapter(adapter);
     }
 
     private void setActions() {
@@ -151,13 +165,13 @@ public class SignupActivity extends AppCompatActivity {
                 progressDialog.show();
 
                 String type = (String) sp_type.getSelectedItem();
-
+                String university = (String) sp_university.getSelectedItem();
                 //current attributes
                 String name = et_name.getText().toString();
                 String lastName = et_lastname.getText().toString();
                 String phone = et_phone.getText().toString();
-                String email = et_email.getText().toString();
-                String password = et_password.getText().toString();
+                final String email = et_email.getText().toString();
+                final String password = et_password.getText().toString();
 
                 if(type.equals("Alumno")){
                     Student student = new Student();
@@ -165,6 +179,7 @@ public class SignupActivity extends AppCompatActivity {
                     student.setLastname(lastName);
                     student.setPhone(phone);
                     student.setEmail(email);
+                    student.setUniversity(university);
                     student.setPassword(password);
                     student.setFcmToken(FirebaseInstanceId.getInstance().getToken());
                     JsonObject studentObject = student.toJson();
@@ -176,9 +191,8 @@ public class SignupActivity extends AppCompatActivity {
                             public void success(JsonObject jsonObject, Response response) {
                                 super.success(jsonObject, response);
                                 setResult(RESULT_OK, null);
-                                //TODO freeCourse(); using courseId we must create a new free course.
-                                finish();
                                 progressDialog.dismiss();
+                                login(email, password, false);
                             }
                         });
                     } catch (Exception e) {
@@ -199,8 +213,8 @@ public class SignupActivity extends AppCompatActivity {
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
                             setResult(RESULT_OK, null);
-                            finish();
                             progressDialog.dismiss();
+                            login(email, password, true);
                         }
                     });
                 }
@@ -232,6 +246,7 @@ public class SignupActivity extends AppCompatActivity {
         String password = et_password.getText().toString();
         String courseName = tv_course.getText().toString();
         String selectedUserType= sp_type.getSelectedItem().toString();
+        String selectedUniversity = sp_university.getSelectedItem().toString();
 
         if(selectedUserType.equals("¿Alumno o asesor?")){
             valid = false;
@@ -278,6 +293,11 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         }else{
             tv_course.setError(null);
+        }
+
+        if(selectedUserType.equals("Alumno") && selectedUniversity.isEmpty()){
+            valid = false;
+            Toast.makeText(this, "Debe elegir una universidad", Toast.LENGTH_SHORT).show();
         }
 
         return valid;
@@ -355,5 +375,41 @@ public class SignupActivity extends AppCompatActivity {
         }else{
             mPhotoLocationPath = null;
         }
+    }
+
+    private void login(String email, String password, final boolean isInstructor) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("email", email);
+        jsonObject.addProperty("password", password);
+
+        if(isInstructor) {
+            restClient.getWebservices().authInstructor("", jsonObject, new IClassCallback<JsonObject>(self) {
+                @Override
+                public void success(JsonObject jsonObject, Response response) {
+                    super.success(jsonObject, response);
+                    startHome(jsonObject, isInstructor);
+                }
+            });
+        }else{
+            restClient.getWebservices().authStudent("", jsonObject, new IClassCallback<JsonObject>(self) {
+                @Override
+                public void success(JsonObject jsonObject, Response response) {
+                    super.success(jsonObject, response);
+                    startHome(jsonObject, isInstructor);
+                }
+            });
+        }
+    }
+
+    public void startHome(JsonObject jsonObject, boolean isInstructor){
+        Gson gson = new Gson();
+        SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
+        sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
+        sharedPreferencesManager.saveUserType(isInstructor);
+
+        Intent intent = new Intent(self, HomeActivity.class);
+        intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);
+        startActivity(intent);
+        finish();
     }
 }

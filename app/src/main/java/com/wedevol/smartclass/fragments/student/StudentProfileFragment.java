@@ -1,6 +1,6 @@
 package com.wedevol.smartclass.fragments.student;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.HomeActivity;
+import com.wedevol.smartclass.activities.EditProfileActivity;
 import com.wedevol.smartclass.models.Student;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
@@ -95,7 +95,8 @@ public class StudentProfileFragment extends Fragment{
         fab_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UtilMethods.showSnackbar(((HomeActivity)getActivity()).getMainLayout(), "Funcion aun no implementada", Color.YELLOW, "REDO", Color.MAGENTA);
+                Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+                startActivity(intent);
             }
         });
     }
