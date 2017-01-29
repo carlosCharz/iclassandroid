@@ -1,7 +1,10 @@
 package com.wedevol.smartclass.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +21,9 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListCoursesAdapter;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
+import com.wedevol.smartclass.utils.dialogs.GetFacultyandUniversityDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.interfaces.SearchedCoursesListener;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -28,7 +33,8 @@ import java.util.List;
 import retrofit.client.Response;
 
 /** Created by paolorossi on 12/9/16.*/
-public class ListCoursesActivity extends AppCompatActivity{
+@SuppressLint("ParcelCreator")
+public class ListCoursesActivity extends AppCompatActivity implements SearchedCoursesListener {
     private RecyclerView rv_courses;
     private List<Course> courses;
     private Activity self;
@@ -123,7 +129,9 @@ public class ListCoursesActivity extends AppCompatActivity{
         collapsedSearchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                GetFacultyandUniversityDialogFragment suggestCourseDialogFragment =
+                        GetFacultyandUniversityDialogFragment.newInstance((SearchedCoursesListener)self);
+                suggestCourseDialogFragment.show(((FragmentActivity) self).getSupportFragmentManager(), "Buscar Curso");
             }
         });
 
@@ -156,5 +164,20 @@ public class ListCoursesActivity extends AppCompatActivity{
                 return subsetCoursesList;
             }
         });
+    }
+
+    @Override
+    public void onCourseSearched(int universityId, int facultyId) {
+        Toast.makeText(self, "aun no implementado pero uId: " +universityId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

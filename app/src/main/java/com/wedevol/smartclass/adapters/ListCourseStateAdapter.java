@@ -86,7 +86,6 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
                                 ChangePriceDialogFragment.newInstance(R.layout.dialog_suggest_price, course.getId(),
                                         course.getCurrency(), course.getStatus(), finalI-1, self);
                         suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
-
                     }
                 });
             } else {
