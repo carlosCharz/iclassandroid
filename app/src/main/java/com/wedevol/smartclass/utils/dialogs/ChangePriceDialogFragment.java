@@ -91,6 +91,7 @@ public class ChangePriceDialogFragment extends DialogFragment {
                                 @Override
                                 public void success(JsonObject jsonObject, Response response) {
                                     super.success(jsonObject, response);
+                                    assert priceChangeListener != null;
                                     priceChangeListener.onPriceChanged(position, instructorPrice);
                                     dialog.dismiss();
                                 }
@@ -103,7 +104,6 @@ public class ChangePriceDialogFragment extends DialogFragment {
                         dialog.cancel();
                     }
                 });
-
 
         return builder.create();
     }

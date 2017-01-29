@@ -13,6 +13,8 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.HomeActivity;
+import com.wedevol.smartclass.activities.LoginActivity;
+import com.wedevol.smartclass.activities.SplashActivity;
 
 /** Created by paolo on 1/19/17.*/
 public class IClassFirebaseMessagingService extends FirebaseMessagingService {
@@ -57,7 +59,7 @@ public class IClassFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SplashActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

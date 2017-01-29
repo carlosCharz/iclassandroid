@@ -6,10 +6,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
@@ -31,9 +33,13 @@ public class ListCoursesActivity extends AppCompatActivity{
     private List<Course> courses;
     private Activity self;
 
+    private SearchView sv_search_course;
     private ImageView iv_toolbar_back;
-    private ImageView iv_toolbar_actual_screen;
     private ProgressBar pb_charging;
+    private boolean firstSearch;
+    private ListCoursesAdapter listCoursesAdapter;
+    private List<Course> currentCoursesList;
+    private ImageView collapsedSearchIcon;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,17 +52,20 @@ public class ListCoursesActivity extends AppCompatActivity{
     private void setElements() {
         boolean isStudentCourse= getIntent().getBooleanExtra(Constants.STUDENT_COURSE_TYPE, false);
         self = this;
+        firstSearch = true;
         RestClient restClient = new RestClient(self);
 
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
-        iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
+        ImageView iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
 
         tv_detail_title.setText("Cursos");
         iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
 
         pb_charging = (ProgressBar) findViewById(R.id.pb_charging);
-        //sv_search_course = (SearchView) findViewById(R.id.sv_search_course);
+        sv_search_course = (SearchView) findViewById(R.id.sv_search_course);
+        collapsedSearchIcon = (ImageView) sv_search_course.findViewById(android.support.v7.appcompat.R.id.search_button);
+
         rv_courses = (RecyclerView) findViewById(R.id.rv_courses);
 
         final TextView tv_no_courses = (TextView) findViewById(R.id.tv_no_courses);
@@ -95,7 +104,8 @@ public class ListCoursesActivity extends AppCompatActivity{
             rv_courses.setVisibility(View.GONE);
         }else{
             rv_courses.setLayoutManager(new LinearLayoutManager(self));
-            rv_courses.setAdapter(new ListCoursesAdapter(self, courses));
+            listCoursesAdapter = new ListCoursesAdapter(self, courses);
+            rv_courses.setAdapter(listCoursesAdapter);
             rv_courses.setVisibility(View.VISIBLE);
             tv_no_courses.setVisibility(View.GONE);
         }
@@ -110,18 +120,41 @@ public class ListCoursesActivity extends AppCompatActivity{
             }
         });
 
-        iv_toolbar_actual_screen.setOnClickListener(new View.OnClickListener() {
+        collapsedSearchIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*TODO needs to open a drawer that enters from the right*/
+
             }
         });
-        /* sv_search_course.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        sv_search_course.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) { searchCourse(query); return false;}
             @Override
             public boolean onQueryTextChange(String newText) { searchCourse(newText);return false;}
-            private void searchCourse(String wordFragment) { List<Course> searchedCourses = new ArrayList<>();rv_courses.setAdapter(new ListCoursesAdapter(self, searchedCourses));}
-        });*/
+            private void searchCourse(String wordFragment) {
+                if(listCoursesAdapter != null) {
+                    if (firstSearch && wordFragment.length() > 2) {
+                        firstSearch = false;
+                        currentCoursesList = listCoursesAdapter.getItems();
+                    }
+                    rv_courses.setAdapter(new ListCoursesAdapter(self, searchCourseSubset(currentCoursesList, wordFragment)));
+                }else{
+                    Toast.makeText(self, "No hay cursos disponibles", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            private List<Course> searchCourseSubset(List<Course> currentCoursesList, String wordFragment) {
+                List<Course> subsetCoursesList = new ArrayList<>();
+                for (int i = 0; i < currentCoursesList.size(); i++){
+                    Course course = currentCoursesList.get(i);
+                    if(course.getDescription().contains(wordFragment) || course.getFaculty().contains(wordFragment) ||
+                            course.getName().contains(wordFragment) || course.getUniversity().contains(wordFragment)){
+                        subsetCoursesList.add(course);
+                    }
+                }
+                return subsetCoursesList;
+            }
+        });
     }
 }

@@ -103,9 +103,7 @@ public class RequestCounselSelectCourseFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        getActivity();
         if((requestCode == Constants.CHOOSEN_COURSE) && (resultCode == Activity.RESULT_OK)) {
-
             int courseId = data.getIntExtra(Constants.BUNDLE_COURSE_ID, -1);
             String courseName = data.getStringExtra(Constants.BUNDLE_COURSE_NAME);
             ((RequestCounselActivity)getActivity()).saveCourse(courseId, courseName);

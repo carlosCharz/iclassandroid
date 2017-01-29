@@ -15,7 +15,7 @@ import com.wedevol.smartclass.utils.interfaces.Constants;
 import java.util.List;
 
 /** Created by paolo on 12/20/16.*/
-public class ListBanksAdapter   extends RecyclerView.Adapter<ListBanksAdapter.ViewHolder> {
+public class ListBanksAdapter extends RecyclerView.Adapter<ListBanksAdapter.ViewHolder> {
     private final List<String> mItems;
     private final Activity context;
 

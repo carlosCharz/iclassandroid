@@ -7,11 +7,6 @@
 
     <include layout="@layout/toolbar_detail"/>
 
-    <SearchView
-        android:id="@+id/sv_search_course"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,7 +19,7 @@
             android:visibility="visible"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_courses"
+            android:id="@+id/rv_universities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -35,12 +30,12 @@
             android:scrollbarStyle="outsideInset"/>
 
         <TextView
-            android:id="@+id/tv_no_courses"
-            android:drawableTop="@drawable/ic_course_black"
+            android:id="@+id/tv_no_universities"
+            android:drawableTop="@drawable/ic_pay_course_black"
             android:gravity="center"
             android:layout_margin="50dp"
             android:textSize="22sp"
-            android:text="No se logro encontrar cursos"
+            android:text="No se logro encontrar universidades"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"/>

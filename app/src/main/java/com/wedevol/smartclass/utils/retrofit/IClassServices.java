@@ -96,9 +96,17 @@ public interface IClassServices {
     void newLesson(@Header("Authorization") String authorization, @Body JsonObject lesson,
                    Callback<JsonObject> callback);
 
-    @GET(Urls.GET_CLASS_INSTRUCTORS ) //?courseId=1&weekDay=mon&startTime=10&endTime=12
+    @GET(Urls.GET_CLASS_INSTRUCTORS) //?courseId=1&weekDay=mon&startTime=10&endTime=12
     void getInstructorsForClass(@Header("Authorization") String authorization, @Query("courseId") int courseId,
                                 @Query("weekDay") String weekDay, @Query("startTime") int startTime,
                                 @Query("endTime") int endTime, Callback<JsonArray> callback);
 
+    /**Universities*/
+    @GET(Urls.GET_UNIVERSITIES)
+    void getUniversities(@Header("Authorization") String authorization, Callback<JsonArray> callback);
+
+    /**Faculties*/
+    @GET(Urls.GET_FACULTIES_BY_UNIVERSITY)
+    void getUniversityFaculties(@Header("Authorization") String authorization, @Query("universityId") int universityId,
+                                Callback<JsonArray> callback);
 }

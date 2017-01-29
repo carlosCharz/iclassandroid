@@ -57,6 +57,10 @@ public class ListCoursesAdapter  extends RecyclerView.Adapter<ListCoursesAdapter
         return mItems.size();
     }
 
+    public List<Course> getItems() {
+        return mItems;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder{
         final TextView tv_course_name;
         final TextView tv_course_university_career;

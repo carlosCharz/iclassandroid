@@ -38,4 +38,10 @@ interface Urls {
     String FREE_HOURS_FOR_CLASS = "/schedules/fetch";
     String NEW_CLASS = "/classes";
     String GET_CLASS_INSTRUCTORS = "/instructors/fetch"; //?courseId=1&weekDay=mon&startTime=10&endTime=12
+
+    //University
+    String GET_UNIVERSITIES = "/universities";
+
+    //Faculties
+    String GET_FACULTIES_BY_UNIVERSITY = "/faculties";
 }

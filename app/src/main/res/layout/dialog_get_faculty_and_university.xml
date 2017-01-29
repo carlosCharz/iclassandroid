@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buscar Cursos"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:background="@color/primary_dark"
+        android:padding="10dp"/>
+
+    <TextView
+        android:layout_margin="10dp"
+        android:text="Aqui puedes buscar cursos por facultad y universidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:background="@drawable/custom_combo_background"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_dialog_university"
+        android:hint="Universidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:background="@drawable/custom_combo_background"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_dialog_faculty"
+        android:hint="Facultad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

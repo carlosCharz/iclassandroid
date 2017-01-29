@@ -22,6 +22,8 @@ public interface Constants {
     int CHOOSEN_DATE = 4;
     int CHOOSEN_SCHEDULE = 5;
     int CHOOSEN_BANK = 6;
+    int CHOOSEN_UNIVERSITY = 7;
+    int CHOOSEN_FACULTY = 8;
 
     String BUNDLE_INSTRUCTOR = "bundle_is_instructor";
     String BUNDLE_COURSE_ID = "bundle_couse_id";
@@ -34,11 +36,17 @@ public interface Constants {
     String BUNDLE_STATUS = "bundle_status";
     String BUNDLE_POSITION = "bundle_position";
     String BUNDLE_PRICE_CHANGE_LISTENER = "bundle_price_listener";
+    String BUNDLE_SEARCHED_COURSES_LISTENER = "bundle_searched_courses_listener";
     String BUNDLE_LESSON_ID = "bundle_lesson_id";
+    String BUNDLE_UNIVERSITY_ID = "bundle_university_id";
+    String BUNDLE_UNIVERSITY_NAME = "bundle_university_name";
+    String BUNDLE_FACULTY_NAME = "bundle_faculty_id";
+    String BUNDLE_FACULTY_ID = "bundle_faculty_id";
 
     boolean SHOW_COURSE_PRICE = true;
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
     boolean SELECTABLE_COURSE = false;
     boolean NOT_SELECTABLE_COURSE = true;
+
 
 }
