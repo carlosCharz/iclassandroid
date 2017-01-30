@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressDialog.show();
 
                 final String email = et_email.getText().toString();
-                String password = et_password.getText().toString();
+                final String password = et_password.getText().toString();
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("email", email);
                 jsonObject.addProperty("password", password);
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
-                            login(jsonObject, progressDialog);
+                            login(jsonObject, progressDialog, password);
                         }
                     });
                 }else{
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
-                            login(jsonObject, progressDialog);
+                            login(jsonObject, progressDialog, password);
                         }
                     });
                 }
@@ -111,11 +111,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void login(JsonObject jsonObject, ProgressDialog progressDialog) {
+    private void login(JsonObject jsonObject, ProgressDialog progressDialog, String password) {
         Gson gson = new Gson();
         SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
         sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
         sharedPreferencesManager.saveUserType(isInstructor);
+        sharedPreferencesManager.saveTruePassword(password);
 
         Intent intent = new Intent(self, HomeActivity.class);
         intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);

@@ -1,6 +1,7 @@
 package com.wedevol.smartclass.models;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.Date;
 
@@ -207,5 +208,14 @@ public class User {
 
     public void setFacultyId(int facultyId) {
         this.facultyId = facultyId;
+    }
+
+    public JsonObject toJson() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("phone", getPhone());
+        jsonObject.addProperty("universityId", getUniversityId());
+        jsonObject.addProperty("facultyId", getFacultyId());
+        jsonObject.addProperty("fcmToken", getFcmToken());
+        return jsonObject;
     }
 }

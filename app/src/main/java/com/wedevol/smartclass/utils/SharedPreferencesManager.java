@@ -24,10 +24,12 @@ public class SharedPreferencesManager {
     private static final String CURRENT_USER = "currentUser";
     private static final String FACEBOOK_PHOTO = null;
     private static final String CURRENT_USER_TYPE = "currentUserType";
+    private static final String PASSWORD = "password";
 
     private static SharedPreferencesManager self;
     private final SharedPreferences mPreferences;
     private final Context context;
+
 
 
     private SharedPreferencesManager(Context context) {
@@ -59,6 +61,12 @@ public class SharedPreferencesManager {
     public void saveUuid(String uuid){
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(UUID, uuid);
+        editor.apply();
+    }
+
+    public void saveTruePassword(String password) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(PASSWORD, password);
         editor.apply();
     }
 
@@ -103,6 +111,10 @@ public class SharedPreferencesManager {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(TOKEN_USER, token);
         editor.apply();
+    }
+
+    public String getUserTruePassword(){
+        return mPreferences.getString(PASSWORD, "");
     }
 
     public boolean isUserLogged(){
