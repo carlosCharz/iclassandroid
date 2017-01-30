@@ -40,18 +40,19 @@ android {
             buildConfigField "String", "BASE_URL", "\"$baseUrl\""
             buildConfigField "String", "BASE_API_URL", "\"$baseUrl/api/$apiVersion\""
             resValue "string", "FACEBOOK_APP_ID", ""
-            resValue "string", "GCM_PROJECT_NUMBER", ""
+            resValue "string", "FCM_PROJECT_NUMBER", ""
         }
+
         release {
             apiVersion = ""
-            baseUrl = "http://api-dev.wedevol.com:8080/iclass/"
+            baseUrl = "http://api-prod.iclassapp.com:8080/iclass/"
             minifyEnabled false
 
             buildConfigField "boolean", "REPORT_CRASHES", "true"
             buildConfigField "String", "BASE_URL", "\"$baseUrl\""
             buildConfigField "String", "BASE_API_URL", "\"$baseUrl/api/$apiVersion\""
             resValue "string", "FACEBOOK_APP_ID", ""
-            resValue "string", "GCM_PROJECT_NUMBER", ""
+            resValue "string", "FCM_PROJECT_NUMBER", ""
         }
     }
     productFlavors {

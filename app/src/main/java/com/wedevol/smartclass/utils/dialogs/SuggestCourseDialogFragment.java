@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -53,17 +54,19 @@ public class SuggestCourseDialogFragment extends DialogFragment {
                         TextView tv_dialog_course_name = (TextView) view.findViewById(R.id.tv_dialog_course_name);
                         String courseName = tv_dialog_course_name.getText().toString();
                         if(!courseName.isEmpty()){
+                            User user = SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+
                             JsonObject jsonObject = new JsonObject();
                             jsonObject.addProperty("name", courseName);
                             jsonObject.addProperty("description", courseName);
-                            jsonObject.addProperty("faculty", courseName);
-                            jsonObject.addProperty("university", "PUCP");
+                            jsonObject.addProperty("facultyId", user.getFacultyId());
+                            jsonObject.addProperty("universityId", user.getUniversityId());
                             if(SharedPreferencesManager.getInstance(getActivity()).getUserType()){
                                 jsonObject.addProperty("userType", "instructor");
                             }else{
                                 jsonObject.addProperty("userType", "student");
                             }
-                            jsonObject.addProperty("userId", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId());
+                            jsonObject.addProperty("userId", user.getId());
 
                             RestClient restClient = new RestClient(getActivity());
                             restClient.getWebservices().suggestCourse("", jsonObject, new IClassCallback<JsonObject>(getActivity()){
