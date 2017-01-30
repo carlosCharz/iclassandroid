@@ -40,8 +40,8 @@ public interface Constants {
     String BUNDLE_LESSON_ID = "bundle_lesson_id";
     String BUNDLE_UNIVERSITY_ID = "bundle_university_id";
     String BUNDLE_UNIVERSITY_NAME = "bundle_university_name";
-    String BUNDLE_FACULTY_NAME = "bundle_faculty_id";
     String BUNDLE_FACULTY_ID = "bundle_faculty_id";
+    String BUNDLE_FACULTY_NAME = "bundle_faculty_name";
 
     boolean SHOW_COURSE_PRICE = true;
     boolean DO_NOT_SHOW_COURSE_PRICE = false;

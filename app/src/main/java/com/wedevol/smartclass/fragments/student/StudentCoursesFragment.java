@@ -124,11 +124,14 @@ public class StudentCoursesFragment extends Fragment{
                             Constants.NOT_SELECTABLE_COURSE));
                 }
 
+                TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
+
                 if(payedCourseList.size() == 0 && openCourseList.size() == 0 && pendingCourseList.size() == 0 &&
                    veryfiedCourseList.size() == 0 && freeCourseList.size() == 0){
                     rv_payed.setVisibility(View.GONE);
-                    TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
                     tv_no_courses.setVisibility(View.VISIBLE);
+                }else{
+                    tv_no_courses.setVisibility(View.GONE);
                 }
 
                 pb_charging.setVisibility(View.GONE);

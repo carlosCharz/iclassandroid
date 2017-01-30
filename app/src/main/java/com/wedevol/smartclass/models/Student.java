@@ -1,9 +1,6 @@
 package com.wedevol.smartclass.models;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -38,6 +35,8 @@ public class Student extends User{
         private double mRating;
         private int mLevel;
         private int mTotalHours;
+        private int mFacultyId;
+        private int mUniversityId;
 
         Builder(int id) {
             mId = id;
@@ -88,6 +87,16 @@ public class Student extends User{
             return this;
         }
 
+        Student.Builder facultyId(int facultyId) {
+            mFacultyId = facultyId;
+            return this;
+        }
+
+        Student.Builder universityId(int universityId) {
+            mUniversityId = universityId;
+            return this;
+        }
+
         public Student build() {
             Student student = new Student();
             student.setId(mId);
@@ -100,7 +109,8 @@ public class Student extends User{
             student.setRating(mRating);
             student.setLevel(mLevel);
             student.setTotalHours(mTotalHours);
-
+            student.setUniversityId(mUniversityId);
+            student.setFacultyId(mFacultyId);
             return student;
         }
     }
@@ -144,24 +154,28 @@ public class Student extends User{
             studentBuilder.totalHours(responseObject.get("totalHours").getAsInt());
         }
 
+        if (responseObject.has("universityId") && !responseObject.get("universityId").isJsonNull()) {
+            studentBuilder.universityId(responseObject.get("universityId").getAsInt());
+        }
+
+        if (responseObject.has("facultyId") && !responseObject.get("facultyId").isJsonNull()) {
+            studentBuilder.facultyId(responseObject.get("facultyId").getAsInt());
+        }
+
         return studentBuilder.build();
     }
 
     public JsonObject toJson() {
         JsonObject jsonObject = new JsonObject();
-        //"firstName": "string",
         jsonObject.addProperty("firstName", this.getFirstname());
-        //"lastName": "string",
         jsonObject.addProperty("lastName", this.getLastname());
-        //"phone": "string",
         jsonObject.addProperty("phone", this.getPhone());
-        //"email": "string",
         jsonObject.addProperty("email", this.getEmail());
-        //"password": "string",
         jsonObject.addProperty("password", this.getPassword());
-        //"fcmToken": "string"
         jsonObject.addProperty("fcmToken", this.getFcmToken());
-        //placeOptions": ["string"],
+        jsonObject.addProperty("facultyId", this.getFacultyId());
+        jsonObject.addProperty("universityId", this.getUniversityId());
+
         List<String> list = new ArrayList<>();
         list.add("university");
         list.add("house");

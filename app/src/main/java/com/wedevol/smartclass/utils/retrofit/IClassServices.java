@@ -28,6 +28,9 @@ public interface IClassServices {
     @POST(Urls.SUGGEST_COURSE)
     void suggestCourse(@Header("Authorization") String authorization, @Body JsonObject course,  Callback<JsonObject> callback);
 
+    @GET(Urls.GET_COURSES_BY_FACULTY_BY_UNIVERSITY)
+    void getCoursesByFacultyByUniversity(@Header("Authorization") String authorization, @Path("universityId") int universityId,
+                                         @Path("facultyId") int facultyId, Callback<JsonArray> callback);
     /**Students*/
     @POST(Urls.NEW_STUDENT)
     void newStudent(@Header("Authorization") String authorization, @Body JsonObject student,

@@ -76,7 +76,7 @@ public class StudentProfileFragment extends Fragment{
 
         RestClient restClient = new RestClient(getContext());
         restClient.getWebservices().getStudentCourses("",
-                SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(), "payed",
+                SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(), "payed,free",
                 new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {

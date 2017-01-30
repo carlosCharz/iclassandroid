@@ -12,6 +12,8 @@ public class Course {
     private String status;
     private int price;
     private String currency;
+    private int facultyId;
+    private int universityId;
 
     public Course(){
     }
@@ -80,6 +82,22 @@ public class Course {
         return price;
     }
 
+    public int getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(int facultyId) {
+        this.facultyId = facultyId;
+    }
+
+    public int getUniversityId() {
+        return universityId;
+    }
+
+    public void setUniversityId(int universityId) {
+        this.universityId = universityId;
+    }
+
     static class Builder {
         private int mId;
         private String mName;
@@ -89,6 +107,8 @@ public class Course {
         private String mStatus;
         private int mPrice;
         private String mCurrency;
+        private int mFacultyId;
+        private int mUniversityId;
 
         Builder(int id) {
             mId = id;
@@ -129,6 +149,15 @@ public class Course {
             return this;
         }
 
+        Course.Builder facultyId(int facultyId) {
+            mFacultyId = facultyId;
+            return this;
+        }
+
+        Course.Builder universityId(int universityId) {
+            mUniversityId = universityId;
+            return this;
+        }
 
         public Course build() {
             Course course = new Course();
@@ -140,6 +169,8 @@ public class Course {
             course.setStatus(mStatus);
             course.setPrice(mPrice);
             course.setCurrency(mCurrency);
+            course.setFacultyId(mFacultyId);
+            course.setUniversityId(mUniversityId);
             return course;
         }
     }
@@ -173,6 +204,14 @@ public class Course {
 
         if (responseObject.has("currency") && !responseObject.get("currency").isJsonNull()) {
             courseBuilder.currency(responseObject.get("currency").getAsString());
+        }
+
+        if (responseObject.has("facultyId") && !responseObject.get("facultyId").isJsonNull()) {
+            courseBuilder.facultyId(responseObject.get("facultyId").getAsInt());
+        }
+
+        if (responseObject.has("universityId") && !responseObject.get("universityId").isJsonNull()) {
+            courseBuilder.universityId(responseObject.get("universityId").getAsInt());
         }
 
         return courseBuilder.build();

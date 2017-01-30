@@ -82,7 +82,7 @@ public class InstructorProfileFragment extends Fragment{
 
         RestClient restClient = new RestClient(getContext());
         restClient.getWebservices().getInstructorCourses("", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
-                "payed", new IClassCallback<JsonArray>(getActivity()){
+                "payed,free", new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
                         super.success(jsonArray, response);

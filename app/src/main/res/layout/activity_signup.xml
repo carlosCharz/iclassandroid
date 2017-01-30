@@ -104,9 +104,20 @@
                     android:drawableRight="@drawable/ic_toggle_password_black"/>
             </android.support.design.widget.TextInputLayout>
 
-            <Spinner
+            <TextView
                 android:background="@drawable/custom_combo_background"
-                android:id="@+id/sp_university"
+                android:id="@+id/tv_university"
+                android:hint="Universidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:textSize="16sp" />
+
+            <TextView
+                android:background="@drawable/custom_combo_background"
+                android:id="@+id/tv_faculty"
+                android:hint="Facultad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"

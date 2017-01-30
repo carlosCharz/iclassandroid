@@ -51,7 +51,8 @@ public class SignupActivity extends AppCompatActivity {
     private EditText et_password;
     private Button b_signup;
     private Spinner sp_type;
-    private Spinner sp_university;
+    private TextView tv_university;
+    private TextView tv_faculty;
     private TextView tv_course;
     private CircleImageView civ_profile_photo;
     private ImageView iv_toolbar_back;
@@ -60,6 +61,8 @@ public class SignupActivity extends AppCompatActivity {
     private Activity self;
     private RestClient restClient;
     private int courseId = -1;
+    private int universityId = -1;
+    private int facultyId = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,7 +88,8 @@ public class SignupActivity extends AppCompatActivity {
         et_password = (EditText) findViewById(R.id.et_password);
         b_signup = (Button) findViewById(R.id.b_signup);
         sp_type = (Spinner) findViewById(R.id.sp_type);
-        sp_university = (Spinner) findViewById(R.id.sp_university);
+        tv_university = (TextView) findViewById(R.id.tv_university);
+        tv_faculty = (TextView) findViewById(R.id.tv_faculty);
         tv_course = (TextView) findViewById(R.id.tv_course);
         civ_profile_photo = (CircleImageView) findViewById(R.id.civ_profile_photo);
         iv_toolbar_back = (ImageView) findViewById(R.id.iv_toolbar_back);
@@ -99,15 +103,7 @@ public class SignupActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
 
-        List<String> universityArray =  new ArrayList<>();
-        typeArray.add("Universidad");
-        typeArray.add("PUCP");
-        typeArray.add("UPC");
-        typeArray.add("Universidad de Lima");
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, universityArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_university.setAdapter(adapter);
     }
 
     private void setActions() {
@@ -165,7 +161,8 @@ public class SignupActivity extends AppCompatActivity {
                 progressDialog.show();
 
                 String type = (String) sp_type.getSelectedItem();
-                String university = (String) sp_university.getSelectedItem();
+                String university = tv_university.getText().toString();
+
                 //current attributes
                 String name = et_name.getText().toString();
                 String lastName = et_lastname.getText().toString();
@@ -180,6 +177,8 @@ public class SignupActivity extends AppCompatActivity {
                     student.setPhone(phone);
                     student.setEmail(email);
                     student.setUniversity(university);
+                    student.setUniversityId(universityId);
+                    student.setFacultyId(facultyId);
                     student.setPassword(password);
                     student.setFcmToken(FirebaseInstanceId.getInstance().getToken());
                     JsonObject studentObject = student.toJson();
@@ -205,6 +204,8 @@ public class SignupActivity extends AppCompatActivity {
                     instructor.setPhone(phone);
                     instructor.setEmail(email);
                     instructor.setPassword(password);
+                    instructor.setUniversityId(universityId);
+                    instructor.setFacultyId(facultyId);
                     instructor.setFcmToken(FirebaseInstanceId.getInstance().getToken());
                     JsonObject instructorObject = instructor.toJson();
 
@@ -235,6 +236,26 @@ public class SignupActivity extends AppCompatActivity {
                 startActivityForResult(intent, Constants.CHOOSEN_COURSE);
             }
         });
+
+        tv_university.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(self, ListUniversityActivity.class);
+                startActivityForResult(intent, Constants.CHOOSEN_UNIVERSITY);
+            }
+        });
+
+        tv_faculty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(universityId != -1) {
+                    Intent intent = new Intent(self, ListFacultyActivity.class);
+                    startActivityForResult(intent, Constants.CHOOSEN_FACULTY);
+                }else{
+                    Toast.makeText(self, "Necesitas escoger una universidad", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public boolean validate() {
@@ -246,7 +267,8 @@ public class SignupActivity extends AppCompatActivity {
         String password = et_password.getText().toString();
         String courseName = tv_course.getText().toString();
         String selectedUserType= sp_type.getSelectedItem().toString();
-        String selectedUniversity = sp_university.getSelectedItem().toString();
+        String university = tv_university.getText().toString();
+        String faculty = tv_faculty.getText().toString();
 
         if(selectedUserType.equals("¿Alumno o asesor?")){
             valid = false;
@@ -295,9 +317,18 @@ public class SignupActivity extends AppCompatActivity {
             tv_course.setError(null);
         }
 
-        if(selectedUserType.equals("Alumno") && selectedUniversity.isEmpty()){
+        if(university.isEmpty()){
+            tv_university.setError("Debe elegir una universidad");
             valid = false;
-            Toast.makeText(this, "Debe elegir una universidad", Toast.LENGTH_SHORT).show();
+        }else{
+            tv_university.setError(null);
+        }
+
+        if(faculty.isEmpty()){
+            tv_faculty.setError("Debe elegir una facultad");
+            valid = false;
+        }else{
+            tv_faculty.setError(null);
         }
 
         return valid;
@@ -363,14 +394,26 @@ public class SignupActivity extends AppCompatActivity {
                     mPhotoLocationPath = file.getAbsolutePath();
                 }
                 UtilMethods.setPhoto(this, civ_profile_photo, mPhotoLocationPath, Constants.USER_PHOTO);
-            } else if (requestCode == Crop.REQUEST_CROP) {
+            } //else if (requestCode == Crop.REQUEST_CROP) {
                 //Result from cropping. Do nothing
-            }
+            //}
 
             if((requestCode == Constants.CHOOSEN_COURSE)) {
                 String courseName = data.getStringExtra(Constants.BUNDLE_COURSE_NAME);
                 courseId = data.getIntExtra(Constants.BUNDLE_COURSE_ID, -1);
                 tv_course.setText(courseName);
+            }
+
+            if((requestCode == Constants.CHOOSEN_FACULTY)) {
+                String facultyName = data.getStringExtra(Constants.BUNDLE_FACULTY_NAME);
+                facultyId = data.getIntExtra(Constants.BUNDLE_FACULTY_ID, -1);
+                tv_faculty.setText(facultyName);
+            }
+
+            if((requestCode == Constants.CHOOSEN_UNIVERSITY)) {
+                String universityName = data.getStringExtra(Constants.BUNDLE_UNIVERSITY_NAME);
+                universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, -1);
+                tv_university.setText(universityName);
             }
         }else{
             mPhotoLocationPath = null;
@@ -387,7 +430,7 @@ public class SignupActivity extends AppCompatActivity {
                 @Override
                 public void success(JsonObject jsonObject, Response response) {
                     super.success(jsonObject, response);
-                    startHome(jsonObject, isInstructor);
+                    startHome(jsonObject, true);
                 }
             });
         }else{
@@ -395,7 +438,7 @@ public class SignupActivity extends AppCompatActivity {
                 @Override
                 public void success(JsonObject jsonObject, Response response) {
                     super.success(jsonObject, response);
-                    startHome(jsonObject, isInstructor);
+                    startHome(jsonObject, false);
                 }
             });
         }

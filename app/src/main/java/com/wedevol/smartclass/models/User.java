@@ -21,6 +21,8 @@ public class User {
     private int level = -1;
     private int totalHours = -1;
     private String fcmToken = "";
+    private int universityId = -1;
+    private int facultyId = -1;
 
     public User(){
     }
@@ -189,5 +191,21 @@ public class User {
     public String toJsonString() {
         Gson gson = new Gson();
         return gson.toJson(this);
+    }
+
+    public int getUniversityId() {
+        return universityId;
+    }
+
+    public void setUniversityId(int universityId) {
+        this.universityId = universityId;
+    }
+
+    public int getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(int facultyId) {
+        this.facultyId = facultyId;
     }
 }

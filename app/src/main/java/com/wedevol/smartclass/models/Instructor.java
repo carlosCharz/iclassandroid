@@ -37,7 +37,6 @@ public class Instructor extends User {
         this.price = price;
     }
 
-    //TODO: json builder
     private static class Builder {
         private int mId;
         private String mFirstName;
@@ -50,6 +49,8 @@ public class Instructor extends User {
         private int mLevel;
         private int mTotalHours;
         private int mPrice;
+        private int mFacultyId;
+        private int mUniversityId;
 
         Builder(int id) {
             mId = id;
@@ -105,6 +106,16 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder facultyId(int facultyId) {
+            mFacultyId = facultyId;
+            return this;
+        }
+
+        Builder universityId(int universityId) {
+            mUniversityId = universityId;
+            return this;
+        }
+
         public Instructor build() {
             Instructor instructor = new Instructor();
             instructor.setId(mId);
@@ -118,6 +129,8 @@ public class Instructor extends User {
             instructor.setLevel(mLevel);
             instructor.setTotalHours(mTotalHours);
             instructor.setPrice(mPrice);
+            instructor.setUniversityId(mUniversityId);
+            instructor.setFacultyId(mFacultyId);
             return instructor;
         }
     }
@@ -165,24 +178,29 @@ public class Instructor extends User {
             instructorBuilder.price(responseObject.get("price").getAsInt());
         }
 
+        if (responseObject.has("universityId") && !responseObject.get("universityId").isJsonNull()) {
+            instructorBuilder.universityId(responseObject.get("universityId").getAsInt());
+        }
+
+        if (responseObject.has("facultyId") && !responseObject.get("facultyId").isJsonNull()) {
+            instructorBuilder.facultyId(responseObject.get("facultyId").getAsInt());
+        }
+
         return instructorBuilder.build();
     }
 
     public JsonObject toJson(){
         JsonObject jsonObject = new JsonObject();
-        //"firstName": "string",
         jsonObject.addProperty("firstName", this.getFirstname());
-        //"lastName": "string",
         jsonObject.addProperty("lastName", this.getLastname());
-        //"phone": "string",
         jsonObject.addProperty("phone", this.getPhone());
-        //"email": "string",
         jsonObject.addProperty("email", this.getEmail());
-        //"password": "string",
         jsonObject.addProperty("password", this.getPassword());
-        //"fcmToken": "string"
         jsonObject.addProperty("fcmToken", this.getFcmToken());
-        //placeOptions": ["string"],
+        jsonObject.addProperty("facultyId", this.getFacultyId());
+        jsonObject.addProperty("universityId", this.getUniversityId());
+
+
         List<String> list = new ArrayList<>();
         list.add("university");
         list.add("house");
