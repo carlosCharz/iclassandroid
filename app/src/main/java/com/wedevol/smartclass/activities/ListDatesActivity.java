@@ -71,10 +71,10 @@ public class ListDatesActivity extends AppCompatActivity {
 
             detailedDates.add("Lunes");
             detailedDates.add("Martes");
-            detailedDates.add("Miercoles");
+            detailedDates.add("Miércoles");
             detailedDates.add("Jueves");
             detailedDates.add("Viernes");
-            detailedDates.add("Sabado");
+            detailedDates.add("Sábado");
             detailedDates.add("Domingo");
         }
 

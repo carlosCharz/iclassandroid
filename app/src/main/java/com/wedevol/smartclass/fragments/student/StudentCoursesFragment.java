@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.student;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,9 +48,32 @@ public class StudentCoursesFragment extends Fragment{
     }
 
     private void setElements(final View view) {
+        b_new_course = (Button) view.findViewById(R.id.b_new_course);
+        getCourses(view);
+    }
+
+    private void setActions() {
+        b_new_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EnableCourseActivity.class);
+                intent.putExtra(Constants.STUDENT_TYPE, true);
+                startActivityForResult(intent, Constants.CHOOSEN_COURSE);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.CHOOSEN_COURSE) && (resultCode == Activity.RESULT_OK)) {
+            getCourses(this.getView());
+        }
+    }
+
+    private void getCourses(final View view) {
         RestClient restClient = new RestClient(getActivity());
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
-        b_new_course = (Button) view.findViewById(R.id.b_new_course);
 
         int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
         restClient.getWebservices().getStudentCourses("", id, "requested,free,payed,pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
@@ -127,7 +151,7 @@ public class StudentCoursesFragment extends Fragment{
                 TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);
 
                 if(payedCourseList.size() == 0 && openCourseList.size() == 0 && pendingCourseList.size() == 0 &&
-                   veryfiedCourseList.size() == 0 && freeCourseList.size() == 0){
+                        veryfiedCourseList.size() == 0 && freeCourseList.size() == 0){
                     rv_payed.setVisibility(View.GONE);
                     tv_no_courses.setVisibility(View.VISIBLE);
                 }else{
@@ -139,14 +163,4 @@ public class StudentCoursesFragment extends Fragment{
         });
     }
 
-    private void setActions() {
-        b_new_course.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), EnableCourseActivity.class);
-                intent.putExtra(Constants.STUDENT_TYPE, true);
-                startActivity(intent);
-            }
-        });
-    }
 }
