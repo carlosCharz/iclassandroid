@@ -27,27 +27,29 @@ public class IClassFirebaseInstanceIDService extends FirebaseInstanceIdService {
         RestClient restClient = new RestClient(this);
         boolean isInstructor = SharedPreferencesManager.getInstance(this).getUserType();
         final User user = SharedPreferencesManager.getInstance(this).getUserInfo();
-        user.setFcmToken(refreshedToken);
-        final Context context = getApplicationContext();
+        if(user!=null) {
+            user.setFcmToken(refreshedToken);
+            final Context context = getApplicationContext();
 
-        if(isInstructor){
-            restClient.getWebservices().updateInstructor("", user.getId(), ((Instructor)user).toJson(), new IClassCallback<JsonObject>(context){
-                @Override
-                public void success(JsonObject jsonObject, Response response) {
-                    super.success(jsonObject, response);
-                    Gson gson = new Gson();
-                    SharedPreferencesManager.getInstance(context).saveUser("", gson.toJson(user));
-                }
-            });
-        }else{
-            restClient.getWebservices().updateStudent("", user.getId(), ((Student)user).toJson(), new IClassCallback<JsonObject>(context){
-                @Override
-                public void success(JsonObject jsonObject, Response response) {
-                    super.success(jsonObject, response);
-                    Gson gson = new Gson();
-                    SharedPreferencesManager.getInstance(context).saveUser("", gson.toJson(user));
-                }
-            });
+            if (isInstructor) {
+                restClient.getWebservices().updateInstructor("", user.getId(), ((Instructor) user).toJson(), new IClassCallback<JsonObject>(context) {
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        Gson gson = new Gson();
+                        SharedPreferencesManager.getInstance(context).saveUser("", gson.toJson(user));
+                    }
+                });
+            } else {
+                restClient.getWebservices().updateStudent("", user.getId(), ((Student) user).toJson(), new IClassCallback<JsonObject>(context) {
+                    @Override
+                    public void success(JsonObject jsonObject, Response response) {
+                        super.success(jsonObject, response);
+                        Gson gson = new Gson();
+                        SharedPreferencesManager.getInstance(context).saveUser("", gson.toJson(user));
+                    }
+                });
+            }
         }
     }
 }
