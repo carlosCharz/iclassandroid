@@ -14,18 +14,18 @@ import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
 /** Created by paolo on 1/25/17.*/
-public class RateClassActivity extends AppCompatActivity {
+public class RateLessonActivity extends AppCompatActivity {
     private Button b_send;
     private Button b_cancel;
     private RatingBar rb_class_calification;
     private ImageView iv_toolbar_back;
-    private RateClassActivity self;
+    private RateLessonActivity self;
     private boolean isInstructor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rate_class);
+        setContentView(R.layout.activity_rate_lesson);
         setElements();
         setActions();
     }
@@ -41,7 +41,7 @@ public class RateClassActivity extends AppCompatActivity {
         b_send = (Button) findViewById(R.id.b_send);
         b_cancel = (Button) findViewById(R.id.b_cancel);
 
-        String formatableAnnouncement = "Acabas de completar tu asesoría de %s! Como te pareció tu %s? Califícalo";
+        String formatableAnnouncement = "¡Acabas de completar tu asesoría de %s! ¿Como te pareció tu %s? Califícalo";
         String announcement;
 
         if (isInstructor) {

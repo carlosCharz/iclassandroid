@@ -45,7 +45,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.ListBankActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.RateClassActivity"
+        <activity android:name=".activities.RateLessonActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.EditProfileActivity"
             android:screenOrientation="portrait"/>

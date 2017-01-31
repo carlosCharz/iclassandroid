@@ -17,35 +17,16 @@ public class User {
     private boolean gender = false;
     private String profilePictureUrl = "";
     private String placeOptions = "";
-    private String university = "";
+    private String universityName = "";
     private double rating = -1;
     private int level = -1;
     private int totalHours = -1;
     private String fcmToken = "";
     private int universityId = -1;
     private int facultyId = -1;
+    private String facultyName = "";
 
-    public User(){
-    }
-
-    public User(int id, String firstname, String lastname, String phone, String email, String password,
-                Date birthday, boolean gender, String profilePictureUrl, String placeOptions,
-                String university, double rating, int level, int totalHours){
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.profilePictureUrl = profilePictureUrl;
-        this.placeOptions = placeOptions;
-        this.university = university;
-        this.rating = rating;
-        this.level = level;
-        this.totalHours = totalHours;
-
+    User(){
     }
 
     public int getId() {
@@ -149,12 +130,12 @@ public class User {
         this.placeOptions = placeOptions;
     }
 
-    public String getUniversity() {
-        return university;
+    public String getUniversityName() {
+        return universityName;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
     }
 
     public double getRating() {
@@ -217,5 +198,13 @@ public class User {
         jsonObject.addProperty("facultyId", getFacultyId());
         jsonObject.addProperty("fcmToken", getFcmToken());
         return jsonObject;
+    }
+
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
     }
 }

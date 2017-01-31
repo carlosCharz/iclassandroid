@@ -71,8 +71,8 @@ public class EditProfileActivity  extends AppCompatActivity {
         tv_user_profile_number.setText(user.getPhone());
         tv_user_profile_email.setText(user.getEmail());
 
-        tv_user_faculty.setText(""+user.getFacultyId());
-        tv_user_university.setText(""+user.getUniversityId());
+        tv_user_faculty.setText(user.getFacultyName());
+        tv_user_university.setText(user.getUniversityName());
     }
 
     private void setupActions() {
@@ -97,9 +97,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
                             setResult(Activity.RESULT_OK);
-                            Gson gson = new Gson();
-                            SharedPreferencesManager.getInstance(self).saveUser("", gson.toJson(user));
-                            self.finish();
+                            relogin();
                         }
                     });
                 }else{
@@ -108,9 +106,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
                             setResult(Activity.RESULT_OK);
-                            Gson gson = new Gson();
-                            SharedPreferencesManager.getInstance(self).saveUser("", gson.toJson(user));
-                            self.finish();
+                            relogin();
                         }
                     });
                 }
@@ -132,6 +128,39 @@ public class EditProfileActivity  extends AppCompatActivity {
                 startActivityForResult(intent, Constants.CHOOSEN_UNIVERSITY);
             }
         });
+    }
+
+    private void relogin() {
+        SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("email", sharedPreferencesManager.getUserInfo().getEmail());
+        jsonObject.addProperty("password", sharedPreferencesManager.getUserTruePassword());
+
+        if(isInstructor) {
+            restClient.getWebservices().authInstructor("", jsonObject, new IClassCallback<JsonObject>(self) {
+                @Override
+                public void success(JsonObject jsonObject, Response response) {
+                    super.success(jsonObject, response);
+                    updateUser(jsonObject);
+                    self.finish();
+                }
+            });
+        }else{
+            restClient.getWebservices().authStudent("", jsonObject, new IClassCallback<JsonObject>(self) {
+                @Override
+                public void success(JsonObject jsonObject, Response response) {
+                    super.success(jsonObject, response);
+                    updateUser(jsonObject);
+                    self.finish();
+                }
+            });
+        }
+    }
+
+    private void updateUser(JsonObject jsonObject) {
+        Gson gson = new Gson();
+        SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
+        sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
     }
 
     @Override

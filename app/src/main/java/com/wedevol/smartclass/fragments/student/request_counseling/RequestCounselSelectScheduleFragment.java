@@ -52,7 +52,6 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     public static Fragment newInstance() {
         RequestCounselSelectScheduleFragment requestCounselSelectScheduleFragment = new RequestCounselSelectScheduleFragment();
         Bundle args = new Bundle();
-        //args.putInt(Constants.BUNDLE_COURSE_ID, courseId);
         requestCounselSelectScheduleFragment.setArguments(args);
         return requestCounselSelectScheduleFragment;
     }
@@ -60,7 +59,6 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //courseId = getArguments().getInt(Constants.BUNDLE_COURSE_ID);
     }
 
     @Override
@@ -181,8 +179,7 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
             int endTime = Integer.parseInt(et_end_time.getText().toString());
             int beginTime = Integer.parseInt(et_begin_time.getText().toString());
 
-            boolean wrong = ((endTime - beginTime) < 0) || (dateDelimiters[0] > beginTime) ||
-                    (dateDelimiters[1] < endTime) || (endTime == beginTime);
+            boolean wrong = ((endTime - beginTime) < 0) || (endTime == beginTime);
             if(wrong){
                 return 1;
             }

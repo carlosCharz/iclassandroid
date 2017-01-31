@@ -176,7 +176,7 @@ public class SignupActivity extends AppCompatActivity {
                     student.setLastname(lastName);
                     student.setPhone(phone);
                     student.setEmail(email);
-                    student.setUniversity(university);
+                    student.setUniversityName(university);
                     student.setUniversityId(universityId);
                     student.setFacultyId(facultyId);
                     student.setPassword(password);

@@ -31,6 +31,7 @@ interface Urls {
     String NEW_SCHEDULE = "/schedules"; //post
     String UPDATE_SCHEDULE = "/schedules/{scheduleId}"; //
     String LIST_INSTRUCTOR_SCHEDULE = "/schedules/week"; //list instructorId=1
+    String DELETE_SCHEDULE = "/schedules/{scheduleId}";
 
     //Instructor enrollment
     String GET_INSTRUCTOR_COURSES = "/instructors/{instructorId}/courses"; //get

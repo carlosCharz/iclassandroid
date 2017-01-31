@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
@@ -14,15 +13,7 @@ public class Instructor extends User {
     private int price = -1;
 
     public Instructor(){
-
-    }
-
-    public Instructor(int id, String firstname, String lastname, String phone, String email, String password,
-                      Date birthday, boolean gender, String profilePictureUrl, String placeOptions,
-                      String university, double rating, int level, int totalHours) {
-        super( id,  firstname,  lastname,  phone,  email,  password,
-                birthday,  gender,  profilePictureUrl, placeOptions,
-                university,  rating,  level,  totalHours);
+        super();
     }
 
     public String getName() {
@@ -52,6 +43,8 @@ public class Instructor extends User {
         private int mFacultyId;
         private int mUniversityId;
         private String mFcmToken;
+        private String mFacultyName;
+        private String mUniversityName;
 
         Builder(int id) {
             mId = id;
@@ -112,8 +105,18 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder facultyName(String facultyName) {
+            mFacultyName = facultyName;
+            return this;
+        }
+
         Builder universityId(int universityId) {
             mUniversityId = universityId;
+            return this;
+        }
+
+        Builder universityName(String universityName) {
+            mUniversityName = universityName;
             return this;
         }
 
@@ -136,7 +139,9 @@ public class Instructor extends User {
             instructor.setTotalHours(mTotalHours);
             instructor.setPrice(mPrice);
             instructor.setUniversityId(mUniversityId);
+            instructor.setUniversityName(mUniversityName);
             instructor.setFacultyId(mFacultyId);
+            instructor.setFacultyName(mFacultyName);
             instructor.setFcmToken(mFcmToken);
             return instructor;
         }
@@ -166,7 +171,7 @@ public class Instructor extends User {
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            instructorBuilder.placeOptions(responseObject.get("placeOptions").getAsString());
+            instructorBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
@@ -189,8 +194,16 @@ public class Instructor extends User {
             instructorBuilder.universityId(responseObject.get("universityId").getAsInt());
         }
 
+        if (responseObject.has("universityName") && !responseObject.get("universityName").isJsonNull()) {
+            instructorBuilder.universityName(responseObject.get("universityName").getAsString());
+        }
+
         if (responseObject.has("facultyId") && !responseObject.get("facultyId").isJsonNull()) {
             instructorBuilder.facultyId(responseObject.get("facultyId").getAsInt());
+        }
+
+        if (responseObject.has("facultyName") && !responseObject.get("facultyName").isJsonNull()) {
+            instructorBuilder.facultyName(responseObject.get("facultyName").getAsString());
         }
 
         if (responseObject.has("fcmToken") && !responseObject.get("fcmToken").isJsonNull()) {

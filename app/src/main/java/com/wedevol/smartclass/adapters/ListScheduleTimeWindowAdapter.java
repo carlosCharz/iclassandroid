@@ -94,8 +94,7 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
 
     private void deleteSchedule(Schedule schedule, final int position) {
         RestClient restClient = new RestClient(context);
-        schedule.setAvailable(false);
-        restClient.getWebservices().updateSchedule("", schedule.getId(), schedule.toJson(), new IClassCallback<JsonObject>(context) {
+        restClient.getWebservices().deleteSchedule("", schedule.getId(), new IClassCallback<JsonObject>(context) {
             @Override
             public void success(JsonObject jsonObject, Response response) {
                 super.success(jsonObject, response);

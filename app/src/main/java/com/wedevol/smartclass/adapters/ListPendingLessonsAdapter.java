@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.RateClassActivity;
+import com.wedevol.smartclass.activities.RateLessonActivity;
 import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.utils.PhoneCallListener;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -70,7 +70,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         viewHolder.iv_rate_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, RateClassActivity.class);
+                Intent intent = new Intent(context, RateLessonActivity.class);
                 intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
                 intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
                 context.startActivity(intent);

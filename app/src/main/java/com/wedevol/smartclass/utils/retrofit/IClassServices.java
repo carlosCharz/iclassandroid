@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
@@ -84,6 +85,10 @@ public interface IClassServices {
     @PUT(Urls.UPDATE_SCHEDULE)
     void updateSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
                         @Body JsonObject schedule, Callback<JsonObject> callback);
+
+    @DELETE(Urls.DELETE_SCHEDULE)
+    void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
+                        Callback<JsonObject> callback);
 
     /**Instructor enrollment */
     @GET(Urls.GET_INSTRUCTOR_COURSES)

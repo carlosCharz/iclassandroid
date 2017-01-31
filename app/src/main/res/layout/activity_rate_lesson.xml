@@ -17,7 +17,7 @@
             android:id="@+id/tv_course_user_type_announcement"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Acabas de completar tu asesoria! Como te parecio tu alumno? Calificalo"/>
+            tools:text="¡Acabas de completar tu asesoría! ¿Como te pareció tu alumno? Califícalo"/>
 
         <RatingBar
             android:layout_gravity="center"
@@ -32,7 +32,7 @@
             android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Surgio algun problema? Comunicate con nosotros!"/>
+            android:text="¿Surgió algún problema? ¡Comunícate con nosotros!"/>
 
         <TextView
             android:layout_marginTop="10dp"

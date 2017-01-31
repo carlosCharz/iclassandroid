@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /** Created by paolorossi on 12/8/16.*/
@@ -30,6 +29,8 @@ public class Student extends User{
         private int mFacultyId;
         private int mUniversityId;
         private String mFcmToken;
+        private String mFacultyName;
+        private String mUniversityName;
 
         Builder(int id) {
             mId = id;
@@ -85,8 +86,18 @@ public class Student extends User{
             return this;
         }
 
+        Student.Builder facultyName(String facultyName) {
+            mFacultyName = facultyName;
+            return this;
+        }
+
         Student.Builder universityId(int universityId) {
             mUniversityId = universityId;
+            return this;
+        }
+
+        Student.Builder universityName(String universityName) {
+            mUniversityName = universityName;
             return this;
         }
 
@@ -108,7 +119,9 @@ public class Student extends User{
             student.setLevel(mLevel);
             student.setTotalHours(mTotalHours);
             student.setUniversityId(mUniversityId);
+            student.setUniversityName(mUniversityName);
             student.setFacultyId(mFacultyId);
+            student.setFacultyName(mFacultyName);
             student.setFcmToken(mFcmToken);
             return student;
         }
@@ -138,7 +151,7 @@ public class Student extends User{
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            studentBuilder.placeOptions(responseObject.get("placeOptions").getAsString());
+            studentBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
@@ -157,8 +170,16 @@ public class Student extends User{
             studentBuilder.universityId(responseObject.get("universityId").getAsInt());
         }
 
+        if (responseObject.has("universityName") && !responseObject.get("universityName").isJsonNull()) {
+            studentBuilder.universityName(responseObject.get("universityName").getAsString());
+        }
+
         if (responseObject.has("facultyId") && !responseObject.get("facultyId").isJsonNull()) {
             studentBuilder.facultyId(responseObject.get("facultyId").getAsInt());
+        }
+
+        if (responseObject.has("facultyName") && !responseObject.get("facultyName").isJsonNull()) {
+            studentBuilder.facultyName(responseObject.get("facultyName").getAsString());
         }
 
         if (responseObject.has("fcmToken") && !responseObject.get("fcmToken").isJsonNull()) {
