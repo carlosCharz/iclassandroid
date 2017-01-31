@@ -156,6 +156,7 @@
                     android:src="@drawable/ic_pay_course_black"/>
 
                 <TextView
+                    android:background="@drawable/custom_combo_background"
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
@@ -182,13 +183,14 @@
                     android:src="@drawable/ic_course_black"/>
 
                 <TextView
+                    android:background="@drawable/custom_combo_background"
                     android:layout_weight="0.6"
                     android:layout_marginStart="40dp"
                     android:layout_marginLeft="40dp"
                     android:id="@+id/tv_user_faculty"
                     android:gravity="center_vertical"
                     android:layout_width="0dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_height="match_parent"
                     tools:text="Ingenieria Informatica" />

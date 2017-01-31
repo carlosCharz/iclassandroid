@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
@@ -44,6 +45,10 @@ public interface IClassServices {
     @POST(Urls.STUDENT_ENROLL_ON_COURSE)
     void enrollOnCourseStudent(@Header("Authorization") String authorization, @Body JsonObject course, IClassCallback<JsonObject> iClassCallback);
 
+    @PUT(Urls.UPDATE_STUDENT)
+    void updateStudent(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                       @Body JsonObject student, IClassCallback<JsonObject> iClassCallback);
+
     /**Instructors*/
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
@@ -56,7 +61,12 @@ public interface IClassServices {
 
     @POST(Urls.INSTRUCTOR_ENROLL_ON_COURSE)
     void enrollOnCourseInstructor(@Header("Authorization") String authorization, @Body JsonObject instructorEnrollment,
-                       Callback<JsonObject> callback);
+                                  Callback<JsonObject> callback);
+
+    @PUT(Urls.UPDATE_INSTRUCTOR)
+    void updateInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                          @Body JsonObject instructor, IClassCallback<JsonObject> iClassCallback);
+
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
@@ -74,7 +84,11 @@ public interface IClassServices {
 
     @PUT(Urls.UPDATE_SCHEDULE)
     void updateSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
-                                 @Body JsonObject schedule, Callback<JsonObject> callback);
+                        @Body JsonObject schedule, Callback<JsonObject> callback);
+
+    @DELETE(Urls.DELETE_SCHEDULE)
+    void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
+                        Callback<JsonObject> callback);
 
     /**Instructor enrollment */
     @GET(Urls.GET_INSTRUCTOR_COURSES)
@@ -83,7 +97,7 @@ public interface IClassServices {
 
     @PUT(Urls.UPDATE_COURSE)
     void updateInstructorCourse(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
-                      @Path("courseId") int courseId, @Body JsonObject course, Callback<JsonObject> callback);
+                                @Path("courseId") int courseId, @Body JsonObject course, Callback<JsonObject> callback);
 
 
     /**Classes*/

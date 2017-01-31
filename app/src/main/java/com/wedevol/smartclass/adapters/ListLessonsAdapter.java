@@ -8,11 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.List;
+
+import retrofit.client.Response;
 
 /** Created by paolo on 12/20/16.*/
 public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.ViewHolder> {
@@ -35,7 +41,7 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final ListLessonsAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ListLessonsAdapter.ViewHolder viewHolder, final int i) {
         final Lesson lesson = mItems.get(i);
         viewHolder.tv_request_counsult_data.setText(lesson.getCourseName() + " - " +
                 lesson.getSenderFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
@@ -44,17 +50,27 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
         viewHolder.tv_counselor_rating.setText("0.0");
         viewHolder.tv_lesson_status.setText(lesson.getPresentationStatus());
 
-
+        final int finalI = i;
         if(type == Constants.REQUEST_TYPE){
             viewHolder.b_cancel.setVisibility(View.VISIBLE);
             viewHolder.b_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Call web service to cancel it
+                    RestClient restClient = new RestClient(context);
+                    lesson.setReceptorId(lesson.getSenderId());
+                    lesson.setSenderId(SharedPreferencesManager.getInstance(context).getUserInfo().getId());
+                    lesson.setStatus("ignored");
+                    restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(), new IClassCallback<JsonObject>(context) {
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            mItems.remove(finalI);
+                            notifyItemChanged(finalI);
+                        }
+                    });
                 }
             });
-
-        }else{
+        } else {
             viewHolder.b_cancel.setVisibility(View.GONE);
         }
     }

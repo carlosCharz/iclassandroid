@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.instructor;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -16,10 +17,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.EditProfileActivity;
-import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
@@ -101,8 +100,16 @@ public class InstructorProfileFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, Constants.EDITED_PROFILE);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.EDITED_PROFILE) && (resultCode == Activity.RESULT_OK)) {
+            setElements(getView());
+        }
     }
 }

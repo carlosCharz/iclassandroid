@@ -12,8 +12,6 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.HomeActivity;
-import com.wedevol.smartclass.activities.LoginActivity;
 import com.wedevol.smartclass.activities.SplashActivity;
 
 /** Created by paolo on 1/19/17.*/

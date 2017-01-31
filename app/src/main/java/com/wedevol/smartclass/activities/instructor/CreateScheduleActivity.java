@@ -160,7 +160,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
                 case "Martes":
                     choosenWeekDay = "tue";
                     break;
-                case "Miercoles":
+                case "Miércoles":
                     choosenWeekDay = "wed";
                     break;
                 case "Jueves":
@@ -169,7 +169,7 @@ public class CreateScheduleActivity extends AppCompatActivity {
                 case "Viernes":
                     choosenWeekDay = "fri";
                     break;
-                case "Sabado":
+                case "Sábado":
                     choosenWeekDay = "sat";
                     break;
                 case "Domingo":

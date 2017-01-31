@@ -176,7 +176,7 @@ public class SignupActivity extends AppCompatActivity {
                     student.setLastname(lastName);
                     student.setPhone(phone);
                     student.setEmail(email);
-                    student.setUniversity(university);
+                    student.setUniversityName(university);
                     student.setUniversityId(universityId);
                     student.setFacultyId(facultyId);
                     student.setPassword(password);
@@ -420,7 +420,7 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
-    private void login(String email, String password, final boolean isInstructor) {
+    private void login(String email, final String password, final boolean isInstructor) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("email", email);
         jsonObject.addProperty("password", password);
@@ -430,7 +430,7 @@ public class SignupActivity extends AppCompatActivity {
                 @Override
                 public void success(JsonObject jsonObject, Response response) {
                     super.success(jsonObject, response);
-                    startHome(jsonObject, true);
+                    startHome(jsonObject, true, password);
                 }
             });
         }else{
@@ -438,17 +438,18 @@ public class SignupActivity extends AppCompatActivity {
                 @Override
                 public void success(JsonObject jsonObject, Response response) {
                     super.success(jsonObject, response);
-                    startHome(jsonObject, false);
+                    startHome(jsonObject, false, password);
                 }
             });
         }
     }
 
-    public void startHome(JsonObject jsonObject, boolean isInstructor){
+    public void startHome(JsonObject jsonObject, boolean isInstructor, String password){
         Gson gson = new Gson();
         SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
         sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
         sharedPreferencesManager.saveUserType(isInstructor);
+        sharedPreferencesManager.saveTruePassword(password);
 
         Intent intent = new Intent(self, HomeActivity.class);
         intent.putExtra(Constants.BUNDLE_INSTRUCTOR, isInstructor);

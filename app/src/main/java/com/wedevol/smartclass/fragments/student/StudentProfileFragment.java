@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.fragments.student;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -99,5 +100,13 @@ public class StudentProfileFragment extends Fragment{
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.EDITED_PROFILE) && (resultCode == Activity.RESULT_OK)) {
+            setElements(getView());
+        }
     }
 }
