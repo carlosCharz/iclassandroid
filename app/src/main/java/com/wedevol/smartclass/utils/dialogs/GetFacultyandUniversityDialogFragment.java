@@ -42,13 +42,14 @@ public class GetFacultyandUniversityDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
 
         final SearchedCoursesListener searchedCoursesListener = getArguments().getParcelable(Constants.BUNDLE_SEARCHED_COURSES_LISTENER);
 
         View view = inflater.inflate(R.layout.dialog_get_faculty_and_university, null);
         tv_dialog_university = (TextView) view.findViewById(R.id.tv_dialog_university);
         tv_dialog_faculty = (TextView) view.findViewById(R.id.tv_dialog_faculty);
+        tv_dialog_faculty.setEnabled(false);
 
         tv_dialog_university.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +63,7 @@ public class GetFacultyandUniversityDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ListFacultyActivity.class);
+                intent.putExtra(Constants.BUNDLE_UNIVERSITY_ID, universityId);
                 startActivityForResult(intent, Constants.CHOOSEN_FACULTY);
             }
         });
@@ -88,9 +90,9 @@ public class GetFacultyandUniversityDialogFragment extends DialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if((requestCode == Constants.CHOOSEN_UNIVERSITY) && (resultCode == Activity.RESULT_OK)) {
-
             universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, -1);
             String universityName = data.getStringExtra(Constants.BUNDLE_UNIVERSITY_NAME);
+            tv_dialog_faculty.setEnabled(true);
             tv_dialog_university.setText(universityName);
         }
 

@@ -171,7 +171,8 @@ public class Instructor extends User {
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            instructorBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
+            Gson gson = new Gson();
+            instructorBuilder.placeOptions(gson.toJson(responseObject.get("placeOptions").getAsJsonArray()));
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {

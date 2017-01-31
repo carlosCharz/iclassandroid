@@ -124,6 +124,6 @@ public interface IClassServices {
 
     /**Faculties*/
     @GET(Urls.GET_FACULTIES_BY_UNIVERSITY)
-    void getUniversityFaculties(@Header("Authorization") String authorization, @Query("universityId") int universityId,
+    void getUniversityFaculties(@Header("Authorization") String authorization, @Path("universityId") int universityId,
                                 Callback<JsonArray> callback);
 }

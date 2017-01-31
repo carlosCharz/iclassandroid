@@ -151,7 +151,8 @@ public class Student extends User{
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            studentBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
+            Gson gson = new Gson();
+            studentBuilder.placeOptions(gson.toJson(responseObject.get("placeOptions").getAsJsonArray()));
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
