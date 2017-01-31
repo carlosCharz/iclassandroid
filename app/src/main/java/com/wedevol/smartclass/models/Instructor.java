@@ -51,6 +51,7 @@ public class Instructor extends User {
         private int mPrice;
         private int mFacultyId;
         private int mUniversityId;
+        private String mFcmToken;
 
         Builder(int id) {
             mId = id;
@@ -116,6 +117,11 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder fcmToken(String fcmToken) {
+            mFcmToken = fcmToken;
+            return this;
+        }
+
         public Instructor build() {
             Instructor instructor = new Instructor();
             instructor.setId(mId);
@@ -131,6 +137,7 @@ public class Instructor extends User {
             instructor.setPrice(mPrice);
             instructor.setUniversityId(mUniversityId);
             instructor.setFacultyId(mFacultyId);
+            instructor.setFcmToken(mFcmToken);
             return instructor;
         }
     }
@@ -159,7 +166,7 @@ public class Instructor extends User {
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            instructorBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
+            instructorBuilder.placeOptions(responseObject.get("placeOptions").getAsString());
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
@@ -186,6 +193,11 @@ public class Instructor extends User {
             instructorBuilder.facultyId(responseObject.get("facultyId").getAsInt());
         }
 
+        if (responseObject.has("fcmToken") && !responseObject.get("fcmToken").isJsonNull()) {
+            instructorBuilder.fcmToken(responseObject.get("fcmToken").getAsString());
+        }
+
+
         return instructorBuilder.build();
     }
 
@@ -199,7 +211,7 @@ public class Instructor extends User {
         jsonObject.addProperty("fcmToken", this.getFcmToken());
         jsonObject.addProperty("facultyId", this.getFacultyId());
         jsonObject.addProperty("universityId", this.getUniversityId());
-
+        jsonObject.addProperty("fcmToken", getFcmToken());
 
         List<String> list = new ArrayList<>();
         list.add("university");

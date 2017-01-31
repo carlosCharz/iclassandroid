@@ -92,7 +92,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                 user.setPassword(SharedPreferencesManager.getInstance(self).getUserTruePassword());
 
                 if(isInstructor){
-                    restClient.getWebservices().updateInstructor("", user.getId(), user.toJson(), new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().updateInstructor("", user.getId(), user.toJsonUpdate(), new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -103,7 +103,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                         }
                     });
                 }else{
-                    restClient.getWebservices().updateStudent("", user.getId(), user.toJson(), new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().updateStudent("", user.getId(), user.toJsonUpdate(), new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -132,5 +132,23 @@ public class EditProfileActivity  extends AppCompatActivity {
                 startActivityForResult(intent, Constants.CHOOSEN_UNIVERSITY);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if((requestCode == Constants.CHOOSEN_UNIVERSITY) && (resultCode == Activity.RESULT_OK)) {
+            String universityName = data.getStringExtra(Constants.BUNDLE_UNIVERSITY_NAME);
+            universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, -1);
+            tv_user_university.setText(universityName);
+
+        }
+
+        if((requestCode == Constants.CHOOSEN_FACULTY) && (resultCode == Activity.RESULT_OK)) {
+            facultyId = -1;
+            String facultyName = data.getStringExtra(Constants.BUNDLE_FACULTY_NAME);
+            facultyId = data.getIntExtra(Constants.BUNDLE_FACULTY_ID, -1);
+            tv_user_faculty.setText(facultyName);
+        }
     }
 }

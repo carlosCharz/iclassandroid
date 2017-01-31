@@ -210,7 +210,7 @@ public class User {
         this.facultyId = facultyId;
     }
 
-    public JsonObject toJson() {
+    public JsonObject toJsonUpdate() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("phone", getPhone());
         jsonObject.addProperty("universityId", getUniversityId());

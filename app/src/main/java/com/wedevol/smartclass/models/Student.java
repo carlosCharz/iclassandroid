@@ -12,14 +12,6 @@ import java.util.List;
 /** Created by paolorossi on 12/8/16.*/
 public class Student extends User{
 
-    public Student(int id, String firstname, String lastname, String phone, String email, String password,
-                   Date birthday, boolean gender, String profilePictureUrl, String placeOptions,
-                   String university, double rating, int level, int totalHours) {
-        super( id,  firstname,  lastname,  phone,  email,  password,
-                birthday,  gender,  profilePictureUrl, placeOptions,
-                university,  rating,  level,  totalHours);
-    }
-
     public Student() {
         super();
     }
@@ -37,6 +29,7 @@ public class Student extends User{
         private int mTotalHours;
         private int mFacultyId;
         private int mUniversityId;
+        private String mFcmToken;
 
         Builder(int id) {
             mId = id;
@@ -97,6 +90,11 @@ public class Student extends User{
             return this;
         }
 
+        Student.Builder fcmToken(String fcmToken) {
+            mFcmToken = fcmToken;
+            return this;
+        }
+
         public Student build() {
             Student student = new Student();
             student.setId(mId);
@@ -111,6 +109,7 @@ public class Student extends User{
             student.setTotalHours(mTotalHours);
             student.setUniversityId(mUniversityId);
             student.setFacultyId(mFacultyId);
+            student.setFcmToken(mFcmToken);
             return student;
         }
     }
@@ -139,7 +138,7 @@ public class Student extends User{
         }
 
         if (responseObject.has("placeOptions") && !responseObject.get("placeOptions").isJsonNull()) {
-            studentBuilder.placeOptions(responseObject.get("placeOptions").getAsJsonArray().toString());
+            studentBuilder.placeOptions(responseObject.get("placeOptions").getAsString());
         }
 
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
@@ -162,6 +161,9 @@ public class Student extends User{
             studentBuilder.facultyId(responseObject.get("facultyId").getAsInt());
         }
 
+        if (responseObject.has("fcmToken") && !responseObject.get("fcmToken").isJsonNull()) {
+            studentBuilder.fcmToken(responseObject.get("fcmToken").getAsString());
+        }
         return studentBuilder.build();
     }
 

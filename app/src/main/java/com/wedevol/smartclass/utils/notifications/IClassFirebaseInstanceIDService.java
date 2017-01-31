@@ -7,6 +7,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.wedevol.smartclass.models.Instructor;
+import com.wedevol.smartclass.models.Student;
 import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -29,7 +31,7 @@ public class IClassFirebaseInstanceIDService extends FirebaseInstanceIdService {
         final Context context = getApplicationContext();
 
         if(isInstructor){
-            restClient.getWebservices().updateInstructor("", user.getId(), user.toJson(), new IClassCallback<JsonObject>(context){
+            restClient.getWebservices().updateInstructor("", user.getId(), ((Instructor)user).toJson(), new IClassCallback<JsonObject>(context){
                 @Override
                 public void success(JsonObject jsonObject, Response response) {
                     super.success(jsonObject, response);
@@ -38,7 +40,7 @@ public class IClassFirebaseInstanceIDService extends FirebaseInstanceIdService {
                 }
             });
         }else{
-            restClient.getWebservices().updateStudent("", user.getId(), user.toJson(), new IClassCallback<JsonObject>(context){
+            restClient.getWebservices().updateStudent("", user.getId(), ((Student)user).toJson(), new IClassCallback<JsonObject>(context){
                 @Override
                 public void success(JsonObject jsonObject, Response response) {
                     super.success(jsonObject, response);
