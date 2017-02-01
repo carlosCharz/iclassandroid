@@ -28,6 +28,7 @@ import com.soundcloud.android.crop.Crop;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Student;
+import com.wedevol.smartclass.utils.DeviceUuidFactory;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -63,6 +64,7 @@ public class SignupActivity extends AppCompatActivity {
     private int courseId = -1;
     private int universityId = -1;
     private int facultyId = -1;
+    private DeviceUuidFactory deviceUuidFactory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class SignupActivity extends AppCompatActivity {
     private void setElements() {
         self = this;
         restClient = new RestClient();
+        deviceUuidFactory = new DeviceUuidFactory(this);
 
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         ImageView iv_toolbar_actual_screen = (ImageView) findViewById(R.id.iv_toolbar_actual_screen);
@@ -181,6 +184,7 @@ public class SignupActivity extends AppCompatActivity {
                     student.setFacultyId(facultyId);
                     student.setPassword(password);
                     student.setFcmToken(FirebaseInstanceId.getInstance().getToken());
+                    student.setDeviceId(String.valueOf(deviceUuidFactory.getDeviceUuid()));
                     JsonObject studentObject = student.toJson();
                     studentObject.addProperty("courseId", courseId);
 
@@ -207,6 +211,7 @@ public class SignupActivity extends AppCompatActivity {
                     instructor.setUniversityId(universityId);
                     instructor.setFacultyId(facultyId);
                     instructor.setFcmToken(FirebaseInstanceId.getInstance().getToken());
+                    instructor.setDeviceId(String.valueOf(deviceUuidFactory.getDeviceUuid()));
                     JsonObject instructorObject = instructor.toJson();
 
                     restClient.getWebservices().newInstructor("", instructorObject, new IClassCallback<JsonObject>(self){
@@ -250,6 +255,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(universityId != -1) {
                     Intent intent = new Intent(self, ListFacultyActivity.class);
+                    intent.putExtra(Constants.BUNDLE_UNIVERSITY_ID, universityId);
                     startActivityForResult(intent, Constants.CHOOSEN_FACULTY);
                 }else{
                     Toast.makeText(self, "Necesitas escoger una universidad", Toast.LENGTH_SHORT).show();

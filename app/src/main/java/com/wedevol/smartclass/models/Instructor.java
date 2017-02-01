@@ -45,6 +45,7 @@ public class Instructor extends User {
         private String mFcmToken;
         private String mFacultyName;
         private String mUniversityName;
+        private String mDeviceId;
 
         Builder(int id) {
             mId = id;
@@ -125,6 +126,11 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder deviceId(String deviceId) {
+            mDeviceId = deviceId;
+            return this;
+        }
+
         public Instructor build() {
             Instructor instructor = new Instructor();
             instructor.setId(mId);
@@ -143,6 +149,8 @@ public class Instructor extends User {
             instructor.setFacultyId(mFacultyId);
             instructor.setFacultyName(mFacultyName);
             instructor.setFcmToken(mFcmToken);
+            instructor.setDeviceId(mDeviceId);
+
             return instructor;
         }
     }
@@ -211,6 +219,9 @@ public class Instructor extends User {
             instructorBuilder.fcmToken(responseObject.get("fcmToken").getAsString());
         }
 
+        if (responseObject.has("deviceId") && !responseObject.get("deviceId").isJsonNull()) {
+            instructorBuilder.deviceId(responseObject.get("deviceId").getAsString());
+        }
 
         return instructorBuilder.build();
     }
@@ -226,6 +237,7 @@ public class Instructor extends User {
         jsonObject.addProperty("facultyId", this.getFacultyId());
         jsonObject.addProperty("universityId", this.getUniversityId());
         jsonObject.addProperty("fcmToken", getFcmToken());
+        jsonObject.addProperty("deviceId", this.getDeviceId());
 
         List<String> list = new ArrayList<>();
         list.add("university");
@@ -233,14 +245,6 @@ public class Instructor extends User {
         Gson gson = new Gson();
         JsonElement element = gson.toJsonTree(list, new TypeToken<ArrayList<String>>() {}.getType());
         jsonObject.add("placeOptions", element);
-
-        //"birthday": "2017-01-09T21:22:01.004Z", //DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); //String birth = df.format(this.getBirthday()); //jsonObject.addProperty("birthday", birth);
-        //"gender": "string", //jsonObject.addProperty("gender", "M");
-        //"level": 0, //jsonObject.addProperty("level", 0);
-        //"profilePictureUrl": "string", //jsonObject.addProperty("profilePictureUrl", "None");
-        //"rating": 0, //jsonObject.addProperty("rating", 0);
-        //"totalHours": 0, //jsonObject.addProperty("totalHours", 0);
-        //"university": "string" //jsonObject.addProperty("university", "None");
 
         return jsonObject;
     }
