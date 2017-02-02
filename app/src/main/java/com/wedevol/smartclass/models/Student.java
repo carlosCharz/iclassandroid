@@ -31,6 +31,7 @@ public class Student extends User{
         private String mFcmToken;
         private String mFacultyName;
         private String mUniversityName;
+        private String mDeviceId;
 
         Builder(int id) {
             mId = id;
@@ -106,6 +107,11 @@ public class Student extends User{
             return this;
         }
 
+        Student.Builder deviceId(String deviceId) {
+            mDeviceId = deviceId;
+            return this;
+        }
+
         public Student build() {
             Student student = new Student();
             student.setId(mId);
@@ -123,6 +129,7 @@ public class Student extends User{
             student.setFacultyId(mFacultyId);
             student.setFacultyName(mFacultyName);
             student.setFcmToken(mFcmToken);
+            student.setDeviceId(mDeviceId);
             return student;
         }
     }
@@ -186,6 +193,11 @@ public class Student extends User{
         if (responseObject.has("fcmToken") && !responseObject.get("fcmToken").isJsonNull()) {
             studentBuilder.fcmToken(responseObject.get("fcmToken").getAsString());
         }
+
+        if (responseObject.has("deviceId") && !responseObject.get("deviceId").isJsonNull()) {
+            studentBuilder.deviceId(responseObject.get("deviceId").getAsString());
+        }
+
         return studentBuilder.build();
     }
 
@@ -199,6 +211,7 @@ public class Student extends User{
         jsonObject.addProperty("fcmToken", this.getFcmToken());
         jsonObject.addProperty("facultyId", this.getFacultyId());
         jsonObject.addProperty("universityId", this.getUniversityId());
+        jsonObject.addProperty("deviceId", this.getDeviceId());
 
         List<String> list = new ArrayList<>();
         list.add("university");

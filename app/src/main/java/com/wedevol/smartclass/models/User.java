@@ -25,6 +25,7 @@ public class User {
     private int universityId = -1;
     private int facultyId = -1;
     private String facultyName = "";
+    private String deviceId = "";
 
     User(){
     }
@@ -206,5 +207,13 @@ public class User {
 
     public void setFacultyName(String facultyName) {
         this.facultyName = facultyName;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 }
