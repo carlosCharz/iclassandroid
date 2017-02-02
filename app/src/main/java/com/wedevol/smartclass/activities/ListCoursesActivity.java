@@ -82,6 +82,7 @@ public class ListCoursesActivity extends AppCompatActivity implements SearchedCo
         courses = new ArrayList<>();
 
         if(isStudentCourse){
+            fab_search.setVisibility(View.GONE);
             restClient.getWebservices().getStudentCourses("", SharedPreferencesManager.getInstance(self).getUserInfo().getId(),
                     "payed,free", new IClassCallback<JsonArray>(self){
                         @Override
