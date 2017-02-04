@@ -17,10 +17,13 @@ import retrofit.http.Query;
 public interface IClassServices {
     /**Login methods*/
     @POST(Urls.LOGIN_URL_INSTRUCTOR)
-    void authInstructor(@Header("email") String authorization, @Body JsonObject request, Callback<JsonObject> callback);
+    void authInstructor(@Header("Authorization") String authorization, @Body JsonObject request, Callback<JsonObject> callback);
 
     @POST(Urls.LOGIN_URL_STUDENT)
-    void authStudent(@Header("email") String authorization, @Body JsonObject request, Callback<JsonObject> callback);
+    void authStudent(@Header("Authorization") String authorization, @Body JsonObject request, Callback<JsonObject> callback);
+
+    @POST(Urls.REFRESH_TOKEN)
+    void refreshToken(@Header("Authorization") String authorization, @Body JsonObject request, Callback<JsonObject> callback);
 
     /*Courses*/
     @GET(Urls.ALL_COURSES)

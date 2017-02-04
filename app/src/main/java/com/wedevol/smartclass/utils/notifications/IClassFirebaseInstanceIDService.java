@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Student;
 import com.wedevol.smartclass.models.User;
+import com.wedevol.smartclass.utils.DeviceUuidFactory;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -25,31 +26,17 @@ public class IClassFirebaseInstanceIDService extends FirebaseInstanceIdService {
         Log.d("IClassFirebase", "Refreshed token: " + refreshedToken);
 
         RestClient restClient = new RestClient(this);
-        boolean isInstructor = SharedPreferencesManager.getInstance(this).getUserType();
-        final User user = SharedPreferencesManager.getInstance(this).getUserInfo();
-        if(user!=null) {
-            user.setFcmToken(refreshedToken);
-            final Context context = getApplicationContext();
+        final Context context = getApplicationContext();
 
-            if (isInstructor) {
-                restClient.getWebservices().updateInstructor("", user.getId(), ((Instructor) user).toJson(), new IClassCallback<JsonObject>(context) {
-                    @Override
-                    public void success(JsonObject jsonObject, Response response) {
-                        super.success(jsonObject, response);
-                        Gson gson = new Gson();
-                        SharedPreferencesManager.getInstance(context).saveUser("", gson.toJson(user));
-                    }
-                });
-            } else {
-                restClient.getWebservices().updateStudent("", user.getId(), ((Student) user).toJson(), new IClassCallback<JsonObject>(context) {
-                    @Override
-                    public void success(JsonObject jsonObject, Response response) {
-                        super.success(jsonObject, response);
-                        Gson gson = new Gson();
-                        SharedPreferencesManager.getInstance(context).saveUser("", gson.toJson(user));
-                    }
-                });
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("deviceId", String.valueOf(new DeviceUuidFactory(context).getDeviceUuid()));
+        jsonObject.addProperty("fcmToken", refreshedToken);
+
+        restClient.getWebservices().refreshToken("", jsonObject, new IClassCallback<JsonObject>(context) {
+            @Override
+            public void success(JsonObject jsonObject, Response response) {
+                super.success(jsonObject, response);
             }
-        }
+        });
     }
 }

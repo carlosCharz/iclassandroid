@@ -4,6 +4,7 @@ package com.wedevol.smartclass.utils.retrofit;
 interface Urls {
     String LOGIN_URL_INSTRUCTOR = "/auth/instructor/login";
     String LOGIN_URL_STUDENT = "/auth/student/login";
+    String REFRESH_TOKEN = "/auth/token/refresh";
 
     //Courses
     String ALL_COURSES = "/courses"; //get
