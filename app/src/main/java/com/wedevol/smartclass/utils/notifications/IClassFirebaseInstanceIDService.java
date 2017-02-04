@@ -5,13 +5,8 @@ import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.wedevol.smartclass.models.Instructor;
-import com.wedevol.smartclass.models.Student;
-import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.DeviceUuidFactory;
-import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
