@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -30,6 +31,7 @@ public class RateLessonActivity extends AppCompatActivity {
     private boolean isInstructor;
     private int lessonId;
     private RestClient restClient;
+    private User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class RateLessonActivity extends AppCompatActivity {
     private void setElements() {
         self = this;
         isInstructor = SharedPreferencesManager.getInstance(this).getUserType();
+        user = SharedPreferencesManager.getInstance(this).getUserInfo();
         String courseName = getIntent().getStringExtra(Constants.BUNDLE_COURSE_NAME);
         lessonId = getIntent().getIntExtra(Constants.BUNDLE_LESSON_ID, -1);
         restClient = new RestClient(this);
@@ -76,10 +79,17 @@ public class RateLessonActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int stars= rb_class_calification.getNumStars();
                 if(isInstructor){
-                    Toast.makeText(self, "Funcion aun no implementada", Toast.LENGTH_SHORT).show();
-                    finish();
+
+                    restClient.getWebservices().rateStudent("", lessonId, user.getId(), stars, new JsonObject(), new IClassCallback<JsonObject>(self) {
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            setResult(Activity.RESULT_OK);
+                            finish();
+                        }
+                    });
                 }else{
-                    restClient.getWebservices().rateInstructor("", lessonId, stars, new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().rateInstructor("", lessonId, user.getId(), stars, new JsonObject(), new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);

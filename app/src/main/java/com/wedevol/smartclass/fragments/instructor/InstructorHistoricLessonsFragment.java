@@ -52,7 +52,7 @@ public class InstructorHistoricLessonsFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
 
-        restClient.getWebservices().getInstructorHistoricClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed,requested,rejected,ignored", new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().getInstructorHistoricClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed,requested,rejected,ignored,cancelled", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

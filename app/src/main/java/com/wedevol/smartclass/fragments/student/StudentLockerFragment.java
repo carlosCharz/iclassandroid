@@ -127,7 +127,6 @@ public class StudentLockerFragment extends Fragment{
                     int month = calendar.get(Calendar.MONTH);
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-
                     for (Lesson lesson: pendingLessons){
                         String[] date= lesson.getClassDate().split("/");
                         boolean datePassed = lesson.getEndTime() <= hourOfDay && Integer.parseInt(date[0]) <= day && Integer.parseInt(date[1]) <= month;
@@ -140,7 +139,6 @@ public class StudentLockerFragment extends Fragment{
                         }
                     }
                 }
-
                 pb_charging.setVisibility(View.GONE);
             }
         });

@@ -53,8 +53,8 @@ public interface IClassServices {
                        @Body JsonObject student, IClassCallback<JsonObject> iClassCallback);
 
     @POST(Urls.STUDENT_RATES_INSTRUCTOR)
-    void rateInstructor(@Header("Authorization") String authorization, @Path("lessonId") int lessonId,
-                        @Path("rating") int rating, Callback<JsonObject> callback);
+    void rateInstructor(@Header("Authorization") String authorization, @Path("lessonId") int lessonId, @Path("studentId") int studentId,
+                        @Path("rating") int rating, @Body JsonObject jsonObject,  Callback<JsonObject> callback);
 
     @GET(Urls.GET_COMING_LESSONS)
     void getStudentComingClasses(@Header("Authorization") String authorization, @Path("studentId") int studentId,
@@ -84,6 +84,10 @@ public interface IClassServices {
     @PUT(Urls.UPDATE_INSTRUCTOR)
     void updateInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
                           @Body JsonObject instructor, IClassCallback<JsonObject> iClassCallback);
+
+    @POST(Urls.INSTRUCTOR_RATES_STUDENT)
+    void rateStudent(@Header("Authorization") String authorization, @Path("lessonId") int lessonId, @Path("instructorId") int instructorId,
+                     @Path("rating") int rating, @Body JsonObject jsonObject, Callback<JsonObject> callback);
 
     @GET(Urls.GET_COMING_CLASSES)
     void getInstructorComingClasses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,

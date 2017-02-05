@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.RateLessonActivity;
 import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Lesson;
@@ -122,15 +123,24 @@ public class InstructorDesktopFragment extends Fragment {
                     TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
                     tv_no_counselings.setVisibility(View.VISIBLE);
                     rv_pending_counselings.setVisibility(View.GONE);
-                } /*else {
-                    for (Lesson lesson: pendingCounselleds){
-                        Intent intent = new Intent(self, RateLessonActivity.class);
-                        intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
-                        intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
-                        startActivityForResult(intent, Constants.RATED_LESSON);
+                } else {
+                    Calendar calendar = Calendar.getInstance();
+                    int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+                    int month = calendar.get(Calendar.MONTH);
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+                    for (Lesson lesson: pendingCounselleds){
+                        String[] date= lesson.getClassDate().split("/");
+                        boolean datePassed = lesson.getEndTime() <= hourOfDay && Integer.parseInt(date[0]) <= day && Integer.parseInt(date[1]) <= month;
+                        boolean monthPassed = Integer.parseInt(date[1]) < month;
+                        if(datePassed || monthPassed) {
+                            Intent intent = new Intent(self, RateLessonActivity.class);
+                            intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
+                            intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
+                            startActivityForResult(intent, Constants.RATED_LESSON);
+                        }
                     }
-                }*/
+                }
                 pb_charging.setVisibility(View.GONE);
             }
         });

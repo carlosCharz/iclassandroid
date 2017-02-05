@@ -59,7 +59,7 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
                     RestClient restClient = new RestClient(context);
                     lesson.setReceptorId(lesson.getSenderId());
                     lesson.setSenderId(SharedPreferencesManager.getInstance(context).getUserInfo().getId());
-                    lesson.setStatus("ignored");
+                    lesson.setStatus("cancelled");
                     restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(), new IClassCallback<JsonObject>(context) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
