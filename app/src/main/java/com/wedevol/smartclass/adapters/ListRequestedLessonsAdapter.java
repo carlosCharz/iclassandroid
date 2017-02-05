@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -167,8 +168,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
                     long seconds = timeDiff / 1000 % 60;
                     long minutes = timeDiff / (60 * 1000) % 60;
                     long hours = timeDiff / (60 * 60 * 1000) % 24;
-                    long days = (int) timeDiff / (24 * 60 * 60 * 1000);
-                    //long days = TimeUnit.MILLISECONDS.toDays(timeDiff);
+                    long days = (int) timeDiff / (24 * 60 * 60 * 1000) % 14 - 1;
 
                     String left = "";
                     if (days > 0)

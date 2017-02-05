@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
-import com.wedevol.smartclass.activities.RateLessonActivity;
 import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Lesson;
@@ -84,6 +83,21 @@ public class InstructorDesktopFragment extends Fragment {
         getInstructorLessons(view);
     }
 
+    private void setActions() {
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.RATED_LESSON){
+            if(resultCode == Activity.RESULT_OK) {
+                getInstructorLessons(getView());
+            } else{
+                Toast.makeText(self, "Debes ponerle puntaje a tu último alumno", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     private void getInstructorLessons(final View view) {
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
@@ -104,31 +118,17 @@ public class InstructorDesktopFragment extends Fragment {
                     TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
                     tv_no_counselings.setVisibility(View.VISIBLE);
                     rv_pending_counselings.setVisibility(View.GONE);
-                } else {
+                } /*else {
                     for (Lesson lesson: pendingCounselleds){
                         Intent intent = new Intent(self, RateLessonActivity.class);
                         intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
                         intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
                         startActivityForResult(intent, Constants.RATED_LESSON);
+
                     }
-                }
+                }*/
                 pb_charging.setVisibility(View.GONE);
             }
         });
-    }
-
-    private void setActions() {
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == Constants.RATED_LESSON){
-            if(resultCode == Activity.RESULT_OK) {
-                getInstructorLessons(getView());
-            } else{
-                Toast.makeText(self, "Debes ponerle puntaje a tu ultim asesor", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 }
