@@ -56,6 +56,17 @@ public interface IClassServices {
     void rateInstructor(@Header("Authorization") String authorization, @Path("lessonId") int lessonId,
                         @Path("rating") int rating, Callback<JsonObject> callback);
 
+    @GET(Urls.GET_COMING_LESSONS)
+    void getStudentComingClasses(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                                    @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                                    @Query("status") String status, Callback<JsonArray> callback);
+
+    @GET(Urls.GET_HISTORIC_LESSONS)
+    void getStudentHistoricClasses(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                                 @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                                 @Query("status") String status, Callback<JsonArray> callback);
+
+
     /**Instructors*/
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
@@ -74,6 +85,15 @@ public interface IClassServices {
     void updateInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
                           @Body JsonObject instructor, IClassCallback<JsonObject> iClassCallback);
 
+    @GET(Urls.GET_COMING_CLASSES)
+    void getInstructorComingClasses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                           @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                           @Query("status") String status, Callback<JsonArray> callback);
+
+    @GET(Urls.GET_HISTORIC_CLASSES)
+    void getInstructorHistoricClasses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                                    @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                                    @Query("status") String status, Callback<JsonArray> callback);
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)

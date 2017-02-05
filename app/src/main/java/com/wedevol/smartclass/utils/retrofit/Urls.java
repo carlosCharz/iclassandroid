@@ -15,12 +15,16 @@ interface Urls {
     String HOME_STUDENT = "/students/{studentId}/classes";
     String STUDENT_ENROLL_ON_COURSE = "/studentenrollments";
     String UPDATE_STUDENT = "/students/{studentId}";
+    String GET_COMING_LESSONS = "/students/{studentId}/classes/coming";
+    String GET_HISTORIC_LESSONS = "/students/{studentId}/classes/historic";
 
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post
     String HOME_INSTRUCTOR = "/instructors/{instructorId}/classes";//home
     String INSTRUCTOR_ENROLL_ON_COURSE = "/instructorenrollments";
     String UPDATE_INSTRUCTOR = "/instructors/{instructorId}";
+    String GET_COMING_CLASSES = "/instructors/{instructorId}/classes/coming";
+    String GET_HISTORIC_CLASSES = "/instructors/{instructorId}/classes/historic";
 
     //Course
     String UPDATE_COURSE = "/instructors/{instructorId}/courses/{courseId}/enrollment";//put
@@ -30,7 +34,6 @@ interface Urls {
 
     //Schedule
     String NEW_SCHEDULE = "/schedules"; //post
-    String UPDATE_SCHEDULE = "/schedules/{scheduleId}"; //
     String LIST_INSTRUCTOR_SCHEDULE = "/schedules/week"; //list instructorId=1
     String DELETE_SCHEDULE = "/schedules/{scheduleId}";
 
