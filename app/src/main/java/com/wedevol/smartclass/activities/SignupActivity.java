@@ -281,21 +281,21 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "Debe elegir ser asesor o alumno", Toast.LENGTH_SHORT).show();
         }
 
-        if (name.isEmpty() || name.length() < 3) {
+        if (name.isEmpty() || name.length() <= 3) {
             et_name.setError("El nombre deberia tener por lo menos 3 caracteres");
             valid = false;
         } else {
             et_name.setError(null);
         }
 
-        if (lastName.isEmpty() || lastName.length() < 3) {
+        if (lastName.isEmpty() || lastName.length() <= 3) {
             et_lastname.setError("El apellido deberia tener por lo menos 3 caracteres");
             valid = false;
         } else {
             et_lastname.setError(null);
         }
 
-        if (phone.isEmpty() || phone.length() < 7) {
+        if (phone.isEmpty() || phone.length() <= 7) {
             et_phone.setError("El telefono es de por lo menos 7 dígitos");
             valid = false;
         } else {
@@ -310,7 +310,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         if (password.isEmpty() || password.length() <= 6 || password.length() >= 20) {
-            et_password.setError("La contrasenha debe tener minimo 6 o maximo 20 caracteres");
+            et_password.setError("La contraseña debe tener mínimo 6 o máximo 20 caracteres");
             valid = false;
         } else {
             et_password.setError(null);
