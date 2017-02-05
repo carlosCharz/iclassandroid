@@ -25,6 +25,7 @@ public interface Constants {
     int CHOOSEN_UNIVERSITY = 7;
     int CHOOSEN_FACULTY = 8;
     int EDITED_PROFILE = 9;
+    int RATED_LESSON = 10;
 
     String BUNDLE_INSTRUCTOR = "bundle_is_instructor";
     String BUNDLE_COURSE_ID = "bundle_couse_id";
@@ -48,7 +49,4 @@ public interface Constants {
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
     boolean SELECTABLE_COURSE = false;
     boolean NOT_SELECTABLE_COURSE = true;
-
-
-
 }

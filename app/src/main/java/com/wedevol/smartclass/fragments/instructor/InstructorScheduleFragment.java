@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.instructor.CreateScheduleActivity;
 import com.wedevol.smartclass.adapters.ListScheduleTimeWindowAdapter;
 import com.wedevol.smartclass.models.Schedule;
+import com.wedevol.smartclass.utils.IClassLinearLayoutManager;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
@@ -41,6 +41,7 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
     private RecyclerView rv_friday_time;
     private RecyclerView rv_saturday_time;
     private RecyclerView rv_sunday_time;
+    private Activity context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
 
     private void setElements(final View view){
         self = this;
+        context = getActivity();
         getWeekSchedule(view);
 
         fab_edit_schedule = (FloatingActionButton) view.findViewById(R.id.fab_edit_schedule);
@@ -67,7 +69,7 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
         fab_edit_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CreateScheduleActivity.class);
+                Intent intent = new Intent(context, CreateScheduleActivity.class);
                 intent.putExtra(Constants.BUNDLE_SIMPLE_DATE, true);
                 startActivityForResult(intent, Constants.CHOOSEN_SCHEDULE);
             }
@@ -142,7 +144,7 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
         RestClient restClient = new RestClient(getContext());
 
         int instructorId = SharedPreferencesManager.getInstance(getContext()).getUserInfo().getId();
-        restClient.getWebservices().listSchedule("", instructorId, new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().listSchedule("", instructorId, new IClassCallback<JsonArray>(context) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
@@ -183,44 +185,52 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
 
                 if(monList.size()>0) {
                     rv_monday_time = (RecyclerView) view.findViewById(R.id.rv_monday_time);
-                    rv_monday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_monday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), monList, "LUNES", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_monday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_monday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, monList, "LUNES", self,
+                            iClassLinearLayoutManager));
                 }
 
                 if(tueList.size()>0) {
                     rv_tuesday_time = (RecyclerView) view.findViewById(R.id.rv_tuesday_time);
-                    rv_tuesday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_tuesday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), tueList, "MARTES", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_tuesday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_tuesday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, tueList, "MARTES", self, iClassLinearLayoutManager));
                 }
 
                 if(wedList.size()>0) {
                     rv_wednesday_time = (RecyclerView) view.findViewById(R.id.rv_wednesday_time);
-                    rv_wednesday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_wednesday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), wedList, "MIERCOLES", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_wednesday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_wednesday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, wedList, "MIERCOLES", self, iClassLinearLayoutManager));
                 }
 
                 if(thuList.size()>0) {
                     rv_thursday_time = (RecyclerView) view.findViewById(R.id.rv_thursday_time);
-                    rv_thursday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_thursday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), thuList, "JUEVES", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_thursday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_thursday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, thuList, "JUEVES", self, iClassLinearLayoutManager));
                 }
 
                 if(friList.size()>0) {
                     rv_friday_time = (RecyclerView) view.findViewById(R.id.rv_friday_time);
-                    rv_friday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_friday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), friList, "VIERNES", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_friday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_friday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, friList, "VIERNES", self, iClassLinearLayoutManager));
                 }
 
                 if(satList.size()>0) {
                     rv_saturday_time = (RecyclerView) view.findViewById(R.id.rv_saturday_time);
-                    rv_saturday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_saturday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), satList, "SABADO", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_saturday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_saturday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, satList, "SABADO", self, iClassLinearLayoutManager));
                 }
 
                 if(sunList.size() > 0) {
                     rv_sunday_time = (RecyclerView) view.findViewById(R.id.rv_sunday_time);
-                    rv_sunday_time.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    rv_sunday_time.setAdapter(new ListScheduleTimeWindowAdapter(getActivity(), sunList, "DOMINGO", self));
+                    IClassLinearLayoutManager iClassLinearLayoutManager = new IClassLinearLayoutManager(context);
+                    rv_sunday_time.setLayoutManager(iClassLinearLayoutManager);
+                    rv_sunday_time.setAdapter(new ListScheduleTimeWindowAdapter(context, sunList, "DOMINGO", self, iClassLinearLayoutManager));
                 }
 
                 TextView tv_no_schedules = (TextView) view.findViewById(R.id.tv_no_schedules);

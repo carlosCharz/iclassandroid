@@ -1,5 +1,6 @@
 package com.wedevol.smartclass.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
+import com.wedevol.smartclass.utils.retrofit.IClassCallback;
+import com.wedevol.smartclass.utils.retrofit.RestClient;
+
+import retrofit.client.Response;
 
 /** Created by paolo on 1/25/17.*/
 public class RateLessonActivity extends AppCompatActivity {
@@ -21,6 +28,8 @@ public class RateLessonActivity extends AppCompatActivity {
     private ImageView iv_toolbar_back;
     private RateLessonActivity self;
     private boolean isInstructor;
+    private int lessonId;
+    private RestClient restClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +43,9 @@ public class RateLessonActivity extends AppCompatActivity {
         self = this;
         isInstructor = SharedPreferencesManager.getInstance(this).getUserType();
         String courseName = getIntent().getStringExtra(Constants.BUNDLE_COURSE_NAME);
-        int lessonId = getIntent().getIntExtra(Constants.BUNDLE_LESSON_ID, -1);
+        lessonId = getIntent().getIntExtra(Constants.BUNDLE_LESSON_ID, -1);
+        restClient = new RestClient(this);
+
 
         TextView tv_course_user_type_announcement = (TextView) findViewById(R.id.tv_course_user_type_announcement);
         rb_class_calification = (RatingBar) findViewById(R.id.rb_class_calification);
@@ -63,11 +74,19 @@ public class RateLessonActivity extends AppCompatActivity {
         b_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int num= rb_class_calification.getNumStars();
+                int stars= rb_class_calification.getNumStars();
                 if(isInstructor){
-
+                    Toast.makeText(self, "Funcion aun no implementada", Toast.LENGTH_SHORT).show();
+                    finish();
                 }else{
-
+                    restClient.getWebservices().rateInstructor("", lessonId, stars, new IClassCallback<JsonObject>(self) {
+                        @Override
+                        public void success(JsonObject jsonObject, Response response) {
+                            super.success(jsonObject, response);
+                            setResult(Activity.RESULT_OK);
+                            finish();
+                        }
+                    });
                 }
             }
         });

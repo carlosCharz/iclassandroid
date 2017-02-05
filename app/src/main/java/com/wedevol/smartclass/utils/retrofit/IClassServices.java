@@ -52,6 +52,10 @@ public interface IClassServices {
     void updateStudent(@Header("Authorization") String authorization, @Path("studentId") int studentId,
                        @Body JsonObject student, IClassCallback<JsonObject> iClassCallback);
 
+    @POST(Urls.STUDENT_RATES_INSTRUCTOR)
+    void rateInstructor(@Header("Authorization") String authorization, @Path("lessonId") int lessonId,
+                        @Path("rating") int rating, Callback<JsonObject> callback);
+
     /**Instructors*/
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
@@ -84,10 +88,6 @@ public interface IClassServices {
     @GET(Urls.LIST_INSTRUCTOR_SCHEDULE)
     void listSchedule(@Header("Authorization") String authorization,
                       @Query("instructorId") int instructorId, Callback<JsonArray> callback);
-
-    @PUT(Urls.UPDATE_SCHEDULE)
-    void updateSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
-                        @Body JsonObject schedule, Callback<JsonObject> callback);
 
     @DELETE(Urls.DELETE_SCHEDULE)
     void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
