@@ -23,6 +23,7 @@ public class Lesson {
     private int price = -1;
     private String currency = "";
     private String weekDay = "";
+    private int rating = 0;
 
     public Lesson(){
 
@@ -54,6 +55,9 @@ public class Lesson {
                 break;
             case "ignored":
                 presentationStatus = "Ignorada";
+                break;
+            case "done":
+                presentationStatus = "Terminada";
                 break;
         }
         return presentationStatus;
@@ -176,6 +180,14 @@ public class Lesson {
         return weekDay;
     }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
     private static class Builder {
         private int mId;
         private int mStartTime;
@@ -192,6 +204,7 @@ public class Lesson {
         private int mPrice;
         private String mCurrency;
         private String mWeekDay;
+        private int mRating;
 
         Builder(int id) {
             mId = id;
@@ -267,6 +280,11 @@ public class Lesson {
             return this;
         }
 
+        Lesson.Builder rating(int rating) {
+            mRating = rating;
+            return this;
+        }
+
         Lesson build() {
             Lesson lesson = new Lesson();
             lesson.setId(mId);
@@ -284,6 +302,7 @@ public class Lesson {
             lesson.setPrice(mPrice);
             lesson.setCurrency(mCurrency);
             lesson.setWeekDay(mWeekDay);
+            lesson.setRating(mRating);
             return lesson;
         }
     }
@@ -354,6 +373,10 @@ public class Lesson {
             lessonBuilder.objectiveId(responseObject.get("userId").getAsInt());
         }
 
+        //"rating":1,
+        if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
+            lessonBuilder.rating(responseObject.get("rating").getAsInt());
+        }
 
         return lessonBuilder.build();
     }

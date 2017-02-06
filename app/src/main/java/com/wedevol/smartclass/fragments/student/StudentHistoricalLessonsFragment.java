@@ -50,9 +50,9 @@ public class StudentHistoricalLessonsFragment extends Fragment {
         Student student = (Student) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
         Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR);
 
-        restClient.getWebservices().getStudentHistoricClasses("", student.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed,requested,rejected,ignored,cancelled", new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().getStudentHistoricClasses("", student.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "done,confirmed,requested,rejected,ignored,cancelled", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

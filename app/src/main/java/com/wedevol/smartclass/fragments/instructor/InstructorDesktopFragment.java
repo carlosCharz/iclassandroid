@@ -105,7 +105,7 @@ public class InstructorDesktopFragment extends Fragment {
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
 
         Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + (calendar.get(Calendar.YEAR)-1);
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + (calendar.get(Calendar.YEAR)-1);
 
         restClient.getWebservices().getInstructorComingClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed", new IClassCallback<JsonArray>(getActivity()) {
             @Override
@@ -126,7 +126,7 @@ public class InstructorDesktopFragment extends Fragment {
                 } else {
                     Calendar calendar = Calendar.getInstance();
                     int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-                    int month = calendar.get(Calendar.MONTH);
+                    int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                     for (Lesson lesson: pendingCounselleds){
