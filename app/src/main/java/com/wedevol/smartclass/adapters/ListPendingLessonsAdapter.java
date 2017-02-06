@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.RateLessonActivity;
@@ -22,6 +23,7 @@ import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.utils.PhoneCallListener;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 
+import java.util.Calendar;
 import java.util.List;
 
 /** Created by paolorossi on 12/9/16.*/
@@ -49,7 +51,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         viewHolder.tv_pending_counsel_course_counseller.setText(lesson.getCourseName() + " - " +
                 lesson.getSenderFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
         viewHolder.tv_pending_counsel_date.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
-                        " a " + lesson.getEndTime() + " horas");
+                " a " + lesson.getEndTime() + " horas");
 
         viewHolder.iv_call_counseller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +72,21 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         viewHolder.iv_rate_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, RateLessonActivity.class);
-                intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
-                intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
-                context.startActivity(intent);
+                Calendar calendar = Calendar.getInstance();
+                int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                String[] date= lesson.getClassDate().split("/");
+                boolean datePassed = lesson.getEndTime() <= hourOfDay && Integer.parseInt(date[0]) <= day && Integer.parseInt(date[1]) <= month;
+                if(datePassed){
+                    Intent intent = new Intent(context, RateLessonActivity.class);
+                    intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
+                    intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
+                    context.startActivity(intent);
+                } else {
+                    Toast.makeText(context, "Debe llevar la asesoria para poder calificarla", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
