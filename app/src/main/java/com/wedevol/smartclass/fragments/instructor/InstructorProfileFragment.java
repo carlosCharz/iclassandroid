@@ -62,6 +62,8 @@ public class InstructorProfileFragment extends Fragment{
         final TextView tv_counselor_profile_courses_afilliated = (TextView) view.findViewById(R.id.tv_counselor_profile_courses_afilliated);
         TextView tv_counselor_profile_time_teaching = (TextView) view.findViewById(R.id.tv_counselor_profile_time_teaching);
         fab_edit_profile = (FloatingActionButton) view.findViewById(R.id.fab_edit_profile);
+        TextView tv_user_faculty = (TextView) view.findViewById(R.id.tv_user_faculty);
+        TextView tv_user_university = (TextView) view.findViewById(R.id.tv_user_university);
 
         tv_counselor_rating_number.setText(""+ instructor.getRating());
 
@@ -77,6 +79,8 @@ public class InstructorProfileFragment extends Fragment{
         tv_counselor_profile_email.setText(instructor.getEmail());
         tv_counselor_profile_courses_afilliated.setText(0 +" cursos");
         tv_counselor_profile_time_teaching.setText(instructor.getTotalHours() + " hrs");
+        tv_user_faculty.setText(instructor.getFacultyName());
+        tv_user_university.setText(instructor.getUniversityName());
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
         RestClient restClient = new RestClient(getContext());

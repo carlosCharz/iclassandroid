@@ -219,6 +219,58 @@
                     android:layout_height="match_parent"
                     tools:text="20 horas" />
             </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_pay_course_black"/>
+
+                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_user_university"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="PUCP" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:weightSum="1">
+                <ImageView
+                    android:layout_weight="0.3"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_course_black"/>
+
+                <TextView
+                    android:layout_weight="0.6"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:id="@+id/tv_user_faculty"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_height="match_parent"
+                    tools:text="Ingenieria Informatica" />
+            </LinearLayout>
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton

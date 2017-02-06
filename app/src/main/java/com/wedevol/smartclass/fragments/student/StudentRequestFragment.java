@@ -22,6 +22,7 @@ import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit.client.Response;
@@ -50,7 +51,10 @@ public class StudentRequestFragment extends Fragment{
         final List<Lesson> requestedlessonList = new ArrayList<>();
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
 
-        restClient.getWebservices().studentLessons("", student.getId(), "8/1/2017", 2, "requested", new IClassCallback<JsonArray>(getActivity()) {
+        Calendar calendar = Calendar.getInstance();
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + (calendar.get(Calendar.YEAR)-1);
+
+        restClient.getWebservices().getStudentComingClasses("", student.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "requested", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

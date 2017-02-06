@@ -22,11 +22,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
     <EditText
         android:layout_margin="10dp"
         android:id="@+id/tv_dialog_course_name"
         android:hint="Curso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:background="@drawable/custom_combo_background"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_dialog_university"
+        android:hint="Universidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:background="@drawable/custom_combo_background"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_dialog_faculty"
+        android:hint="Facultad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.wedevol.smartclass.fragments.instructor;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,10 +16,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.RateLessonActivity;
 import com.wedevol.smartclass.adapters.ListPendingLessonsAdapter;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.models.Lesson;
@@ -28,6 +32,7 @@ import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit.client.Response;
@@ -35,6 +40,9 @@ import retrofit.client.Response;
 /** Created by paolorossi on 12/9/16.*/
 public class InstructorDesktopFragment extends Fragment {
     RestClient restClient;
+    List<Lesson> pendingCounselleds;
+    private Activity self;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +58,8 @@ public class InstructorDesktopFragment extends Fragment {
     }
 
     private void setElements(final View view) {
+        self = getActivity();
         restClient = new RestClient(getContext());
-        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
 
         ImageView iv_user_profile_photo = (ImageView) view.findViewById(R.id.iv_user_profile_photo);
         TextView tv_counselor_level = (TextView) view.findViewById(R.id.tv_counselor_level);
@@ -65,7 +73,6 @@ public class InstructorDesktopFragment extends Fragment {
         DrawableCompat.setTint(progress, Color.WHITE);
 
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
-
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
         tv_counselor_rating_number.setText(""+ instructor.getRating());
         tv_counselor_level.setText("Nivel "+ instructor.getLevel());
@@ -73,9 +80,34 @@ public class InstructorDesktopFragment extends Fragment {
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
-        final List<Lesson> pendingCounselleds = new ArrayList<>();
+        pendingCounselleds = new ArrayList<>();
 
-        restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "confirmed", new IClassCallback<JsonArray>(getActivity()) {
+        getInstructorLessons(view);
+    }
+
+    private void setActions() {
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.RATED_LESSON){
+            if(resultCode == Activity.RESULT_OK) {
+                getInstructorLessons(getView());
+            } else{
+                Toast.makeText(self, "Debes ponerle puntaje a tu último alumno", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void getInstructorLessons(final View view) {
+        Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+        final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
+
+        Calendar calendar = Calendar.getInstance();
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + (calendar.get(Calendar.YEAR)-1);
+
+        restClient.getWebservices().getInstructorComingClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
@@ -91,14 +123,26 @@ public class InstructorDesktopFragment extends Fragment {
                     TextView tv_no_counselings = (TextView) view.findViewById(R.id.tv_no_counselings);
                     tv_no_counselings.setVisibility(View.VISIBLE);
                     rv_pending_counselings.setVisibility(View.GONE);
-                }
+                } else {
+                    Calendar calendar = Calendar.getInstance();
+                    int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+                    int month = calendar.get(Calendar.MONTH);
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+                    for (Lesson lesson: pendingCounselleds){
+                        String[] date= lesson.getClassDate().split("/");
+                        boolean datePassed = lesson.getEndTime() <= hourOfDay && Integer.parseInt(date[0]) <= day && Integer.parseInt(date[1]) <= month;
+                        boolean monthPassed = Integer.parseInt(date[1]) < month;
+                        if(datePassed || monthPassed) {
+                            Intent intent = new Intent(self, RateLessonActivity.class);
+                            intent.putExtra(Constants.BUNDLE_LESSON_ID, lesson.getId());
+                            intent.putExtra(Constants.BUNDLE_COURSE_NAME, lesson.getCourseName());
+                            startActivityForResult(intent, Constants.RATED_LESSON);
+                        }
+                    }
+                }
                 pb_charging.setVisibility(View.GONE);
             }
         });
-    }
-
-    private void setActions() {
-
     }
 }

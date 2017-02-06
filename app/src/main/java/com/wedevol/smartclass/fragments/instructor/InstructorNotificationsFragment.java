@@ -21,6 +21,7 @@ import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit.client.Response;
@@ -46,8 +47,10 @@ public class InstructorNotificationsFragment extends Fragment {
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
         final List<Lesson> requestedlessonList = new ArrayList<>();
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+        Calendar calendar = Calendar.getInstance();
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + (calendar.get(Calendar.YEAR)-1);
 
-        restClient.getWebservices().instructorLessons("", instructor.getId(), "8/1/2017", 2, "requested", new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().getInstructorComingClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "requested", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

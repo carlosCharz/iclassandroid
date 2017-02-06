@@ -52,6 +52,21 @@ public interface IClassServices {
     void updateStudent(@Header("Authorization") String authorization, @Path("studentId") int studentId,
                        @Body JsonObject student, IClassCallback<JsonObject> iClassCallback);
 
+    @POST(Urls.STUDENT_RATES_INSTRUCTOR)
+    void rateInstructor(@Header("Authorization") String authorization, @Path("lessonId") int lessonId, @Path("studentId") int studentId,
+                        @Path("rating") int rating, @Body JsonObject jsonObject,  Callback<JsonObject> callback);
+
+    @GET(Urls.GET_COMING_LESSONS)
+    void getStudentComingClasses(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                                    @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                                    @Query("status") String status, Callback<JsonArray> callback);
+
+    @GET(Urls.GET_HISTORIC_LESSONS)
+    void getStudentHistoricClasses(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                                 @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                                 @Query("status") String status, Callback<JsonArray> callback);
+
+
     /**Instructors*/
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
@@ -70,6 +85,19 @@ public interface IClassServices {
     void updateInstructor(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
                           @Body JsonObject instructor, IClassCallback<JsonObject> iClassCallback);
 
+    @POST(Urls.INSTRUCTOR_RATES_STUDENT)
+    void rateStudent(@Header("Authorization") String authorization, @Path("lessonId") int lessonId, @Path("instructorId") int instructorId,
+                     @Path("rating") int rating, @Body JsonObject jsonObject, Callback<JsonObject> callback);
+
+    @GET(Urls.GET_COMING_CLASSES)
+    void getInstructorComingClasses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                           @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                           @Query("status") String status, Callback<JsonArray> callback);
+
+    @GET(Urls.GET_HISTORIC_CLASSES)
+    void getInstructorHistoricClasses(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
+                                    @Query("actualDate") String date, @Query("actualTime") int actualTime,
+                                    @Query("status") String status, Callback<JsonArray> callback);
 
     /**Student enrollment */
     @GET(Urls.GET_STUDENT_COURSES)
@@ -84,10 +112,6 @@ public interface IClassServices {
     @GET(Urls.LIST_INSTRUCTOR_SCHEDULE)
     void listSchedule(@Header("Authorization") String authorization,
                       @Query("instructorId") int instructorId, Callback<JsonArray> callback);
-
-    @PUT(Urls.UPDATE_SCHEDULE)
-    void updateSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,
-                        @Body JsonObject schedule, Callback<JsonObject> callback);
 
     @DELETE(Urls.DELETE_SCHEDULE)
     void deleteSchedule(@Header("Authorization") String authorization, @Path("scheduleId") int scheduleId,

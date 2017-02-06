@@ -101,8 +101,5 @@ public class GetFacultyandUniversityDialogFragment extends DialogFragment {
             String facultyName = data.getStringExtra(Constants.BUNDLE_FACULTY_NAME);
             tv_dialog_faculty.setText(facultyName);
         }
-
-
     }
-
 }

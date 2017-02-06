@@ -11,12 +11,14 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Schedule;
+import com.wedevol.smartclass.utils.IClassLinearLayoutManager;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
 import java.util.List;
 
+import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /** Created by paolo on 12/14/16.*/
@@ -25,13 +27,17 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
     private final Activity context;
     private final String headerName;
     private final ScheduleClickListener itemClickListener;
+    private final IClassLinearLayoutManager iClassLinearLayoutManager;
 
-    public ListScheduleTimeWindowAdapter(Activity context, List<Schedule> list, String headerName, ScheduleClickListener itemClickListener) {
+    public ListScheduleTimeWindowAdapter(Activity context, List<Schedule> list, String headerName,
+                                         ScheduleClickListener itemClickListener,
+                                         IClassLinearLayoutManager iClassLinearLayoutManager) {
         super();
         this.context = context;
         mItems = list;
         this.headerName = headerName;
         this.itemClickListener = itemClickListener;
+        this.iClassLinearLayoutManager = iClassLinearLayoutManager;
     }
 
     @Override
@@ -93,6 +99,7 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
     }
 
     private void deleteSchedule(Schedule schedule, final int position) {
+        iClassLinearLayoutManager.setScrollEnabled(false);
         RestClient restClient = new RestClient(context);
         restClient.getWebservices().deleteSchedule("", schedule.getId(), new IClassCallback<JsonObject>(context) {
             @Override
@@ -100,6 +107,13 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
                 super.success(jsonObject, response);
                 mItems.remove(position);
                 notifyDataSetChanged();
+                iClassLinearLayoutManager.setScrollEnabled(true);
+            }
+
+            @Override
+            public void failure(RetrofitError error){
+                super.failure(error);
+                iClassLinearLayoutManager.setScrollEnabled(true);
             }
         });
     }
