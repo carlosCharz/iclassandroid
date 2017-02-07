@@ -40,7 +40,6 @@ import retrofit.client.Response;
 /** Created by paolorossi on 12/9/16.*/
 public class InstructorDesktopFragment extends Fragment {
     RestClient restClient;
-    List<Lesson> pendingCounselleds;
     private Activity self;
 
     @Override
@@ -80,7 +79,6 @@ public class InstructorDesktopFragment extends Fragment {
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
-        pendingCounselleds = new ArrayList<>();
 
         getInstructorLessons(view);
     }
@@ -103,6 +101,7 @@ public class InstructorDesktopFragment extends Fragment {
     private void getInstructorLessons(final View view) {
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
+        final List<Lesson> pendingCounselleds = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
         String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + (calendar.get(Calendar.YEAR)-1);
