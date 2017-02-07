@@ -32,6 +32,7 @@ public class Student extends User{
         private String mFacultyName;
         private String mUniversityName;
         private String mDeviceId;
+        private int mRatingCount;
 
         Builder(int id) {
             mId = id;
@@ -112,6 +113,11 @@ public class Student extends User{
             return this;
         }
 
+        Student.Builder ratingCount(int ratingCount) {
+            mRatingCount = ratingCount;
+            return this;
+        }
+
         public Student build() {
             Student student = new Student();
             student.setId(mId);
@@ -130,6 +136,8 @@ public class Student extends User{
             student.setFacultyName(mFacultyName);
             student.setFcmToken(mFcmToken);
             student.setDeviceId(mDeviceId);
+            student.setRatingCount(mRatingCount);
+
             return student;
         }
     }
@@ -196,6 +204,10 @@ public class Student extends User{
 
         if (responseObject.has("deviceId") && !responseObject.get("deviceId").isJsonNull()) {
             studentBuilder.deviceId(responseObject.get("deviceId").getAsString());
+        }
+
+        if (responseObject.has("ratingCount") && !responseObject.get("ratingCount").isJsonNull()) {
+            studentBuilder.ratingCount(responseObject.get("ratingCount").getAsInt());
         }
 
         return studentBuilder.build();

@@ -46,6 +46,7 @@ public class Instructor extends User {
         private String mFacultyName;
         private String mUniversityName;
         private String mDeviceId;
+        private int mRatingCount;
 
         Builder(int id) {
             mId = id;
@@ -131,6 +132,11 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder ratingCount(int ratingCount) {
+            mRatingCount = ratingCount;
+            return this;
+        }
+
         public Instructor build() {
             Instructor instructor = new Instructor();
             instructor.setId(mId);
@@ -150,6 +156,7 @@ public class Instructor extends User {
             instructor.setFacultyName(mFacultyName);
             instructor.setFcmToken(mFcmToken);
             instructor.setDeviceId(mDeviceId);
+            instructor.setRatingCount(mRatingCount);
 
             return instructor;
         }
@@ -221,6 +228,10 @@ public class Instructor extends User {
 
         if (responseObject.has("deviceId") && !responseObject.get("deviceId").isJsonNull()) {
             instructorBuilder.deviceId(responseObject.get("deviceId").getAsString());
+        }
+
+        if (responseObject.has("ratingCount") && !responseObject.get("ratingCount").isJsonNull()) {
+            instructorBuilder.ratingCount(responseObject.get("ratingCount").getAsInt());
         }
 
         return instructorBuilder.build();

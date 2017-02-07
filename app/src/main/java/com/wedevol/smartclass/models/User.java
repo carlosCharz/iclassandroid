@@ -26,6 +26,8 @@ public class User {
     private int facultyId = -1;
     private String facultyName = "";
     private String deviceId = "";
+    private int ratingCount = -1;
+
 
     User(){
     }
@@ -215,5 +217,13 @@ public class User {
 
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
     }
 }

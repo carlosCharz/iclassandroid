@@ -23,7 +23,7 @@ public class Lesson {
     private int price = -1;
     private String currency = "";
     private String weekDay = "";
-    private int rating = 0;
+    private int rating = -1;
 
     public Lesson(){
 
@@ -187,6 +187,8 @@ public class Lesson {
     public int getRating() {
         return rating;
     }
+
+
 
     private static class Builder {
         private int mId;
@@ -377,7 +379,6 @@ public class Lesson {
         if (responseObject.has("rating") && !responseObject.get("rating").isJsonNull()) {
             lessonBuilder.rating(responseObject.get("rating").getAsInt());
         }
-
         return lessonBuilder.build();
     }
 
