@@ -73,6 +73,7 @@ public class EditProfileActivity  extends AppCompatActivity {
 
         tv_user_faculty.setText(user.getFacultyName());
         tv_user_university.setText(user.getUniversityName());
+        universityId = user.getUniversityId();
     }
 
     private void setupActions() {
