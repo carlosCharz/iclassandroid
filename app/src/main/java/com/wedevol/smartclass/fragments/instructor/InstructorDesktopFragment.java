@@ -75,7 +75,7 @@ public class InstructorDesktopFragment extends Fragment {
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
         tv_counselor_rating_number.setText(""+ instructor.getRating());
         tv_counselor_level.setText("Nivel "+ instructor.getLevel());
-        pb_counselor_progress.setProgress(((Double) instructor.getRating()).intValue());
+        pb_counselor_progress.setProgress(instructor.getTotalHours()/10);
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
