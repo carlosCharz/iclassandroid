@@ -8,10 +8,14 @@ import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.PUT;
+import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.mime.TypedFile;
+import retrofit.mime.TypedString;
 
 /** Created by Paolo on 3/14/2016.*/
 public interface IClassServices {
@@ -153,4 +157,8 @@ public interface IClassServices {
     @GET(Urls.GET_FACULTIES_BY_UNIVERSITY)
     void getUniversityFaculties(@Header("Authorization") String authorization, @Path("universityId") int universityId,
                                 Callback<JsonArray> callback);
+
+    @Multipart
+    @POST(Urls.STUDENT_UPLOAD_PROFILE_PHOTO)
+    void uploadStudentPhoto(@Path("studentId") int studentId, @Part("file") TypedFile photoFile, Callback<JsonObject> callback);
 }

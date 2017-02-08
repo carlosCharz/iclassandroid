@@ -54,4 +54,5 @@ interface Urls {
     //Faculties
     String GET_FACULTIES_BY_UNIVERSITY = "/universities/{universityId}/faculties";
     String GET_COURSES_BY_FACULTY_BY_UNIVERSITY = "/universities/{universityId}/faculties/{facultyId}/courses";
+    String STUDENT_UPLOAD_PROFILE_PHOTO = "/media/students/{studentId}/picture/upload";
 }
