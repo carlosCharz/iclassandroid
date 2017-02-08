@@ -95,7 +95,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
                 viewHolder.b_cancel.setEnabled(false);
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("rejected");
-                restClient.getWebservices().rejectClass("", user.getId(), lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().rejectClass("", lesson.getId(), user.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
@@ -118,7 +118,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
                 viewHolder.b_confirm.setEnabled(false);
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("confirmed");
-                restClient.getWebservices().confirmClass("", user.getId(),  lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().confirmClass("", lesson.getId(), user.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);

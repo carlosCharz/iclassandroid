@@ -45,8 +45,8 @@ interface Urls {
     String GET_CLASS_INSTRUCTORS = "/instructors/fetch"; //?courseId=1&weekDay=mon&startTime=10&endTime=12
     String STUDENT_RATES_INSTRUCTOR = "/classes/{lessonId}/students/{studentId}/rating/{rating}";
     String INSTRUCTOR_RATES_STUDENT = "/classes/{lessonId}/instructors/{instructorId}/rating/{rating}";
-    String REJECT_CLASS = "/classes/{classId}/instructors/{instructorId}/confirm";
-    String CONFIRM_CLASS = "/classes/{classId}/instructors/{instructorId}/reject";
+    String REJECT_CLASS = "/classes/{classId}/instructors/{instructorId}/reject";
+    String CONFIRM_CLASS = "/classes/{classId}/instructors/{instructorId}/confirm";
 
     //University
     String GET_UNIVERSITIES = "/universities";
