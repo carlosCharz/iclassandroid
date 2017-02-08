@@ -61,7 +61,7 @@ public class StudentProfileFragment extends Fragment{
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, student.getProfilePictureUrl(), Constants.USER_PHOTO);
         tv_student_level.setText("Nivel "+ student.getLevel());
-        pb_student_progress.setProgress( (student.getTotalHours()/10) * 100);
+        pb_student_progress.setProgress( (student.getTotalHours() % 10) * 100);
         tv_student_counselled_time.setText(student.getTotalHours() + " hrs");
         tv_student_profile_type.setText("Alumno");
         tv_student_profile_number.setText(student.getPhone());
