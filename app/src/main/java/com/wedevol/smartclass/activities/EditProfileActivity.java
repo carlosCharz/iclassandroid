@@ -34,8 +34,8 @@ public class EditProfileActivity  extends AppCompatActivity {
     private RestClient restClient;
     private Activity self;
     private EditText tv_user_profile_number;
-    private int universityId = -1;
-    private int facultyId = -1;
+    private int universityId;
+    private int facultyId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,9 @@ public class EditProfileActivity  extends AppCompatActivity {
 
         tv_user_faculty.setText(user.getFacultyName());
         tv_user_university.setText(user.getUniversityName());
+
         universityId = user.getUniversityId();
+        facultyId = user.getFacultyId();
     }
 
     private void setupActions() {
@@ -87,8 +89,8 @@ public class EditProfileActivity  extends AppCompatActivity {
                     return;
                 }
 
-                user.setUniversityId(universityId!=-1? universityId : user.getUniversityId());
-                user.setFacultyId(facultyId!=-1? facultyId : user.getFacultyId());
+                user.setUniversityId(universityId == -1 ? user.getUniversityId(): universityId);
+                user.setFacultyId(facultyId == -1 ? user.getFacultyId(): facultyId);
                 user.setPhone(phone);
                 user.setPassword(SharedPreferencesManager.getInstance(self).getUserTruePassword());
 
@@ -118,6 +120,7 @@ public class EditProfileActivity  extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(self, ListFacultyActivity.class);
+                intent.putExtra(Constants.BUNDLE_UNIVERSITY_ID, universityId);
                 startActivityForResult(intent, Constants.CHOOSEN_FACULTY);
             }
         });
@@ -169,7 +172,7 @@ public class EditProfileActivity  extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if((requestCode == Constants.CHOOSEN_UNIVERSITY) && (resultCode == Activity.RESULT_OK)) {
             String universityName = data.getStringExtra(Constants.BUNDLE_UNIVERSITY_NAME);
-            universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, -1);
+            universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, user.getUniversityId());
             tv_user_university.setText(universityName);
 
         }
@@ -177,7 +180,7 @@ public class EditProfileActivity  extends AppCompatActivity {
         if((requestCode == Constants.CHOOSEN_FACULTY) && (resultCode == Activity.RESULT_OK)) {
             facultyId = -1;
             String facultyName = data.getStringExtra(Constants.BUNDLE_FACULTY_NAME);
-            facultyId = data.getIntExtra(Constants.BUNDLE_FACULTY_ID, -1);
+            facultyId = data.getIntExtra(Constants.BUNDLE_FACULTY_ID, user.getFacultyId());
             tv_user_faculty.setText(facultyName);
         }
     }
