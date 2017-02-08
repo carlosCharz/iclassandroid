@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
@@ -77,10 +76,9 @@ public class RateLessonActivity extends AppCompatActivity {
         b_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int stars= rb_class_calification.getNumStars();
+                Double stars= Double.parseDouble(Float.toString(rb_class_calification.getRating()));
                 if(isInstructor){
-
-                    restClient.getWebservices().rateStudent("", lessonId, user.getId(), stars, new JsonObject(), new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().rateStudent("", lessonId, user.getId(), stars.intValue(), new JsonObject(), new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -89,7 +87,7 @@ public class RateLessonActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    restClient.getWebservices().rateInstructor("", lessonId, user.getId(), stars, new JsonObject(), new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().rateInstructor("", lessonId, user.getId(), stars.intValue(), new JsonObject(), new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
