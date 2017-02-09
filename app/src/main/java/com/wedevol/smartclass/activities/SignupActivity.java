@@ -57,7 +57,6 @@ public class SignupActivity extends AppCompatActivity {
     private TextView tv_course;
     private CircleImageView civ_profile_photo;
     private ImageView iv_toolbar_back;
-    private File mDestinationFile;
     private String mPhotoLocationPath;
     private Activity self;
     private RestClient restClient;
@@ -364,7 +363,7 @@ public class SignupActivity extends AppCompatActivity {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (cameraIntent.resolveActivity(this.getPackageManager()) != null) {
-            mDestinationFile = UtilMethods.getImageFile();
+            File mDestinationFile = UtilMethods.getImageFile();
 
             if (mDestinationFile != null) {
                 mPhotoLocationPath = mDestinationFile.getAbsolutePath();

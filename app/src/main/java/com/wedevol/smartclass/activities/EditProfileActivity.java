@@ -1,8 +1,11 @@
 package com.wedevol.smartclass.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.soundcloud.android.crop.Crop;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
@@ -22,7 +26,13 @@ import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import retrofit.client.Response;
+import retrofit.mime.TypedFile;
 
 /** Created by paolo on 1/27/17.*/
 public class EditProfileActivity  extends AppCompatActivity {
@@ -34,8 +44,10 @@ public class EditProfileActivity  extends AppCompatActivity {
     private RestClient restClient;
     private Activity self;
     private EditText tv_user_profile_number;
+    private ImageView iv_user_profile_photo;
     private int universityId;
     private int facultyId;
+    private String mPhotoLocationPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +63,7 @@ public class EditProfileActivity  extends AppCompatActivity {
         isInstructor = SharedPreferencesManager.getInstance(this).getUserType();
         user = SharedPreferencesManager.getInstance(this).getUserInfo();
 
-        ImageView iv_user_profile_photo = (ImageView)  findViewById(R.id.iv_user_profile_photo);
+        iv_user_profile_photo = (ImageView)  findViewById(R.id.iv_user_profile_photo);
         TextView tv_user_level = (TextView) findViewById(R.id.tv_user_level);
         ProgressBar pb_user_progress = (ProgressBar) findViewById(R.id.pb_user_progress);
         TextView tv_user_counselled_time = (TextView) findViewById(R.id.tv_user_counselled_time);
@@ -132,6 +144,13 @@ public class EditProfileActivity  extends AppCompatActivity {
                 startActivityForResult(intent, Constants.CHOOSEN_UNIVERSITY);
             }
         });
+
+        iv_user_profile_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPhotoOptions();
+            }
+        });
     }
 
     private void relogin() {
@@ -170,18 +189,97 @@ public class EditProfileActivity  extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if((requestCode == Constants.CHOOSEN_UNIVERSITY) && (resultCode == Activity.RESULT_OK)) {
-            String universityName = data.getStringExtra(Constants.BUNDLE_UNIVERSITY_NAME);
-            universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, user.getUniversityId());
-            tv_user_university.setText(universityName);
+        if((resultCode == Activity.RESULT_OK)){
+            if((requestCode == Constants.CHOOSEN_UNIVERSITY)) {
+                String universityName = data.getStringExtra(Constants.BUNDLE_UNIVERSITY_NAME);
+                universityId = data.getIntExtra(Constants.BUNDLE_UNIVERSITY_ID, user.getUniversityId());
+                tv_user_university.setText(universityName);
 
-        }
+            }
 
-        if((requestCode == Constants.CHOOSEN_FACULTY) && (resultCode == Activity.RESULT_OK)) {
-            facultyId = -1;
-            String facultyName = data.getStringExtra(Constants.BUNDLE_FACULTY_NAME);
-            facultyId = data.getIntExtra(Constants.BUNDLE_FACULTY_ID, user.getFacultyId());
-            tv_user_faculty.setText(facultyName);
+            if((requestCode == Constants.CHOOSEN_FACULTY)) {
+                facultyId = -1;
+                String facultyName = data.getStringExtra(Constants.BUNDLE_FACULTY_NAME);
+                facultyId = data.getIntExtra(Constants.BUNDLE_FACULTY_ID, user.getFacultyId());
+                tv_user_faculty.setText(facultyName);
+            }
+
+            if (requestCode == Constants.GALLERY_REQUEST_CODE) {
+                mPhotoLocationPath = UtilMethods.getGalleryImagePath(this, data.getData());
+            }
+
+            if (requestCode == Constants.GALLERY_REQUEST_CODE || requestCode == Constants.CAMERA_REQUEST_CODE) {
+                File file = UtilMethods.getImageFile();
+                if (file != null) {
+                    Uri photoUri = Uri.fromFile(new File(mPhotoLocationPath));
+                    Crop.of(photoUri, Uri.fromFile(file)).asSquare().start(this);
+                    mPhotoLocationPath = file.getAbsolutePath();
+                }
+
+                UtilMethods.setPhoto(this, iv_user_profile_photo, mPhotoLocationPath, Constants.USER_PHOTO);
+
+                //TODO uploadStudentPhoto
+                if(!isInstructor){
+                    TypedFile typedImageFile = new TypedFile("image/jpeg", file);
+                    restClient.getWebservices().uploadStudentPhoto(user.getId(), typedImageFile,
+                            new IClassCallback<JsonObject>(self) {
+                                @Override
+                                public void success(JsonObject jsonObject, Response response) {
+                                    super.success(jsonObject, response);
+                                }
+                            }
+                    );
+                }
+
+            }
+        } else {
+            mPhotoLocationPath = null;
+
         }
     }
+
+
+    protected void showPhotoOptions() {
+        List<String> options = Arrays.asList(getString(R.string.take_photo),
+                getString(R.string.choose_from_gallery));
+
+        UtilMethods.createSelectionDialog(this, getString(R.string.choose_option),
+                new ArrayList<Object>(options), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                invokeDeviceCamera();
+                                break;
+                            case 1:
+                                invokePhotoGallery();
+                                break;
+                        }
+                    }
+                });
+    }
+
+    private void invokeDeviceCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (cameraIntent.resolveActivity(this.getPackageManager()) != null) {
+            File mDestinationFile = UtilMethods.getImageFile();
+
+            if (mDestinationFile != null) {
+                mPhotoLocationPath = mDestinationFile.getAbsolutePath();
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mDestinationFile));
+                startActivityForResult(cameraIntent, Constants.CAMERA_REQUEST_CODE);
+            }
+
+        }
+    }
+
+    private void invokePhotoGallery() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+        galleryIntent.setType("image/*");
+        if (galleryIntent.resolveActivity(this.getPackageManager()) != null) {
+            startActivityForResult(galleryIntent, Constants.GALLERY_REQUEST_CODE);
+        }
+    }
+
 }

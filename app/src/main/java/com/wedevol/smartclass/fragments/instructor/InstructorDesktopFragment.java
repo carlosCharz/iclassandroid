@@ -31,6 +31,8 @@ import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -73,9 +75,14 @@ public class InstructorDesktopFragment extends Fragment {
 
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
-        tv_counselor_rating_number.setText(""+ instructor.getRating());
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.DOWN);
+        String formatedDecimal = df.format(instructor.getRating());
+        tv_counselor_rating_number.setText(formatedDecimal);
         tv_counselor_level.setText("Nivel "+ instructor.getLevel());
-        pb_counselor_progress.setProgress((instructor.getTotalHours() % 10) * 100);
+        pb_counselor_progress.setMax(100);
+        pb_counselor_progress.setProgress((instructor.getTotalHours() % 10) * 10);
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 

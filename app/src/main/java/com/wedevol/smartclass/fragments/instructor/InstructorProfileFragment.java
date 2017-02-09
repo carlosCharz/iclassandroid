@@ -72,6 +72,7 @@ public class InstructorProfileFragment extends Fragment{
 
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
         tv_counselor_level.setText("Nivel "+ instructor.getLevel());
+        pb_counselor_progress.setMax(100);
         pb_counselor_progress.setProgress((instructor.getTotalHours() % 10) * 100);
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         tv_counselor_profile_type.setText("Instructor");
