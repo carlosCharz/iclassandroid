@@ -47,7 +47,12 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
                 lesson.getSenderFirstName() + " - " + lesson.getCurrency() + lesson.getPrice());
         viewHolder.tv_request_date_time.setText(lesson.getClassDate() + " - " + lesson.getStartTime() +
                 " a " + lesson.getEndTime() + " horas");
-        viewHolder.tv_counselor_rating.setText("0.0");
+
+        if(SharedPreferencesManager.getInstance(context).getUserType()){
+            viewHolder.tv_counselor_rating.setText(""+lesson.getRatingToInstructor());
+        }else{
+            viewHolder.tv_counselor_rating.setText(""+lesson.getRatingToStudent());
+        }
         viewHolder.tv_lesson_status.setText(lesson.getPresentationStatus());
 
         final int finalI = i;

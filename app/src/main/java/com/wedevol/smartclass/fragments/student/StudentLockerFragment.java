@@ -68,7 +68,8 @@ public class StudentLockerFragment extends Fragment{
         Student student = (Student) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, student.getProfilePictureUrl(), Constants.USER_PHOTO);
         tv_student_level.setText("Nivel "+ student.getLevel());
-        pb_student_progress.setProgress(((Double)student.getRating()).intValue());
+        pb_student_progress.setMax(100);
+        pb_student_progress.setProgress((student.getTotalHours() % 10)* 10);
         tv_student_counselled_time.setText(student.getTotalHours() + " hrs");
 
         getStudentLessons(view);
@@ -103,7 +104,7 @@ public class StudentLockerFragment extends Fragment{
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
 
         Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + (calendar.get(Calendar.YEAR)-1);
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + (calendar.get(Calendar.YEAR)-1);
 
         restClient.getWebservices().getStudentComingClasses("", student.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed", new IClassCallback<JsonArray>(getActivity()) {
             @Override
@@ -124,7 +125,7 @@ public class StudentLockerFragment extends Fragment{
                 } else {
                     Calendar calendar = Calendar.getInstance();
                     int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-                    int month = calendar.get(Calendar.MONTH);
+                    int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                     for (Lesson lesson: pendingLessons){

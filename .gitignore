@@ -40,3 +40,5 @@ Thumbs.db
 /captures
 .idea/
 app/app-release.apk
+app/app-dev.apk
+app/app-debug.apk

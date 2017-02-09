@@ -74,7 +74,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
                 int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-                int month = calendar.get(Calendar.MONTH);
+                int month = calendar.get(Calendar.MONTH) + 1;
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                 String[] date= lesson.getClassDate().split("/");

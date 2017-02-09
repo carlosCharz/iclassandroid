@@ -13,6 +13,8 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Instructor;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,11 @@ public class ListInstructorsAdapter extends RecyclerView.Adapter<ListInstructors
         }
 
         viewHolder.tv_counsellor_name.setText(instructor.getName());
-        viewHolder.tv_counsellor_rating.setText("" + instructor.getRating());
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.DOWN);
+        String formatedDecimal = df.format(instructor.getRating());
+        viewHolder.tv_counsellor_rating.setText(formatedDecimal);
         viewHolder.tv_counsellor_hourly_rate.setText("S/./H "+ instructor.getPrice());
         viewHolder.tv_counsellor_level.setText("" + instructor.getLevel());
 

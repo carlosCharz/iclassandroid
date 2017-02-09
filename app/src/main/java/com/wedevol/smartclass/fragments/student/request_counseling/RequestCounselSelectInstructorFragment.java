@@ -105,7 +105,6 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
             @Override
             public void onClick(View view) {
                 requestCounselActivity.setInstructor(listInstructorsAdapter.getItemInPosition(oldPosition));
-
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.rl_request_counseling_holder, RequestCounselConfirmCounselingFragment.newInstance())

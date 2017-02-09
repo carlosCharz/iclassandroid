@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.models.User;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -32,6 +34,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
     private final List<Lesson> mItems;
     private final Activity context;
     private final List<ViewHolder> viewHoldersList;
+    private final User user;
     private Handler handler = new Handler();
     private Runnable updateRemainingTimeRunnable = new Runnable() {
         @Override
@@ -60,6 +63,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
         this.context = context;
         mItems = list;
         viewHoldersList = new ArrayList<>();
+        user = SharedPreferencesManager.getInstance(context).getUserInfo();
         startUpdateTimer();
     }
 
@@ -92,7 +96,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
                 viewHolder.b_cancel.setEnabled(false);
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("rejected");
-                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().rejectClass("", lesson.getId(), user.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);
@@ -115,7 +119,7 @@ public class ListRequestedLessonsAdapter extends RecyclerView.Adapter<ListReques
                 viewHolder.b_confirm.setEnabled(false);
                 RestClient restClient = new RestClient(context);
                 lesson.setStatus("confirmed");
-                restClient.getWebservices().updateLesson("", lesson.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
+                restClient.getWebservices().confirmClass("", lesson.getId(), user.getId(), lesson.updateJson(context), new IClassCallback<JsonObject>(context) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);

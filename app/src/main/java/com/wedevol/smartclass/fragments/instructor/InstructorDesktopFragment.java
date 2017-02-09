@@ -31,6 +31,8 @@ import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -40,7 +42,6 @@ import retrofit.client.Response;
 /** Created by paolorossi on 12/9/16.*/
 public class InstructorDesktopFragment extends Fragment {
     RestClient restClient;
-    List<Lesson> pendingCounselleds;
     private Activity self;
 
     @Override
@@ -74,14 +75,16 @@ public class InstructorDesktopFragment extends Fragment {
 
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
         UtilMethods.setPhoto(getActivity(), iv_user_profile_photo, instructor.getProfilePictureUrl(), Constants.USER_PHOTO);
-        tv_counselor_rating_number.setText(""+ instructor.getRating());
+
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.DOWN);
+        String formatedDecimal = df.format(instructor.getRating());
+        tv_counselor_rating_number.setText(formatedDecimal);
         tv_counselor_level.setText("Nivel "+ instructor.getLevel());
-        pb_counselor_progress.setProgress(((Double) instructor.getRating()).intValue());
+        pb_counselor_progress.setMax(100);
+        pb_counselor_progress.setProgress((instructor.getTotalHours() % 10) * 10);
         tv_counselor_counseling_time.setText(instructor.getTotalHours() + " hrs");
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
-
-        pendingCounselleds = new ArrayList<>();
-
         getInstructorLessons(view);
     }
 
@@ -103,9 +106,10 @@ public class InstructorDesktopFragment extends Fragment {
     private void getInstructorLessons(final View view) {
         Instructor instructor = (Instructor) SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
+        final List<Lesson> pendingCounselleds = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
-        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + calendar.get(Calendar.MONTH) + "/" + (calendar.get(Calendar.YEAR)-1);
+        String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + (calendar.get(Calendar.YEAR)-1);
 
         restClient.getWebservices().getInstructorComingClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed", new IClassCallback<JsonArray>(getActivity()) {
             @Override
@@ -126,7 +130,7 @@ public class InstructorDesktopFragment extends Fragment {
                 } else {
                     Calendar calendar = Calendar.getInstance();
                     int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-                    int month = calendar.get(Calendar.MONTH);
+                    int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                     for (Lesson lesson: pendingCounselleds){

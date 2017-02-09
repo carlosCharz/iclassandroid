@@ -8,10 +8,14 @@ import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Multipart;
 import retrofit.http.POST;
 import retrofit.http.PUT;
+import retrofit.http.Part;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.mime.TypedFile;
+import retrofit.mime.TypedString;
 
 /** Created by Paolo on 3/14/2016.*/
 public interface IClassServices {
@@ -40,11 +44,6 @@ public interface IClassServices {
     void newStudent(@Header("Authorization") String authorization, @Body JsonObject student,
                     Callback<JsonObject> callback);
 
-    @GET(Urls.HOME_STUDENT)
-    void studentLessons(@Header("Authorization") String authorization, @Path("studentId") int studentId,
-                        @Query("actualDate") String date, @Query("actualTime") int actualTime,
-                        @Query("status") String status, Callback<JsonArray> callback);
-
     @POST(Urls.STUDENT_ENROLL_ON_COURSE)
     void enrollOnCourseStudent(@Header("Authorization") String authorization, @Body JsonObject course, IClassCallback<JsonObject> iClassCallback);
 
@@ -71,11 +70,6 @@ public interface IClassServices {
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
                        Callback<JsonObject> callback);
-
-    @GET(Urls.HOME_INSTRUCTOR)
-    void instructorLessons(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
-                           @Query("actualDate") String date, @Query("actualTime") int actualTime,
-                           @Query("status") String status, Callback<JsonArray> callback);
 
     @POST(Urls.INSTRUCTOR_ENROLL_ON_COURSE)
     void enrollOnCourseInstructor(@Header("Authorization") String authorization, @Body JsonObject instructorEnrollment,
@@ -140,10 +134,20 @@ public interface IClassServices {
     void newLesson(@Header("Authorization") String authorization, @Body JsonObject lesson,
                    Callback<JsonObject> callback);
 
-    @GET(Urls.GET_CLASS_INSTRUCTORS) //?courseId=1&weekDay=mon&startTime=10&endTime=12
+    @GET(Urls.GET_CLASS_INSTRUCTORS)
     void getInstructorsForClass(@Header("Authorization") String authorization, @Query("courseId") int courseId,
                                 @Query("weekDay") String weekDay, @Query("startTime") int startTime,
                                 @Query("endTime") int endTime, Callback<JsonArray> callback);
+
+    @POST(Urls.REJECT_CLASS)
+    void rejectClass(@Header("Authorization") String authorization, @Path("classId") int classId,
+                     @Path("instructorId") int instructorId, @Body JsonObject lesson,
+                                Callback<JsonObject> callback);
+
+    @POST(Urls.CONFIRM_CLASS)
+    void confirmClass(@Header("Authorization") String authorization, @Path("classId") int classId,
+                      @Path("instructorId") int instructorId,  @Body JsonObject lesson,
+                                Callback<JsonObject> callback);
 
     /**Universities*/
     @GET(Urls.GET_UNIVERSITIES)
@@ -153,4 +157,8 @@ public interface IClassServices {
     @GET(Urls.GET_FACULTIES_BY_UNIVERSITY)
     void getUniversityFaculties(@Header("Authorization") String authorization, @Path("universityId") int universityId,
                                 Callback<JsonArray> callback);
+
+    @Multipart
+    @POST(Urls.STUDENT_UPLOAD_PROFILE_PHOTO)
+    void uploadStudentPhoto(@Path("studentId") int studentId, @Part("file") TypedFile photoFile, Callback<JsonObject> callback);
 }

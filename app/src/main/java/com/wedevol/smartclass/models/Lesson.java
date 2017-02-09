@@ -23,6 +23,8 @@ public class Lesson {
     private int price = -1;
     private String currency = "";
     private String weekDay = "";
+    private int ratingToInstructor = -1;
+    private int ratingToStudent = -1;
 
     public Lesson(){
 
@@ -54,6 +56,9 @@ public class Lesson {
                 break;
             case "ignored":
                 presentationStatus = "Ignorada";
+                break;
+            case "done":
+                presentationStatus = "Terminada";
                 break;
         }
         return presentationStatus;
@@ -176,6 +181,23 @@ public class Lesson {
         return weekDay;
     }
 
+    public int getRatingToInstructor() {
+        return ratingToInstructor;
+    }
+
+    public void setRatingToInstructor(int ratingToInstructor) {
+        this.ratingToInstructor = ratingToInstructor;
+    }
+
+    public int getRatingToStudent() {
+        return ratingToStudent;
+    }
+
+    public void setRatingToStudent(int ratingToStudent) {
+        this.ratingToStudent = ratingToStudent;
+    }
+
+
     private static class Builder {
         private int mId;
         private int mStartTime;
@@ -192,6 +214,8 @@ public class Lesson {
         private int mPrice;
         private String mCurrency;
         private String mWeekDay;
+        private int mRatingToInstructor;
+        private int mRatingToStudent;
 
         Builder(int id) {
             mId = id;
@@ -267,6 +291,16 @@ public class Lesson {
             return this;
         }
 
+        Lesson.Builder ratingToInstructor(int ratingToInstructor) {
+            mRatingToInstructor = ratingToInstructor;
+            return this;
+        }
+
+        Lesson.Builder ratingToStudent(int ratingToStudent) {
+            mRatingToStudent = ratingToStudent;
+            return this;
+        }
+
         Lesson build() {
             Lesson lesson = new Lesson();
             lesson.setId(mId);
@@ -284,6 +318,8 @@ public class Lesson {
             lesson.setPrice(mPrice);
             lesson.setCurrency(mCurrency);
             lesson.setWeekDay(mWeekDay);
+            lesson.setRatingToInstructor(mRatingToInstructor);
+            lesson.setRatingToStudent(mRatingToStudent);
             return lesson;
         }
     }
@@ -291,69 +327,71 @@ public class Lesson {
     public static Lesson parseLesson(JsonObject responseObject) {
         Lesson.Builder lessonBuilder;
 
-        //"classId":1
         lessonBuilder = new Lesson.Builder(responseObject.get("classId").getAsInt());
-        //"startTime":8,
+
         if (responseObject.has("startTime") && !responseObject.get("startTime").isJsonNull()) {
             lessonBuilder.startTime(responseObject.get("startTime").getAsInt());
         }
-        //"endTime":10,
+
         if (responseObject.has("endTime") && !responseObject.get("endTime").isJsonNull()) {
             lessonBuilder.endTime(responseObject.get("endTime").getAsInt());
         }
-        //"classDate":"09/01/2017",
+
         if (responseObject.has("classDate") && !responseObject.get("classDate").isJsonNull()) {
             lessonBuilder.classDate(responseObject.get("classDate").getAsString());
         }
-        //"classStatus":"requested",
+
         if (responseObject.has("classStatus") && !responseObject.get("classStatus").isJsonNull()) {
             lessonBuilder.status(responseObject.get("classStatus").getAsString());
         }
 
-        //"courseId":1,
         if (responseObject.has("courseId") && !responseObject.get("courseId").isJsonNull()) {
             lessonBuilder.courseId(responseObject.get("courseId").getAsInt());
         }
-        //"courseName":"Calculo 1",
+
         if (responseObject.has("courseName") && !responseObject.get("courseName").isJsonNull()) {
             lessonBuilder.courseName(responseObject.get("courseName").getAsString());
         }
-        //"userType":"student",
+
         if (responseObject.has("userType") && !responseObject.get("userType").isJsonNull()) {
             lessonBuilder.userType(responseObject.get("userType").getAsString());
         }
 
-        //"firstName":"Luis",
         if (responseObject.has("firstName") && !responseObject.get("firstName").isJsonNull()) {
             lessonBuilder.objectveFirstName(responseObject.get("firstName").getAsString());
         }
-        //"lastName":"Becerra",
+
         if (responseObject.has("lastName") && !responseObject.get("lastName").isJsonNull()) {
             lessonBuilder.objectveLastName(responseObject.get("lastName").getAsString());
         }
-        //"phone":"78013455",
+
         if (responseObject.has("phone") && !responseObject.get("phone").isJsonNull()) {
             lessonBuilder.phone(responseObject.get("phone").getAsString());
         }
-        //"price":20,
+
         if (responseObject.has("price") && !responseObject.get("price").isJsonNull()) {
             lessonBuilder.price(responseObject.get("price").getAsInt());
         }
-        //"currency":"S/."
+
         if (responseObject.has("currency") && !responseObject.get("currency").isJsonNull()) {
             lessonBuilder.currency(responseObject.get("currency").getAsString());
         }
 
-        //"currency":"S/."
         if (responseObject.has("weekDay") && !responseObject.get("weekDay").isJsonNull()) {
             lessonBuilder.weekDay(responseObject.get("weekDay").getAsString());
         }
 
-        //"userId":1,
         if (responseObject.has("userId") && !responseObject.get("userId").isJsonNull()) {
             lessonBuilder.objectiveId(responseObject.get("userId").getAsInt());
         }
 
+        if (responseObject.has("ratingToStudent") && !responseObject.get("ratingToStudent").isJsonNull()) {
+            lessonBuilder.ratingToStudent(responseObject.get("ratingToStudent").getAsInt());
+        }
+
+        if (responseObject.has("ratingToInstructor") && !responseObject.get("ratingToInstructor").isJsonNull()) {
+            lessonBuilder.ratingToInstructor(responseObject.get("ratingToInstructor").getAsInt());
+        }
 
         return lessonBuilder.build();
     }

@@ -12,7 +12,6 @@ interface Urls {
 
     //Student
     String NEW_STUDENT = "/students"; //post
-    String HOME_STUDENT = "/students/{studentId}/classes";
     String STUDENT_ENROLL_ON_COURSE = "/studentenrollments";
     String UPDATE_STUDENT = "/students/{studentId}";
     String GET_COMING_LESSONS = "/students/{studentId}/classes/coming";
@@ -20,7 +19,6 @@ interface Urls {
 
     //Instructor
     String NEW_INSTRUCTOR = "/instructors"; //post
-    String HOME_INSTRUCTOR = "/instructors/{instructorId}/classes";//home
     String INSTRUCTOR_ENROLL_ON_COURSE = "/instructorenrollments";
     String UPDATE_INSTRUCTOR = "/instructors/{instructorId}";
     String GET_COMING_CLASSES = "/instructors/{instructorId}/classes/coming";
@@ -47,10 +45,14 @@ interface Urls {
     String GET_CLASS_INSTRUCTORS = "/instructors/fetch"; //?courseId=1&weekDay=mon&startTime=10&endTime=12
     String STUDENT_RATES_INSTRUCTOR = "/classes/{lessonId}/students/{studentId}/rating/{rating}";
     String INSTRUCTOR_RATES_STUDENT = "/classes/{lessonId}/instructors/{instructorId}/rating/{rating}";
+    String REJECT_CLASS = "/classes/{classId}/instructors/{instructorId}/reject";
+    String CONFIRM_CLASS = "/classes/{classId}/instructors/{instructorId}/confirm";
+
     //University
     String GET_UNIVERSITIES = "/universities";
 
     //Faculties
     String GET_FACULTIES_BY_UNIVERSITY = "/universities/{universityId}/faculties";
     String GET_COURSES_BY_FACULTY_BY_UNIVERSITY = "/universities/{universityId}/faculties/{facultyId}/courses";
+    String STUDENT_UPLOAD_PROFILE_PHOTO = "/media/students/{studentId}/picture/upload";
 }
