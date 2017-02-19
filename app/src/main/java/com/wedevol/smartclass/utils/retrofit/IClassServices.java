@@ -65,7 +65,6 @@ public interface IClassServices {
                                  @Query("actualDate") String date, @Query("actualTime") int actualTime,
                                  @Query("status") String status, Callback<JsonArray> callback);
 
-
     /**Instructors*/
     @POST(Urls.NEW_INSTRUCTOR)
     void newInstructor(@Header("Authorization") String authorization, @Body JsonObject instructor,
@@ -120,7 +119,6 @@ public interface IClassServices {
     void updateInstructorCourse(@Header("Authorization") String authorization, @Path("instructorId") int instructorId,
                                 @Path("courseId") int courseId, @Body JsonObject course, Callback<JsonObject> callback);
 
-
     /**Classes*/
     @PUT(Urls.UPDATE_CLASS)
     void updateLesson(@Header("Authorization") String authorization, @Path("classId") int classId, @Body JsonObject lesson,
@@ -160,5 +158,6 @@ public interface IClassServices {
 
     @Multipart
     @POST(Urls.STUDENT_UPLOAD_PROFILE_PHOTO)
-    void uploadStudentPhoto(@Path("studentId") int studentId, @Part("file") TypedFile photoFile, Callback<JsonObject> callback);
+    void uploadStudentPhoto(@Header("Authorization") String authorization, @Path("studentId") int studentId,
+                            @Part("file") TypedFile photoFile, Callback<JsonObject> callback);
 }

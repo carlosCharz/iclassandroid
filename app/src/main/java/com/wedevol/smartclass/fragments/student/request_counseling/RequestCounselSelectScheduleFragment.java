@@ -22,6 +22,8 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListTimesAdapter;
+import com.wedevol.smartclass.models.User;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.dialogs.TimePickDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -206,7 +208,9 @@ public class RequestCounselSelectScheduleFragment extends Fragment implements It
         final List<String> timesList = new ArrayList<>();
 
         RestClient restClient = new RestClient(getContext());
-        restClient.getWebservices().getFreeHours("", requestCounselActivity.getCourse().getId(),
+        User user = SharedPreferencesManager.getInstance(requestCounselActivity).getUserInfo();
+
+        restClient.getWebservices().getFreeHours(user.getAccessToken(), requestCounselActivity.getCourse().getId(),
                 requestCounselActivity.getWeekDayName(), new IClassCallback<JsonArray>(getActivity()) {
                     @Override
                     public void success(JsonArray jsonArray, Response response) {

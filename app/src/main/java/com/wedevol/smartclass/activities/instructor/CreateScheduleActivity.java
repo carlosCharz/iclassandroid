@@ -18,6 +18,7 @@ import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.ListDatesActivity;
 import com.wedevol.smartclass.models.Schedule;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.dialogs.TimePickDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -107,7 +108,9 @@ public class CreateScheduleActivity extends AppCompatActivity {
                 schedule.setEndTime(Integer.parseInt(et_end_time.getText().toString()));
                 schedule.setInstructorId(SharedPreferencesManager.getInstance(self).getUserInfo().getId());
 
-                restClient.getWebservices().newSchedule("", schedule.toJson(), new IClassCallback<JsonObject>(self) {
+                User user = SharedPreferencesManager.getInstance(self).getUserInfo();
+
+                restClient.getWebservices().newSchedule(user.getAccessToken(), schedule.toJson(), new IClassCallback<JsonObject>(self) {
                     @Override
                     public void success(JsonObject jsonObject, Response response) {
                         super.success(jsonObject, response);

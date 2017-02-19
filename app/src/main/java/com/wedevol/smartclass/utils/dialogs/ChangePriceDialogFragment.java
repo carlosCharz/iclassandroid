@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.PriceChangeListener;
@@ -68,25 +69,25 @@ public class ChangePriceDialogFragment extends DialogFragment {
 
                         if(!course_price.isEmpty()) {
                             final int instructorPrice = Integer.parseInt(course_price);
-                            int instructorId = SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId();
+                            User user = SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
 
                             JsonObject jsonCourse = new JsonObject();
 
                             JsonObject jsonEnrollmentId = new JsonObject();
                             jsonEnrollmentId.addProperty("courseId", courseId);
-                            jsonEnrollmentId.addProperty("instructorId", instructorId);
+                            jsonEnrollmentId.addProperty("instructorId", user.getId());
                             jsonCourse.add("instructorEnrollmentId",jsonEnrollmentId);
 
                             JsonObject jsonId = new JsonObject();
                             jsonId.addProperty("courseId", courseId);
-                            jsonId.addProperty("instructorId", instructorId);
+                            jsonId.addProperty("instructorId", user.getId());
                             jsonCourse.add("id",jsonId);
 
                             jsonCourse.addProperty("price", instructorPrice);
                             jsonCourse.addProperty("currency", currency);
                             jsonCourse.addProperty("status", status);
 
-                            restClient.getWebservices().updateInstructorCourse("", instructorId, courseId, jsonCourse,
+                            restClient.getWebservices().updateInstructorCourse(user.getAccessToken(), user.getId(), courseId, jsonCourse,
                                     new IClassCallback<JsonObject>(getActivity()) {
                                 @Override
                                 public void success(JsonObject jsonObject, Response response) {

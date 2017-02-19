@@ -78,7 +78,7 @@ public class RateLessonActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Double stars= Double.parseDouble(Float.toString(rb_class_calification.getRating()));
                 if(isInstructor){
-                    restClient.getWebservices().rateStudent("", lessonId, user.getId(), stars.intValue(), new JsonObject(), new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().rateStudent(user.getAccessToken(), lessonId, user.getId(), stars.intValue(), new JsonObject(), new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -87,7 +87,7 @@ public class RateLessonActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    restClient.getWebservices().rateInstructor("", lessonId, user.getId(), stars.intValue(), new JsonObject(), new IClassCallback<JsonObject>(self) {
+                    restClient.getWebservices().rateInstructor(user.getAccessToken(), lessonId, user.getId(), stars.intValue(), new JsonObject(), new IClassCallback<JsonObject>(self) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);

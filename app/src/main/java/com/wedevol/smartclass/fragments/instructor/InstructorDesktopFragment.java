@@ -111,7 +111,7 @@ public class InstructorDesktopFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + (calendar.get(Calendar.YEAR)-1);
 
-        restClient.getWebservices().getInstructorComingClasses("", instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed", new IClassCallback<JsonArray>(getActivity()) {
+        restClient.getWebservices().getInstructorComingClasses(instructor.getAccessToken(), instructor.getId(), date, calendar.get(Calendar.HOUR_OF_DAY), "confirmed", new IClassCallback<JsonArray>(getActivity()) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

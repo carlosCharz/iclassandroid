@@ -27,6 +27,7 @@ public class User {
     private String facultyName = "";
     private String deviceId = "";
     private int ratingCount = -1;
+    private String accessToken = "";
 
 
     User(){
@@ -225,5 +226,13 @@ public class User {
 
     public void setRatingCount(int ratingCount) {
         this.ratingCount = ratingCount;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

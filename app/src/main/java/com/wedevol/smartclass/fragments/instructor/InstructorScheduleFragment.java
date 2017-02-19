@@ -18,6 +18,7 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.instructor.CreateScheduleActivity;
 import com.wedevol.smartclass.adapters.ListScheduleTimeWindowAdapter;
 import com.wedevol.smartclass.models.Schedule;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.IClassLinearLayoutManager;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -143,8 +144,8 @@ public class InstructorScheduleFragment extends Fragment implements ScheduleClic
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
         RestClient restClient = new RestClient(getContext());
 
-        int instructorId = SharedPreferencesManager.getInstance(getContext()).getUserInfo().getId();
-        restClient.getWebservices().listSchedule("", instructorId, new IClassCallback<JsonArray>(context) {
+        User instructor = SharedPreferencesManager.getInstance(getContext()).getUserInfo();
+        restClient.getWebservices().listSchedule(instructor.getAccessToken(), instructor.getId(), new IClassCallback<JsonArray>(context) {
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

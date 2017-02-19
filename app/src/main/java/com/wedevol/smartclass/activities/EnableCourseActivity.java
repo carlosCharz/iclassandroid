@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.dialogs.SuggestCourseDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -32,6 +33,7 @@ public class EnableCourseActivity extends AppCompatActivity{
     private boolean studentType;
     private RestClient restClient;
     private int courseId;
+    private User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class EnableCourseActivity extends AppCompatActivity{
         iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_course_black));
         TextView tv_detail_title = (TextView) findViewById(R.id.tv_detail_title);
         tv_detail_title.setText("Habilitar Curso");
+        user = SharedPreferencesManager.getInstance(self).getUserInfo();
 
         if(studentType){
             tv_course_selection_option.setText("Selecciona el curso en el que desees buscar asesorías.");
@@ -72,12 +75,12 @@ public class EnableCourseActivity extends AppCompatActivity{
                 jsonObjectId.addProperty("courseId", courseId);
 
                 if(!studentType){
-                    jsonObjectId.addProperty("instructorId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
+                    jsonObjectId.addProperty("instructorId", user.getId());
                     jsonObject.add("id", jsonObjectId);
                     jsonObject.addProperty("status", "payed");
                     jsonObject.addProperty("price", 25);
                     jsonObject.addProperty("currency", "S/.");
-                    restClient.getWebservices().enrollOnCourseInstructor("", jsonObject, new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().enrollOnCourseInstructor(user.getAccessToken(), jsonObject, new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -86,12 +89,12 @@ public class EnableCourseActivity extends AppCompatActivity{
                         }
                     });
                 } else {
-                    jsonObjectId.addProperty("studentId", SharedPreferencesManager.getInstance(self).getUserInfo().getId());
+                    jsonObjectId.addProperty("studentId", user.getId());
                     jsonObject.add("id", jsonObjectId);
                     jsonObject.addProperty("status", "payed");
                     jsonObject.addProperty("price", 25);
                     jsonObject.addProperty("currency", "S/.");
-                    restClient.getWebservices().enrollOnCourseStudent("", jsonObject, new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().enrollOnCourseStudent(user.getAccessToken(), jsonObject, new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);

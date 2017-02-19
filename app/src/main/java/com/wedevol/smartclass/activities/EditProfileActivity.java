@@ -107,7 +107,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                 user.setPassword(SharedPreferencesManager.getInstance(self).getUserTruePassword());
 
                 if(isInstructor){
-                    restClient.getWebservices().updateInstructor("", user.getId(), user.toJsonUpdate(), new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().updateInstructor(user.getAccessToken(), user.getId(), user.toJsonUpdate(), new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -116,7 +116,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                         }
                     });
                 }else{
-                    restClient.getWebservices().updateStudent("", user.getId(), user.toJsonUpdate(), new IClassCallback<JsonObject>(self){
+                    restClient.getWebservices().updateStudent(user.getAccessToken(), user.getId(), user.toJsonUpdate(), new IClassCallback<JsonObject>(self){
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);
@@ -221,7 +221,7 @@ public class EditProfileActivity  extends AppCompatActivity {
                 //TODO uploadStudentPhoto
                 if(!isInstructor){
                     TypedFile typedImageFile = new TypedFile("image/jpeg", file);
-                    restClient.getWebservices().uploadStudentPhoto(user.getId(), typedImageFile,
+                    restClient.getWebservices().uploadStudentPhoto(user.getAccessToken(), user.getId(), typedImageFile,
                             new IClassCallback<JsonObject>(self) {
                                 @Override
                                 public void success(JsonObject jsonObject, Response response) {

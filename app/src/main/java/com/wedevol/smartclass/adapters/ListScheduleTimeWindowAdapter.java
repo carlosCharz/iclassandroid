@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Schedule;
 import com.wedevol.smartclass.utils.IClassLinearLayoutManager;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.ScheduleClickListener;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -101,7 +102,8 @@ public class ListScheduleTimeWindowAdapter extends RecyclerView.Adapter{
     private void deleteSchedule(Schedule schedule, final int position) {
         iClassLinearLayoutManager.setScrollEnabled(false);
         RestClient restClient = new RestClient(context);
-        restClient.getWebservices().deleteSchedule("", schedule.getId(), new IClassCallback<JsonObject>(context) {
+        restClient.getWebservices().deleteSchedule(SharedPreferencesManager.getInstance(context).getUserInfo().getAccessToken(),
+                schedule.getId(), new IClassCallback<JsonObject>(context) {
             @Override
             public void success(JsonObject jsonObject, Response response) {
                 super.success(jsonObject, response);

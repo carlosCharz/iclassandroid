@@ -20,6 +20,7 @@ import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.EditProfileActivity;
 import com.wedevol.smartclass.models.Instructor;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -85,7 +86,8 @@ public class InstructorProfileFragment extends Fragment{
         rb_counselor_rating_stars.setRating((float)instructor.getRating());
 
         RestClient restClient = new RestClient(getContext());
-        restClient.getWebservices().getInstructorCourses("", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
+        User user = SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+        restClient.getWebservices().getInstructorCourses(user.getAccessToken(), user.getId(),
                 "payed,free", new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {

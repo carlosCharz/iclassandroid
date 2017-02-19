@@ -21,6 +21,7 @@ import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListCoursesAdapter;
 import com.wedevol.smartclass.models.Course;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.dialogs.GetFacultyandUniversityDialogFragment;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -83,7 +84,8 @@ public class ListCoursesActivity extends AppCompatActivity implements SearchedCo
 
         if(isStudentCourse){
             fab_search.setVisibility(View.GONE);
-            restClient.getWebservices().getStudentCourses("", SharedPreferencesManager.getInstance(self).getUserInfo().getId(),
+            User user = SharedPreferencesManager.getInstance(self).getUserInfo();
+            restClient.getWebservices().getStudentCourses(user.getAccessToken(), user.getId(),
                     "payed,free", new IClassCallback<JsonArray>(self){
                         @Override
                         public void success(JsonArray jsonArray, Response response) {

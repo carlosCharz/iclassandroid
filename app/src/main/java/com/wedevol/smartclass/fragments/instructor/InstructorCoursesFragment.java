@@ -20,6 +20,7 @@ import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.activities.EnableCourseActivity;
 import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 import com.wedevol.smartclass.models.Course;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -72,10 +73,10 @@ public class InstructorCoursesFragment extends Fragment{
 
     private void getCourses(final View view) {
         final ProgressBar pb_charging = (ProgressBar) view.findViewById(R.id.pb_charging);
-        int id = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo().getId();
+        User user = ((HomeActivity)getActivity()).getmPreferencesManager().getUserInfo();
         RestClient restClient = new RestClient(getActivity());
 
-        restClient.getWebservices().getInstructorCourses("", id, "requested,free,payed,pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
+        restClient.getWebservices().getInstructorCourses(user.getAccessToken(), user.getId(), "requested,free,payed,pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);
