@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -86,7 +87,9 @@ public class RequestCounselConfirmCounselingFragment extends Fragment {
                 lesson.setWeekDay(requestCounselActivity.getWeekDayName());
                 //lesson.setReceptorId(requestCounselActivity.getInstructorId());
 
-                restClient.getWebservices().newLesson("", lesson.toJson(), new IClassCallback<JsonObject>(getActivity()) {
+                User user = SharedPreferencesManager.getInstance(requestCounselActivity).getUserInfo();
+
+                restClient.getWebservices().newLesson(user.getAccessToken(), lesson.toJson(), new IClassCallback<JsonObject>(getActivity()) {
                             @Override
                             public void success(JsonObject jsonObject, Response response) {
                                 super.success(jsonObject, response);

@@ -92,7 +92,7 @@ public class SuggestCourseDialogFragment extends DialogFragment {
                             jsonObject.addProperty("userId", user.getId());
 
                             RestClient restClient = new RestClient(getActivity());
-                            restClient.getWebservices().suggestCourse("", jsonObject, new IClassCallback<JsonObject>(getActivity()){
+                            restClient.getWebservices().suggestCourse(user.getAccessToken(), jsonObject, new IClassCallback<JsonObject>(getActivity()){
                                 @Override
                                 public void success(JsonObject jsonObject, Response response) {
                                     super.success(jsonObject, response);

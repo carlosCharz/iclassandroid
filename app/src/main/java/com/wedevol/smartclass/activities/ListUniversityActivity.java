@@ -15,6 +15,8 @@ import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.adapters.ListUniversitiesAdapter;
 import com.wedevol.smartclass.models.University;
+import com.wedevol.smartclass.models.User;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
 
@@ -54,11 +56,13 @@ public class ListUniversityActivity extends AppCompatActivity{
         pb_charging = (ProgressBar) findViewById(R.id.pb_charging);
         rv_universities = (RecyclerView) findViewById(R.id.rv_universities);
 
+        User user = SharedPreferencesManager.getInstance(self).getUserInfo();
+
         final TextView tv_no_universities = (TextView) findViewById(R.id.tv_no_universities);
 
         universities = new ArrayList<>();
 
-        restClient.getWebservices().getUniversities("", new IClassCallback<JsonArray>(self){
+        restClient.getWebservices().getUniversities(user.getAccessToken(), new IClassCallback<JsonArray>(self){
             @Override
             public void success(JsonArray jsonArray, Response response) {
                 super.success(jsonArray, response);

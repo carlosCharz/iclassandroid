@@ -18,6 +18,7 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.PayCoursesActivity;
 import com.wedevol.smartclass.adapters.ListCourseStateAdapter;
 import com.wedevol.smartclass.models.Course;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -52,7 +53,8 @@ public class InstructorPayCourseFragment extends Fragment {
         b_next.setEnabled(false);
         
         RestClient restClient = new RestClient(getActivity());
-        restClient.getWebservices().getInstructorCourses("", SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(),
+        User user = SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+        restClient.getWebservices().getInstructorCourses(user.getAccessToken(), user.getId(),
                 "pendingPayment,verifyingPayment", new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {

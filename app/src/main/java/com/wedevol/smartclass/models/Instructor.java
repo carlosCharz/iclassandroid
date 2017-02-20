@@ -47,6 +47,7 @@ public class Instructor extends User {
         private String mUniversityName;
         private String mDeviceId;
         private int mRatingCount;
+        private String mAccessToken;
 
         Builder(int id) {
             mId = id;
@@ -137,6 +138,11 @@ public class Instructor extends User {
             return this;
         }
 
+        Builder accessToken(String accessToken) {
+            mAccessToken = accessToken;
+            return this;
+        }
+
         public Instructor build() {
             Instructor instructor = new Instructor();
             instructor.setId(mId);
@@ -157,7 +163,7 @@ public class Instructor extends User {
             instructor.setFcmToken(mFcmToken);
             instructor.setDeviceId(mDeviceId);
             instructor.setRatingCount(mRatingCount);
-
+            instructor.setAccessToken(mAccessToken);
             return instructor;
         }
     }
@@ -232,6 +238,10 @@ public class Instructor extends User {
 
         if (responseObject.has("ratingCount") && !responseObject.get("ratingCount").isJsonNull()) {
             instructorBuilder.ratingCount(responseObject.get("ratingCount").getAsInt());
+        }
+
+        if (responseObject.has("accessToken") && !responseObject.get("accessToken").isJsonNull()) {
+            instructorBuilder.accessToken(responseObject.get("accessToken").getAsString());
         }
 
         return instructorBuilder.build();

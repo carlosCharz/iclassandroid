@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.google.gson.JsonObject;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Lesson;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
@@ -62,10 +63,11 @@ public class ListLessonsAdapter extends RecyclerView.Adapter<ListLessonsAdapter.
                 @Override
                 public void onClick(View v) {
                     RestClient restClient = new RestClient(context);
+                    User user = SharedPreferencesManager.getInstance(context).getUserInfo();
                     lesson.setReceptorId(lesson.getSenderId());
-                    lesson.setSenderId(SharedPreferencesManager.getInstance(context).getUserInfo().getId());
+                    lesson.setSenderId(user.getId());
                     lesson.setStatus("cancelled");
-                    restClient.getWebservices().updateLesson("", lesson.getId(), lesson.toJson(), new IClassCallback<JsonObject>(context) {
+                    restClient.getWebservices().updateLesson(user.getAccessToken(), lesson.getId(), lesson.toJson(), new IClassCallback<JsonObject>(context) {
                         @Override
                         public void success(JsonObject jsonObject, Response response) {
                             super.success(jsonObject, response);

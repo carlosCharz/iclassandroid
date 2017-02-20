@@ -14,6 +14,8 @@ import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.student.RequestCounselActivity;
 import com.wedevol.smartclass.adapters.ListInstructorsAdapter;
 import com.wedevol.smartclass.models.Instructor;
+import com.wedevol.smartclass.models.User;
+import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.interfaces.ItemClickListener;
 import com.wedevol.smartclass.utils.retrofit.IClassCallback;
 import com.wedevol.smartclass.utils.retrofit.RestClient;
@@ -59,13 +61,14 @@ public class RequestCounselSelectInstructorFragment extends Fragment implements 
         requestCounselActivity = ((RequestCounselActivity)getActivity());
         requestCounselActivity.setToolbarTitle("Seleccionar Asesor");
         b_next = (Button) view.findViewById(R.id.b_next);
+        User user = SharedPreferencesManager.getInstance(requestCounselActivity).getUserInfo();
 
         final List<Instructor> instructorList = new ArrayList<>();
 
         RestClient restClient = new RestClient(getContext());
 
         //TODO think is not gonna work.
-        restClient.getWebservices().getInstructorsForClass("", requestCounselActivity.getCourse().getId(),
+        restClient.getWebservices().getInstructorsForClass(user.getAccessToken(), requestCounselActivity.getCourse().getId(),
                 requestCounselActivity.getWeekDayName(), Integer.parseInt(requestCounselActivity.getBeginTime()),
                 Integer.parseInt(requestCounselActivity.getEndTime()), /** Need to see where to pursue assesor for X hour*/
                 new IClassCallback<JsonArray>(getActivity()) {
