@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wedevol.smartclass.BuildConfig;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.dialogs.ChangePriceDialogFragment;
@@ -104,8 +105,8 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
                             Toast.makeText(context, "No hay material de clase", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        Uri uriUrl = Uri.parse(course.getClassMaterialUrl());
-                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                        Uri uriUrl = Uri.parse(BuildConfig.BASE_URL + course.getClassMaterialUrl());
+                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW,uriUrl);
                         context.startActivity(launchBrowser);
                     }
                 });
