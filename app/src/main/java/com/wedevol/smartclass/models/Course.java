@@ -14,6 +14,8 @@ public class Course {
     private String currency;
     private int facultyId;
     private int universityId;
+    private String classMaterialUrl = null;
+    private String exerciseMaterialUrl = null;
 
     public Course(){
     }
@@ -98,6 +100,22 @@ public class Course {
         this.universityId = universityId;
     }
 
+    public String getClassMaterialUrl() {
+        return classMaterialUrl;
+    }
+
+    public void setClassMaterialUrl(String classMaterialUrl) {
+        this.classMaterialUrl = classMaterialUrl;
+    }
+
+    public String getExerciseMaterialUrl() {
+        return exerciseMaterialUrl;
+    }
+
+    public void setExerciseMaterialUrl(String exerciseMaterialUrl) {
+        this.exerciseMaterialUrl = exerciseMaterialUrl;
+    }
+
     static class Builder {
         private int mId;
         private String mName;
@@ -109,6 +127,8 @@ public class Course {
         private String mCurrency;
         private int mFacultyId;
         private int mUniversityId;
+        private String mClassMaterialUrl;
+        private String mExerciseMaterialUrl;
 
         Builder(int id) {
             mId = id;
@@ -159,6 +179,16 @@ public class Course {
             return this;
         }
 
+        Course.Builder classMaterialUrl (String classMaterialUrl){
+            mClassMaterialUrl = classMaterialUrl;
+            return this;
+        }
+
+        Course.Builder exerciseMaterialUrl(String exerciseMaterialUrl){
+            mExerciseMaterialUrl = exerciseMaterialUrl;
+            return this;
+        }
+
         public Course build() {
             Course course = new Course();
             course.setId(mId);
@@ -171,6 +201,8 @@ public class Course {
             course.setCurrency(mCurrency);
             course.setFacultyId(mFacultyId);
             course.setUniversityId(mUniversityId);
+            course.setClassMaterialUrl(mClassMaterialUrl);
+            course.setExerciseMaterialUrl(mExerciseMaterialUrl);
             return course;
         }
     }
@@ -212,6 +244,14 @@ public class Course {
 
         if (responseObject.has("universityId") && !responseObject.get("universityId").isJsonNull()) {
             courseBuilder.universityId(responseObject.get("universityId").getAsInt());
+        }
+
+        if (responseObject.has("classMaterialUrl") && !responseObject.get("classMaterialUrl").isJsonNull()) {
+            courseBuilder.classMaterialUrl(responseObject.get("classMaterialUrl").getAsString());
+        }
+
+        if (responseObject.has("exerciseMaterialUrl") && !responseObject.get("exerciseMaterialUrl").isJsonNull()) {
+            courseBuilder.exerciseMaterialUrl(responseObject.get("exerciseMaterialUrl").getAsString());
         }
 
         return courseBuilder.build();

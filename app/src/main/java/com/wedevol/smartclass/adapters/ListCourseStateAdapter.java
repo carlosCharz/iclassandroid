@@ -2,6 +2,8 @@ package com.wedevol.smartclass.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -9,8 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.models.Course;
@@ -88,8 +93,41 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
                         suggestCourseDialogFragment.show(((FragmentActivity)context).getSupportFragmentManager(), "Cambiar Precio");
                     }
                 });
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).iv_pdf_icon.setVisibility(View.VISIBLE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setVisibility(View.VISIBLE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setVisibility(View.VISIBLE);
+
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(course.getClassMaterialUrl()==null){
+                            Toast.makeText(context, "No hay material de clase", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Uri uriUrl = Uri.parse(course.getClassMaterialUrl());
+                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                        context.startActivity(launchBrowser);
+                    }
+                });
+
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(course.getExerciseMaterialUrl()==null){
+                            Toast.makeText(context, "No hay material de ejercicios", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Uri uriUrl = Uri.parse(course.getClassMaterialUrl());
+                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                        context.startActivity(launchBrowser);
+                    }
+                });
             } else {
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.GONE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).iv_pdf_icon.setVisibility(View.GONE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setVisibility(View.GONE);
+                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setVisibility(View.GONE);
+
             }
 
             if(selectable){
@@ -146,12 +184,18 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
         final TextView tv_course_name;
         final TextView tv_course_hourly_rate;
         final RelativeLayout rl_course_holder;
+        final ImageView iv_pdf_icon;
+        final LinearLayout l_lessons;
+        final LinearLayout l_exercises;
 
         ItemViewHolder(View itemView) {
             super(itemView);
             tv_course_name = (TextView) itemView.findViewById(R.id.tv_course_name);
             tv_course_hourly_rate = (TextView) itemView.findViewById(R.id.tv_course_hourly_rate);
             rl_course_holder = (RelativeLayout) itemView.findViewById(R.id.rl_course_holder);
+            iv_pdf_icon = (ImageView) itemView.findViewById(R.id.iv_pdf_icon);
+            l_lessons = (LinearLayout) itemView.findViewById(R.id.l_lessons);
+            l_exercises = (LinearLayout) itemView.findViewById(R.id.l_exercises) ;
         }
     }
 }

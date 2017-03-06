@@ -28,8 +28,8 @@ public class RestClient {
                 .create();
 
         OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.setReadTimeout(40, TimeUnit.SECONDS);
-        okHttpClient.setConnectTimeout(40, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(60, TimeUnit.SECONDS);
+        okHttpClient.setConnectTimeout(60, TimeUnit.SECONDS);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
@@ -50,8 +50,8 @@ public class RestClient {
         RetrofitAuthenticator authAuthenticator = new RetrofitAuthenticator(context);
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setAuthenticator(authAuthenticator);
-        okHttpClient.setReadTimeout(20, TimeUnit.SECONDS);
-        okHttpClient.setConnectTimeout(20, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(60, TimeUnit.SECONDS);
+        okHttpClient.setConnectTimeout(60, TimeUnit.SECONDS);
 
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
