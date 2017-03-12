@@ -64,28 +64,6 @@ public class ListBankActivity extends AppCompatActivity {
         }
 
         pb_charging.setVisibility(View.GONE);
-        /*
-        restClient.getWebservices().getAllCourses("", new IClassCallback<JsonArray>(self){
-            @Override
-            public void success(JsonArray jsonArray, Response response) {
-                super.success(jsonArray, response);
-                for(int i = 0; i<jsonArray.size(); i++){
-                    Course course = Course.parseCourse(jsonArray.get(i).getAsJsonObject());
-                    courses.add(course);
-                }
-
-                if(courses.size() == 0 ){
-                    tv_no_courses.setVisibility(View.VISIBLE);
-                    rv_courses.setVisibility(View.GONE);
-                }else{
-                    rv_courses.setLayoutManager(new LinearLayoutManager(self));
-                    rv_courses.setAdapter(new ListCoursesAdapter(self, courses));
-                    rv_courses.setVisibility(View.VISIBLE);
-                    tv_no_courses.setVisibility(View.GONE);
-                }
-                pb_charging.setVisibility(View.GONE);
-            }
-        });*/
     }
 
     private void setActions() {
