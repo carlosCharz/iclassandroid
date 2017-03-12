@@ -16,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.wedevol.smartclass.R;
 import com.wedevol.smartclass.activities.EditProfileActivity;
 import com.wedevol.smartclass.models.Student;
+import com.wedevol.smartclass.models.User;
 import com.wedevol.smartclass.utils.SharedPreferencesManager;
 import com.wedevol.smartclass.utils.UtilMethods;
 import com.wedevol.smartclass.utils.interfaces.Constants;
@@ -73,8 +74,9 @@ public class StudentProfileFragment extends Fragment{
         tv_user_university.setText(student.getUniversityName());
 
         RestClient restClient = new RestClient(getContext());
-        restClient.getWebservices().getStudentCourses("",
-                SharedPreferencesManager.getInstance(getActivity()).getUserInfo().getId(), "payed,free",
+        User user = SharedPreferencesManager.getInstance(getActivity()).getUserInfo();
+        restClient.getWebservices().getStudentCourses(user.getAccessToken(),
+                user.getId(), "payed,free",
                 new IClassCallback<JsonArray>(getActivity()){
                     @Override
                     public void success(JsonArray jsonArray, Response response) {
