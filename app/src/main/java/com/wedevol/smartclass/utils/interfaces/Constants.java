@@ -44,6 +44,7 @@ public interface Constants {
     String BUNDLE_UNIVERSITY_NAME = "bundle_university_name";
     String BUNDLE_FACULTY_ID = "bundle_faculty_id";
     String BUNDLE_FACULTY_NAME = "bundle_faculty_name";
+    String BUNDLE_FILE_URL = "bundle_file_url";
 
     boolean SHOW_COURSE_PRICE = true;
     boolean DO_NOT_SHOW_COURSE_PRICE = false;

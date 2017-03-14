@@ -30,15 +30,18 @@ android {
     buildTypes {
         def apiVersion
         def baseUrl
+        def fileUrl
 
         debug {
             apiVersion = ""
             baseUrl = "http://api-dev.wedevol.com:8080/iclass/"
+            fileUrl = "https://s3-us-west-2.amazonaws.com/iclassapp/"//course/1/691b54a8b70c466f9b54a8b70cb66f90.pdf
             minifyEnabled false
 
             buildConfigField "boolean", "REPORT_CRASHES", "false"
             buildConfigField "String", "BASE_URL", "\"$baseUrl\""
             buildConfigField "String", "BASE_API_URL", "\"$baseUrl/api/$apiVersion\""
+            buildConfigField "String", "FILE_URL", "\"$fileUrl\""
             resValue "string", "FACEBOOK_APP_ID", ""
             resValue "string", "FCM_PROJECT_NUMBER", ""
         }
@@ -46,6 +49,7 @@ android {
         release {
             apiVersion = ""
             baseUrl = "http://api-prod.iclassapp.com:8080/iclass/"
+            fileUrl = "https://s3-us-west-2.amazonaws.com/iclassapp/prod/"
             minifyEnabled false
 
             buildConfigField "boolean", "REPORT_CRASHES", "true"

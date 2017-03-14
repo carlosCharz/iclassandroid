@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import com.wedevol.smartclass.BuildConfig;
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.ViewFileActivity;
 import com.wedevol.smartclass.models.Course;
 import com.wedevol.smartclass.utils.dialogs.ChangePriceDialogFragment;
+import com.wedevol.smartclass.utils.interfaces.Constants;
 import com.wedevol.smartclass.utils.interfaces.PriceChangeListener;
 
 import java.util.ArrayList;
@@ -105,9 +107,11 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
                             Toast.makeText(context, "No hay material de clase", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        Uri uriUrl = Uri.parse(BuildConfig.BASE_URL + course.getClassMaterialUrl());
-                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW,uriUrl);
-                        context.startActivity(launchBrowser);
+
+                        String url = BuildConfig.FILE_URL + course.getClassMaterialUrl();
+                        Intent intent = new Intent(context, ViewFileActivity.class);
+                        intent.putExtra(Constants.BUNDLE_FILE_URL, url);
+                        context.startActivity(intent);
                     }
                 });
 
@@ -118,9 +122,11 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
                             Toast.makeText(context, "No hay material de ejercicios", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        Uri uriUrl = Uri.parse(course.getClassMaterialUrl());
-                        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-                        context.startActivity(launchBrowser);
+
+                        String url = BuildConfig.FILE_URL + course.getExerciseMaterialUrl();
+                        Intent intent = new Intent(context, ViewFileActivity.class);
+                        intent.putExtra(Constants.BUNDLE_FILE_URL, url);
+                        context.startActivity(intent);
                     }
                 });
             } else {
