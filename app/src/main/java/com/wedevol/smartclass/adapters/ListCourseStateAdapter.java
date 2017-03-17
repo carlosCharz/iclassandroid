@@ -3,7 +3,6 @@ package com.wedevol.smartclass.adapters;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -15,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wedevol.smartclass.BuildConfig;
 import com.wedevol.smartclass.R;
@@ -37,11 +35,12 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
     private final String headerExplanation;
     private final boolean showHourlyRate;
     private final boolean selectable;
+    private final boolean showMaterial;
     private List<Boolean> positionsSelected;
     private ListCourseStateAdapter self;
 
     public ListCourseStateAdapter(Activity context, List<Course> list, String headerName,
-                                  String headerExplanation, boolean showHourlyRate, boolean selectable) {
+                                  String headerExplanation, boolean showHourlyRate, boolean selectable, boolean showMaterial) {
         super();
         self = this;
         this.context = context;
@@ -50,6 +49,7 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
         this.headerExplanation = headerExplanation;
         this.showHourlyRate = showHourlyRate;
         this.selectable = selectable;
+        this.showMaterial = showMaterial;
         positionsSelected = new ArrayList<>();
         for (int i = 0; i<mItems.size(); i++){
             positionsSelected.add(false);
@@ -99,42 +99,46 @@ public class ListCourseStateAdapter extends RecyclerView.Adapter implements Pric
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).iv_pdf_icon.setVisibility(View.VISIBLE);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setVisibility(View.VISIBLE);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setVisibility(View.VISIBLE);
-
-                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(course.getClassMaterialUrl()==null){
-                            Toast.makeText(context, "No hay material de clase", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        String url = BuildConfig.FILE_URL + course.getClassMaterialUrl();
-                        Intent intent = new Intent(context, ViewFileActivity.class);
-                        intent.putExtra(Constants.BUNDLE_FILE_URL, url);
-                        context.startActivity(intent);
-                    }
-                });
-
-                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(course.getExerciseMaterialUrl()==null){
-                            Toast.makeText(context, "No hay material de ejercicios", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-
-                        String url = BuildConfig.FILE_URL + course.getExerciseMaterialUrl();
-                        Intent intent = new Intent(context, ViewFileActivity.class);
-                        intent.putExtra(Constants.BUNDLE_FILE_URL, url);
-                        context.startActivity(intent);
-                    }
-                });
             } else {
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).tv_course_hourly_rate.setVisibility(View.GONE);
                 ((ListCourseStateAdapter.ItemViewHolder)viewHolder).iv_pdf_icon.setVisibility(View.GONE);
-                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setVisibility(View.GONE);
-                ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setVisibility(View.GONE);
+            }
 
+            if(showMaterial){
+                if(course.getClassMaterialUrl()==null){
+                    ((ListCourseStateAdapter.ItemViewHolder) viewHolder).l_lessons.setVisibility(View.GONE);
+                }else{
+                    ((ListCourseStateAdapter.ItemViewHolder) viewHolder).l_lessons.setVisibility(View.VISIBLE);
+                    ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_lessons.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String url = BuildConfig.FILE_URL + course.getClassMaterialUrl();
+                            Intent intent = new Intent(context, ViewFileActivity.class);
+                            intent.putExtra(Constants.BUNDLE_FILE_URL, url);
+                            context.startActivity(intent);
+                        }
+                    });
+                }
+
+
+
+                if(course.getExerciseMaterialUrl()==null){
+                    ((ListCourseStateAdapter.ItemViewHolder) viewHolder).l_exercises.setVisibility(View.GONE);
+                }else{
+                    ((ListCourseStateAdapter.ItemViewHolder) viewHolder).l_exercises.setVisibility(View.VISIBLE);
+                    ((ListCourseStateAdapter.ItemViewHolder)viewHolder).l_exercises.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String url = BuildConfig.FILE_URL + course.getExerciseMaterialUrl();
+                            Intent intent = new Intent(context, ViewFileActivity.class);
+                            intent.putExtra(Constants.BUNDLE_FILE_URL, url);
+                            context.startActivity(intent);
+                        }
+                    });
+                }
+            }else {
+                ((ListCourseStateAdapter.ItemViewHolder) viewHolder).l_lessons.setVisibility(View.GONE);
+                ((ListCourseStateAdapter.ItemViewHolder) viewHolder).l_exercises.setVisibility(View.GONE);
             }
 
             if(selectable){

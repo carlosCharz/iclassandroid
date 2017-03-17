@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wedevol.smartclass.R;
+import com.wedevol.smartclass.activities.HomeActivity;
 import com.wedevol.smartclass.activities.RateLessonActivity;
 import com.wedevol.smartclass.models.Lesson;
 import com.wedevol.smartclass.utils.PhoneCallListener;
@@ -93,7 +94,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         viewHolder.iv_detail_course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO go to maps
+                ((HomeActivity) context).goToCourses();
             }
         });
     }
@@ -109,6 +110,7 @@ public class ListPendingLessonsAdapter extends RecyclerView.Adapter<ListPendingL
         final ImageView iv_call_counseller;
         final ImageView iv_rate_lesson;
         final ImageView iv_detail_course;
+
 
         ViewHolder(View itemView) {
             super(itemView);

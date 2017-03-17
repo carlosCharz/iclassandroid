@@ -82,14 +82,14 @@ public class InstructorPayCourseFragment extends Fragment {
                             rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
                             rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pendingCourseList,
                                     "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_COURSE_PRICE,
-                                    Constants.SELECTABLE_COURSE));
+                                    Constants.SELECTABLE_COURSE,Constants.DO_NOT_SHOW_MATERIAL));
                         }
 
                         if(veryfiedCourseList.size() > 0){
                             rv_pending_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
                             rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), veryfiedCourseList,
                                     "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder pedir asesores", Constants.DO_NOT_SHOW_COURSE_PRICE,
-                                    Constants.SELECTABLE_COURSE));
+                                    Constants.SELECTABLE_COURSE,Constants.DO_NOT_SHOW_MATERIAL));
                         }
 
                         if(pendingCourseList.size() == 0 && veryfiedCourseList.size() == 0 ){

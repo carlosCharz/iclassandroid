@@ -50,4 +50,6 @@ public interface Constants {
     boolean DO_NOT_SHOW_COURSE_PRICE = false;
     boolean SELECTABLE_COURSE = false;
     boolean NOT_SELECTABLE_COURSE = true;
+    boolean SHOW_MATERIAL = true;
+    boolean DO_NOT_SHOW_MATERIAL = false;
 }

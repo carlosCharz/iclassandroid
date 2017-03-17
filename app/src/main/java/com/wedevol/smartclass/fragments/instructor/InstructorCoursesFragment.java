@@ -117,7 +117,7 @@ public class InstructorCoursesFragment extends Fragment{
                     rv_payed.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_payed.setAdapter(new ListCourseStateAdapter(getActivity(), payedCourseList,
                             "PAGADO", "Eres un asesor de este curso", Constants.SHOW_COURSE_PRICE,
-                            Constants.SELECTABLE_COURSE));
+                            Constants.SELECTABLE_COURSE, Constants.SHOW_MATERIAL));
                 }
 
                 if(pendingCourseList.size()>0) {
@@ -125,28 +125,28 @@ public class InstructorCoursesFragment extends Fragment{
                     rv_pending_payment.setAdapter(new ListCourseStateAdapter(getActivity(), pendingCourseList,
                             "PENDIENTE DE PAGO", "Necesitar pagar el curso para poder dictarlo",
                             Constants.DO_NOT_SHOW_COURSE_PRICE,
-                            Constants.SELECTABLE_COURSE));
+                            Constants.SELECTABLE_COURSE, Constants.DO_NOT_SHOW_MATERIAL));
                 }
 
                 if(veryfiedCourseList.size()>0) {
                     rv_verify_payment.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_verify_payment.setAdapter(new ListCourseStateAdapter(getActivity(), veryfiedCourseList,
                             "VERIFICANDO PAGO", "Maximo 24 horas", Constants.DO_NOT_SHOW_COURSE_PRICE,
-                            Constants.SELECTABLE_COURSE));
+                            Constants.SELECTABLE_COURSE, Constants.DO_NOT_SHOW_MATERIAL));
                 }
 
                 if(requestedCourseList.size()>0) {
                     rv_open.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_open.setAdapter(new ListCourseStateAdapter(getActivity(), requestedCourseList,
                             "REQUERIDO", "Verificaremos que eres apto para asesorar", Constants.DO_NOT_SHOW_COURSE_PRICE,
-                            Constants.SELECTABLE_COURSE));
+                            Constants.SELECTABLE_COURSE, Constants.DO_NOT_SHOW_MATERIAL));
                 }
 
                 if(freeCourseList.size()>0) {
                     rv_free.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rv_free.setAdapter(new ListCourseStateAdapter(getActivity(), freeCourseList,
                             "GRATIS", "Por promocion", Constants.SHOW_COURSE_PRICE,
-                            Constants.SELECTABLE_COURSE));
+                            Constants.SELECTABLE_COURSE, Constants.SHOW_MATERIAL));
                 }
 
                 TextView tv_no_courses = (TextView) view.findViewById(R.id.tv_no_courses);

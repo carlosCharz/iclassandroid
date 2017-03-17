@@ -237,4 +237,28 @@ public class HomeActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public SharedPreferencesManager getmPreferencesManager (){
         return mPreferencesManager;
     }
+
+    public void goToStudentCourses() {
+
+    }
+
+    public void goToCourses() {
+        Fragment fragment;
+        if(SharedPreferencesManager.getInstance(this).getUserType()){
+            fragment = new InstructorCoursesFragment();
+        }else{
+            fragment = new StudentCoursesFragment();
+        }
+
+        fragmentDrawableId = R.drawable.ic_course_black;
+        fragmentTitle = "Mis Cursos";
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_fragment_container, fragment);
+        fragmentTransaction.commit();
+
+        iv_toolbar_actual_screen.setImageDrawable(ContextCompat.getDrawable(this, fragmentDrawableId));
+        tv_reception_title.setText(fragmentTitle);
+    }
 }
