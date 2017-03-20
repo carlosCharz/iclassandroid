@@ -49,12 +49,13 @@ android {
         release {
             apiVersion = ""
             baseUrl = "http://api-prod.iclassapp.com:8080/iclass/"
-            fileUrl = "https://s3-us-west-2.amazonaws.com/iclassapp/prod/"
+            fileUrl = "https://s3-us-west-2.amazonaws.com/iclassapp/"
             minifyEnabled false
 
             buildConfigField "boolean", "REPORT_CRASHES", "true"
             buildConfigField "String", "BASE_URL", "\"$baseUrl\""
             buildConfigField "String", "BASE_API_URL", "\"$baseUrl/api/$apiVersion\""
+            buildConfigField "String", "FILE_URL", "\"$fileUrl\""
             resValue "string", "FACEBOOK_APP_ID", ""
             resValue "string", "FCM_PROJECT_NUMBER", ""
         }
