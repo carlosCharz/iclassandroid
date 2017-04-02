@@ -17,7 +17,6 @@ import com.wedevol.smartclass.models.User;
  * Use it to identify already logged users or take "global variables" for your use.
  * */
 public class SharedPreferencesManager {
-
     private static final String PREFERENCES_NAME = "blcc";
     private static final String TOKEN_USER = "userToken";
     private static final String UUID = "uuid";
@@ -45,9 +44,8 @@ public class SharedPreferencesManager {
         return self;
     }
 
-    public void saveUser(String token, String jsonUserData){
+    public void saveUser(String jsonUserData){
         SharedPreferences.Editor editor = mPreferences.edit();
-        //editor.putString(TOKEN_USER, token);
         editor.putString(CURRENT_USER, jsonUserData);
         editor.apply();
     }
@@ -55,12 +53,6 @@ public class SharedPreferencesManager {
     public void saveUserType(boolean userType){
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(CURRENT_USER_TYPE, userType);
-        editor.apply();
-    }
-
-    public void saveUuid(String uuid){
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(UUID, uuid);
         editor.apply();
     }
 
@@ -118,7 +110,7 @@ public class SharedPreferencesManager {
     }
 
     public boolean isUserLogged(){
-        return (getUserInfo() != null && mPreferences.contains(UUID) && !getUuid().equals(""));
+        return (getUserInfo() != null);
     }
 
     public void logout(){
@@ -129,13 +121,5 @@ public class SharedPreferencesManager {
         if(Activity.class.isInstance(context)){
             ((Activity)context).finish();
         }
-    }
-
-    public boolean shouldWeAskPermissions(String permission){
-        return (mPreferences.getBoolean(permission, true));
-    }
-
-    public void markAsAskedPermissions(String permission){
-        mPreferences.edit().putBoolean(permission, false).apply();
     }
 }

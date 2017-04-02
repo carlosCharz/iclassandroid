@@ -105,7 +105,6 @@ public class ListCoursesActivity extends AppCompatActivity implements SearchedCo
     }
 
     private void getCourses(JsonArray jsonArray, TextView tv_no_courses) {
-
         for(int i = 0; i<jsonArray.size(); i++){
             Course course = Course.parseCourse(jsonArray.get(i).getAsJsonObject());
             courses.add(course);
@@ -194,6 +193,5 @@ public class ListCoursesActivity extends AppCompatActivity implements SearchedCo
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-
     }
 }
