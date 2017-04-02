@@ -452,7 +452,7 @@ public class SignupActivity extends AppCompatActivity {
     public void startHome(JsonObject jsonObject, boolean isInstructor, String password){
         Gson gson = new Gson();
         SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
-        sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
+        sharedPreferencesManager.saveUser(gson.toJson(jsonObject));
         sharedPreferencesManager.saveUserType(isInstructor);
         sharedPreferencesManager.saveTruePassword(password);
 

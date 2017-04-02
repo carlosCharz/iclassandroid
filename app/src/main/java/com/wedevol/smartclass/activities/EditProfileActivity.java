@@ -183,7 +183,7 @@ public class EditProfileActivity  extends AppCompatActivity {
     private void updateUser(JsonObject jsonObject) {
         Gson gson = new Gson();
         SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
-        sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
+        sharedPreferencesManager.saveUser(gson.toJson(jsonObject));
     }
 
     @Override

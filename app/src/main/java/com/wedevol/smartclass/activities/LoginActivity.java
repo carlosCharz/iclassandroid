@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login(JsonObject jsonObject, ProgressDialog progressDialog, String password) {
         Gson gson = new Gson();
         SharedPreferencesManager sharedPreferencesManager = SharedPreferencesManager.getInstance(self);
-        sharedPreferencesManager.saveUser("", gson.toJson(jsonObject));
+        sharedPreferencesManager.saveUser(gson.toJson(jsonObject));
         sharedPreferencesManager.saveUserType(isInstructor);
         sharedPreferencesManager.saveTruePassword(password);
 
